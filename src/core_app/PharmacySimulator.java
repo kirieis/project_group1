@@ -1,9 +1,3 @@
-// ===============================
-// Pharmacy Chain Management Simulator
-// Java 8+
-// Includes: Domain model + Legacy CSV data generator (>10,000 rows)
-// ===============================
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
