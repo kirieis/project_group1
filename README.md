@@ -8,7 +8,7 @@
 
 -Trần Quốc Thịnh QE190140
 
-# project:
+# Project:
 
 Pharmacy Chain Management (Mô hình Long Châu/Pharmacity)
 Thực thể: Thuốc, Lô hàng (Batch - Hạn sử dụng), Khách hàng, Dược sĩ, Hóa đơn.
