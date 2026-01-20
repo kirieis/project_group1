@@ -1,0 +1,4 @@
+CREATE DATABASE PharmacyDB;
+GO
+USE PharmacyDB;
+GO
