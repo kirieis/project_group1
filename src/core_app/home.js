@@ -31,18 +31,27 @@ function clampNumber(val) {
 }
 
 // -------- Mock dataset builder (khi bạn chưa nối DB) --------
-// Bạn có data dạng: B1,M2,Thuoc_M2,2025-03-27,1400,CN5
-// -> branch, medId, name, date, price, store
+// Format legacy_batches.csv: batch_id,medicine_id,medicine_name,expiry_date,quantity_vien,branch_id
 function mockFromCSVLines(lines) {
   const rows = [];
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
+    // Skip header row
+    if (trimmed.startsWith("batch_id")) continue;
+
     const parts = trimmed.split(",");
     if (parts.length < 6) continue;
 
-    const [batchId, medId, name, dateStr, priceStr, store] = parts;
-    const price = Number(priceStr);
+    const [batchId, medId, name, dateStr, quantityStr, store] = parts;
+
+    // Skip invalid rows (empty medId or invalid data)
+    if (!medId || !batchId || dateStr === "INVALID_DATE") continue;
+    const quantity = Number(quantityStr);
+    if (quantity < 0) continue; // Skip negative quantity
+
+    // Mock price based on medicine ID (since CSV doesn't have price)
+    const price = 10000 + (hashString(medId) % 200) * 1000; // 10,000 - 210,000 VND
 
     // mock: 20% sản phẩm có sale
     const hasSale = hashString(medId) % 5 === 0;
@@ -61,6 +70,7 @@ function mockFromCSVLines(lines) {
       discount,
       finalPrice,
       store,
+      quantity,
       popularity,
     });
   }
@@ -77,28 +87,24 @@ function hashString(s) {
 }
 
 // -------- CSV Loader --------
-// Cách 1: bạn để products.csv cạnh index.html
-// Cách 2: sau này bạn thay bằng fetch API từ server
+// Load từ file legacy_batches.csv trong thư mục data
 async function loadProducts() {
   try {
-    const res = await fetch("products.csv", { cache: "no-store" });
+    const res = await fetch("../data/legacy_batches.csv", { cache: "no-store" });
     if (!res.ok) throw new Error("No CSV");
     const text = await res.text();
     const lines = text.split("\n");
-
-    // nếu file có header thì bạn bỏ dòng đầu:
-    // lines.shift();
-
     return mockFromCSVLines(lines);
   } catch (e) {
-    // fallback: demo vài dòng
+    console.error("Failed to load CSV:", e);
+    // fallback: demo vài dòng với format mới
     const sample = [
       "B1,M2,Thuoc_M2,2025-03-27,1400,CN5",
       "B2,M35,Thuoc_M35,2025-08-05,1300,CN5",
-      "B3,M99,Vitamin C 500mg,2025-01-12,99000,CN1",
-      "B4,M120,Paracetamol 500mg,2025-02-02,85000,CN2",
-      "B5,M77,Collagen Beauty,2025-04-18,150000,CN3",
-      "B6,M18,Omega 3,2025-05-22,120000,CN2",
+      "B3,M99,Vitamin_C_500mg,2025-01-12,500,CN1",
+      "B4,M120,Paracetamol_500mg,2025-02-02,800,CN2",
+      "B5,M77,Collagen_Beauty,2025-04-18,600,CN3",
+      "B6,M18,Omega_3,2025-05-22,700,CN2",
     ];
     return mockFromCSVLines(sample);
   }
@@ -368,7 +374,7 @@ function resetFiltersUI() {
 }
 
 function fillBranches(products) {
-  const branches = [...new Set(products.map(p => p.store))].sort((a,b)=>a.localeCompare(b,"vi"));
+  const branches = [...new Set(products.map(p => p.store))].sort((a, b) => a.localeCompare(b, "vi"));
   const sel = $("filterBranch");
   for (const b of branches) {
     const opt = document.createElement("option");
