@@ -8,4 +8,8 @@ SELECT DISTINCT
     'VIEN'
 FROM Batch_Staging
 WHERE medicine_id IS NOT NULL
-  AND medicine_id <> '';
+  AND NOT EXISTS (
+        SELECT 1
+        FROM Medicine m
+        WHERE m.medicine_id = s.medicine_id
+    );
