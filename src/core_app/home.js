@@ -36,21 +36,37 @@ function clampNumber(val) {
 // Format legacy_batches.csv: batch_id,medicine_id,medicine_name,expiry_date,quantity_vien,branch_id
 function mockFromCSVLines(lines) {
   const rows = [];
-  for (const line of lines) {
+  const errors = []; // Log lỗi
+
+  console.group("📝 IMPORT LOG: starting...");
+
+  lines.forEach((line, index) => {
     const trimmed = line.trim();
-    if (!trimmed) continue;
-    // Skip header row
-    if (trimmed.startsWith("batch_id")) continue;
+    if (!trimmed) return;
+    if (trimmed.startsWith("batch_id")) return;
 
     const parts = trimmed.split(",");
-    if (parts.length < 6) continue;
+    if (parts.length < 6) {
+      errors.push(`Line ${index + 1}: Malformed row (not enough columns) -> "${trimmed}"`);
+      return;
+    }
 
     const [batchId, medId, name, dateStr, quantityStr, store] = parts;
 
-    // Skip invalid rows (empty medId or invalid data)
-    if (!medId || !batchId || dateStr === "INVALID_DATE") continue;
+    // Validate data
+    const reasons = [];
+    if (!medId) reasons.push("Missing Medicine ID");
+    if (!batchId) reasons.push("Missing Batch ID");
+    if (dateStr === "INVALID_DATE") reasons.push("Invalid Expiry Date");
+
     const quantity = Number(quantityStr);
-    if (quantity < 0) continue; // Skip negative quantity
+    if (!Number.isFinite(quantity)) reasons.push("Quantity is not a number");
+    else if (quantity < 0) reasons.push("Negative Quantity");
+
+    if (reasons.length > 0) {
+      errors.push(`Line ${index + 1}: Skipped [${reasons.join(", ")}] -> batch:${batchId}, med:${medId}`);
+      return;
+    }
 
     // Mock price based on medicine ID (since CSV doesn't have price)
     const price = 10000 + (hashString(medId) % 200) * 1000; // 10,000 - 210,000 VND
@@ -75,7 +91,17 @@ function mockFromCSVLines(lines) {
       quantity,
       popularity,
     });
+  });
+
+  console.log(`✅ Import thành công: ${rows.length} dòng.`);
+  if (errors.length > 0) {
+    console.warn(`⚠️ Có ${errors.length} dòng bị lỗi/bỏ qua:`);
+    console.table(errors);
+  } else {
+    console.log("✨ Dữ liệu sạch 100%, không có lỗi.");
   }
+  console.groupEnd();
+
   return rows;
 }
 
@@ -219,16 +245,34 @@ function escapeHtml(str) {
 }
 
 function renderSale(filtered) {
-  const sale = filtered.filter(p => p.discount > 0).slice(0, 8);
-  $("saleGrid").innerHTML = sale.map(productCard).join("");
-  $("saleEmpty").classList.toggle("hidden", sale.length > 0);
+  // Deduplicate by medicine ID - keep only best batch per medicine
+  const seen = new Set();
+  const uniqueSale = filtered
+    .filter(p => p.discount > 0)
+    .sort((a, b) => b.popularity - a.popularity)
+    .filter(p => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    })
+    .slice(0, 8);
+  $("saleGrid").innerHTML = uniqueSale.map(productCard).join("");
+  $("saleEmpty").classList.toggle("hidden", uniqueSale.length > 0);
 }
 
 function renderBest(filtered) {
-  // best seller = top popularity
-  const best = [...filtered].sort((a, b) => b.popularity - a.popularity).slice(0, 8);
-  $("bestGrid").innerHTML = best.map(productCard).join("");
-  $("bestEmpty").classList.toggle("hidden", best.length > 0);
+  // Deduplicate by medicine ID - keep only best batch per medicine
+  const seen = new Set();
+  const uniqueBest = [...filtered]
+    .sort((a, b) => b.popularity - a.popularity)
+    .filter(p => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    })
+    .slice(0, 8);
+  $("bestGrid").innerHTML = uniqueBest.map(productCard).join("");
+  $("bestEmpty").classList.toggle("hidden", uniqueBest.length > 0);
 }
 
 function renderAll(filtered) {
@@ -247,9 +291,20 @@ function renderAll(filtered) {
 
 function renderAllSections() {
   const filtered = applyFilters(state.products);
-  renderSale(filtered);
-  renderBest(filtered);
-  renderAll(filtered);
+
+  // Create deduplicated list for display (keep best batch per medicine ID)
+  const seen = new Set();
+  const uniqueFiltered = [...filtered]
+    .sort((a, b) => b.popularity - a.popularity)
+    .filter(p => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    });
+
+  renderSale(uniqueFiltered);
+  renderBest(uniqueFiltered);
+  renderAll(uniqueFiltered);
 }
 
 // -------- Events --------
