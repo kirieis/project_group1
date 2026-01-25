@@ -9,7 +9,7 @@ import java.util.Random;
 public class Simulator {
 
     public static void main(String[] args) throws Exception {
-        String endpoint = "http://localhost:8080/core_app/order";
+        String endpoint = "http://localhost:8080/core_app/servlet";
         Random rnd = new Random();
 
         for (int i = 1; i <= 50; i++) {

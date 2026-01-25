@@ -1,0 +1,11 @@
+simulator\Simulator.class
+core_app\model\InvoiceDetail.class
+core_app\model\Customer.class
+core_app\servlet\DashboardServlet.class
+core_app\servlet\POSOrderServlet.class
+core_app\model\Batch.class
+core_app\model\Medicine.class
+core_app\model\Pharmacist.class
+core_app\model\Invoice.class
+core_app\model\MedicineGroup.class
+core_app\util\DBConnection.class
