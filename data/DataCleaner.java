@@ -6,8 +6,8 @@ import java.time.LocalDate;
 public class DataCleaner {
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader("medicines_raw_10000.csv"));
-        FileWriter fw = new FileWriter("medicines_clean_9500.csv");
+        BufferedReader br = new BufferedReader(new FileReader("medicines_raw.csv"));
+        FileWriter fw = new FileWriter("medicines_clean.csv"); // cleaned records -> about 9500 records
 
         fw.write(br.readLine() + "\n");
         String line;

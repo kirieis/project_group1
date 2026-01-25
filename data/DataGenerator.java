@@ -5,7 +5,7 @@ import java.util.Random;
 public class DataGenerator {
 
     public static void main(String[] args) throws Exception {
-        FileWriter fw = new FileWriter("medicines_raw_10000.csv");
+        FileWriter fw = new FileWriter("medicines_raw.csv"); // 10000 raw records with bugs
         fw.write("medicine_id,name,batch,expiry,quantity\n");
 
         Random r = new Random();
