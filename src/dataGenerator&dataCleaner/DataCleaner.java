@@ -15,10 +15,12 @@ public class DataCleaner {
         while ((line = br.readLine()) != null) {
             String[] p = line.split(",");
             try {
-                if (p.length != 5) continue;
+                if (p.length != 6) continue;
                 if (p[0].isEmpty()) continue;
-                if (Integer.parseInt(p[4]) <= 0) continue;
-                LocalDate.parse(p[3]);
+                if (p[1].equals("###")) continue;
+                if (p[3].equals("unknown ingredient")) continue;
+                if (Integer.parseInt(p[5]) <= 0) continue;
+                LocalDate.parse(p[4]);
                 fw.write(line + "\n");
             } catch (Exception ignored) {}
         }
