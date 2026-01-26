@@ -7,7 +7,7 @@ public class DataCleaner {
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new FileReader("medicines_raw.csv"));
-        FileWriter fw = new FileWriter("medicines_clean.csv"); // cleaned records -> about 9500 records
+        FileWriter fw = new FileWriter("medicines_clean.csv"); // cleaned records -> about 9100 records
 
         fw.write(br.readLine() + "\n");
         String line;

@@ -5,7 +5,7 @@ public class Pharmacist {
     private String fullName;
     private String licenseNumber;
     private int branchId;
-    private String role; // ADMIN, MANAGER, STAFF
+    private String role;
 
     public Pharmacist() {
     }

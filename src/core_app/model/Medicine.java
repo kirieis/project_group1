@@ -1,7 +1,5 @@
 package core_app.model;
 
-import core_app.model.MedicineGroup; 
-
 public class Medicine {
 
     private int medicineId;
@@ -11,8 +9,6 @@ public class Medicine {
     private String registrationNumber; // Số đăng ký Bộ Y Tế
     private MedicineGroup group;        // DRUG, SUPPLEMENT, MEDICAL_DEVICE
 
-    public Medicine() {
-    }
 
     public Medicine(int medicineId, String medicineCode, String medicineName,
             String activeIngredient, String registrationNumber,

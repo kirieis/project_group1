@@ -14,7 +14,7 @@ public class DataGenerator {
             "Amoxicillin",
             "Ibuprofen",
             "Cefixime",
-            "Vitamin C"
+            "Vitamin_C"
     };
 
         Random r = new Random();
