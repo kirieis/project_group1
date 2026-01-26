@@ -33,51 +33,54 @@ function clampNumber(val) {
 }
 
 // -------- Mock dataset builder (khi bạn chưa nối DB) --------
-// Format legacy_batches.csv: batch_id,medicine_id,medicine_name,expiry_date,quantity_vien,branch_id
+// Format medicines_clean.csv: medicine_id,name,batch,expiry,quantity
 function mockFromCSVLines(lines) {
   const rows = [];
-  const errors = []; // Log lỗi
+  const errors = []; 
 
   console.group("📝 IMPORT LOG: starting...");
 
   lines.forEach((line, index) => {
     const trimmed = line.trim();
     if (!trimmed) return;
-    if (trimmed.startsWith("batch_id")) return;
+    if (trimmed.startsWith("medicine_id") || trimmed.startsWith("id")) return;
 
     const parts = trimmed.split(",");
-    if (parts.length < 6) {
-      errors.push(`Line ${index + 1}: Malformed row (not enough columns) -> "${trimmed}"`);
+    
+    // Validate we have at least 5 columns
+    if (parts.length < 5) {
+      if (parts.length > 1) { // ignore empty lines
+          errors.push(`Line ${index + 1}: Malformed row (need 5 cols) -> "${trimmed}"`);
+      }
       return;
     }
 
-    const [batchId, medId, name, dateStr, quantityStr, store] = parts;
+    // New Schema: medicine_id,name,batch,expiry,quantity
+    const [medId, name, batchId, dateStr, quantityStr] = parts;
 
-    // Validate data
-    const reasons = [];
-    if (!medId) reasons.push("Missing Medicine ID");
-    if (!batchId) reasons.push("Missing Batch ID");
-    if (dateStr === "INVALID_DATE") reasons.push("Invalid Expiry Date");
+    // Basic Validation
+    if (!medId || !name) return;
 
     const quantity = Number(quantityStr);
-    if (!Number.isFinite(quantity)) reasons.push("Quantity is not a number");
-    else if (quantity < 0) reasons.push("Negative Quantity");
+    if (!Number.isFinite(quantity)) return;
 
-    if (reasons.length > 0) {
-      errors.push(`Line ${index + 1}: Skipped [${reasons.join(", ")}] -> batch:${batchId}, med:${medId}`);
-      return;
-    }
+    // --- Data Mocking / Enrichment (Missing cols in CSV) ---
+    
+    // 1. Store/Branch (Randomly assign CN1, CN2, CN3, CN4, CN5)
+    // Hash medId to keep it consistent for the same product
+    const storeIdx = (hashString(medId) % 5) + 1;
+    const store = `CN${storeIdx}`;
 
-    // Mock price based on medicine ID (since CSV doesn't have price)
-    const price = 10000 + (hashString(medId) % 200) * 1000; // 10,000 - 210,000 VND
-
-    // mock: 20% sản phẩm có sale
-    const hasSale = hashString(medId) % 5 === 0;
-    const discount = hasSale ? (5 + (hashString(name) % 26)) : 0; // 5..30%
+    // 2. Pricing
+    const price = 10000 + (hashString(medId) % 200) * 1000; // 10k - 210k
+    
+    // 3. Sale Logic
+    const hasSale = hashString(medId) % 5 === 0; // 20% chance
+    const discount = hasSale ? (5 + (hashString(name) % 26)) : 0; // 5-30%
     const finalPrice = discount ? Math.round(price * (1 - discount / 100)) : price;
 
-    // mock popularity (để tạo best seller)
-    const popularity = (hashString(name + store) % 1000) + 1;
+    // 4. Popularity
+    const popularity = (hashString(name + batchId) % 1000) + 1;
 
     rows.push({
       id: medId,
@@ -96,9 +99,6 @@ function mockFromCSVLines(lines) {
   console.log(`✅ Import thành công: ${rows.length} dòng.`);
   if (errors.length > 0) {
     console.warn(`⚠️ Có ${errors.length} dòng bị lỗi/bỏ qua:`);
-    console.table(errors);
-  } else {
-    console.log("✨ Dữ liệu sạch 100%, không có lỗi.");
   }
   console.groupEnd();
 
@@ -115,26 +115,18 @@ function hashString(s) {
 }
 
 // -------- CSV Loader --------
-// Load từ file legacy_batches.csv trong thư mục data
+// Load từ file medicines_clean.csv (đã copy vào webapp)
 async function loadProducts() {
   try {
-    const res = await fetch("../../data/legacy_batches.csv", { cache: "no-store" });
-    if (!res.ok) throw new Error("No CSV");
+    const res = await fetch("./medicines_clean.csv", { cache: "no-store" });
+    if (!res.ok) throw new Error("No CSV found");
     const text = await res.text();
     const lines = text.split("\n");
     return mockFromCSVLines(lines);
   } catch (e) {
     console.error("Failed to load CSV:", e);
-    // fallback: demo vài dòng với format mới
-    const sample = [
-      "B1,M2,Thuoc_M2,2025-03-27,1400,CN5",
-      "B2,M35,Thuoc_M35,2025-08-05,1300,CN5",
-      "B3,M99,Vitamin_C_500mg,2025-01-12,500,CN1",
-      "B4,M120,Paracetamol_500mg,2025-02-02,800,CN2",
-      "B5,M77,Collagen_Beauty,2025-04-18,600,CN3",
-      "B6,M18,Omega_3,2025-05-22,700,CN2",
-    ];
-    return mockFromCSVLines(sample);
+    // fallback: clean array if failed
+    return [];
   }
 }
 
@@ -387,9 +379,22 @@ function bindEvents() {
   $("btnGoAll").addEventListener("click", () => scrollToAll());
 
   // Login mock
-  $("btnLogin").addEventListener("click", () => {
-    alert("Demo: Màn đăng nhập bạn tự làm thêm (modal/route).");
-  });
+  // Login / Auth logic
+  const authState = window.authState || { isLoggedIn: false };
+  const btnLogin = $("btnLogin");
+
+  if (authState.isLoggedIn) {
+    btnLogin.innerHTML = `👤 ${escapeHtml(authState.fullName)} (Đăng xuất)`;
+    btnLogin.addEventListener("click", () => {
+      // Logout
+      window.location.href = "logout";
+    });
+  } else {
+    btnLogin.innerHTML = `👤 Đăng nhập`;
+    btnLogin.addEventListener("click", () => {
+      window.location.href = "login";
+    });
+  }
 
   $("btnCart").addEventListener("click", () => {
     alert(`Giỏ hàng demo: ${state.cartCount} sản phẩm (bạn tự nối DB/cart sau).`);
@@ -443,6 +448,16 @@ function fillBranches(products) {
 
 // -------- Boot --------
 (async function init() {
+  // Check Login Status
+  try {
+    const authRes = await fetch("api/auth-status");
+    if (authRes.ok) {
+      window.authState = await authRes.json();
+    }
+  } catch (e) {
+    console.error("Auth check failed", e);
+  }
+
   state.products = await loadProducts();
   fillBranches(state.products);
   bindEvents();
