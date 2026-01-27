@@ -11,7 +11,7 @@ public class Batch implements Comparable<Batch> {
 
     private int vienPerVi;
     private int viPerHop;
-    private int hopPerThung;
+    
 
     private int totalVien;
 
@@ -26,7 +26,7 @@ public class Batch implements Comparable<Batch> {
                  LocalDate expiryDate,
                  int vienPerVi,
                  int viPerHop,
-                 int hopPerThung,
+
                  int totalVien,
                  Medicine medicine) {
         this.batchId = batchId;
@@ -35,7 +35,7 @@ public class Batch implements Comparable<Batch> {
         this.expiryDate = expiryDate;
         this.vienPerVi = vienPerVi;
         this.viPerHop = viPerHop;
-        this.hopPerThung = hopPerThung;
+        
         this.totalVien = totalVien;
         this.medicine = medicine;
     }
@@ -61,8 +61,7 @@ public class Batch implements Comparable<Batch> {
                 return quantity * vienPerVi;
             case HOP:
                 return quantity * viPerHop * vienPerVi;
-            case THUNG:
-                return quantity * hopPerThung * viPerHop * vienPerVi;
+           
             default:
                 throw new IllegalArgumentException("Invalid unit type");
         }
