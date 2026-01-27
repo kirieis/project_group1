@@ -176,4 +176,28 @@ public class DataGenerator {
         }
         fw.close();
     }
+    private static double generatePrice(String name, String dosageForm) {
+    Random r = new Random();
+    double basePrice;
+
+    if (name.contains("Paracetamol") || name.contains("Hapacol")) {
+        basePrice = 25000;
+    } else if (name.contains("Ibuprofen") || name.contains("Aspirin")) {
+        basePrice = 30000;
+    } else if (name.contains("Vitamin") || name.contains("Ginkgo")) {
+        basePrice = 45000;
+    } else if (name.contains("Amoxicillin") || name.contains("Cef")) {
+        basePrice = 120000;
+    } else if (name.contains("Augmentin")) {
+        basePrice = 220000;
+    } else if (dosageForm.equals("Syrup")) {
+        basePrice = 50000;
+    } else {
+        basePrice = 40000;
+    }
+
+    // dao động ±10%
+    return basePrice * (0.9 + (0.2 * r.nextDouble()));
+}
+
 }
