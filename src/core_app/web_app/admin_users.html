@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản trị - Github Pharmacy</title>
+    <link rel="stylesheet" href="../home.css">
+    <style>
+        :root {
+            --admin-primary: #6366f1;
+            --admin-secondary: #4f46e5;
+            --admin-success: #10b981;
+            --admin-danger: #ef4444;
+            --admin-warning: #f59e0b;
+        }
+
+        body {
+            background-color: #f8fafc;
+        }
+
+        .admin-main {
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .page-header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.25rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+            .glass-card {
+                padding: 1.25rem;
+                border-radius: 1rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Form Styling */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: start;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 0;
+        }
+
+        .field span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #475569;
+            display: block;
+        }
+
+        .field input,
+        .field select {
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s;
+            width: 100%;
+            background: white;
+            box-sizing: border-box;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: var(--admin-primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Password Rules Visualizer */
+        .pwd-rules {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            background: #f1f5f9;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .rule-item.valid {
+            color: var(--admin-success);
+            font-weight: 600;
+        }
+
+        .rule-item.invalid {
+            color: var(--admin-danger);
+        }
+
+        /* Password Toggle Specific to Admin */
+        .field--password {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .field--password input {
+            padding-right: 3rem !important;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #64748b;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: color 0.2s;
+        }
+
+        .password-toggle:hover {
+            color: var(--admin-primary);
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+
+        .modern-table th {
+            background: #f1f5f9;
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            color: #1e293b;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .modern-table th:first-child {
+            border-top-left-radius: 1rem;
+        }
+
+        .modern-table th:last-child {
+            border-top-right-radius: 1rem;
+        }
+
+        .modern-table td {
+            padding: 1.25rem;
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+            vertical-align: middle;
+        }
+
+        .modern-table tr:last-child td:first-child {
+            border-bottom-left-radius: 1rem;
+        }
+
+        .modern-table tr:last-child td:last-child {
+            border-bottom-right-radius: 1rem;
+        }
+
+        .modern-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #64748b;
+            margin-right: 1rem;
+        }
+
+        .user-name-cell {
+            display: flex;
+            align-items: center;
+        }
+
+        .badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge--admin {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge--customer {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .btn-action {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .toast {
+            background: #1e293b;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+            animation: slideIn 0.3s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner container">
+            <div class="brand">
+                <a href="../home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
+                    <div class="brand__logo">
+                        <span class="logo-dot"></span>
+                        <span class="logo-dot"></span>
+                        <span class="logo-dot"></span>
+                    </div>
+                    <div class="brand__text">
+                        <div class="brand__name">Github Pharmacy</div>
+                        <div
+                            style="font-size: 0.7rem; color: var(--admin-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                            Admin Control Panel</div>
+                    </div>
+                </a>
+            </div>
+            <div class="header__actions">
+                <a href="../home.html" class="btn btn--ghost">← Về trang chủ</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container admin-main">
+        <div class="page-header">
+            <h1>Quản trị Người dùng</h1>
+            <div id="statInfo" class="tag bg-white shadow-sm" style="padding: 0.5rem 1rem;">
+                👥 <span id="totalUsers">0</span> người dùng
+            </div>
+        </div>
+
+        <!-- ADD FORM -->
+        <section class="glass-card">
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">✨ Thêm nhân viên / khách hàng mới</h2>
+            <div class="form-grid">
+                <label class="field">
+                    <span>Họ và tên đầy đủ</span>
+                    <input type="text" id="addFullName" placeholder="Vd: Nguyễn Văn A">
+                </label>
+                <label class="field">
+                    <span>Tên đăng nhập</span>
+                    <input type="text" id="addUsername" placeholder="user_name_123">
+                </label>
+                <label class="field">
+                    <span>Mật khẩu bảo mật</span>
+                    <div class="field--password">
+                        <input type="password" id="addPassword" placeholder="Nhập mật khẩu">
+                        <button type="button" class="password-toggle" id="togglePassword" title="Hiện/Ản mật khẩu">
+                            👁️
+                        </button>
+                    </div>
+                    <div class="pwd-rules" id="pwdRules">
+                        <div class="rule-item" data-rule="len">⚪ Ít nhất 8 ký tự</div>
+                        <div class="rule-item" data-rule="upper">⚪ Có chữ IN HOA</div>
+                        <div class="rule-item" data-rule="lower">⚪ Có chữ thường</div>
+                        <div class="rule-item" data-rule="num">⚪ Có con số</div>
+                    </div>
+                </label>
+                <label class="field">
+                    <span>Phân quyền hệ thống</span>
+                    <select id="addRole">
+                        <option value="CUSTOMER">👤 CUSTOMER (Khách hàng)</option>
+                        <option value="ADMIN">🛡️ ADMIN (Quản trị viên)</option>
+                    </select>
+                </label>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <button class="btn btn--primary" id="btnSubmitUser" style="padding: 0.8rem 2rem; border-radius: 1rem;">
+                    🚀 Tạo tài khoản ngay
+                </button>
+            </div>
+        </section>
+
+        <!-- USER LIST -->
+        <section class="glass-card">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap;">
+                <h2 style="font-size: 1.25rem; margin: 0;">📋 Danh sách tài khoản</h2>
+                <div class="search" style="width: 100%; max-width: 300px;">
+                    <input type="text" id="userSearch" placeholder="Tìm tên, username..."
+                        style="width: 100%; padding: 0.6rem 1rem; border-radius: 0.5rem; border: 1px solid #e2e8f0;">
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Thông tin người dùng</th>
+                            <th>Vai trò</th>
+                            <th style="text-align: right;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList">
+                        <!-- Loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script>
+        const $ = (id) => document.getElementById(id);
+
+        function showToast(msg, type = 'success') {
+            const container = $('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = (type === 'success' ? '✅' : '❌') + ` <span>${msg}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Security Validation
+        function checkPassword(p) {
+            return {
+                len: p.length >= 8,
+                upper: /[A-Z]/.test(p),
+                lower: /[a-z]/.test(p),
+                num: /[0-9]/.test(p)
+            };
+        }
+
+        function updatePwdUI() {
+            const p = $('addPassword').value;
+            const res = checkPassword(p);
+            const items = document.querySelectorAll('.rule-item');
+
+            items.forEach(item => {
+                const rule = item.dataset.rule;
+                if (res[rule]) {
+                    item.classList.add('valid');
+                    item.classList.remove('invalid');
+                    item.innerHTML = '✅ ' + item.innerHTML.substring(2);
+                } else {
+                    item.classList.remove('valid');
+                    item.classList.add('invalid');
+                    item.innerHTML = '❌ ' + item.innerHTML.substring(2);
+                }
+            });
+            return Object.values(res).every(v => v);
+        }
+
+        $('addPassword').addEventListener('input', updatePwdUI);
+
+        async function loadUsers() {
+            try {
+                const res = await fetch('users?action=list');
+                let users = await res.json();
+
+                const query = $('userSearch').value.toLowerCase();
+                if (query) {
+                    users = users.filter(u =>
+                        u.fullName.toLowerCase().includes(query) ||
+                        u.username.toLowerCase().includes(query)
+                    );
+                }
+
+                $('totalUsers').textContent = users.length;
+                const tbody = $('userList');
+                tbody.innerHTML = users.map(u => `
+                    <tr>
+                        <td style="font-weight: 700;">#${u.id}</td>
+                        <td>
+                            <div class="user-name-cell">
+                                <div class="user-avatar">${u.fullName.charAt(0).toUpperCase()}</div>
+                                <div>
+                                    <div style="font-weight: 700; color: #1e293b;">${u.fullName}</div>
+                                    <div style="font-size: 0.8rem; color: #64748b;">@${u.username}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge ${u.role === 'ADMIN' ? 'badge--admin' : 'badge--customer'}">
+                                ${u.role === 'ADMIN' ? '🛡️ Admin' : '👤 Guest'}
+                            </span>
+                        </td>
+                        <td style="text-align: right;">
+                            <button class="btn-action btn-delete" title="Xóa người dùng" onclick="deleteUser(${u.id})">
+                                🗑️
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        $('btnSubmitUser').addEventListener('click', async () => {
+            const fullName = $('addFullName').value;
+            const username = $('addUsername').value;
+            const password = $('addPassword').value;
+            const role = $('addRole').value;
+
+            if (!fullName || !username || !password) {
+                showToast('Vui lòng điền đủ thông tin!', 'error');
+                return;
+            }
+
+            if (!updatePwdUI()) {
+                showToast('Mật khẩu chưa đạt yêu cầu bảo mật!', 'error');
+                return;
+            }
+
+            const params = new URLSearchParams();
+            params.append('action', 'add');
+            params.append('fullName', fullName);
+            params.append('username', username);
+            params.append('password', password);
+            params.append('role', role);
+
+            const res = await fetch('users', { method: 'POST', body: params });
+            if (await res.text() === 'OK') {
+                showToast('Tạo tài khoản thành công!');
+                $('addFullName').value = '';
+                $('addUsername').value = '';
+                $('addPassword').value = '';
+                updatePwdUI();
+                loadUsers();
+            } else {
+                showToast('Tên đăng nhập đã tồn tại hoặc có lỗi!', 'error');
+            }
+        });
+
+        async function deleteUser(id) {
+            if (!confirm('Hành động này không thể hoàn tác. Bạn chắc chứ?')) return;
+
+            const params = new URLSearchParams();
+            params.append('action', 'delete');
+            params.append('id', id);
+
+            const res = await fetch('users', { method: 'POST', body: params });
+            if (await res.text() === 'OK') {
+                showToast('Đã xóa người dùng.');
+                loadUsers();
+            } else {
+                showToast('Lỗi khi xóa người dùng!', 'error');
+            }
+        }
+
+        $('userSearch').addEventListener('input', loadUsers);
+        loadUsers();
+
+        // Password Toggle Logic
+        const togglePassword = $('togglePassword');
+        const passwordInput = $('addPassword');
+
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+        }
+    </script>
+</body>
+
+</html>

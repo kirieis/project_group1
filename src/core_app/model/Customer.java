@@ -15,7 +15,7 @@ public class Customer {
     }
 
     public Customer(int customerId, String fullName,
-                    String phoneNumber, String address, String username, String password, String role) {
+            String phoneNumber, String address, String username, String password, String role) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -24,7 +24,6 @@ public class Customer {
         this.password = password;
         this.role = role;
     }
-
 
     public int getCustomerId() {
         return customerId;
@@ -56,6 +55,18 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getRole() {

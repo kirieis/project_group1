@@ -733,6 +733,38 @@ body {
   background: var(--white);
 }
 
+/* === Password Toggle === */
+.field--password {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field--password input {
+  padding-right: 48px !important;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  color: var(--text-muted);
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.password-toggle:hover {
+  color: var(--gold);
+  transform: scale(1.1);
+}
+
 .field select {
   cursor: pointer;
   appearance: none;

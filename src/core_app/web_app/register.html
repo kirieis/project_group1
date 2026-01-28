@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Đăng ký - Github Pharmacy</title>
+    <link rel="stylesheet" href="home.css" />
+    <style>
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 40px 10px;
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--border);
+        }
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-title h1 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header__inner container">
+            <div class="brand">
+                <a href="home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
+                    <div class="brand__logo" aria-label="Github logo">
+                        <span class="logo-dot"></span>
+                        <span class="logo-dot"></span>
+                        <span class="logo-dot"></span>
+                    </div>
+                    <div class="brand__text">
+                        <div class="brand__name">Github Pharmacy</div>
+                    </div>
+                </a>
+            </div>
+            <div class="header__actions">
+                <a href="login.html" class="btn btn--ghost">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container main">
+        <div class="login-wrapper">
+            <div class="login-card">
+                <div class="login-title">
+                    <h1>Tạo tài khoản</h1>
+                    <p>Tham gia cộng đồng Github Pharmacy ngay</p>
+                </div>
+
+                <div id="errorBox"
+                    style="display: none; background: #fee2e2; color: #ef4444; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; text-align: center; border: 1px solid #fecaca;">
+                </div>
+
+                <form action="register" method="POST">
+                    <label class="field">
+                        <span>Họ và tên</span>
+                        <input type="text" name="fullName" required placeholder="Nguyễn Văn A">
+                    </label>
+
+                    <label class="field">
+                        <span>Số điện thoại</span>
+                        <input type="tel" name="phone" placeholder="090...">
+                    </label>
+
+                    <label class="field">
+                        <span>Địa chỉ</span>
+                        <input type="text" name="address" placeholder="Hồ Chí Minh, Việt Nam">
+                    </label>
+
+                    <label class="field">
+                        <span>Tên đăng nhập</span>
+                        <input type="text" name="username" required placeholder="Nhập username">
+                    </label>
+
+                    <label class="field">
+                        <span>Mật khẩu</span>
+                        <div class="field--password">
+                            <input type="password" id="password" name="password" required placeholder="Nhập password">
+                            <button type="button" class="password-toggle" id="togglePassword" title="Hiện/Ản mật khẩu">
+                                👁️
+                            </button>
+                        </div>
+                        <div id="pwdRules"
+                            style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem;">
+                            <div class="rule-item" data-rule="len">⚪ Ít nhất 8 ký tự</div>
+                            <div class="rule-item" data-rule="upper">⚪ Có chữ IN HOA</div>
+                            <div class="rule-item" data-rule="lower">⚪ Có chữ thường</div>
+                            <div class="rule-item" data-rule="num">⚪ Có con số</div>
+                        </div>
+                    </label>
+
+                    <button type="submit" id="btnRegister" class="btn btn--primary"
+                        style="width: 100%; margin-top: 20px; justify-content: center;">Đăng Ký</button>
+                </form>
+
+                <div style="text-align: center; margin-top: 24px;">
+                    <span style="color: var(--text-muted); font-size: 14px;">Đã có tài khoản? </span>
+                    <a href="login.html" class="back-link">Đăng nhập ngay</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            Connect with us : 03xxxxxxx
+        </div>
+    </footer>
+
+    <script>
+        const pwdInput = document.getElementById('password');
+        const btnRegister = document.getElementById('btnRegister');
+        const rules = {
+            len: (p) => p.length >= 8,
+            upper: (p) => /[A-Z]/.test(p),
+            lower: (p) => /[a-z]/.test(p),
+            num: (p) => /[0-9]/.test(p)
+        };
+
+        function updateUI() {
+            const p = pwdInput.value;
+            let allValid = true;
+            document.querySelectorAll('.rule-item').forEach(item => {
+                const rule = item.dataset.rule;
+                const isValid = rules[rule](p);
+                if (isValid) {
+                    item.style.color = '#10b981';
+                    item.innerHTML = '✅ ' + item.innerHTML.substring(2);
+                } else {
+                    item.style.color = '#ef4444';
+                    item.innerHTML = '❌ ' + item.innerHTML.substring(2);
+                    allValid = false;
+                }
+            });
+            btnRegister.disabled = !allValid;
+            btnRegister.style.opacity = allValid ? '1' : '0.5';
+            btnRegister.style.cursor = allValid ? 'pointer' : 'not-allowed';
+        }
+
+        pwdInput.addEventListener('input', updateUI);
+        // Initial state
+        updateUI();
+
+        // Error message handling
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.style.display = 'block';
+            if (error === 'weak_password') errorBox.textContent = 'Mật khẩu không đạt yêu cầu bảo mật!';
+            else if (error === 'exists') errorBox.textContent = 'Tên đăng nhập đã tồn tại!';
+            else errorBox.textContent = 'Đăng ký thất bại. Vui lòng thử lại!';
+        }
+
+        // Password Toggle Logic
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+        }
+    </script>
+</body>
+
+</html>

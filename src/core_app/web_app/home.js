@@ -378,11 +378,25 @@ function bindEvents() {
   const authState = window.authState || { isLoggedIn: false };
   const btnLogin = $("btnLogin");
   if (authState.isLoggedIn) {
+    if (authState.role === "ADMIN") {
+      const adminLink = document.createElement("a");
+      adminLink.href = "admin/users";
+      adminLink.className = "btn btn--ghost";
+      adminLink.innerHTML = "⚙️ Admin";
+      adminLink.style.textDecoration = "none";
+      btnLogin.parentNode.insertBefore(adminLink, btnLogin);
+    }
     btnLogin.innerHTML = `👤 ${escapeHtml(authState.fullName)} (Đăng xuất)`;
-    btnLogin.addEventListener("click", () => { window.location.href = "logout"; });
+    btnLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "logout";
+    });
   } else {
     btnLogin.innerHTML = `👤 Đăng nhập`;
-    btnLogin.addEventListener("click", () => { window.location.href = "login"; });
+    btnLogin.addEventListener("click", (e) => {
+      // Removed e.preventDefault() here so if it's an <a> tag, it can also work naturally
+      window.location.href = "login.html";
+    });
   }
 
   $("btnCart").addEventListener("click", () => {

@@ -54,8 +54,20 @@ CREATE TABLE Customer (
     phone VARCHAR(20),
     dob DATE,
     address NVARCHAR(255),
-    loyalty_points INT DEFAULT 0
+    loyalty_points INT DEFAULT 0,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
+    role VARCHAR(20) DEFAULT 'CUSTOMER'
 );
+
+-- Seed initial users
+-- Admin: admin / admin
+-- User: user / 123
+INSERT INTO Customer (full_name, phone, dob, address, loyalty_points, username, password, role) 
+VALUES (N'Quản Trị Viên', '0909000111', '1990-01-01', 'HCMC', 100, 'admin', 'admin', 'ADMIN');
+
+INSERT INTO Customer (full_name, phone, dob, address, loyalty_points, username, password, role) 
+VALUES (N'Nguyễn Văn A', '0912345678', '2000-05-20', 'Hanoi', 0, 'user', '123', 'CUSTOMER');
 
 /* =========================
    PHARMACIST

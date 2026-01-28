@@ -101,6 +101,10 @@
                     <p>Chào mừng trở lại Github Pharmacy</p>
                 </div>
 
+                <div id="messageBox"
+                    style="display: none; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; text-align: center; border: 1px solid transparent;">
+                </div>
+
                 <form action="/login" method="POST">
                     <!-- Keep existing name attributes consistent -->
                     <label class="field">
@@ -110,7 +114,12 @@
 
                     <label class="field">
                         <span>Mật khẩu</span>
-                        <input type="password" id="password" name="password" required placeholder="Nhập password">
+                        <div class="field--password">
+                            <input type="password" id="password" name="password" required placeholder="Nhập password">
+                            <button type="button" class="password-toggle" id="togglePassword" title="Hiện/Ản mật khẩu">
+                                👁️
+                            </button>
+                        </div>
                     </label>
 
                     <button type="submit" class="btn btn--primary"
@@ -118,7 +127,11 @@
                 </form>
 
                 <div style="text-align: center; margin-top: 24px;">
-                    <a href="home.html" class="back-link">← Quay lại trang chủ</a>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">Chưa có tài khoản?</p>
+                    <a href="register.html" class="back-link">Đăng ký ngay</a>
+                    <div style="margin-top: 16px;">
+                        <a href="home.html" class="back-link">← Quay lại trang chủ</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -130,6 +143,42 @@
             Connect with us : 03xxxxxxx
         </div>
     </footer>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const msgBox = document.getElementById('messageBox');
+
+        if (urlParams.has('registered')) {
+            msgBox.style.display = 'block';
+            msgBox.style.background = '#dcfce7';
+            msgBox.style.color = '#166534';
+            msgBox.style.borderColor = '#bbf7d0';
+            msgBox.textContent = '🎉 Đăng ký thành công! Hãy đăng nhập ngay.';
+        } else if (urlParams.get('error') === 'unauthorized') {
+            msgBox.style.display = 'block';
+            msgBox.style.background = '#fee2e2';
+            msgBox.style.color = '#ef4444';
+            msgBox.style.borderColor = '#fecaca';
+            msgBox.textContent = '⛔ Bạn không có quyền truy cập trang này!';
+        } else if (urlParams.has('error')) {
+            msgBox.style.display = 'block';
+            msgBox.style.background = '#fee2e2';
+            msgBox.style.color = '#ef4444';
+            msgBox.style.borderColor = '#fecaca';
+            msgBox.textContent = '❌ Sai tên đăng nhập hoặc mật khẩu!';
+        }
+
+        // Password Toggle Logic
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+        }
+    </script>
 </body>
 
 </html>
