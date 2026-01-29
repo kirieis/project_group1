@@ -26,7 +26,7 @@ public class Batch implements Comparable<Batch> {
                  int tabletsPerBlister,
                  int blisterPerBox,
 
-                 int totalVien,
+                 int totalTablets,
                  Medicine medicine) {
         this.batchId = batchId;
         this.batchNumber = batchNumber;
