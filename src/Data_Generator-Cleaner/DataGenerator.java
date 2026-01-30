@@ -88,7 +88,28 @@ public class DataGenerator {
     "Levothyroxine_50mcg",
     "Allopurinol_300mg",
     "Colchicine_1mg",
-    "Vitamin_K2"
+    "Vitamin_K2",
+    "Ranitidine_150mg",
+    "Famotidine_20mg",
+    "Sucralfate_1g",
+    "Bismuth_Subsalicylate",
+    "Montelukast_10mg",
+    "Theophylline_200mg",
+    "Spironolactone_25mg",
+    "Furosemide_40mg",
+    "Hydrochlorothiazide_25mg",
+    "Clopidogrel_75mg",
+    "Aspirin_81mg",
+    "Warfarin_5mg",
+    "Enalapril_10mg",
+    "Captopril_25mg",
+    "Valsartan_80mg",
+    "Glimepiride_2mg",
+    "Sitagliptin_100mg",
+    "Gabapentin_300mg",
+    "Carbamazepine_200mg",
+    "Diazepam_5mg",
+
 };
 
 		int[] pricePool = {
