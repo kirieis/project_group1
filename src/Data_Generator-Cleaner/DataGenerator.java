@@ -10,33 +10,101 @@ public class DataGenerator {
         fw.write("medicine_id,name,batch,ingredient,dosage_form,strength,unit,manufacturer,expiry,quantity,price\n");
 
         String[] medicines = {
-                "Paracetamol_500mg",
-                "Aspirin_500mg",
-                "Amoxicillin_500mg",
-                "Ibuprofen_200mg",
-                "Cefixime_200mg",
-                "Vitamin_C",
-                "Meloxicam_7.5mg",
-                "Cefdinir_300mg",
-                "SkillMax_Ocavill",
-                "Siro_Ginkid_ZinC",
-                "Echina_Kingphar",
-                "Panadol_Extra",
-                "Efferalgan_500mg",
-                "Hapacol_650",
-                "Alphachoay",
-                "Augmentin_625mg",
-                "Cefuroxim_500mg",
-                "Acyclovir_400mg",
-                "Nexium_mups_20mg",
-                "Loperamid_2mg",
-                "Enterogermina",
-                "Tiffy_Dey",
-                "Telfast_HD_180mg",
-                "Eugica",
-                "Enat_400",
-                "Ginkgo_Biloba_120mg",
-        };
+    "Paracetamol_500mg",
+    "Aspirin_500mg",
+    "Amoxicillin_500mg",
+    "Ibuprofen_200mg",
+    "Cefixime_200mg",
+    "Vitamin_C",
+    "Meloxicam_7.5mg",
+    "Cefdinir_300mg",
+    "SkillMax_Ocavill",
+    "Siro_Ginkid_ZinC",
+    "Echina_Kingphar",
+    "Panadol_Extra",
+    "Efferalgan_500mg",
+    "Hapacol_650",
+    "Alphachoay",
+    "Augmentin_625mg",
+    "Cefuroxim_500mg",
+    "Acyclovir_400mg",
+    "Nexium_mups_20mg",
+    "Loperamid_2mg",
+    "Enterogermina",
+    "Tiffy_Dey",
+    "Telfast_HD_180mg",
+    "Eugica",
+    "Enat_400",
+    "Ginkgo_Biloba_120mg",
+    "Clarithromycin_500mg",
+    "Azithromycin_250mg",
+    "Ciprofloxacin_500mg",
+    "Levofloxacin_500mg",
+    "Metronidazole_500mg",
+    "Omeprazole_20mg",
+    "Pantoprazole_40mg",
+    "Esomeprazole_40mg",
+    "Domperidone_10mg",
+    "Metoclopramide_10mg",
+    "Cetirizine_10mg",
+    "Loratadine_10mg",
+    "Desloratadine_5mg",
+    "Fexofenadine_120mg",
+    "Salbutamol_4mg",
+    "Ambroxol_30mg",
+    "Bromhexine_8mg",
+    "Acetylcysteine_200mg",
+    "Calcium_Carbonate_500mg",
+    "Calcium_D3",
+    "Magnesium_B6",
+    "Vitamin_B1_B6_B12",
+    "Vitamin_E_400IU",
+    "Iron_Folic",
+    "ORS_Plus",
+    "Smecta",
+    "Krebs_Cough_Syrup",
+    "Prospan_Syrup",
+    "Zinc_Gluconate_20mg",
+    "Hydrocortisone_10mg",
+    "Betadine_Solution",
+    "Clotrimazole_1pct",
+    "Ketoconazole_200mg",
+    "Fluconazole_150mg",
+    "Nystatin_Suspension",
+    "Diclofenac_50mg",
+    "Celecoxib_200mg",
+    "Tramadol_50mg",
+    "Prednisolone_5mg",
+    "Methylprednisolone_16mg",
+    "Losartan_50mg",
+    "Amlodipine_5mg",
+    "Bisoprolol_5mg",
+    "Atorvastatin_20mg",
+    "Simvastatin_20mg",
+    "Metformin_500mg",
+    "Gliclazide_80mg",
+    "Insulin_Rapid",
+    "Insulin_Basal",
+    "Levothyroxine_50mcg",
+    "Allopurinol_300mg",
+    "Colchicine_1mg",
+    "Vitamin_K2"
+};
+
+		int[] pricePool = {
+    		1500, 1600, 1700, 2000, 1000,
+    		2500, 3000, 1200, 1250, 1450
+		};
+		String[] ingredientlist = {
+			"Paracetamol", "Aspirin", "Amoxicillin", "Ibuprofen", "Cefixime",
+			"Vitamin C", "Meloxicam", "Cefdinir", "Multivitamin", "Zinc + Vitamin",
+			"Echinacea", "Paracetamol + Caffeine", "Ascorbic Acid", "Alpha chymotrypsin",
+			"Amoxicillin + Clavulanate", "Cefuroxime", "Acyclovir"
+		};
+        String[] dosageFormlist = {"Tablet", "Capsule", "Syrup"};
+        String[] strengthlist = {"500", "200", "10", "7.5", "300","250","400","20","40","2","5","120","650","4200","625","50","16","80","300","1"};
+        String[] unitlist = {"mg", "ml"};
+        String[] manufacturerlist = {"Sanofi", "Bayer", "GSK", "Abbott", "Imexpharm", "DHG Pharma", "Pfizer", "OPV Pharma", "Kingphar", "UPSA","UDI","ASDEX","Stella","AstraZeneca","United Pharma","Mega We Care","Traphaco","Choay Pharma","Sandoz"};
 
         Random r = new Random();
 
@@ -56,7 +124,7 @@ public class DataGenerator {
 			if(errorbatch){
 				batch = "???";
 			} else {
-				batch = (char) ('A' + r.nextInt(26)) + String.valueOf(r.nextInt(100));
+				batch = (char) ('A' + r.nextInt(3)) + String.valueOf(r.nextInt(100));
 			}
 
             // default values
@@ -66,140 +134,183 @@ public class DataGenerator {
             String unit = "mg";
             String manufacturer = "Unknown";
 
-		if (name.equals("Paracetamol_500mg")) {
-				ingredient = "Paracetamol";
-				manufacturer = "Sanofi";
+switch (name) {
 
-		} else if (name.equals("Aspirin_500mg")) {
-				ingredient = "Aspirin";
-				manufacturer = "Bayer";
+    case "Paracetamol_500mg":
+        ingredient = "Paracetamol";
+        manufacturer = "Sanofi";
+        break;
 
-		} else if (name.equals("Amoxicillin_500mg")) {
-				ingredient = "Amoxicillin";
-				dosageForm = "Capsule";
-				manufacturer = "GSK";
+    case "Aspirin_500mg":
+        ingredient = "Aspirin";
+        manufacturer = "Bayer";
+        break;
 
-		} else if (name.equals("Ibuprofen_200mg")) {
-				ingredient = "Ibuprofen";
-				strength = "200";
-				manufacturer = "Abbott";
+    case "Amoxicillin_500mg":
+        ingredient = "Amoxicillin";
+        dosageForm = "Capsule";
+        manufacturer = "GSK";
+        break;
 
-		} else if (name.equals("Cefixime_200mg")) {
-				ingredient = "Cefixime";
-				dosageForm = "Capsule";
-				strength = "200";
-				manufacturer = "Imexpharm";
+    case "Ibuprofen_200mg":
+        ingredient = "Ibuprofen";
+        strength = "200";
+        manufacturer = "Abbott";
+        break;
 
-		} else if (name.equals("Vitamin_C")) {
-				ingredient = "Ascorbic Acid";
-				manufacturer = "DHG Pharma";
+    case "Cefixime_200mg":
+        ingredient = "Cefixime";
+        dosageForm = "Capsule";
+        strength = "200";
+        manufacturer = "Imexpharm";
+        break;
 
-		} else if (name.equals("Meloxicam_7.5mg")) {
-				ingredient = "Meloxicam";
-				strength = "7.5";
-				manufacturer = "Sanofi";
+    case "Vitamin_C":
+        ingredient = "Ascorbic Acid";
+        manufacturer = "DHG Pharma";
+        break;
 
-		} else if (name.equals("Cefdinir_300mg")) {
-				ingredient = "Cefdinir";
-				dosageForm = "Capsule";
-				strength = "300";
-				manufacturer = "Pfizer";
+    case "Meloxicam_7.5mg":
+        ingredient = "Meloxicam";
+        strength = "7.5";
+        manufacturer = "Sanofi";
+        break;
 
-		} else if (name.equals("SkillMax_Ocavill")) {
-				ingredient = "Multivitamin";
-				dosageForm = "Syrup";
-				strength = "10";
-				unit = "ml";
-				manufacturer = "OPV Pharma";
+    case "Cefdinir_300mg":
+        ingredient = "Cefdinir";
+        dosageForm = "Capsule";
+        strength = "300";
+        manufacturer = "Pfizer";
+        break;
 
-		} else if (name.equals("Siro_Ginkid_ZinC")) {
-				ingredient = "Zinc + Vitamin";
-				dosageForm = "Syrup";
-				strength = "10";
-				unit = "ml";
-				manufacturer = "OPV Pharma";
+    case "SkillMax_Ocavill":
+        ingredient = "Multivitamin";
+        dosageForm = "Syrup";
+        strength = "10";
+        unit = "ml";
+        manufacturer = "OPV Pharma";
+        break;
 
-		} else if (name.equals("Echina_Kingphar")) {
-				ingredient = "Echinacea";
-				manufacturer = "Kingphar";
+    case "Siro_Ginkid_ZinC":
+        ingredient = "Zinc + Vitamin";
+        dosageForm = "Syrup";
+        strength = "10";
+        unit = "ml";
+        manufacturer = "OPV Pharma";
+        break;
 
-		} else if (name.equals("Panadol_Extra")) {
-				ingredient = "Paracetamol + Caffeine";
-				manufacturer = "GSK";
+    case "Echina_Kingphar":
+        ingredient = "Echinacea";
+        manufacturer = "Kingphar";
+        break;
 
-		} else if (name.equals("Efferalgan_500mg")) {
-				ingredient = "Paracetamol";
-				manufacturer = "UPSA";
+    case "Panadol_Extra":
+        ingredient = "Paracetamol + Caffeine";
+        manufacturer = "GSK";
+        break;
 
-		} else if (name.equals("Hapacol_650")) {
-				ingredient = "Paracetamol";
-				strength = "650";
-				manufacturer = "DHG Pharma";
+    case "Efferalgan_500mg":
+        ingredient = "Paracetamol";
+        manufacturer = "UPSA";
+        break;
 
-		} else if (name.equals("Alphachoay")) {
-				ingredient = "Alpha chymotrypsin";
-				unit = "IU";
-				strength = "4200";
-				manufacturer = "Choay Pharma";
+    case "Hapacol_650":
+        ingredient = "Paracetamol";
+        strength = "650";
+        manufacturer = "DHG Pharma";
+        break;
 
-		} else if (name.equals("Augmentin_625mg")) {
-				ingredient = "Amoxicillin + Clavulanate";
-				strength = "625";
-				manufacturer = "GSK";
+    case "Alphachoay":
+        ingredient = "Alpha chymotrypsin";
+        strength = "4200";
+        unit = "IU";
+        manufacturer = "Choay Pharma";
+        break;
 
-		} else if (name.equals("Cefuroxim_500mg")) {
-				ingredient = "Cefuroxime";
-				manufacturer = "Sandoz";
+    case "Augmentin_625mg":
+        ingredient = "Amoxicillin + Clavulanate";
+        strength = "625";
+        manufacturer = "GSK";
+        break;
 
-		} else if (name.equals("Acyclovir_400mg")) {
-				ingredient = "Acyclovir";
-				strength = "400";
-				manufacturer = "Stella";
+    case "Cefuroxim_500mg":
+        ingredient = "Cefuroxime";
+        manufacturer = "Sandoz";
+        break;
 
-		} else if (name.equals("Nexium_mups_20mg")) {
-				ingredient = "Esomeprazole";
-				strength = "20";
-				manufacturer = "AstraZeneca";
+    case "Acyclovir_400mg":
+        ingredient = "Acyclovir";
+        strength = "400";
+        manufacturer = "Stella";
+        break;
 
-		} else if (name.equals("Loperamid_2mg")) {
-				ingredient = "Loperamide";
-				strength = "2";
-				manufacturer = "Imexpharm";
+    case "Nexium_mups_20mg":
+        ingredient = "Esomeprazole";
+        strength = "20";
+        manufacturer = "AstraZeneca";
+        break;
 
-		} else if (name.equals("Enterogermina")) {
-				ingredient = "Bacillus clausii";
-				dosageForm = "Suspension";
-				strength = "5";
-				unit = "ml";
-				manufacturer = "Sanofi";
+    case "Loperamid_2mg":
+        ingredient = "Loperamide";
+        strength = "2";
+        manufacturer = "Imexpharm";
+        break;
 
-		} else if (name.equals("Tiffy_Dey")) {
-				ingredient = "Paracetamol + Chlorpheniramine";
-				manufacturer = "United Pharma";
+    case "Enterogermina":
+        ingredient = "Bacillus clausii";
+        dosageForm = "Suspension";
+        strength = "5";
+        unit = "ml";
+        manufacturer = "Sanofi";
+        break;
 
-		} else if (name.equals("Telfast_HD_180mg")) {
-				ingredient = "Fexofenadine";
-				strength = "180";
-				manufacturer = "Sanofi";
+    case "Tiffy_Dey":
+        ingredient = "Paracetamol + Chlorpheniramine";
+        manufacturer = "United Pharma";
+        break;
 
-		} else if (name.equals("Eugica")) {
-				ingredient = "Herbal Extract";
-				dosageForm = "Syrup";
-				strength = "10";
-				unit = "ml";
-				manufacturer = "Mega We Care";
+    case "Telfast_HD_180mg":
+        ingredient = "Fexofenadine";
+        strength = "180";
+        manufacturer = "Sanofi";
+        break;
 
-		} else if (name.equals("Enat_400")) {
-				ingredient = "Vitamin E";
-				strength = "400";
-				unit = "IU";
-				manufacturer = "Mega We Care";
+    case "Eugica":
+        ingredient = "Herbal Extract";
+        dosageForm = "Syrup";
+        strength = "10";
+        unit = "ml";
+        manufacturer = "Mega We Care";
+        break;
 
-		} else if (name.equals("Ginkgo_Biloba_120mg")) {
-				ingredient = "Ginkgo Biloba";
-				strength = "120";
-				manufacturer = "Traphaco";
-		}
+    case "Enat_400":
+        ingredient = "Vitamin E";
+        strength = "400";
+        unit = "IU";
+        manufacturer = "Mega We Care";
+        break;
+
+    case "Ginkgo_Biloba_120mg":
+        ingredient = "Ginkgo Biloba";
+        strength = "120";
+        manufacturer = "Traphaco";
+        break;
+
+default:
+    ingredient = ingredientlist[r.nextInt(ingredientlist.length)];
+
+    dosageForm = dosageFormlist[r.nextInt(dosageFormlist.length)];
+    strength   = strengthlist[r.nextInt(strengthlist.length)];
+    unit       = unitlist[r.nextInt(unitlist.length)];
+    manufacturer = manufacturerlist[r.nextInt(manufacturerlist.length)];
+
+    // logic hợp lý: Syrup → ml, còn lại → mg
+    if (dosageForm.equals("Syrup"))
+        unit = "ml";
+    break;
+
+
+}
 
 
     int basePrice;
@@ -219,7 +330,7 @@ public class DataGenerator {
     } else if (dosageForm.equals("Syrup")) {
         basePrice = 50000;
     }else{
-		basePrice = 1500;
+		basePrice = pricePool[r.nextInt(pricePool.length)];
 	}
 }
 
