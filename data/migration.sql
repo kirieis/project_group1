@@ -44,7 +44,7 @@ GO
 --Nguyen Tri Thien path: C:\Users\nguye\Documents\GitHub\lab211-project-group1\data\medicines_clean.csv--
 --Hang Vo Minh Nhat path: C:\Users\nhatg\Documents\GitHub\lab211-project-group1\data\medicines_clean.csv--
 BULK INSERT Medicine 
-FROM 'E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\medicines_clean.csv'
+FROM 'E:\Project-LAB-github\lab211-project-group1\data\medicines_clean.csv'
 WITH (
     FIRSTROW = 2,
     FIELDTERMINATOR = ',',
@@ -60,7 +60,7 @@ GO
 CREATE TABLE Customer (
     customer_id INT IDENTITY PRIMARY KEY,
     full_name VARCHAR(100),
-    phone VARCHAR(20),
+    phone INT,
     address VARCHAR(255),
     username VARCHAR(50) UNIQUE,
     password VARCHAR(255),
@@ -72,12 +72,12 @@ GO
    IMPORT CUSTOMER DATA
    ========================= */
 --Nguyen_Van_An path:E:\Project-LAB-github\lab211-project-group1\data\customers.csv--
---Nguyen_Van_An path:E:\Project-LAB-github\lab211-project-group1\data\customers.csv--
+--Nguyen_Van_An path:E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\customers.csv--
 --Tran Quoc Thinh path:C:\Users\PC\Documents\GitHub\project_group1\data\customers.csv--
 --Nguyen Tri Thien path: C:\Users\nguye\Documents\GitHub\lab211-project-group1\data\customers.csv--
 --Hang Vo Minh Nhat path: C:\Users\nhatg\Documents\GitHub\lab211-project-group1\data\customers.csv--
 BULK INSERT Customer 
-FROM 'E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\customers.csv'
+FROM 'E:\Project-LAB-github\lab211-project-group1\data\customers.csv'
 WITH (
     FIRSTROW = 2,
     FIELDTERMINATOR = ',',
@@ -104,7 +104,6 @@ CREATE TABLE Pharmacist (
     pharmacist_id INT IDENTITY PRIMARY KEY,
     full_name VARCHAR(100),
     license_number VARCHAR(50),
-    branch_id INT,
     role VARCHAR(30)
 );
 GO
@@ -118,7 +117,7 @@ GO
 --Nguyen Tri Thien path: C:\Users\nguye\Documents\GitHub\lab211-project-group1\data\pharmacists.csv--
 --Hang Vo Minh Nhat path: C:\Users\nhatg\Documents\GitHub\lab211-project-group1\data\pharmacists.csv--
 BULK INSERT Pharmacist 
-FROM 'E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\pharmacists.csv'
+FROM 'E:\Project-LAB-github\lab211-project-group1\data\pharmacists.csv'
 WITH (
     FIRSTROW = 2,
     FIELDTERMINATOR = ',',

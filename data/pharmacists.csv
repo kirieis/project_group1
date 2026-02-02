@@ -1,4 +1,4 @@
-full_name,license_number,role
-Nguyễn Dược Sĩ A,PHA001,PHARMACIST
-Trần Dược Sĩ B,PHA002,PHARMACIST
-Lê Dược Sĩ C,PHA003,PHARMACIST
+PHARMACIST_id,full_name,license_number,role
+1,Nguyễn Dược Sĩ A,PHA001,PHARMACIST
+2,Trần Dược Sĩ B,PHA002,PHARMACIST
+3,Lê Dược Sĩ C,PHA003,PHARMACIST
