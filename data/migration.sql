@@ -22,13 +22,13 @@ GO
    ========================= */
 CREATE TABLE Medicine (
     medicine_id VARCHAR(20) PRIMARY KEY,
-    name NVARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     batch VARCHAR(250),
-    ingredient NVARCHAR(100),
-    dosage_form NVARCHAR(50),
-    strength NVARCHAR(20),
-    unit NVARCHAR(10),
-    manufacturer NVARCHAR(100),
+    ingredient VARCHAR(100),
+    dosage_form VARCHAR(50),
+    strength VARCHAR(20),
+    unit VARCHAR(10),
+    manufacturer VARCHAR(100),
     expiry DATE,
     quantity INT,
     price INT,
@@ -39,11 +39,12 @@ GO
    IMPORT MEDICINE DATA
    ========================= */
 --Nguyen_Van_An path:E:\Project-LAB-github\lab211-project-group1\data\medicines_clean.csv--
+--Nguyen_Van_An path:E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\medicines_clean.csv--
 --Tran Quoc Thinh path:C:\Users\PC\Documents\GitHub\project_group1\data\medicines_clean.csv--
 --Nguyen Tri Thien path: C:\Users\nguye\Documents\GitHub\lab211-project-group1\data\medicines_clean.csv--
 --Hang Vo Minh Nhat path: C:\Users\nhatg\Documents\GitHub\lab211-project-group1\data\medicines_clean.csv--
 BULK INSERT Medicine 
-FROM 'E:\Project-LAB-github\lab211-project-group1\data\medicines_clean.csv'
+FROM 'E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\medicines_clean.csv'
 WITH (
     FIRSTROW = 2,
     FIELDTERMINATOR = ',',
@@ -58,9 +59,9 @@ GO
    ========================= */
 CREATE TABLE Customer (
     customer_id INT IDENTITY PRIMARY KEY,
-    full_name NVARCHAR(100),
+    full_name VARCHAR(100),
     phone VARCHAR(20),
-    address NVARCHAR(255),
+    address VARCHAR(255),
     username VARCHAR(50) UNIQUE,
     password VARCHAR(255),
     role VARCHAR(20) DEFAULT 'CUSTOMER'
@@ -71,11 +72,12 @@ GO
    IMPORT CUSTOMER DATA
    ========================= */
 --Nguyen_Van_An path:E:\Project-LAB-github\lab211-project-group1\data\customers.csv--
+--Nguyen_Van_An path:E:\Project-LAB-github\lab211-project-group1\data\customers.csv--
 --Tran Quoc Thinh path:C:\Users\PC\Documents\GitHub\project_group1\data\customers.csv--
 --Nguyen Tri Thien path: C:\Users\nguye\Documents\GitHub\lab211-project-group1\data\customers.csv--
 --Hang Vo Minh Nhat path: C:\Users\nhatg\Documents\GitHub\lab211-project-group1\data\customers.csv--
 BULK INSERT Customer 
-FROM 'C:\Users\PC\Documents\GitHub\project_group1\data\customers.csv'
+FROM 'E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\customers.csv'
 WITH (
     FIRSTROW = 2,
     FIELDTERMINATOR = ',',
@@ -100,7 +102,7 @@ GO
    ========================= */
 CREATE TABLE Pharmacist (
     pharmacist_id INT IDENTITY PRIMARY KEY,
-    full_name NVARCHAR(100),
+    full_name VARCHAR(100),
     license_number VARCHAR(50),
     branch_id INT,
     role VARCHAR(30)
@@ -111,11 +113,12 @@ GO
    IMPORT PHARMACIST DATA
    ========================= */
 --Nguyen_Van_An path:E:\Project-LAB-github\lab211-project-group1\data\pharmacists.csv--
+--Nguyen_Van_An path:E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\pharmacists.csv--
 --Tran Quoc Thinh path:C:\Users\PC\Documents\GitHub\project_group1\data\pharmacists.csv--
 --Nguyen Tri Thien path: C:\Users\nguye\Documents\GitHub\lab211-project-group1\data\pharmacists.csv--
 --Hang Vo Minh Nhat path: C:\Users\nhatg\Documents\GitHub\lab211-project-group1\data\pharmacists.csv--
 BULK INSERT Pharmacist 
-FROM 'C:\Users\PC\Documents\GitHub\project_group1\data\pharmacists.csv'
+FROM 'E:\Download setup\apache-tomcat-10.1.50\webapps\target\data\pharmacists.csv'
 WITH (
     FIRSTROW = 2,
     FIELDTERMINATOR = ',',
