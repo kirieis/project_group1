@@ -41,7 +41,7 @@ public class Simulator {
         System.out.println("   BẮT ĐẦU GIẢ LẬP ĐƠN HÀNG - ORDER SIMULATOR");
         System.out.println("═══════════════════════════════════════════════\n");
 
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 1; i <= 20; i++) {
             // Tạo 1-5 items ngẫu nhiên cho mỗi đơn hàng
             int numItems = rnd.nextInt(5) + 1;
             StringBuilder itemsJson = new StringBuilder();
@@ -85,16 +85,16 @@ public class Simulator {
             }
 
             int responseCode = conn.getResponseCode();
-            String status = (responseCode == 200) ? "✅ SUCCESS" : "❌ FAILED";
+            String status = (responseCode == 200) ? " SUCCESS" : " FAILED";
 
-            System.out.printf("Đơn #%02d | Items: %d | Total: %,.0f VND | %s (HTTP %d)\n",
+            System.out.printf("don #%02d | Items: %d | Total: %,.0f VND | %s (HTTP %d)\n",
                     i, numItems, totalAmount, status, responseCode);
 
             Thread.sleep(200); // Delay 200ms giữa các requests
         }
 
         System.out.println("\n═══════════════════════════════════════════════");
-        System.out.println("   DONE - 50 simulator orders");
+        System.out.println("   DONE - 20 simulator orders");
         System.out.println("═══════════════════════════════════════════════");
     }
 }

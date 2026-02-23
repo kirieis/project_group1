@@ -176,77 +176,76 @@ async function confirmPayment() {
         return;
     }
 
-    const proofInput = $("paymentProof");
     const btnConfirm = $("btnConfirmPayment");
 
-    // 🛡️ CHỐNG CLICK NHIỀU LẦN: Khóa nút ngay lập tức
+    // 🛡️ CHỐNG CLICK NHIỀU LẦN
     btnConfirm.disabled = true;
     btnConfirm.classList.add("btn-disabled");
-    btnConfirm.innerHTML = "⏳ ĐANG GỬI ĐƠN HÀNG... VUI LÒNG ĐỢI";
-
-    let proofBase64 = null;
-
-    if (!proofInput || !proofInput.files[0]) {
-        alert("Vui lòng tải lên ảnh màn hình chuyển khoản để xác thực!");
-        btnConfirm.disabled = false;
-        btnConfirm.classList.remove("btn-disabled");
-        btnConfirm.innerHTML = "🚀 XÁC NHẬN THANH TOÁN";
-        return;
-    }
+    btnConfirm.innerHTML = "⏳ ĐANG KHỞI TẠO ĐƠN HÀNG...";
 
     try {
-        const file = proofInput.files[0];
-        // 📏 GIỚI HẠN DUNG LƯỢNG: Nếu ảnh > 2MB thì báo khách chọn ảnh nhẹ hơn
-        if (file.size > 2 * 1024 * 1024) {
-            alert("Ảnh quá nặng! Mày hãy chụp lại màn hình hoặc dùng ảnh dưới 2MB nhé (để gửi qua Ngrok cho nhanh).");
-            btnConfirm.disabled = false;
-            btnConfirm.classList.remove("btn-disabled");
-            btnConfirm.innerHTML = "🚀 XÁC NHẬN THANH TOÁN";
-            return;
-        }
-
-        // Convert image to base64
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        await new Promise(resolve => reader.onload = resolve);
-        proofBase64 = reader.result;
-
         const orderData = {
-            orderId: orderId,
-            paymentMethod: "BANK_TRANSFER",
             totalAmount: subtotal - Math.round(subtotal * appliedDiscount / 100),
-            items: cart,
-            paymentProof: proofBase64,
-            status: "PENDING"
+            items: cart
         };
 
-        const res = await fetch('api/orders', {
+        const res = await fetch('api/sepay/create-order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
         });
 
-        if (res.ok) {
-            // ✅ THÀNH CÔNG: Hiện modal và xóa giỏ
-            $("orderId").textContent = orderId;
+        const result = await res.json();
+
+        if (res.ok && result.invoiceId) {
+            const finalId = result.invoiceId;
+            const finalAmount = orderData.totalAmount;
+
+            // ✅ HIỆN MODAL VỚI QR ĐỘNG (VietQR)
+            // Bro cấu hình MB Bank trong link này
+            const bankId = "MB";
+            const accountNo = "3399377355";
+            const template = "compact2";
+            const description = `DH${finalId}`;
+            const accountName = encodeURIComponent("NGUYEN TRI THIEN");
+
+            const qrUrl = `https://img.vietqr.io/image/${bankId}-${accountNo}-${template}.png?amount=${finalAmount}&addInfo=${description}&accountName=${accountName}`;
+
+            // Tạo giao diện QR trong modal
+            $("successModal").querySelector(".success-content").innerHTML = `
+                <div class="success-icon">💳</div>
+                <h2>Quét mã để thanh toán</h2>
+                <p>Vui lòng quét mã QR dưới đây. Hệ thống sẽ tự động xác nhận đơn hàng sau khi bạn chuyển khoản thành công.</p>
+                
+                <div style="margin: 20px 0; border: 2px solid #6366f1; border-radius: 12px; padding: 10px; background: white;">
+                    <img src="${qrUrl}" style="width: 100%; border-radius: 8px;">
+                </div>
+
+                <p style="font-weight: 700; color: var(--primary);">Số tiền: ${formatVND(finalAmount)}</p>
+                <p style="font-size: 13px; background: #fff3cd; color: #856404; padding: 8px; border-radius: 8px;">
+                    ⚠️ Lưu ý: Giữ nguyên nội dung chuyển khoản <b>${description}</b> để hệ thống tự động nhận diện.
+                </p>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn--ghost" onclick="window.location.href='home.html'" style="flex: 1; justify-content: center;">Về Trang Chủ</button>
+                    <button class="btn btn--primary" onclick="window.location.href='profile.html'" style="flex: 1; justify-content: center;">Lịch sử đơn 👤</button>
+                </div>
+            `;
+
             $("successModal").classList.add("active");
             clearCart();
-            // Ẩn preview cho đỡ lag
-            if ($("proofPreview")) $("proofPreview").style.display = "none";
         } else {
-            const result = await res.json();
-            alert('Lỗi: ' + result.message);
-            // Mở lại nút nếu lỗi để khách thử lại
+            alert('Lỗi: ' + (result.message || 'Không thể tạo đơn hàng'));
             btnConfirm.disabled = false;
             btnConfirm.classList.remove("btn-disabled");
-            btnConfirm.innerHTML = "🚀 THỬ LẠI XÁC NHẬN";
+            btnConfirm.innerHTML = "🚀 THỬ LẠI";
         }
     } catch (e) {
         console.error("Payment error:", e);
         alert('Lỗi kết nối! Bạn vui lòng kiểm tra mạng và thử lại.');
         btnConfirm.disabled = false;
         btnConfirm.classList.remove("btn-disabled");
-        btnConfirm.innerHTML = "🚀 THỬ LẠI XÁC NHẬN";
+        btnConfirm.innerHTML = "🚀 THỬ LẠI";
     }
 }
 
