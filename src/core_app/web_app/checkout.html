@@ -251,83 +251,23 @@
             <div class="checkout-box">
                 <h2>💳 Thanh toán chuyển khoản</h2>
 
-                <div class="bank-info">
-                    <h3>🏦 Ngân hàng Quân đội (MB Bank)</h3>
-                    <p>Chủ tài khoản:</p>
-                    <p style="font-weight: 700;">NGUYỄN TRÍ THIỆN</p>
-                    <p class="account-number">3399377355</p>
-                </div>
-
-                <div class="qr-container">
-                    <img src="qr_bank.png" alt="QR Code chuyển khoản" />
-                    <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">Quét mã QR để chuyển khoản
-                        nhanh</p>
-                </div>
-
-                <div class="payment-note">
-                    <strong>⚠️ Lưu ý quan trọng:</strong>
-                    Vui lòng chuyển <b>đúng số tiền</b> của đơn hàng: <span id="transferAmount"
-                        style="color: var(--primary); font-weight: 800;">0đ</span>
-                    <br><br>
-                    Nội dung chuyển khoản: <b id="transferContent">ĐH-xxxxx</b>
-                </div>
-
-                <div class="upload-section" style="margin: 24px 0; text-align: left;">
-                    <p
-                        style="font-weight: 700; font-size: 14px; margin-bottom: 12px; color: #475569; letter-spacing: 0.5px; text-transform: uppercase;">
-                        📸 Xác thực chuyển khoản
+                <div class="payment-intro" style="text-align: center; padding: 20px 0;">
+                    <img src="https://sepay.vn/assets/img/logo-sepay.png" alt="SePay"
+                        style="width: 120px; margin-bottom: 20px;">
+                    <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6;">
+                        Hệ thống sử dụng cổng thanh toán <b>SePay</b> để tự động xác thực giao dịch chuyển khoản qua
+                        VietQR.
                     </p>
+                </div>
 
-                    <div style="position: relative;">
-                        <!-- Hidden real input -->
-                        <input type="file" id="paymentProof" accept="image/*" style="display: none;">
-
-                        <!-- Custom styled label as button -->
-                        <label for="paymentProof" style="
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            gap: 12px;
-                            padding: 20px;
-                            background: white;
-                            border: 2px dashed #6366f1;
-                            border-radius: 16px;
-                            cursor: pointer;
-                            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                            color: #6366f1;
-                            font-weight: 700;
-                            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-                        " onmouseover="this.style.background='#f5f3ff'; this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.background='white'; this.style.transform='scale(1)'">
-                            <span style="font-size: 24px;">📤</span>
-                            <span>Tải ảnh màn hình lên ngay</span>
-                        </label>
-                    </div>
-
-                    <div id="proofPreview" style="margin-top: 16px; display: none; animation: slideDown 0.4s ease-out;">
-                        <div
-                            style="padding: 12px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
-                            <p style="font-size: 12px; color: #64748b; margin-bottom: 8px; font-weight: 600;">Xem trước
-                                bằng chứng:</p>
-                            <img src=""
-                                style="width: 100%; max-height: 300px; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
-                        </div>
-                    </div>
+                <div class="payment-note"
+                    style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-md); padding: 16px; margin: 20px 0; color: #1e40af;">
+                    <strong>💡 Thông tin thanh toán:</strong>
+                    Sau khi nhấn xác nhận, mã QR thanh toán sẽ hiện lên. Đơn hàng sẽ được tự động xác nhận ngay sau khi
+                    hệ thống nhận được tiền.
                 </div>
 
                 <style>
-                    @keyframes slideDown {
-                        from {
-                            opacity: 0;
-                            transform: translateY(-10px);
-                        }
-
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
-
                     .btn-disabled {
                         background: #cbd5e1 !important;
                         color: #94a3b8 !important;
@@ -338,7 +278,7 @@
 
                 <button class="btn btn--primary" id="btnConfirmPayment"
                     style="width: 100%; justify-content: center; padding: 18px; font-size: 16px; font-weight: 800; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); transition: all 0.3s;">
-                    🚀 XÁC NHẬN THANH TOÁN
+                    🚀 THANH TOÁN QUA PAYOS
                 </button>
             </div>
         </div>

@@ -15,7 +15,7 @@ public class InvoiceDAO {
 
     private final MedicineDAO medicineDAO = new MedicineDAO();
 
-    public boolean addInvoice(Invoice invoice) {
+    public int addInvoice(Invoice invoice) {
         String sqlInvoice = "INSERT INTO Invoice (customer_id, total_amount, payment_method, status, payment_proof) VALUES (?, ?, ?, ?, ?)";
         // Added import_price to track profit per sale
         String sqlDetail = "INSERT INTO Invoice_Detail (invoice_id, medicine_id, medicine_name, quantity, unit_price, import_price) VALUES (?, ?, ?, ?, ?, ?)";
@@ -33,7 +33,6 @@ public class InvoiceDAO {
                 psInvoice.setString(4, invoice.getStatus() != null ? invoice.getStatus() : "PENDING");
                 psInvoice.setString(5, invoice.getPaymentProof());
 
-                System.out.println("DEBUG: Đang lưu Invoice cho CustomerID: " + invoice.getCustomerId());
                 psInvoice.executeUpdate();
 
                 ResultSet rs = psInvoice.getGeneratedKeys();
@@ -41,10 +40,7 @@ public class InvoiceDAO {
                     int invId = rs.getInt(1);
                     try (PreparedStatement psDetail = conn.prepareStatement(sqlDetail)) {
                         for (InvoiceDetail d : invoice.getInvoiceDetails()) {
-                            // Ensure medicine exists to prevent FK error
                             medicineDAO.ensureMedicineExists(d.getMedicineId(), d.getMedicineName(), d.getUnitPrice());
-
-                            // Get import price for profit calculation
                             double importCost = medicineDAO.getImportPrice(d.getMedicineId());
 
                             psDetail.setInt(1, invId);
@@ -56,24 +52,19 @@ public class InvoiceDAO {
                             psDetail.addBatch();
                         }
                         psDetail.executeBatch();
-                    } catch (SQLException ex) {
-                        System.err.println(
-                                "❌ SQL DETAIL ERROR (Có thể do bảng Medicine chưa có dữ liệu): " + ex.getMessage());
-                        throw ex; // Trigger rollback
                     }
+                    conn.commit();
+                    return invId;
                 }
-                conn.commit();
-                System.out.println("✅ SUCCESS: Đã lưu đơn hàng vào Database thành công!");
-                return true;
+                conn.rollback();
             } catch (SQLException e) {
                 conn.rollback();
-                System.err.println("❌ SQL MASTER ERROR (Rollback đơn hàng): " + e.getMessage());
                 throw new RuntimeException("Database Error: " + e.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("System Error: " + e.getMessage());
         }
+        return -1;
     }
 
     public List<Invoice> getInvoicesByCustomerId(int customerId) {
