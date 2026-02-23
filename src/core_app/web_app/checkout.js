@@ -176,54 +176,77 @@ async function confirmPayment() {
         return;
     }
 
-    const bankRadio = $("bankTransferRadio");
     const proofInput = $("paymentProof");
     const btnConfirm = $("btnConfirmPayment");
+
+    // 🛡️ CHỐNG CLICK NHIỀU LẦN: Khóa nút ngay lập tức
+    btnConfirm.disabled = true;
+    btnConfirm.classList.add("btn-disabled");
+    btnConfirm.innerHTML = "⏳ ĐANG GỬI ĐƠN HÀNG... VUI LÒNG ĐỢI";
+
     let proofBase64 = null;
 
     if (!proofInput || !proofInput.files[0]) {
         alert("Vui lòng tải lên ảnh màn hình chuyển khoản để xác thực!");
+        btnConfirm.disabled = false;
+        btnConfirm.classList.remove("btn-disabled");
+        btnConfirm.innerHTML = "🚀 XÁC NHẬN THANH TOÁN";
         return;
     }
 
-    if (proofInput && proofInput.files[0]) {
-        // Convert image to base64 to send to server
+    try {
+        const file = proofInput.files[0];
+        // 📏 GIỚI HẠN DUNG LƯỢNG: Nếu ảnh > 2MB thì báo khách chọn ảnh nhẹ hơn
+        if (file.size > 2 * 1024 * 1024) {
+            alert("Ảnh quá nặng! Mày hãy chụp lại màn hình hoặc dùng ảnh dưới 2MB nhé (để gửi qua Ngrok cho nhanh).");
+            btnConfirm.disabled = false;
+            btnConfirm.classList.remove("btn-disabled");
+            btnConfirm.innerHTML = "🚀 XÁC NHẬN THANH TOÁN";
+            return;
+        }
+
+        // Convert image to base64
         const reader = new FileReader();
-        reader.readAsDataURL(proofInput.files[0]);
+        reader.readAsDataURL(file);
         await new Promise(resolve => reader.onload = resolve);
         proofBase64 = reader.result;
-    }
 
-    const orderData = {
-        orderId: orderId,
-        paymentMethod: "BANK_TRANSFER",
-        totalAmount: subtotal - Math.round(subtotal * appliedDiscount / 100),
-        items: cart,
-        paymentProof: proofBase64,
-        status: "PENDING"
-    };
+        const orderData = {
+            orderId: orderId,
+            paymentMethod: "BANK_TRANSFER",
+            totalAmount: subtotal - Math.round(subtotal * appliedDiscount / 100),
+            items: cart,
+            paymentProof: proofBase64,
+            status: "PENDING"
+        };
 
-    try {
         const res = await fetch('api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
         });
 
-        const result = await res.json();
-
         if (res.ok) {
-            // Show success modal
+            // ✅ THÀNH CÔNG: Hiện modal và xóa giỏ
             $("orderId").textContent = orderId;
             $("successModal").classList.add("active");
-            // Clear cart
             clearCart();
+            // Ẩn preview cho đỡ lag
+            if ($("proofPreview")) $("proofPreview").style.display = "none";
         } else {
-            alert('Lỗi khi lưu đơn hàng: ' + result.message);
+            const result = await res.json();
+            alert('Lỗi: ' + result.message);
+            // Mở lại nút nếu lỗi để khách thử lại
+            btnConfirm.disabled = false;
+            btnConfirm.classList.remove("btn-disabled");
+            btnConfirm.innerHTML = "🚀 THỬ LẠI XÁC NHẬN";
         }
     } catch (e) {
         console.error("Payment error:", e);
-        alert('Có lỗi xảy ra khi xử lý thanh toán. Vui lòng thử lại.');
+        alert('Lỗi kết nối! Bạn vui lòng kiểm tra mạng và thử lại.');
+        btnConfirm.disabled = false;
+        btnConfirm.classList.remove("btn-disabled");
+        btnConfirm.innerHTML = "🚀 THỬ LẠI XÁC NHẬN";
     }
 }
 

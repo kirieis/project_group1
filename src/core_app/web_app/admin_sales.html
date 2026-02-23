@@ -229,7 +229,7 @@
     <header class="header">
         <div class="header__inner container">
             <div class="brand">
-                <a href="home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
+                <a href="../home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
                     <div class="brand__logo">
                         <span class="logo-dot"></span>
                         <span class="logo-dot"></span>
@@ -391,8 +391,10 @@
                     orderProfit += (item.price - cost) * item.qty;
                 });
 
-                totalRev += order.total;
-                totalProfit += orderProfit;
+                if (order.status === 'PAID') {
+                    totalRev += order.total;
+                    totalProfit += orderProfit;
+                }
 
                 return `
                     <tr>
@@ -403,9 +405,11 @@
                         <td class="total-cell">${formatVND(order.total)}</td>
                         <td class="profit-cell">+${formatVND(orderProfit)}</td>
                         <td>
-                            <span class="badge" style="background: ${order.status === 'PAID' ? '#10b981' : '#f59e0b'}; color: white; font-size: 0.7rem;">
-                                ${order.status === 'PAID' ? '✅ ĐÃ TRẢ' : '⏳ CHỜ GD'}
-                            </span>
+                            ${order.status === 'PAID' ?
+                        '<span class="badge" style="background: #10b981; color: white; font-size: 0.7rem;">✅ ĐÃ TRẢ</span>' :
+                        order.status === 'CANCELLED' ?
+                            '<span class="badge" style="background: #ef4444; color: white; font-size: 0.7rem;">❌ ĐÃ HỦY</span>' :
+                            '<span class="badge" style="background: #f59e0b; color: white; font-size: 0.7rem;">⏳ CHỜ DUYỆT</span>'}
                         </td>
                         <td><button class="btn-view" onclick="toggleDetails(${order.id})">Xem</button></td>
                     </tr>
@@ -417,15 +421,15 @@
                                     <span>Lợi nhuận gộp</span>
                                 </div>
                                 ${order.items.map(item => {
-                    const itemCost = item.importPrice || (item.price * 0.7);
-                    const itemProfit = (item.price - itemCost) * item.qty;
-                    return `
+                                const itemCost = item.importPrice || (item.price * 0.7);
+                                const itemProfit = (item.price - itemCost) * item.qty;
+                                return `
                                     <div class="item-line">
                                         <span>${item.name} (x${item.qty})</span>
                                         <span class="item-profit">+${formatVND(itemProfit)}</span>
                                     </div>
                                     `;
-                }).join('')}
+                            }).join('')}
                             </div>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: flex-start;">
                                 ${order.paymentProof ? `
@@ -435,13 +439,19 @@
                                     </div>
                                 ` : '<div style="flex: 1; color: #94a3b8; font-style: italic; font-size: 0.8rem;">(Chưa tải ảnh bằng chứng)</div>'}
                                 
-                                <div style="text-align: right;">
-                                    ${order.status !== 'PAID' ? `
-                                        <button onclick="updateOrderStatus(${order.id}, 'PAID')" 
-                                            style="background: #10b981; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
-                                            💰 Xác nhận Đã nhận tiền
+                                <div style="text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
+                                    ${order.status === 'PENDING' ? `
+                                        <button onclick="updateOrderStatus(${order.id}, 'CANCELLED')" 
+                                            style="background: var(--admin-danger); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
+                                            ❌ Hủy/Từ chối
                                         </button>
-                                    ` : '<span style="color: #10b981; font-weight: 700;">✅ Giao dịch đã hoàn tất</span>'}
+                                        <button onclick="updateOrderStatus(${order.id}, 'PAID')" 
+                                            style="background: var(--admin-success); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
+                                            💰 Duyệt & Xác nhận tiền
+                                        </button>
+                                    ` : order.status === 'PAID' ?
+                        '<span style="color: var(--admin-success); font-weight: 700; background: #ecfdf5; padding: 0.5rem 1rem; border-radius: 0.5rem;">✅ Đã hoàn tất giao dịch</span>' :
+                        '<span style="color: var(--admin-danger); font-weight: 700; background: #fef2f2; padding: 0.5rem 1rem; border-radius: 0.5rem;">🚫 Đơn đã bị hủy</span>'}
                                 </div>
                             </div>
                         </td>

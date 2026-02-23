@@ -213,27 +213,55 @@
                     return;
                 }
 
-                summaryCount.textContent = orders.length;
-                let totalSpent = orders.reduce((sum, o) => sum + o.total, 0);
+                const paidOrders = orders.filter(o => o.status === 'PAID');
+                summaryCount.textContent = paidOrders.length;
+                let totalSpent = paidOrders.reduce((sum, o) => sum + o.total, 0);
 
                 const renderOrder = (o) => {
                     const dateStr = `${o.day}/${o.month}/${o.year}`;
 
+                    // Logic màu sắc trạng thái
+                    let statusLabel = '⏳ Chờ xác nhận';
+                    let statusColor = '#f59e0b';
+                    let statusBg = '#fffbeb';
+
+                    if (o.status === 'PAID') {
+                        statusLabel = '✅ Đã hoàn tất';
+                        statusColor = '#10b981';
+                        statusBg = '#f0fdf4';
+                    } else if (o.status === 'CANCELLED') {
+                        statusLabel = '❌ Đã bị hủy';
+                        statusColor = '#ef4444';
+                        statusBg = '#fef2f2';
+                    }
+
                     return `
-                        <div class="order-card" style="border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; background: #fff; box-shadow: var(--shadow-sm);">
-                            <div style="display:flex; justify-content:space-between; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px;">
-                                <span style="font-weight:700; color: var(--primary);">Đơn #INV-${o.id}</span>
-                                <span style="font-weight:800; color: var(--gold);">${o.total.toLocaleString('vi-VN')}đ</span>
+                        <div class="order-card" style="border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; background: #fff; box-shadow: var(--shadow-sm); transition: transform 0.2s;">
+                            <div style="display:flex; justify-content:space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                                <div>
+                                    <span style="font-weight:700; color: var(--primary); display:block;">Đơn #INV-${o.id}</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);">${dateStr}</span>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span style="display: block; font-weight:800; color: var(--gold); font-size: 16px;">${o.total.toLocaleString('vi-VN')}đ</span>
+                                    <span style="display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; color: ${statusColor}; background: ${statusBg}; border: 1px solid ${statusColor}33; margin-top: 4px;">
+                                        ${statusLabel}
+                                    </span>
+                                </div>
                             </div>
-                            <div style="font-size: 14px; margin-bottom: 8px;">
+                            <div style="font-size: 13px; margin-bottom: 8px;">
                                 ${o.items.map(item => `
                                     <div style="display:flex; justify-content:space-between; margin-bottom: 4px;">
-                                        <span>${item.name} (x${item.qty})</span>
-                                        <span style="color: var(--text-muted);">${(item.price * item.qty).toLocaleString('vi-VN')}đ</span>
+                                        <span style="color: #475569;">${item.name} <span style="color: #94a3b8;">x${item.qty}</span></span>
+                                        <span style="font-weight: 600;">${(item.price * item.qty).toLocaleString('vi-VN')}đ</span>
                                     </div>
                                 `).join('')}
                             </div>
-                            <div style="font-size: 11px; color: var(--text-muted);">Ngày đặt: ${dateStr}</div>
+                            ${o.status === 'PENDING' ? `
+                                <div style="margin-top: 10px; padding: 8px; background: #f8fafc; border-radius: 8px; font-size: 11px; color: #64748b; font-style: italic;">
+                                    💡 Hệ thống đang chờ Admin xác nhận giao dịch của bạn.
+                                </div>
+                            ` : ''}
                         </div>
                     `;
                 };

@@ -348,12 +348,20 @@
     <div class="success-modal" id="successModal">
         <div class="success-content">
             <div class="success-icon">🎉</div>
-            <h2>Đặt hàng thành công!</h2>
-            <p>Cảm ơn bạn đã mua hàng tại Github Pharmacy. Chúng tôi sẽ xử lý đơn hàng của bạn ngay!</p>
-            <p style="font-weight: 600; color: var(--primary);">Mã đơn hàng: <span id="orderId">ĐH-xxxxx</span></p>
-            <button class="btn btn--primary" onclick="goHome()" style="width: 100%; justify-content: center;">
-                Về trang chủ
-            </button>
+            <h2>Đã gửi yêu cầu thanh toán!</h2>
+            <p>Bằng chứng chuyển khoản của bạn đã được gửi thành công. Hệ thống đang đợi Admin kiểm tra giao dịch.</p>
+            <p
+                style="background: #f0fdf4; padding: 10px; border-radius: 8px; color: #166534; font-size: 13px; margin-bottom: 20px; text-align: left;">
+                💡 Mẹo: Bạn hãy vào mục <b>"Hồ sơ -> Lịch sử mua hàng"</b> để theo dõi khi nào đơn được duyệt nhé!
+            </p>
+            <p style="font-weight: 600; color: var(--primary); margin-bottom: 20px;">Mã đơn hàng: <span
+                    id="orderId">ĐH-xxxxx</span></p>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn--ghost" onclick="window.location.href='home.html'"
+                    style="flex: 1; justify-content: center;">Về Trang Chủ</button>
+                <button class="btn btn--primary" onclick="window.location.href='profile.html'"
+                    style="flex: 1; justify-content: center;">Vào Hồ Sơ 👤</button>
+            </div>
         </div>
     </div>
 
