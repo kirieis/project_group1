@@ -94,7 +94,7 @@ public class Simulator {
         }
 
         System.out.println("\n═══════════════════════════════════════════════");
-        System.out.println("   HOÀN THÀNH - Đã tạo 50 đơn hàng giả lập");
+        System.out.println("   DONE - 50 simulator orders");
         System.out.println("═══════════════════════════════════════════════");
     }
 }
