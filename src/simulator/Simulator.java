@@ -34,7 +34,7 @@ public class Simulator {
     };
 
     public static void main(String[] args) throws Exception {
-        String endpoint = "http://localhost:8080/api/orders";
+        String endpoint = "http://localhost:8080";
         Random rnd = new Random();
 
         System.out.println("═══════════════════════════════════════════════");
