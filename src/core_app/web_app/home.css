@@ -1621,3 +1621,177 @@ body {
   font-size: 15px;
   cursor: not-allowed;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LANGUAGE SWITCHER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Container */
+.lang-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Gear button */
+.lang-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  color: var(--white);
+  padding: 0;
+  line-height: 1;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: var(--gold-light);
+  transform: rotate(45deg) scale(1.1);
+}
+
+.lang-switcher.open .lang-btn {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: var(--gold);
+  transform: rotate(90deg);
+}
+
+/* Dropdown panel */
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 190px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 40px rgba(10, 37, 64, 0.18);
+  border: 1px solid var(--border-gold);
+  overflow: hidden;
+  z-index: 999;
+  animation: langDropIn 0.2s ease;
+}
+
+.lang-switcher.open .lang-dropdown {
+  display: block;
+}
+
+@keyframes langDropIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Current language label header */
+.lang-header {
+  padding: 12px 16px 8px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: var(--light-bg);
+}
+
+.lang-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* Option buttons */
+.lang-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lang-option:hover {
+  background: var(--light-bg);
+  color: var(--primary);
+}
+
+.lang-option.active {
+  background: linear-gradient(90deg, rgba(201,162,39,0.12), transparent);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Tiếng Tày - styled as a fun/joke option */
+.lang-option--joke {
+  color: #7c6b4a;
+  border-top: 1px dashed var(--border);
+}
+
+.lang-option--joke:hover {
+  background: #fef9ec;
+  color: #7c3f00;
+}
+
+/* TAY error toast */
+.tay-error-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #7c3f00 0%, #a0522d 100%);
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 30px rgba(124, 63, 0, 0.4);
+  z-index: 9999;
+  animation: tayToastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+}
+
+.tay-error-toast button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.tay-error-toast button:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+@keyframes tayToastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}

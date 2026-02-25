@@ -691,3 +691,208 @@ function debounce(fn, ms) {
     }
   }
 })();
+
+// ═══════════════════════════════════════════════════════════════════
+//  🌐 LANGUAGE SWITCHER SYSTEM
+// ═══════════════════════════════════════════════════════════════════
+
+const TRANSLATIONS = {
+  vi: {
+    // Meta
+    app_title: "Github Pharmacy",
+    // Header
+    search_placeholder: "Tìm tên thuốc, mã thuốc...",
+    login_button: "Đăng nhập",
+    cart_button: "Giỏ hàng",
+    // Hero
+    hero_title: "Mua thuốc nhanh – tìm dễ – lọc chuẩn",
+    hero_subtitle: "Cập nhật trực tiếp từ hệ thống quản lý kho.",
+    hero_sale_button: "Xem Sale 🔥",
+    hero_all_button: "Xem toàn bộ",
+    pixel_card_foot: "Tư vấn tận tâm",
+    // Sections
+    sale_section_title: "Đang Sale",
+    sale_section_subtitle: "Các sản phẩm giảm giá hấp dẫn",
+    sale_empty: "Chưa có sản phẩm sale theo bộ lọc hiện tại.",
+    bestseller_section_title: "Best Seller",
+    bestseller_section_subtitle: "Sản phẩm được ưa chuộng nhất",
+    bestseller_empty: "Chưa có best seller theo bộ lọc hiện tại.",
+    all_products_section_title: "Tất cả sản phẩm",
+    all_empty: "Không có sản phẩm phù hợp bộ lọc.",
+    // Filters
+    filters_title: "Bộ lọc",
+    filter_keyword_label: "Từ khoá",
+    filter_keyword_placeholder: "Tên thuốc, mã, lô...",
+    filter_price_min_label: "Giá (min)",
+    filter_price_max_label: "Giá (max)",
+    filter_sort_label: "Sắp xếp",
+    sort_pop_desc: "Phổ biến ↓",
+    sort_price_asc: "Giá ↑",
+    sort_price_desc: "Giá ↓",
+    sort_date_desc: "Ngày nhập ↓",
+    sort_name_asc: "Tên A→Z",
+    filter_only_sale: "Chỉ hiện Sale",
+    filter_reset_button: "Reset",
+    filter_apply_button: "Áp dụng",
+    // Pager
+    pager_prev_button: "← Trước",
+    pager_page_label: "Trang",
+    pager_next_button: "Sau →",
+    // Modal
+    modal_unit_label: "Đơn vị tính",
+    modal_quantity_label: "Số lượng",
+    modal_cancel_button: "Huỷ",
+    modal_add_to_cart_button: "Thêm vào giỏ",
+    // Lang dropdown header
+    lang_current_label: "🌐 Tiếng Việt",
+  },
+  en: {
+    // Meta
+    app_title: "Github Pharmacy",
+    // Header
+    search_placeholder: "Search medicine name, code...",
+    login_button: "Login",
+    cart_button: "Cart",
+    // Hero
+    hero_title: "Buy fast – find easy – filter smart",
+    hero_subtitle: "Live updates from our inventory management system.",
+    hero_sale_button: "View Sale 🔥",
+    hero_all_button: "View all",
+    pixel_card_foot: "Dedicated consultation",
+    // Sections
+    sale_section_title: "On Sale",
+    sale_section_subtitle: "Attractive discounted products",
+    sale_empty: "No sale products matching current filters.",
+    bestseller_section_title: "Best Sellers",
+    bestseller_section_subtitle: "Most popular products",
+    bestseller_empty: "No best sellers matching current filters.",
+    all_products_section_title: "All Products",
+    all_empty: "No products match the current filters.",
+    // Filters
+    filters_title: "Filters",
+    filter_keyword_label: "Keyword",
+    filter_keyword_placeholder: "Medicine name, code, batch...",
+    filter_price_min_label: "Price (min)",
+    filter_price_max_label: "Price (max)",
+    filter_sort_label: "Sort by",
+    sort_pop_desc: "Popular ↓",
+    sort_price_asc: "Price ↑",
+    sort_price_desc: "Price ↓",
+    sort_date_desc: "Import Date ↓",
+    sort_name_asc: "Name A→Z",
+    filter_only_sale: "Sale items only",
+    filter_reset_button: "Reset",
+    filter_apply_button: "Apply",
+    // Pager
+    pager_prev_button: "← Prev",
+    pager_page_label: "Page",
+    pager_next_button: "Next →",
+    // Modal
+    modal_unit_label: "Unit",
+    modal_quantity_label: "Quantity",
+    modal_cancel_button: "Cancel",
+    modal_add_to_cart_button: "Add to cart",
+    // Lang dropdown header
+    lang_current_label: "🌐 English",
+  },
+};
+
+function applyLanguage(lang) {
+  const t = TRANSLATIONS[lang];
+  if (!t) return;
+
+  // Text content
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Placeholders
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  // Page title
+  if (t.app_title) document.title = t.app_title;
+
+  // Update lang-current label in dropdown
+  const langCurrentLabel = document.getElementById("langCurrentLabel");
+  if (langCurrentLabel && t.lang_current_label) {
+    langCurrentLabel.textContent = t.lang_current_label;
+  }
+
+  // Mark active option
+  document.querySelectorAll(".lang-option").forEach((btn) => {
+    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
+
+  // Persist
+  localStorage.setItem("app_lang", lang);
+}
+
+function showTayError() {
+  // Remove any existing toast first
+  const existing = document.getElementById("tayErrorToast");
+  if (existing) existing.remove();
+
+  const toast = document.createElement("div");
+  toast.id = "tayErrorToast";
+  toast.className = "tay-error-toast";
+  toast.innerHTML = `
+    <span>😂&nbsp; Bạn chưa đủ TÀY để chuyển đổi sang ngôn ngữ này</span>
+    <button onclick="document.getElementById('tayErrorToast').remove()" aria-label="Đóng">✕</button>
+  `;
+  document.body.appendChild(toast);
+
+  // Auto-dismiss after 4 seconds
+  setTimeout(() => {
+    if (toast.parentNode) toast.remove();
+  }, 4000);
+}
+
+function initLangSwitcher() {
+  const switcher = document.getElementById("langSwitcher");
+  const btn = document.getElementById("langBtn");
+  const dropdown = document.getElementById("langDropdown");
+  if (!switcher || !btn || !dropdown) return;
+
+  // Toggle dropdown
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    switcher.classList.toggle("open");
+  });
+
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!switcher.contains(e.target)) {
+      switcher.classList.remove("open");
+    }
+  });
+
+  // Language option clicks
+  dropdown.querySelectorAll(".lang-option").forEach((optBtn) => {
+    optBtn.addEventListener("click", (e) => {
+      const lang = optBtn.getAttribute("data-lang");
+
+      if (lang === "tay") {
+        showTayError();
+      } else {
+        applyLanguage(lang);
+      }
+
+      switcher.classList.remove("open");
+    });
+  });
+
+  // Restore saved language on load
+  const savedLang = localStorage.getItem("app_lang") || "vi";
+  applyLanguage(savedLang);
+}
+
+// Boot language switcher after DOM ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initLangSwitcher);
+} else {
+  initLangSwitcher();
+}

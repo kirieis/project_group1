@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Github Pharmacy</title>
+  <title data-i18n="app_title">Github Pharmacy</title>
   <link rel="stylesheet" href="home.css" />
 </head>
 
@@ -24,8 +24,10 @@
       </div>
 
       <div class="search">
-        <input id="globalSearch" type="search" placeholder="Tìm tên thuốc, mã thuốc..." />
-        <button id="btnSearch" class="btn btn--icon" title="Tìm kiếm" aria-label="Tìm kiếm">
+        <input id="globalSearch" type="search" data-i18n-placeholder="search_placeholder"
+          placeholder="Tìm tên thuốc, mã thuốc..." />
+        <button id="btnSearch" class="btn btn--icon" data-i18n-title="search_button_title" title="Tìm kiếm"
+          data-i18n-aria-label="search_button_aria_label" aria-label="Tìm kiếm">
           🔍
         </button>
       </div>
@@ -34,12 +36,24 @@
         <!-- User Menu (populated by JS based on auth state) -->
         <div id="userMenuContainer">
           <a href="login.html" id="btnLogin" class="btn btn--ghost" style="text-decoration: none;">
-            👤 Đăng nhập
+            👤 <span data-i18n="login_button">Đăng nhập</span>
           </a>
         </div>
         <button id="btnCart" class="btn btn--primary">
-          🛒 Giỏ hàng <span id="cartBadge" class="badge">0</span>
+          🛒 <span data-i18n="cart_button">Giỏ hàng</span> <span id="cartBadge" class="badge">0</span>
         </button>
+
+        <!-- LANGUAGE SWITCHER - far right -->
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-label="Chọn ngôn ngữ" title="Ngôn ngữ / Language">⚙️</button>
+          <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-header" id="langCurrentLabel">🌐 Tiếng Việt</div>
+            <hr class="lang-divider" />
+            <button class="lang-option" data-lang="vi">🇻🇳 Tiếng Việt</button>
+            <button class="lang-option" data-lang="en">🇬🇧 English</button>
+            <button class="lang-option lang-option--joke" data-lang="tay">🌿 Tiếng Tày</button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -49,19 +63,19 @@
     <!-- HERO / BANNER -->
     <section class="hero">
       <div class="hero__left">
-        <h1>Mua thuốc nhanh – tìm dễ – lọc chuẩn</h1>
-        <p>Cập nhật trực tiếp từ hệ thống quản lý kho.</p>
+        <h1 data-i18n="hero_title">Mua thuốc nhanh – tìm dễ – lọc chuẩn</h1>
+        <p data-i18n="hero_subtitle">Cập nhật trực tiếp từ hệ thống quản lý kho.</p>
         <div class="hero__cta">
-          <button class="btn btn--primary" id="btnGoSale">Xem Sale 🔥</button>
-          <button class="btn btn--ghost" id="btnGoAll">Xem toàn bộ</button>
+          <button class="btn btn--primary" id="btnGoSale" data-i18n="hero_sale_button">Xem Sale 🔥</button>
+          <button class="btn btn--ghost" id="btnGoAll" data-i18n="hero_all_button">Xem toàn bộ</button>
         </div>
       </div>
       <div class="hero__right" aria-hidden="true">
         <div class="hero__art">
           <div class="pixel-card">
-            <div class="pixel-card__title">PHARMACIST</div>
+            <div class="pixel-card__title" data-i18n="pixel_card_title">PHARMACIST</div>
             <div class="pixel-card__body">🧑‍⚕️💬🙂</div>
-            <div class="pixel-card__foot">Tư vấn tận tâm</div>
+            <div class="pixel-card__foot" data-i18n="pixel_card_foot">Tư vấn tận tâm</div>
           </div>
         </div>
       </div>
@@ -70,74 +84,77 @@
     <!-- SALE -->
     <section id="saleSection" class="section">
       <div class="section__head">
-        <h2>Đang Sale</h2>
-        <p class="muted">Các sản phẩm giảm giá hấp dẫn</p>
+        <h2 data-i18n="sale_section_title">Đang Sale</h2>
+        <p class="muted" data-i18n="sale_section_subtitle">Các sản phẩm giảm giá hấp dẫn</p>
       </div>
       <div id="saleGrid" class="grid"></div>
-      <div id="saleEmpty" class="empty hidden">Chưa có sản phẩm sale theo bộ lọc hiện tại.</div>
+      <div id="saleEmpty" class="empty hidden" data-i18n="sale_empty">Chưa có sản phẩm sale theo bộ lọc hiện tại.</div>
     </section>
 
     <!-- BEST SELLER -->
     <section id="bestSection" class="section">
       <div class="section__head">
-        <h2>Best Seller</h2>
-        <p class="muted">Sản phẩm được ưa chuộng nhất</p>
+        <h2 data-i18n="bestseller_section_title">Best Seller</h2>
+        <p class="muted" data-i18n="bestseller_section_subtitle">Sản phẩm được ưa chuộng nhất</p>
       </div>
       <div id="bestGrid" class="grid"></div>
-      <div id="bestEmpty" class="empty hidden">Chưa có best seller theo bộ lọc hiện tại.</div>
+      <div id="bestEmpty" class="empty hidden" data-i18n="bestseller_empty">Chưa có best seller theo bộ lọc hiện tại.
+      </div>
     </section>
 
     <!-- ALL + FILTER -->
     <section id="allSection" class="section">
       <div class="section__head section__head--row">
         <div>
-          <h2>Tất cả sản phẩm</h2>
+          <h2 data-i18n="all_products_section_title">Tất cả sản phẩm</h2>
         </div>
-        <div class="pill" id="resultCount">0 kết quả</div>
+        <div class="pill" id="resultCount" data-i18n="results_count">0 kết quả</div>
       </div>
 
       <div class="layout">
         <!-- FILTER PANEL -->
         <!-- FILTER PANEL -->
         <aside class="filters">
-          <div class="filters__title">Bộ lọc</div>
+          <div class="filters__title" data-i18n="filters_title">Bộ lọc</div>
 
           <label class="field">
-            <span>Từ khoá</span>
-            <input id="filterQuery" type="text" placeholder="Tên thuốc, mã, lô..." />
+            <span data-i18n="filter_keyword_label">Từ khoá</span>
+            <input id="filterQuery" type="text" data-i18n-placeholder="filter_keyword_placeholder"
+              placeholder="Tên thuốc, mã, lô..." />
           </label>
 
 
 
           <label class="field">
-            <span>Giá (min)</span>
-            <input id="filterMin" type="number" min="0" step="1000" placeholder="0" />
+            <span data-i18n="filter_price_min_label">Giá (min)</span>
+            <input id="filterMin" type="number" min="0" step="1000" data-i18n-placeholder="filter_price_min_placeholder"
+              placeholder="0" />
           </label>
 
           <label class="field">
-            <span>Giá (max)</span>
+            <span data-i18n="filter_price_max_label">Giá (max)</span>
             <input id="filterMax" type="number" min="0" step="1000" placeholder="" />
           </label>
 
           <label class="field">
-            <span>Sắp xếp</span>
+            <span data-i18n="filter_sort_label">Sắp xếp</span>
             <select id="filterSort">
-              <option value="pop_desc">Phổ biến ↓</option>
-              <option value="price_asc">Giá ↑</option>
-              <option value="price_desc">Giá ↓</option>
-              <option value="date_desc">Ngày nhập ↓</option>
-              <option value="name_asc">Tên A→Z</option>
+              <option value="pop_desc" data-i18n="sort_pop_desc">Phổ biến ↓</option>
+              <option value="price_asc" data-i18n="sort_price_asc">Giá ↑</option>
+              <option value="price_desc" data-i18n="sort_price_desc">Giá ↓</option>
+              <option value="date_desc" data-i18n="sort_date_desc">Ngày nhập ↓</option>
+              <option value="name_asc" data-i18n="sort_name_asc">Tên A→Z</option>
             </select>
           </label>
 
           <label class="field checkbox">
             <input id="filterOnlySale" type="checkbox" />
-            <span>Chỉ hiện Sale</span>
+            <span data-i18n="filter_only_sale">Chỉ hiện Sale</span>
           </label>
 
           <div class="filters__actions">
-            <button id="btnReset" class="btn btn--ghost">Reset</button>
-            <button id="btnApply" class="btn btn--primary">Áp dụng</button>
+            <button id="btnReset" class="btn btn--ghost" data-i18n="filter_reset_button">Reset</button>
+            <button id="btnApply" class="btn btn--primary" data-i18n="filter_apply_button">Áp dụng</button>
           </div>
         </aside>
 
@@ -146,14 +163,15 @@
           <div id="allGrid" class="grid"></div>
 
           <div class="pager">
-            <button id="prevPage" class="btn btn--ghost">← Trước</button>
+            <button id="prevPage" class="btn btn--ghost" data-i18n="pager_prev_button">← Trước</button>
             <div class="pager__info">
-              Trang <span id="pageNow">1</span> / <span id="pageTotal">1</span>
+              <span data-i18n="pager_page_label">Trang</span> <span id="pageNow">1</span> / <span
+                id="pageTotal">1</span>
             </div>
-            <button id="nextPage" class="btn btn--ghost">Sau →</button>
+            <button id="nextPage" class="btn btn--ghost" data-i18n="pager_next_button">Sau →</button>
           </div>
 
-          <div id="allEmpty" class="empty hidden">Không có sản phẩm phù hợp bộ lọc.</div>
+          <div id="allEmpty" class="empty hidden" data-i18n="all_empty">Không có sản phẩm phù hợp bộ lọc.</div>
         </div>
       </div>
     </section>
@@ -161,7 +179,7 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      Connect with us : 03xxxxxxx
+      <span data-i18n="footer_contact">Connect with us</span> : 03xxxxxxx
     </div>
   </footer>
 
@@ -172,28 +190,29 @@
       <button class="modal__close" onclick="closeModal()">&times;</button>
 
       <div class="modal__header">
-        <h3 id="modalName">Tên thuốc...</h3>
-        <div id="modalMeta" class="modal__meta">Mã: ...</div>
+        <h3 id="modalName" data-i18n="modal_product_name_placeholder">Tên thuốc...</h3>
+        <div id="modalMeta" class="modal__meta"><span data-i18n="modal_product_code_label">Mã</span>: ...</div>
       </div>
 
       <div class="modal__body">
         <div class="modal__price" id="modalPrice">0đ</div>
 
         <label class="field">
-          <span>Đơn vị tính</span>
+          <span data-i18n="modal_unit_label">Đơn vị tính</span>
           <select id="modalUnit" class="field-select">
             <!-- Populated by JS -->
           </select>
         </label>
 
         <label class="field">
-          <span>Số lượng</span>
+          <span data-i18n="modal_quantity_label">Số lượng</span>
           <input id="modalQty" type="number" min="1" value="1" class="field-input" />
         </label>
 
         <div class="modal__actions">
-          <button class="btn btn--ghost" onclick="closeModal()">Huỷ</button>
-          <button id="modalConfirmBtn" class="btn btn--primary">Thêm vào giỏ</button>
+          <button class="btn btn--ghost" onclick="closeModal()" data-i18n="modal_cancel_button">Huỷ</button>
+          <button id="modalConfirmBtn" class="btn btn--primary" data-i18n="modal_add_to_cart_button">Thêm vào
+            giỏ</button>
         </div>
       </div>
     </div>

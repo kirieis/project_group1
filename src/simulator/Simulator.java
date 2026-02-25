@@ -34,7 +34,7 @@ public class Simulator {
     };
 
     public static void main(String[] args) throws Exception {
-        String endpoint = "http://localhost:8080";
+        String endpoint = "https://unplanked-inculpably-malorie.ngrok-free.dev/api/orders";
         Random rnd = new Random();
 
         System.out.println("═══════════════════════════════════════════════");
@@ -78,6 +78,7 @@ public class Simulator {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("ngrok-skip-browser-warning", "true");
             conn.setDoOutput(true);
 
             try (OutputStream os = conn.getOutputStream()) {
