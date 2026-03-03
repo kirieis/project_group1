@@ -1,6 +1,7 @@
 package core_app.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Batch implements Comparable<Batch> {
 
@@ -17,35 +18,82 @@ public class Batch implements Comparable<Batch> {
 
     private Medicine medicine;
 
+    // ===== Ngưỡng quản lý (sync với BatchDAO) =====
+    private static final int DAYS_REMOVE = 15;
+    private static final int DAYS_SALE = 30;
+    private static final int DISCOUNT_PERCENT = 30;
+
     public Batch() {
     }
 
     public Batch(String batchId,
-                 String batchNumber,
-                 LocalDate manufactureDate,
-                 LocalDate expiryDate,
-                 int tabletsPerBlister,
-                 int blisterPerBox,
-
-                 int totalTablets,
-                 Medicine medicine) {
+            String batchNumber,
+            LocalDate manufactureDate,
+            LocalDate expiryDate,
+            int tabletsPerBlister,
+            int blisterPerBox,
+            int totalTablets,
+            Medicine medicine) {
         this.batchId = batchId;
         this.batchNumber = batchNumber;
         this.manufactureDate = manufactureDate;
         this.expiryDate = expiryDate;
         this.tabletsPerBlister = tabletsPerBlister;
         this.blisterPerBox = blisterPerBox;
-
         this.totalTablets = totalTablets;
         this.medicine = medicine;
     }
 
+    // ===== Trạng thái hạn sử dụng (3-tier) =====
+
+    /** Đã hết hạn (≤ 0 ngày) */
     public boolean isExpired() {
-        return expiryDate.isBefore(LocalDate.now());
+        return expiryDate.isBefore(LocalDate.now()) || expiryDate.isEqual(LocalDate.now());
     }
 
+    /** Sắp hết hạn, vùng sale 30% (16–30 ngày) */
+    public boolean isNearExpiry() {
+        if (isExpired())
+            return false;
+        long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+        return days > DAYS_REMOVE && days <= DAYS_SALE;
+    }
+
+    /** Bị loại khỏi bán (≤ 15 ngày, chưa hết hạn) */
+    public boolean isUnsellable() {
+        if (isExpired())
+            return true;
+        long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+        return days <= DAYS_REMOVE;
+    }
+
+    /** Còn bán được (> 15 ngày AND còn tồn kho) */
     public boolean isSellable() {
-        return !isExpired() && totalTablets > 0;
+        return !isExpired() && !isUnsellable() && totalTablets > 0;
+    }
+
+    /** % giảm giá: 30% nếu near-expiry, 0% nếu bình thường */
+    public int getDiscountPercent() {
+        return isNearExpiry() ? DISCOUNT_PERCENT : 0;
+    }
+
+    /** Số ngày còn lại */
+    public long getDaysRemaining() {
+        return ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+    }
+
+    /**
+     * Trạng thái text: OK / NEAR_EXPIRY / REMOVED / EXPIRED
+     */
+    public String getExpiryStatus() {
+        if (isExpired())
+            return "EXPIRED";
+        long days = getDaysRemaining();
+        if (days <= DAYS_REMOVE)
+            return "REMOVED";
+        if (days <= DAYS_SALE)
+            return "NEAR_EXPIRY";
+        return "OK";
     }
 
     @Override
@@ -63,7 +111,6 @@ public class Batch implements Comparable<Batch> {
                 return quantity * blisterPerBox * tabletsPerBlister;
             case BOTTLE:
                 return quantity * bottle;
-
             default:
                 throw new IllegalArgumentException("Invalid unit type");
         }
@@ -76,6 +123,8 @@ public class Batch implements Comparable<Batch> {
         }
         totalTablets -= tablets;
     }
+
+    // ===== Getter =====
 
     public String getBatchId() {
         return batchId;
