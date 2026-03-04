@@ -35,7 +35,7 @@ public class EmailUtil {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(SENDER_EMAIL));
+            message.setFrom(new InternetAddress(SENDER_EMAIL, "Github Pharmacy"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject("Mã xác thực OTP - Github Pharmacy");
             message.setText("Chào bạn,\n\nMã OTP để đăng ký tài khoản của bạn là: " + otp +
@@ -43,7 +43,7 @@ public class EmailUtil {
 
             Transport.send(message);
             return true;
-        } catch (MessagingException e) {
+        } catch (MessagingException | java.io.UnsupportedEncodingException e) {
             e.printStackTrace();
             return false;
         }
