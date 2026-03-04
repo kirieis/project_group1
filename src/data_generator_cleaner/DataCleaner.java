@@ -1,7 +1,9 @@
+package data_generator_cleaner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -145,7 +147,7 @@ public class DataCleaner {
         }
 
         // ---------- 4. Bad name (###) ----------
-        if (name.equals("###") || name.isEmpty() || !VALID_NAMES.contains(name)) {
+        if (name.isEmpty() || !VALID_NAMES.contains(name)) {
             errBadName++;
             return "INVALID_NAME(" + name + ")";
         }
@@ -182,15 +184,17 @@ public class DataCleaner {
 
         // ---------- 8. Price ----------
         try {
-            int price = Integer.parseInt(priceStr);
-            if (price <= 0) {
-                errBadPrice++;
-                return "INVALID_PRICE(" + price + ")";
-            }
-        } catch (NumberFormatException e) {
-            errBadPrice++;
-            return "INVALID_PRICE(" + priceStr + ")";
-        }
+    BigDecimal price = new BigDecimal(priceStr);
+
+    if (price.compareTo(BigDecimal.ZERO) <= 0) {
+        errBadPrice++;
+        return "INVALID_PRICE(" + priceStr + ")";
+    }
+
+} catch (NumberFormatException e) {
+    errBadPrice++;
+    return "INVALID_PRICE(" + priceStr + ")";
+}
 
         return null; // all checks passed
     }
