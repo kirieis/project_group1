@@ -10313,4 +10313,254 @@ Hoặc kiểm tra logic import DB sau cleaning
 
 Bạn muốn nâng cấp tiếp phần nào?
 
+ // ===== Trạng thái hạn sử dụng =====
 
+
+
+    /** Đã hết hạn (≤ 0 ngày) */
+
+    public boolean isExpired() {
+
+        return expiryDate.isBefore(LocalDate.now()) || expiryDate.isEqual(LocalDate.now());
+
+    }
+
+
+
+    /** Sắp hết hạn, vùng sale 30% (16–30 ngày) */
+
+    public boolean isNearExpiry() {
+
+        if (isExpired())
+
+            return false;
+
+        long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+
+        return days > DAYS_REMOVE && days <= DAYS_SALE;
+
+    }
+
+
+
+    /** Bị loại khỏi bán (≤ 15 ngày, chưa hết hạn) */
+
+    public boolean isUnsellable() {
+
+        if (isExpired())
+
+            return true;
+
+        long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+
+        return days <= DAYS_REMOVE;
+
+    }
+
+
+
+    /** Còn bán được (> 15 ngày AND còn tồn kho) */
+
+    public boolean isSellable() {
+
+        return !isExpired() && !isUnsellable() && totalTablets > 0;
+
+    }
+
+
+
+    /** % giảm giá: 30% nếu near-expiry, 0% nếu bình thường */
+
+    public int getDiscountPercent() {
+
+        return isNearExpiry() ? DISCOUNT_PERCENT : 0;
+
+    }
+
+
+
+    /** Số ngày còn lại */
+
+    public long getDaysRemaining() {
+
+        return ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+
+    }
+
+
+
+    /**
+
+     * Trạng thái text: OK / NEAR_EXPIRY / REMOVED / EXPIRED
+
+     */
+
+    public String getExpiryStatus() {
+
+        if (isExpired())
+
+            return "EXPIRED";
+
+        long days = getDaysRemaining();
+
+        if (days <= DAYS_REMOVE)
+
+            return "REMOVED";
+
+        if (days <= DAYS_SALE)
+
+            return "NEAR_EXPIRY";
+
+        return "OK";
+
+những phần này là phần kiểm tra hạn sử dụng của thuốc theo từng trường hợp, tôi thấy không có số để tính thì mình biết thuốc nó trên 30 ngày, dưới 15 ngày hay đã hết hạn hãy giải thích cho tôi từng dòng code
+
+Gemini đã nói
+Câu hỏi của bạn rất tinh tế! Nhìn vào đoạn code, đúng là không hề thấy số 15 hay 30 nằm trực tiếp trong các dòng logic.
+
+Lý do hệ thống vẫn biết được số ngày là nhờ vào 2 yếu tố: Ngày hiện tại của hệ thống và kỹ thuật sử dụng Hằng số (Constants).
+
+Trong các dự án thực tế như mô hình chuỗi nhà thuốc bạn đang làm, lập trình viên không bao giờ viết "cứng" (hardcode) các con số như 15 hay 30 trực tiếp vào logic. Thay vào đó, ở phần đầu của file Java này, chắc chắn có khai báo các biến hằng số (ẩn đi trong đoạn code bạn gửi) trông như thế này:
+
+Java
+private static final int DAYS_SALE = 30;     // Mốc 30 ngày để giảm giá
+private static final int DAYS_REMOVE = 15;   // Mốc 15 ngày để cất khỏi kệ
+private static final int DISCOUNT_PERCENT = 30; // Mức giảm giá 30%
+Việc dùng chữ thay số giúp code đạt chuẩn Clean Code. Nếu sau này nhà thuốc đổi chính sách (ví dụ: thuốc cận date 45 ngày mới giảm giá), bạn chỉ cần đổi số ở một chỗ duy nhất trên cùng, thay vì phải đi tìm sửa từng dòng if/else.
+
+Dưới đây là giải thích chi tiết từng dòng code để bạn nắm rõ luồng chạy:
+
+1. isExpired() - Kiểm tra đã hết hạn chưa
+Java
+public boolean isExpired() {
+    return expiryDate.isBefore(LocalDate.now()) || expiryDate.isEqual(LocalDate.now());
+}
+LocalDate.now(): Lấy ngày giờ hiện tại của máy chủ.
+
+Logic: Hàm này trả về true nếu hạn sử dụng (expiryDate) là một ngày trước ngày hôm nay (isBefore), HOẶC hạn sử dụng bằng đúng ngày hôm nay (isEqual).
+
+Lưu ý nghiệp vụ: Ở phần chat trước, chúng ta có nói về việc ngày cuối cùng vẫn được bán. Nhưng đoạn code này đang thiết lập quy tắc: Chạm đến ngày hết hạn là coi như vứt đi ngay lập tức. Bạn nên lưu ý điều này để báo cáo thống nhất với giảng viên.
+
+2. isNearExpiry() - Kiểm tra vùng giảm giá (16 - 30 ngày)
+Java
+public boolean isNearExpiry() {
+    if (isExpired()) return false; 
+    long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+    return days > DAYS_REMOVE && days <= DAYS_SALE;
+}
+Dòng 2: Đầu tiên, nếu thuốc đã hết hạn hẳn rồi thì chắn chắn không nằm trong diện "sắp hết hạn" nữa, lập tức trả về false.
+
+Dòng 3: ChronoUnit.DAYS.between là hàm đếm xem từ hôm nay (LocalDate.now()) đến ngày hết hạn (expiryDate) còn chênh lệch chính xác bao nhiêu ngày. Gán kết quả vào biến days.
+
+Dòng 4: Trả về true nếu số ngày còn lại lớn hơn DAYS_REMOVE (15) VÀ nhỏ hơn hoặc bằng DAYS_SALE (30). Tức là nằm trong khoảng từ 16 đến 30 ngày.
+
+3. isUnsellable() - Thuốc không được phép bán nữa (Dưới 15 ngày)
+Java
+public boolean isUnsellable() {
+    if (isExpired()) return true;
+    long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+    return days <= DAYS_REMOVE;
+}
+Ở các chuỗi nhà thuốc lớn, thuốc còn hạn dưới 15 ngày sẽ bị thu hồi trả về kho tổng để tiêu hủy hoặc đổi trả, tuyệt đối không bán cho khách.
+
+Logic: Nếu đã hết hạn thì đương nhiên không bán được (return true). Nếu chưa hết hạn, đếm khoảng cách ngày. Nếu số ngày còn lại nhỏ hơn hoặc bằng 15 (DAYS_REMOVE) thì trả về true (Xác nhận là hàng không thể bán).
+
+4. isSellable() - Thuốc đủ điều kiện lên kệ
+Java
+public boolean isSellable() {
+    return !isExpired() && !isUnsellable() && totalTablets > 0;
+}
+Đây là hàm gom tất cả điều kiện lại. Một hộp thuốc chỉ được phép bán khi đáp ứng đủ 3 tiêu chí:
+
+!isExpired(): Không bị hết hạn.
+
+!isUnsellable(): Không nằm trong vùng 15 ngày thu hồi.
+
+totalTablets > 0: Số lượng tồn kho (viên/vỉ) thực tế phải lớn hơn 0.
+
+5. getExpiryStatus() - Phân loại thẻ (Tag) trạng thái
+Java
+public String getExpiryStatus() {
+    if (isExpired()) return "EXPIRED";
+    long days = getDaysRemaining();
+    if (days <= DAYS_REMOVE) return "REMOVED";
+    if (days <= DAYS_SALE) return "NEAR_EXPIRY";
+    return "OK";
+}
+Hàm này dùng để trả về một chuỗi chữ (String). Đoạn này rất hữu ích khi bạn làm giao diện web. Bạn có thể dùng chuỗi này để đổi màu hiển thị cho sinh động.
+
+Logic phân tầng: * Hết hạn -> Trả về chữ "EXPIRED" (Sẽ tô màu đỏ).
+
+Còn <= 15 ngày -> Trả về "REMOVED" (Sẽ tô màu xám/đen).
+
+Còn <= 30 ngày -> Trả về "NEAR_EXPIRY" (Sẽ tô màu vàng/cam).
+
+Còn dài hạn -> Trả về "OK" (Sẽ tô màu xanh lá).
+
+Đoạn code bạn đang giữ có tư duy hướng đối tượng (OOP) rất xuất sắc. Gom nhóm các logic kiểm tra ngày tháng vào một chỗ như thế này sẽ giúp code controller của bạn cực kỳ gọn gàng.
+
+Bạn đã có hàm trả về các trạng thái chuỗi như EXPIRED, NEAR_EXPIRY rồi. Bạn có muốn tôi hướng dẫn cách viết code Frontend (HTML/CSS hoặc JSP) để bắt các chữ này và tự động đổi màu cảnh báo thuốc trên màn hình quản lý kho không?
+
+Bạn đã nói
+ public int getDiscountPercent() {
+
+        return isNearExpiry() ? DISCOUNT_PERCENT : 0;
+
+    }
+
+
+
+    /** Số ngày còn lại */
+
+    public long getDaysRemaining() {
+
+        return ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+
+Gemini đã nói
+Hai hàm cuối cùng này tuy rất ngắn gọn nhưng lại thể hiện tư duy viết code "Clean Code" (code sạch) rất đặc trưng của một Senior Developer.
+
+Chúng ta cùng mổ xẻ chi tiết nhé:
+
+1. Hàm getDiscountPercent() - Tính phần trăm giảm giá
+Java
+public int getDiscountPercent() {
+    return isNearExpiry() ? DISCOUNT_PERCENT : 0;
+}
+Ý nghĩa: Hàm này trả về con số phần trăm sẽ được giảm giá (ví dụ: 30% hoặc 0%).
+
+Kỹ thuật được sử dụng (Rất quan trọng): Dấu ? và : được gọi là Toán tử 3 ngôi (Ternary Operator). Đây là cách viết tắt cực kỳ lợi hại của câu lệnh if-else.
+
+Logic hoạt động:
+Hệ thống sẽ đặt câu hỏi: "Thuốc này có nằm trong vùng sắp hết hạn không?" (isNearExpiry()).
+
+Nếu ĐÚNG (True - nằm trước dấu :): Lấy giá trị của hằng số DISCOUNT_PERCENT (trong đồ án của bạn có lẽ đang gán bằng 30).
+
+Nếu SAI (False - nằm sau dấu :): Lấy giá trị là 0 (Không giảm giá, bán giá gốc).
+
+Để bạn dễ hình dung, nếu viết theo kiểu thông thường (bằng if-else), đoạn code trên sẽ dài dòng như thế này:
+
+Java
+public int getDiscountPercent() {
+    if (isNearExpiry() == true) {
+        return DISCOUNT_PERCENT; // Giảm 30%
+    } else {
+        return 0; // Không giảm
+    }
+}
+Nhờ dùng toán tử 3 ngôi, code rút gọn lại chỉ còn đúng 1 dòng.
+
+2. Hàm getDaysRemaining() - Lấy số ngày còn lại
+Java
+public long getDaysRemaining() {
+    return ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+}
+Ý nghĩa: Hàm này tính toán và trả về chính xác số ngày từ thời điểm hiện tại cho đến ngày hết hạn của hộp thuốc.
+
+Tại sao lại cần hàm này? Bạn có để ý ở hàm getExpiryStatus() bên trên, bạn đã gọi long days = getDaysRemaining(); không? Đây gọi là kỹ thuật Helper Method (Hàm tiện ích). Thay vì đi đâu cũng phải viết lại đoạn code ChronoUnit.DAYS... dài dòng, bạn gói nó vào một hàm nhỏ. Chỗ nào cần đếm ngày thì gọi tên hàm ra là xong.
+
+Một điểm thú vị về logic: Nếu hôm nay là 04/03/2026, nhưng thuốc đã hết hạn từ ngày 01/03/2026 (tức là đã quá hạn 3 ngày), thì hàm ChronoUnit.DAYS.between này sẽ trả về số âm (là -3). Điều này rất tiện lợi để bạn làm báo cáo "Các thuốc đã quá hạn N ngày".
+
+Tóm lại toàn bộ Class BatchInfo của bạn:
+Class này đang đóng vai trò là một "bộ lọc thông minh". Khi bạn lấy dữ liệu 1 lô thuốc từ cơ sở dữ liệu lên, class này sẽ tự động phân tích ngày tháng và dán sẵn các nhãn (Tag) như: Thuốc này được bán không? Có được giảm giá không? Thuộc nhóm màu gì (OK, NEAR_EXPIRY, EXPIRED)? Nhiệm vụ tiếp theo của bạn chỉ là đẩy cục dữ liệu đã được dán nhãn này ra ngoài màn hình giao diện.
+
+Bạn đã hình dung ra cách truyền các trạng thái như getDiscountPercent() hay getExpiryStatus() từ Java Backend ra ngoài màn hình Frontend (HTML/JSP/Thymeleaf) để tự động hiển thị "Giảm 30%" hoặc bôi đỏ dòng chữ "ĐÃ HẾT HẠN" chưa? Nếu chưa, mình có thể viết mẫu cho bạn đoạn code giao diện đó.
