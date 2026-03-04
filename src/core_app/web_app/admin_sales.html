@@ -4,156 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lịch sử Bán hàng & Lợi nhuận - Github Pharmacy</title>
-    <link rel="stylesheet" href="../home.css">
+    <title>Sales Dashboard - Github Pharmacy</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="i18n.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar__header">
+            <div class="sidebar__logo-dot"></div>
+            <div class="sidebar__title">G-PHARMA ADMIN</div>
+        </div>
+        <nav class="sidebar__nav">
+            <a href="sales" class="nav-item active" data-i18n="admin.sales_title">📊 Sales & Revenue</a>
+            <a href="users" class="nav-item" data-i18n="admin.user_title">👥 User Management</a>
+            <a href="../home.html" class="nav-item" data-i18n="admin.nav_website">🌐 View Website</a>
+        </nav>
+        <div class="sidebar__footer">
+            <a href="../logout" class="nav-item" style="color: #ef4444; text-decoration: none;"
+                data-i18n="common.nav_logout">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <header class="content-header">
+            <div class="breadcrumb" style="font-size: 0.9rem; color: #64748b;">Admin / <b style="color: #1e293b;"
+                    data-i18n="admin.sales_title">Sales Dashboard</b></div>
+            <div class="header-user">
+                <span class="badge-admin">BACKOFFICE</span>
+                <span id="adminName" style="font-weight: 600;">Administrator</span>
+            </div>
+        </header>
+
+        <section class="content-body">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card__label" data-i18n="admin.lbl_orders">PAID ORDERS</div>
+                    <div id="statOrders" class="stat-card__value">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label" data-i18n="admin.lbl_revenue">REVENUE</div>
+                    <div id="statRevenue" class="stat-card__value revenue">0đ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label" data-i18n="admin.lbl_profit">EST. PROFIT</div>
+                    <div id="statProfit" class="stat-card__value profit">0đ</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="page-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2 style="margin:0; font-size: 1.25rem;" data-i18n="admin.lbl_recent">Recent Transactions</h2>
+                    <div class="search-bar" style="display: flex; gap: 10px;">
+                        <input type="date" id="dateFrom" onchange="renderTable()"
+                            style="padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <input type="date" id="dateTo" onchange="renderTable()"
+                            style="padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <input type="text" id="searchTerm" data-i18n-placeholder="admin.lbl_search_placeholder"
+                            oninput="renderTable()"
+                            style="padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px; width: 250px;">
+                        <button onclick="loadSales()" class="btn-admin btn-admin--primary"
+                            style="background: #6366f1; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;"
+                            data-i18n="admin.btn_refresh">Refresh</button>
+                    </div>
+                </div>
+
+                <div class="table-container" style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr style="background: #f8fafc; text-align: left;">
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_id">
+                                    Order ID</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_date">
+                                    Date</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_buyer">
+                                    Buyer</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_method">
+                                    Method</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_total">
+                                    Total</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_profit">
+                                    Profit</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_status">
+                                    Status</th>
+                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
+                                    data-i18n="admin.header_action">
+                                    Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesList">
+                            <!-- JS populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <style>
-        :root {
-            --admin-primary: #6366f1;
-            --admin-secondary: #4f46e5;
-            --admin-success: #10b981;
-            --admin-danger: #ef4444;
-            --admin-warning: #f59e0b;
-        }
-
-        body {
-            background-color: #f8fafc;
-        }
-
-        .admin-main {
-            padding: 2rem 0;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .page-header h1 {
-            font-size: clamp(1.5rem, 5vw, 2.25rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 1.25rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
-            transition: transform 0.2s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-card__label {
-            font-size: 0.875rem;
-            color: #64748b;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card__value {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: #1e293b;
-        }
-
-        .stat-card__value.revenue {
-            color: var(--admin-primary);
-        }
-
-        .stat-card__value.profit {
-            color: var(--admin-success);
-        }
-
-        /* Glass Card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .modern-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        .modern-table th {
-            background: #f1f5f9;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 700;
-            color: #1e293b;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .modern-table td {
-            padding: 1rem;
-            background: white;
-            border-bottom: 1px solid #f1f5f9;
-            color: #475569;
-            font-size: 0.9rem;
-        }
-
-        .modern-table tr:hover td {
-            background: #f8fafc;
-        }
-
-        .total-cell {
-            font-weight: 700;
-            color: var(--admin-primary);
-        }
-
-        .profit-cell {
-            font-weight: 700;
-            color: var(--admin-success);
-        }
-
         .detail-row {
-            background: #f8fafc;
             display: none;
+            background: #f8fafc;
         }
 
         .detail-row.active {
@@ -161,172 +122,47 @@
         }
 
         .items-list {
-            padding: 1rem;
-            border-radius: 0.75rem;
+            padding: 1.5rem;
             background: #f1f5f9;
-            margin: 0.5rem 0;
+            border-radius: 12px;
+            margin: 10px;
         }
 
         .item-line {
             display: flex;
             justify-content: space-between;
-            padding: 0.25rem 0;
+            padding: 8px 0;
             border-bottom: 1px dashed #cbd5e1;
         }
 
-        .item-line:last-child {
-            border-bottom: none;
+        .total-cell {
+            color: #6366f1;
+            font-weight: 700;
         }
 
-        .item-profit {
-            font-size: 0.8rem;
-            color: var(--admin-success);
-            font-weight: 600;
+        .profit-cell {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .btn-view {
+            padding: 5px 12px;
             background: #e0e7ff;
-            color: var(--admin-primary);
+            color: #4f46e5;
             border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .btn-view:hover {
-            background: var(--admin-primary);
-            color: white;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .nav-link {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            text-decoration: none;
-            font-weight: 600;
-            color: #64748b;
-            background: white;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
-        }
-
-        .nav-link.active {
-            background: var(--admin-primary);
-            color: white;
-            border-color: var(--admin-primary);
         }
     </style>
-</head>
-
-<body>
-    <header class="header">
-        <div class="header__inner container">
-            <div class="brand">
-                <a href="../home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
-                    <div class="brand__logo">
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                    </div>
-                    <div class="brand__text">
-                        <div class="brand__name">Github Pharmacy</div>
-                        <div
-                            style="font-size: 0.7rem; color: var(--admin-primary); font-weight: 700; text-transform: uppercase;">
-                            Admin Control Panel</div>
-                    </div>
-                </a>
-            </div>
-            <div class="header__actions">
-                <a href="../home.html" class="btn btn--ghost">← Về trang chủ</a>
-            </div>
-        </div>
-    </header>
-
-    <main class="container admin-main">
-        <div class="page-header">
-            <h1>Lịch sử Bán hàng</h1>
-        </div>
-
-        <nav class="nav-tabs">
-            <a href="/admin/users" class="nav-link">👥 Quản lý Người dùng</a>
-            <a href="/admin/sales" class="nav-link active">💰 Doanh thu & Lợi nhuận</a>
-        </nav>
-
-        <section class="glass-card" style="margin-bottom: 2rem; padding: 1.5rem;">
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;">
-                <div style="flex: 1; min-width: 250px;">
-                    <label
-                        style="display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">🔍
-                        Tìm kiếm đơn hàng</label>
-                    <input type="text" id="searchTerm" placeholder="Tên khách hàng hoặc ID đơn..."
-                        style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem;"
-                        oninput="renderTable()">
-                </div>
-                <div style="width: 180px;">
-                    <label
-                        style="display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">📅
-                        Từ ngày</label>
-                    <input type="date" id="dateFrom"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem;"
-                        onchange="renderTable()">
-                </div>
-                <div style="width: 180px;">
-                    <label
-                        style="display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">📅
-                        Đến ngày</label>
-                    <input type="date" id="dateTo"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem;"
-                        onchange="renderTable()">
-                </div>
-                <button class="nav-link active" onclick="loadSales()"
-                    style="border: none; cursor: pointer; height: 46px;">Làm mới</button>
-            </div>
-        </section>
-
-        <section class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-card__label">Tổng đơn hàng</div>
-                <div class="stat-card__value" id="statOrders">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card__label">Tổng doanh thu</div>
-                <div class="stat-card__value revenue" id="statRevenue">0đ</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card__label">Ước tính lợi nhuận</div>
-                <div class="stat-card__value profit" id="statProfit">0đ</div>
-            </div>
-        </section>
-
-        <section class="glass-card">
-            <div class="table-container">
-                <table class="modern-table">
-                    <thead>
-                        <tr>
-                            <th>ID Đơn</th>
-                            <th>Ngày tháng</th>
-                            <th>Người mua</th>
-                            <th>Thanh toán</th>
-                            <th>Tổng tiền</th>
-                            <th>Lợi nhuận</th>
-                            <th>Trạng thái</th>
-                            <th>Chi tiết</th>
-                        </tr>
-                    </thead>
-                    <tbody id="salesList">
-                        <!-- Loaded via JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
 
     <script>
         function formatVND(n) {
@@ -341,7 +177,7 @@
                 const res = await fetch('../api/orders?action=all');
                 if (!res.ok) {
                     console.error("DEBUG: Fetch failed with status", res.status);
-                    alert("Bạn không có quyền truy cập hoặc cần đăng nhập lại!");
+                    alert(window.t ? t('login', 'msg_unauthorized') : "Login required!");
                     window.location.href = "../login.html";
                     return;
                 }
@@ -359,7 +195,7 @@
 
             const filteredOrders = allOrders.filter(order => {
                 // Search filter
-                const buyerName = order.customerName || "Khách vãng lai";
+                const buyerName = order.customerName || t('admin', 'guest_customer');
                 const matchesSearch = buyerName.toLowerCase().includes(searchTerm) ||
                     order.id.toString().includes(searchTerm);
 
@@ -400,25 +236,25 @@
                     <tr>
                         <td style="font-weight: 700;">#${order.id}</td>
                         <td>${order.day}/${order.month}/${order.year}</td>
-                        <td style="font-weight: 600; color: #1e293b;">${order.customerName || 'Khách vãng lai'}</td>
+                        <td style="font-weight: 600; color: #1e293b;">${order.customerName || t('admin', 'guest_customer')}</td>
                         <td><span class="badge ${order.method === 'BANK_TRANSFER' ? 'badge--admin' : 'badge--customer'}" style="font-size: 0.7rem;">${order.method}</span></td>
                         <td class="total-cell">${formatVND(order.total)}</td>
                         <td class="profit-cell">+${formatVND(orderProfit)}</td>
                         <td>
                             ${order.status === 'PAID' ?
-                        '<span class="badge" style="background: #10b981; color: white; font-size: 0.7rem;">✅ ĐÃ TRẢ</span>' :
+                        `<span class="badge" style="background: #10b981; color: white; font-size: 0.7rem;">✅ ${t('admin', 'status_paid')}</span>` :
                         order.status === 'CANCELLED' ?
-                            '<span class="badge" style="background: #ef4444; color: white; font-size: 0.7rem;">❌ ĐÃ HỦY</span>' :
-                            '<span class="badge" style="background: #f59e0b; color: white; font-size: 0.7rem;">⏳ CHỜ DUYỆT</span>'}
+                            `<span class="badge" style="background: #ef4444; color: white; font-size: 0.7rem;">❌ ${t('admin', 'status_cancelled')}</span>` :
+                            `<span class="badge" style="background: #f59e0b; color: white; font-size: 0.7rem;">⏳ ${t('admin', 'status_pending')}</span>`}
                         </td>
-                        <td><button class="btn-view" onclick="toggleDetails(${order.id})">Xem</button></td>
+                        <td><button class="btn-view" onclick="toggleDetails(${order.id})">${t('admin', 'header_action')}</button></td>
                     </tr>
                     <tr id="details-${order.id}" class="detail-row">
                         <td colspan="8">
                             <div class="items-list">
                                 <div style="font-weight: 700; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
-                                    <span>Sản phẩm trong đơn</span>
-                                    <span>Lợi nhuận gộp</span>
+                                    <span>${t('admin', 'lbl_items_in_order')}</span>
+                                    <span>${t('admin', 'lbl_gross_profit')}</span>
                                 </div>
                                 ${order.items.map(item => {
                                 const itemCost = item.importPrice || (item.price * 0.7);
@@ -434,24 +270,24 @@
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: flex-start;">
                                 ${order.paymentProof ? `
                                     <div style="flex: 1;">
-                                        <p style="font-weight: 700; font-size: 0.8rem; margin-bottom: 0.5rem;">📸 Ảnh chuyển khoản:</p>
+                                        <p style="font-weight: 700; font-size: 0.8rem; margin-bottom: 0.5rem;">📸 ${t('admin', 'lbl_payment_proof')}:</p>
                                         <img src="${order.paymentProof}" style="max-width: 200px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer;" onclick="window.open(this.src)">
                                     </div>
-                                ` : '<div style="flex: 1; color: #94a3b8; font-style: italic; font-size: 0.8rem;">(Chưa tải ảnh bằng chứng)</div>'}
+                                ` : `<div style="flex: 1; color: #94a3b8; font-style: italic; font-size: 0.8rem;">(${t('checkout', 'not_received_yet')})</div>`}
                                 
                                 <div style="text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
                                     ${order.status === 'PENDING' ? `
                                         <button onclick="updateOrderStatus(${order.id}, 'CANCELLED')" 
-                                            style="background: var(--admin-danger); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
-                                            ❌ Hủy/Từ chối
+                                            style="background: #ef4444; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
+                                            ❌ ${t('admin', 'btn_reject')}
                                         </button>
                                         <button onclick="updateOrderStatus(${order.id}, 'PAID')" 
-                                            style="background: var(--admin-success); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
-                                            💰 Duyệt & Xác nhận tiền
+                                            style="background: #10b981; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 700; cursor: pointer;">
+                                            💰 ${t('admin', 'btn_approve')}
                                         </button>
                                     ` : order.status === 'PAID' ?
-                        '<span style="color: var(--admin-success); font-weight: 700; background: #ecfdf5; padding: 0.5rem 1rem; border-radius: 0.5rem;">✅ Đã hoàn tất giao dịch</span>' :
-                        '<span style="color: var(--admin-danger); font-weight: 700; background: #fef2f2; padding: 0.5rem 1rem; border-radius: 0.5rem;">🚫 Đơn đã bị hủy</span>'}
+                        `<span style="color: #10b981; font-weight: 700; background: #ecfdf5; padding: 0.5rem 1rem; border-radius: 0.5rem;">✅ ${t('admin', 'status_paid')}</span>` :
+                        `<span style="color: #ef4444; font-weight: 700; background: #fef2f2; padding: 0.5rem 1rem; border-radius: 0.5rem;">🚫 ${t('admin', 'status_cancelled')}</span>`}
                                 </div>
                             </div>
                         </td>
@@ -470,7 +306,7 @@
         };
 
         async function updateOrderStatus(orderId, newStatus) {
-            if (!confirm(`Xác nhận đơn hàng #${orderId} đã được thanh toán?`)) return;
+            if (!confirm(t('admin', 'msg_confirm_approve'))) return;
 
             try {
                 const res = await fetch('../api/orders', {
@@ -480,15 +316,15 @@
                 });
 
                 if (res.ok) {
-                    alert('Cập nhật trạng thái thành công!');
+                    alert(t('admin', 'msg_update_success'));
                     loadSales(); // Reload data
                 } else {
                     const err = await res.json();
-                    alert('Lỗi: ' + err.message);
+                    alert(t('admin', 'msg_update_error') + ': ' + err.message);
                 }
             } catch (e) {
                 console.error(e);
-                alert('Có lỗi xảy ra khi cập nhật.');
+                alert(t('admin', 'msg_update_error'));
             }
         }
 

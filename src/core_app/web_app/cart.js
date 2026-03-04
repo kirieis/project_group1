@@ -25,17 +25,17 @@ function getUnitConversionInfo(item) {
     const hop = Math.floor(item.qty / vienPerHop);
     const remainder = item.qty % vienPerHop;
     if (remainder === 0) {
-      return `<span class="unit-convert">= ${hop} Hộp</span>`;
+      return `<span class="unit-convert">= ${hop} ${window.t ? window.t('common', 'unit_box') : 'Hộp'}</span>`;
     } else {
-      return `<span class="unit-convert">= ${hop} Hộp + ${remainder} Viên</span>`;
+      return `<span class="unit-convert">= ${hop} ${window.t ? window.t('common', 'unit_box') : 'Hộp'} + ${remainder} ${window.t ? window.t('common', 'unit_pill') : 'Viên'}</span>`;
     }
   } else if (item.qty >= vienPerVi) {
     const vi = Math.floor(item.qty / vienPerVi);
     const remainder = item.qty % vienPerVi;
     if (remainder === 0) {
-      return `<span class="unit-convert">= ${vi} Vỉ</span>`;
+      return `<span class="unit-convert">= ${vi} ${window.t ? window.t('common', 'unit_strip') : 'Vỉ'}</span>`;
     } else {
-      return `<span class="unit-convert">= ${vi} Vỉ + ${remainder} Viên</span>`;
+      return `<span class="unit-convert">= ${vi} ${window.t ? window.t('common', 'unit_strip') : 'Vỉ'} + ${remainder} ${window.t ? window.t('common', 'unit_pill') : 'Viên'}</span>`;
     }
   }
   return '';
@@ -48,8 +48,8 @@ function renderCart() {
   if (cart.length === 0) {
     list.innerHTML = `
       <div style="text-align: center; padding: 40px;">
-        <p class="muted">Giỏ hàng của bạn đang trống</p>
-        <a href="home.html" class="btn btn--primary" style="margin-top: 20px;">Quay lại mua sắm</a>
+        <p class="muted" data-i18n="cart.empty">${window.t ? window.t('cart', 'empty') : 'Your cart is empty'}</p>
+        <a href="home.html" class="btn btn--primary" style="margin-top: 20px;" data-i18n="cart.btn_continue">${window.t ? window.t('cart', 'btn_continue') : 'Continue Shopping'}</a>
       </div>
     `;
     $("subtotal").textContent = "0đ";
@@ -63,11 +63,24 @@ function renderCart() {
     subtotal += itemTotal;
     const conversionInfo = getUnitConversionInfo(item);
 
+    // Internationalize dynamic labels
+    const lblCode = window.t ? window.t('common', 'lbl_code') : 'Code';
+    const lblType = window.t ? window.t('common', 'lbl_type') : 'Type';
+
+    // Map unit internal values to translated names
+    const unitMap = {
+      'Viên': window.t ? window.t('common', 'unit_pill') : 'pill',
+      'Vỉ': window.t ? window.t('common', 'unit_strip') : 'strip',
+      'Hộp': window.t ? window.t('common', 'unit_box') : 'box',
+      'Chai': window.t ? window.t('common', 'unit_bottle') : 'bottle'
+    };
+    const unitDisplay = unitMap[item.unit] || item.unit;
+
     return `
       <div class="cart-item">
         <div class="cart-item__info">
           <h3>${item.name}</h3>
-          <p>Mã: ${item.id} • Đơn vị: <b>${item.unit}</b></p>
+          <p>${lblCode}: ${item.id} • ${lblType}: <b>${unitDisplay}</b></p>
         </div>
         <div class="cart-item__qty">
           <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
@@ -160,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCheckout.addEventListener('click', () => {
       const cart = getCart();
       if (cart.length === 0) {
-        alert('Giỏ hàng trống!');
+        alert(window.t ? window.t('cart', 'empty') : 'Giỏ hàng trống!');
         return;
       }
       window.location.href = 'checkout.html';

@@ -56,6 +56,7 @@
             color: var(--gold);
         }
     </style>
+    <script src="i18n.js"></script>
 </head>
 
 <body>
@@ -77,15 +78,14 @@
             </div>
 
             <div class="search">
-                <input id="globalSearch" type="search" placeholder="Tìm tên thuốc..." />
-                <button id="btnSearch" class="btn btn--icon" title="Tìm kiếm" aria-label="Tìm kiếm">
+                <input id="globalSearch" type="search" data-i18n-placeholder="common.lbl_search" />
+                <button id="btnSearch" class="btn btn--icon" title="Search" aria-label="Search">
                     🔍
                 </button>
             </div>
 
             <div class="header__actions">
-                <!-- Login button removed since we are here -->
-                <a href="#" class="btn btn--ghost">
+                <a href="#" class="btn btn--ghost" data-i18n="common.nav_help">
                     Trợ giúp
                 </a>
             </div>
@@ -97,8 +97,8 @@
         <div class="login-wrapper">
             <div class="login-card">
                 <div class="login-title">
-                    <h1>Đăng nhập</h1>
-                    <p>Chào mừng trở lại Github Pharmacy</p>
+                    <h1 data-i18n="login.title">Đăng nhập</h1>
+                    <p data-i18n="login.subtitle">Chào mừng trở lại Github Pharmacy</p>
                 </div>
 
                 <div id="messageBox"
@@ -106,31 +106,33 @@
                 </div>
 
                 <form action="/login" method="POST">
-                    <!-- Keep existing name attributes consistent -->
                     <label class="field">
-                        <span>Tên đăng nhập</span>
-                        <input type="text" id="username" name="username" required placeholder="Nhập username">
+                        <span data-i18n="login.lbl_user">Tên đăng nhập</span>
+                        <input type="text" id="username" name="username" required
+                            data-i18n-placeholder="login.lbl_user">
                     </label>
 
                     <label class="field">
-                        <span>Mật khẩu</span>
+                        <span data-i18n="login.lbl_pass">Mật khẩu</span>
                         <div class="field--password">
-                            <input type="password" id="password" name="password" required placeholder="Nhập password">
-                            <button type="button" class="password-toggle" id="togglePassword" title="Hiện/Ản mật khẩu">
+                            <input type="password" id="password" name="password" required
+                                data-i18n-placeholder="login.lbl_pass">
+                            <button type="button" class="password-toggle" id="togglePassword" title="Toggle Password">
                                 👁️
                             </button>
                         </div>
                     </label>
 
-                    <button type="submit" class="btn btn--primary"
+                    <button type="submit" class="btn btn--primary" data-i18n="login.btn_login"
                         style="width: 100%; margin-top: 10px; justify-content: center;">Đăng Nhập</button>
                 </form>
 
                 <div style="text-align: center; margin-top: 24px;">
-                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">Chưa có tài khoản?</p>
-                    <a href="register.html" class="back-link">Đăng ký ngay</a>
+                    <p data-i18n="login.no_account"
+                        style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">Chưa có tài khoản?</p>
+                    <a href="register.html" class="back-link" data-i18n="login.link_register">Đăng ký ngay</a>
                     <div style="margin-top: 16px;">
-                        <a href="home.html" class="back-link">← Quay lại trang chủ</a>
+                        <a href="home.html" class="back-link" data-i18n="common.btn_back_home">← Quay lại trang chủ</a>
                     </div>
                 </div>
             </div>
@@ -139,7 +141,7 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="container footer__inner">
+        <div class="container footer__inner" data-i18n="footer_connect">
             Connect with us : 03xxxxxxx
         </div>
     </footer>
@@ -152,19 +154,19 @@
             msgBox.style.background = '#dcfce7';
             msgBox.style.color = '#166534';
             msgBox.style.borderColor = '#bbf7d0';
-            msgBox.textContent = '🎉 Đăng ký thành công! Hãy đăng nhập ngay.';
+            msgBox.textContent = t('login', 'msg_success');
         } else if (urlParams.get('error') === 'unauthorized') {
             msgBox.style.display = 'block';
             msgBox.style.background = '#fee2e2';
             msgBox.style.color = '#ef4444';
             msgBox.style.borderColor = '#fecaca';
-            msgBox.textContent = '⛔ Bạn không có quyền truy cập trang này!';
+            msgBox.textContent = t('login', 'msg_unauthorized');
         } else if (urlParams.has('error')) {
             msgBox.style.display = 'block';
             msgBox.style.background = '#fee2e2';
             msgBox.style.color = '#ef4444';
             msgBox.style.borderColor = '#fecaca';
-            msgBox.textContent = '❌ Sai tên đăng nhập hoặc mật khẩu!';
+            msgBox.textContent = t('login', 'msg_error');
         }
 
         // Form Submission Logic
@@ -190,8 +192,12 @@
                     // SAVE TO CACHE IMMEDIATELY
                     localStorage.setItem('cache_auth', JSON.stringify(userData));
 
-                    // Proceed to home
-                    window.location.href = 'home.html';
+                    // Real-world logic: Redirect based on role
+                    if (userData.role === 'ADMIN') {
+                        window.location.href = 'admin'; // Go to Admin Dashboard
+                    } else {
+                        window.location.href = 'home.html'; // Go to Shop
+                    }
                 } else {
                     window.location.href = 'login.html?error=true';
                 }

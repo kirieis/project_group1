@@ -48,3 +48,6 @@ buildNumber.properties
 
 # Other
 bin/
+
+# AI Tools
+.claude/

@@ -4,6 +4,7 @@
 const state = {
   products: [],
   cartCount: 0,
+  lang: localStorage.getItem("lang") || "vi", // Default to VI
 
   // filters
   query: "",
@@ -16,6 +17,42 @@ const state = {
   page: 1,
   pageSize: 12,
 };
+
+// Removed local i18n object - now using global i18n.js
+const txt = (key) => {
+  const dotIndex = key.indexOf('.');
+  if (dotIndex > -1) {
+    return window.t ? window.t(key.substring(0, dotIndex), key.substring(dotIndex + 1)) : key;
+  }
+  // Fallback order: home -> common
+  return window.t ? window.t('home', key) : key;
+};
+
+// -------- Localization --------
+function updateLocale() {
+  if (typeof translateAll === 'function') {
+    translateAll();
+  }
+
+  const langBtn = $("btnLang");
+  if (langBtn) {
+    langBtn.innerHTML = currentLang === "vi" ? "VIE" : "ENG";
+    langBtn.title = currentLang === "vi" ? "Tiếng Việt" : "English";
+  }
+}
+
+function switchLanguage() {
+  const newLang = currentLang === "vi" ? "en" : "vi";
+  setLanguage(newLang);
+  // Re-render everything that uses dynamic strings
+  renderAllSections();
+}
+
+// Listen for global language changes
+window.addEventListener('langChanged', (e) => {
+  state.lang = e.detail;
+  updateLocale();
+});
 
 const $ = (id) => document.getElementById(id);
 
@@ -41,7 +78,7 @@ function showToast(msg) {
     t.className = "toast";
     document.body.appendChild(t);
   }
-  t.innerHTML = `🛒 <span>${msg}</span> đã được thêm vào giỏ!`;
+  t.innerHTML = `🛒 <span>${msg}</span> ${txt('toast_added')}`;
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 3000);
 }
@@ -62,124 +99,150 @@ function hashString(s) {
 
 // -------- CSV Parser + Mock Pricing --------
 function parseCSV(text) {
-  const lines = text.split("\n");
+  if (!text) return [];
+  // Split by any line ending (CR, LF, CRLF)
+  const lines = text.split(/\r?\n/);
   const rows = [];
+
+  console.log(`[home.js] Parsing CSV: ${lines.length} lines detected.`);
 
   lines.forEach((line, index) => {
     const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("medicine_id")) return;
+    if (!trimmed) return;
 
-    // Handle CSV with commas inside quotes if needed, but for now simple split
-    const parts = trimmed.split(",");
+    // Header check (case insensitive, skip if it smells like a header)
+    const lowLine = trimmed.toLowerCase();
+    if (lowLine.includes("medicine_id") || lowLine.includes("name") || lowLine.includes("quantity")) return;
 
-    // Expecting at least 11 columns based on new CSV structure
-    // medicine_id,name,batch,ingredient,dosage_form,strength,unit,manufacturer,expiry,quantity,price
-    if (parts.length < 11) return;
+    // Split by comma, but could be extended to ; or \t
+    let parts = trimmed.split(",");
+    if (parts.length < 5) parts = trimmed.split(";");
+    if (parts.length < 5) parts = trimmed.split("\t");
 
-    const [medId, name, batchId, ingredient, dosageForm, strength, unit, manufacturer, dateStr, quantityStr, priceStr] = parts;
-    const quantity = Number(quantityStr);
-    const price = Number(priceStr);
-
-    if (!medId || !name) return;
-
-    // --- Pricing & Sale Logic ---
-    // --- Pricing & Sale Logic (Mocking based on Expiry) ---
-    // User requested: Sale ONLY if close to expiry (e.g. within 6 months)
-    // Discount range: 5-20%
-
-    let hasSale = false;
-    let daysUntilExpiry = 3650; // Default far future
+    // We need at least 5 parts to show something (id, name, ...price)
+    if (parts.length < 5) return;
 
     try {
-      // Attempt to parse dateStr
-      // Supported formats: YYYY-MM-DD or DD/MM/YYYY
-      let d = new Date(dateStr);
-      if (isNaN(d.getTime())) {
-        const dp = dateStr.split('/'); // Check for DD/MM/YYYY
-        if (dp.length === 3) d = new Date(`${dp[2]}-${dp[1]}-${dp[0]}`);
+      // medicine_id,name,batch,ingredient,dosage_form,strength,unit,manufacturer,expiry,quantity,price
+      // 0:id, 1:name, 2:batch, 3:ingred, 4:form, 5:strength, 6:unit, 7:manuf, 8:expiry, 9:qty, 10:price
+      const medId = (parts[0] || "").trim().replace(/^["']|["']$/g, '');
+      const rawName = (parts[1] || "").trim().replace(/^["']|["']$/g, '');
+      const batchId = (parts[2] || "").trim();
+      const dosageForm = (parts[4] || "Tablet").trim();
+      const dateStr = (parts[8] || "").trim();
+      const quantityStr = (parts[9] || "0").trim();
+      const priceStr = (parts[10] || "0").trim();
+
+      if (!medId || !rawName) return;
+
+      const name = rawName.split("_").join(" ");
+      const quantity = parseInt(quantityStr) || 0;
+      const price = parseInt(priceStr) || 0;
+
+      // --- Sale Logic ---
+      let hasSale = false;
+      let daysUntilExpiry = 3650;
+
+      if (dateStr) {
+        let d = new Date(dateStr);
+        if (isNaN(d.getTime())) {
+          const dp = dateStr.split('/');
+          if (dp.length === 3) d = new Date(`${dp[2]}-${dp[1]}-${dp[0]}`);
+        }
+        if (!isNaN(d.getTime())) {
+          const diff = d - new Date();
+          daysUntilExpiry = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        }
       }
 
-      if (!isNaN(d.getTime())) {
-        const now = new Date();
-        const diff = d - now;
-        daysUntilExpiry = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      if (daysUntilExpiry > 0 && daysUntilExpiry <= 180) {
+        hasSale = true;
       }
-    } catch (e) { }
 
-    // Logic: If expiring in <= 180 days (6 months) AND not expired yet
-    if (daysUntilExpiry > 0 && daysUntilExpiry <= 180) {
-      hasSale = true;
+      const discount = hasSale ? (5 + (hashString(name) % 16)) : 0;
+      const finalBasePrice = discount ? Math.round(price * (1 - discount / 100)) : price;
+      const popularity = (hashString(name + batchId) % 1000) + 1;
+      const isLiquid = ['Syrup', 'Suspension', 'Chai', 'Dịch'].some(kw => dosageForm.includes(kw));
+
+      rows.push({
+        id: medId,
+        name,
+        batchId,
+        date: dateStr,
+        quantity,
+        dosageForm,
+        isLiquid,
+        price,
+        discount,
+        finalBasePrice,
+        vienPerVi: 10,
+        viPerHop: 3,
+        popularity
+      });
+    } catch (err) {
+      console.warn(`[home.js] Skip line ${index} due to error:`, err);
     }
-
-    // Determine discount if sale
-    // Range: 5% to 20% -> 5 + [0..15]
-    const discount = hasSale ? (5 + (hashString(name) % 16)) : 0;
-
-    // Default conversion rates if not in CSV
-    const vienPerVi = 10;
-    const viPerHop = 3;
-
-    // Base price is per Unit (Viên) or per Chai for Syrup
-    const basePrice = isNaN(price) ? 0 : price;
-
-    // Calculate final price with discount
-    // This is the BASE unit price
-    const finalBasePrice = discount ? Math.round(basePrice * (1 - discount / 100)) : basePrice;
-
-    const popularity = (hashString(name + batchId) % 1000) + 1;
-
-    // Determine if liquid product (Syrup, Suspension)
-    const isLiquid = ['Syrup', 'Suspension'].includes(dosageForm);
-
-    rows.push({
-      id: medId,
-      name: name.replaceAll("_", " "),
-      batchId,
-      date: dateStr,
-      quantity: isNaN(quantity) ? 0 : quantity,
-      dosageForm: dosageForm || 'Tablet',
-      isLiquid,
-
-      // Pricing Details
-      price: basePrice, // Original Base Price
-      discount,
-      finalBasePrice, // Discounted Base Price
-
-      // Conversion (only for solid forms)
-      vienPerVi,
-      viPerHop,
-
-      popularity
-    });
   });
 
   return rows;
 }
 
 // -------- CSV Loader --------
-// -------- CSV Loader --------
 async function loadProducts(skipSkeleton = false) {
   try {
-    // Show a quick loading indicator in the grid ONLY if we don't have cached data
+    console.log("[home.js] Fetching fresh product data from: data/medicines_clean.csv");
     const grid = $("allGrid");
     if (grid && !skipSkeleton) {
-      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #64748b;">
+      grid.innerHTML = `<div class="skeleton-ring-container" style="grid-column: 1/-1; text-align: center; padding: 50px; color: #64748b;">
         <div class="skeleton-ring"></div>
-        <p style="margin-top: 15px; font-weight: 600;">Đang tải sản phẩm...</p>
+        <p style="margin-top: 15px; font-weight: 600;" data-i18n="home.loading">Đang tải sản phẩm...</p>
       </div>`;
     }
 
     const res = await fetch("data/medicines_clean.csv");
 
     if (!res.ok) {
+      console.error("[home.js] Fetch failed. Status:", res.status, "URL:", res.url);
       throw new Error(`CSV Not Found: ${res.status} ${res.statusText}`);
     }
 
+    const contentType = res.headers.get("content-type") || "";
     const text = await res.text();
-    return parseCSV(text);
+
+    console.log("[home.js] Fetch response received. Type:", contentType, "Length:", text.length);
+
+    if (contentType.includes("text/html") || text.trim().startsWith("<!doctype")) {
+      console.error("[home.js] Error: Server returned HTML instead of CSV. Check routing/404.");
+      throw new Error("Dữ liệu nhận được là trang HTML (lỗi server/404), không phải file CSV.");
+    }
+
+    const parsed = parseCSV(text);
+    console.log(`[home.js] Successfully parsed ${parsed.length} products.`);
+
+    if (parsed.length === 0) {
+      if (text.length > 0) {
+        console.warn("[home.js] CSV text found but 0 products parsed. Check delimiter/header.");
+        console.log("[home.js] Sample text:", text.substring(0, 100));
+      } else {
+        console.warn("[home.js] CSV file is empty.");
+      }
+    }
+
+    return parsed;
   } catch (e) {
-    console.error("Failed to load products:", e);
-    // Return empty array to prevent app crash
+    console.error("[home.js] Failed to load products:", e);
+
+    // Show error UI if we have no cached data
+    const grid = $("allGrid");
+    if (grid && state.products.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #ef4444; background: #fff1f2; border: 1px solid #fecaca; border-radius: 12px;">
+        <p style="font-size: 24px;">⚠️</p>
+        <p style="font-weight: 700; margin-bottom: 8px;">KHÔNG THỂ TẢI DỮ LIỆU SẢN PHẨM</p>
+        <p style="font-size: 0.9rem; color: #7f1d1d;">Mô tả: ${e.message}</p>
+        <p style="font-size: 0.8rem; margin: 10px 0; color: #991b1b;">Hãy kiểm tra xem file <b>medicines_clean.csv</b> có nằm trong thư mục <b>web_app/data/</b> không.</p>
+        <button onclick="window.location.reload()" class="btn btn--primary btn--sm" style="margin-top: 10px;">Thử tải lại (F5)</button>
+      </div>`;
+    }
     return [];
   }
 }
@@ -273,7 +336,8 @@ function productCard(p) {
     : `<span class="tag">NEW</span>`;
 
   // Display base price on card
-  const unitLabel = p.isLiquid ? 'chai' : 'viên';
+  const unitLabel = p.isLiquid ? txt('unit_bottle') : txt('unit_pill');
+
   const { final } = calculateDisplayPrice(p, p.isLiquid ? "Chai" : "Viên");
 
   const priceHtml = p.discount > 0
@@ -286,8 +350,8 @@ function productCard(p) {
         <div>
           <h3 class="card__name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</h3>
           <div class="card__meta">
-            <div class="line">Mã: <b>${escapeHtml(p.id)}</b></div>
-            <div class="line">Loại: <b>${escapeHtml(p.dosageForm)}</b> • HSD: <b>${escapeHtml(p.date)}</b></div>
+            <div class="line">${txt('card.code')}: <b>${escapeHtml(p.id)}</b></div>
+            <div class="line">${txt('card.type')}: <b>${escapeHtml(p.dosageForm)}</b> • ${txt('card.exp')}: <b>${escapeHtml(p.date)}</b></div>
           </div>
         </div>
         ${saleTag}
@@ -298,8 +362,8 @@ function productCard(p) {
       </div>
 
       <div class="card__actions">
-        <button class="btn btn--buy" onclick="openModal('${p.id}', true)">MUA NGAY</button>
-        <button class="btn btn--add" onclick="openModal('${p.id}', false)">+ Giỏ</button>
+        <button class="btn btn--buy" onclick="openModal('${p.id}', true)">${txt('card.buy').toUpperCase()}</button>
+        <button class="btn btn--add" onclick="openModal('${p.id}', false)">+ ${txt('nav_cart')}</button>
       </div>
     </article>
   `;
@@ -317,18 +381,19 @@ window.openModal = (id, buyNow) => {
   isBuyNow = buyNow;
 
   $("modalName").textContent = p.name;
-  $("modalMeta").textContent = `Mã: ${p.id} • Loại: ${p.dosageForm}`;
+  $("modalMeta").textContent = `${txt('lbl_code')}: ${p.id} • ${txt('lbl_type')}: ${p.dosageForm}`;
 
   // Populate Unit Selector based on product type
   const select = $("modalUnit");
+  const vi = state.lang === "vi";
   if (p.isLiquid) {
-    select.innerHTML = `<option value="Chai">Chai</option>`;
+    select.innerHTML = `<option value="Chai">${txt('unit_bottle')}</option>`;
     select.value = "Chai";
   } else {
     select.innerHTML = `
-      <option value="Viên">Viên</option>
-      <option value="Vỉ">Vỉ (x${p.vienPerVi})</option>
-      <option value="Hộp">Hộp (x${p.vienPerVi * p.viPerHop})</option>
+      <option value="Viên">${txt('unit_pill')}</option>
+      <option value="Vỉ">${txt('unit_strip')} (x${p.vienPerVi})</option>
+      <option value="Hộp">${txt('unit_box')} (x${p.vienPerVi * p.viPerHop})</option>
     `;
     select.value = "Viên";
   }
@@ -410,12 +475,13 @@ function addToCart(id, unit, qty) {
 }
 
 function escapeHtml(str) {
+  if (!str) return "";
   return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .split("&").join("&amp;")
+    .split("<").join("&lt;")
+    .split(">").join("&gt;")
+    .split('"').join("&quot;")
+    .split("'").join("&#039;");
 }
 
 function renderSale(filtered) {
@@ -433,9 +499,14 @@ function renderBest(filtered) {
 function renderAll(filtered) {
   const { items, total, totalPages } = paginate(filtered);
 
-  $("resultCount").textContent = `${total.toLocaleString("vi-VN")} kết quả`;
-  $("pageNow").textContent = String(state.page);
-  $("pageTotal").textContent = String(totalPages);
+  if ($("resultsCount")) $("resultsCount").textContent = total.toLocaleString(state.lang === "vi" ? "vi-VN" : "en-US");
+
+  const pagerDisplay = $("pagerDisplay");
+  if (pagerDisplay) {
+    let pageInfo = txt('page_info');
+    pageInfo = pageInfo.replace('{now}', state.page).replace('{total}', totalPages);
+    pagerDisplay.textContent = pageInfo;
+  }
 
   $("allGrid").innerHTML = items.map(productCard).join("");
   $("allEmpty").classList.toggle("hidden", total > 0);
@@ -462,114 +533,85 @@ function renderAllSections() {
 function bindEvents() {
   const btnGoSale = $("btnGoSale");
   if (btnGoSale) {
-    btnGoSale.addEventListener("click", () => {
+    btnGoSale.onclick = () => {
       const section = $("saleSection");
       if (section) section.scrollIntoView({ behavior: "smooth" });
-    });
+    };
   }
 
   // Set initial badge
   saveCart(getCart());
 
-  document.body.addEventListener("click", (e) => {
-    const buyId = e.target?.getAttribute?.("data-buy");
-    const addId = e.target?.getAttribute?.("data-add");
+  // Global delegate for Buy/Add buttons - ONLY ONCE
+  if (!isEventsBound) {
+    document.body.addEventListener("click", (e) => {
+      const buyId = e.target?.getAttribute?.("data-buy");
+      const addId = e.target?.getAttribute?.("data-add");
 
-    if (buyId || addId) {
-      const id = buyId || addId;
-      const product = state.products.find((p) => p.id === id);
-      const unit = document.querySelector(`.unit-input[data-id="${id}"]`)?.value || "Viên";
-
-      let multiplier = 1;
-      if (unit === "Vỉ") multiplier = product.vienPerVi;
-      if (unit === "Hộp") multiplier = product.vienPerVi * product.viPerHop;
-
-      const unitPrice = product.finalBasePrice * multiplier;
-
-      let cart = getCart();
-      const existing = cart.find(item => item.id === id && item.unit === unit);
-
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({
-          id: product.id,
-          name: product.name,
-          price: unitPrice,
-          unit: unit,
-          qty: 1
-        });
+      if (buyId || addId) {
+        const id = buyId || addId;
+        openModal(id, !!buyId);
       }
+    });
 
-      saveCart(cart);
-      showToast(product.name);
+    $("btnSearch").onclick = () => {
+      state.query = $("globalSearch").value;
+      state.page = 1;
+      renderAllSections();
+      scrollToAll();
+    };
 
-      if (buyId) {
-        window.location.href = "cart.html";
-      }
-      return;
-    }
-  });
+    $("globalSearch").onkeydown = (e) => {
+      if (e.key === "Enter") $("btnSearch").click();
+    };
 
-  $("btnCart").addEventListener("click", () => {
-    window.location.href = "cart.html";
-  });
-
-  $("btnSearch").addEventListener("click", () => {
-    state.query = $("globalSearch").value;
-    state.page = 1;
-    renderAllSections();
-    scrollToAll();
-  });
-
-  $("globalSearch").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") $("btnSearch").click();
-  });
-
-  $("btnApply").addEventListener("click", () => {
-    syncFiltersFromUI();
-    state.page = 1;
-    renderAllSections();
-  });
-
-  $("btnReset").addEventListener("click", () => {
-    resetFiltersUI();
-    syncFiltersFromUI();
-    state.page = 1;
-    renderAllSections();
-  });
-
-  $("prevPage").addEventListener("click", () => {
-    state.page = Math.max(1, state.page - 1);
-    renderAllSections();
-    scrollToAll();
-  });
-
-  $("nextPage").addEventListener("click", () => {
-    state.page += 1;
-    renderAllSections();
-    scrollToAll();
-  });
-
-  const debounced = debounce(() => {
-    syncFiltersFromUI();
-    state.page = 1;
-    renderAllSections();
-  }, 250);
-
-  ["filterQuery", "filterMin", "filterMax"].forEach(id => {
-    $(id).addEventListener("input", debounced);
-  });
-
-  ["filterSort", "filterOnlySale"].forEach(id => {
-    $(id).addEventListener("change", () => {
+    $("btnApply").onclick = () => {
       syncFiltersFromUI();
       state.page = 1;
       renderAllSections();
-    });
-  });
+    };
 
-  $("btnGoAll").addEventListener("click", () => scrollToAll());
+    $("btnReset").onclick = () => {
+      resetFiltersUI();
+      syncFiltersFromUI();
+      state.page = 1;
+      renderAllSections();
+    };
+
+    $("prevPage").onclick = () => {
+      state.page = Math.max(1, state.page - 1);
+      renderAllSections();
+      scrollToAll();
+    };
+
+    $("nextPage").onclick = () => {
+      state.page += 1;
+      renderAllSections();
+      scrollToAll();
+    };
+
+    const debounced = debounce(() => {
+      syncFiltersFromUI();
+      state.page = 1;
+      renderAllSections();
+    }, 250);
+
+    ["filterQuery", "filterMin", "filterMax"].forEach(id => {
+      const el = $(id);
+      if (el) el.oninput = debounced;
+    });
+
+    ["filterSort", "filterOnlySale"].forEach(id => {
+      const el = $(id);
+      if (el) el.onchange = () => {
+        syncFiltersFromUI();
+        state.page = 1;
+        renderAllSections();
+      };
+    });
+
+    $("btnGoAll").onclick = () => scrollToAll();
+  }
 
   // Auth logic - Redirect to Profile Page
   const authState = window.authState || { isLoggedIn: false };
@@ -577,25 +619,31 @@ function bindEvents() {
   const btnLogin = $("btnLogin");
 
   if (authState.isLoggedIn) {
-    // Show username as link to profile page (Admin button removed as requested)
     userMenuContainer.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 8px; width: 100%;">
-        <a href="profile.html" class="btn btn--ghost" style="text-decoration: none; flex: 1; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="profile.html" class="btn btn--ghost" style="text-decoration: none; display: flex; align-items: center; gap: 5px;">
           👤 ${escapeHtml(authState.fullName.split(' ').pop())}
         </a>
       </div>
     `;
-  } else {
-    btnLogin.innerHTML = `👤 Đăng nhập`;
-    btnLogin.addEventListener("click", (e) => {
+  } else if (btnLogin) {
+    btnLogin.onclick = () => {
       window.location.href = "login.html";
-    });
+    };
   }
 
-  $("btnCart").addEventListener("click", () => {
-    // alert(`Giỏ hàng: ${state.cartCount} sản phẩm.`); // Removed ugly alert
-    window.location.href = "cart.html";
-  });
+  const cartBtn = $("btnCart");
+  if (cartBtn) {
+    cartBtn.onclick = () => {
+      window.location.href = "cart.html";
+    };
+  }
+
+  // Language switcher
+  const langBtn = $("btnLang");
+  if (langBtn) {
+    langBtn.onclick = switchLanguage;
+  }
 }
 
 function syncFiltersFromUI() {
@@ -629,30 +677,38 @@ function debounce(fn, ms) {
 }
 
 // -------- Boot --------
+let isEventsBound = false;
+
 (async function init() {
-  // 1. Instant Render from Cache (Stale-While-Revalidate)
+  // 1. Initial UI Setup
+  updateLocale();
+
+  // 2. Instant Render from Cache (Stale-While-Revalidate)
   const cachedAuth = localStorage.getItem("cache_auth");
   const cachedProducts = localStorage.getItem("cache_products");
 
-  if (cachedAuth) {
-    window.authState = JSON.parse(cachedAuth);
-  }
-  if (cachedProducts) {
-    state.products = JSON.parse(cachedProducts);
+  if (cachedAuth) window.authState = JSON.parse(cachedAuth);
+  if (cachedProducts) state.products = JSON.parse(cachedProducts);
+
+  // Bind events exactly once
+  if (!isEventsBound) {
     bindEvents();
-    renderAllSections();
+    isEventsBound = true;
   }
+
+  // Initial render if we have cache
+  if (cachedProducts) renderAllSections();
 
   try {
-    // 2. Fetch fresh data in background
+    // 3. Fetch fresh data in background
     const [authRes, freshProducts] = await Promise.all([
       fetch("api/auth-status").then(r => r.ok ? r.json() : null).catch(() => null),
-      loadProducts(true) // Pass true to skip initial grid clearing if we already have cache
+      loadProducts(state.products.length > 0) // Skip skeleton if we already have data
     ]);
 
-    // 3. Update state and cache if changed
     let needsReRender = false;
 
+    // Update Auth
     if (authRes) {
       const authStr = JSON.stringify(authRes);
       if (authStr !== cachedAuth) {
@@ -660,15 +716,13 @@ function debounce(fn, ms) {
         localStorage.setItem("cache_auth", authStr);
         needsReRender = true;
       }
-    } else {
-      // Server says guest, but cache says user -> Clear it!
-      if (cachedAuth) {
-        window.authState = null;
-        localStorage.removeItem("cache_auth");
-        needsReRender = true;
-      }
+    } else if (cachedAuth) {
+      window.authState = null;
+      localStorage.removeItem("cache_auth");
+      needsReRender = true;
     }
 
+    // Update Products
     if (freshProducts && freshProducts.length > 0) {
       const productsStr = JSON.stringify(freshProducts);
       if (productsStr !== cachedProducts) {
@@ -678,16 +732,24 @@ function debounce(fn, ms) {
       }
     }
 
-    // 4. Final render if first time or data changed
-    if (!cachedProducts || needsReRender) {
-      if (!cachedProducts) bindEvents();
+    // 4. Final render if data changed or first time
+    if (needsReRender || !cachedProducts || state.products.length === 0) {
+      if (state.products.length === 0 && (!freshProducts || freshProducts.length === 0)) {
+        console.warn("[home.js] All load attempts failed. Using demo fallback.");
+        state.products = [
+          { id: "DEMO1", name: "Paracetamol 500mg", batchId: "B001", dosageForm: "Tablet", quantity: 100, price: 2000, finalBasePrice: 2000, discount: 0, popularity: 999, isLiquid: false },
+          { id: "DEMO2", name: "Cebion Vitamin C", batchId: "B002", dosageForm: "Tablet", quantity: 50, price: 45000, finalBasePrice: 35000, discount: 20, popularity: 888, isLiquid: false }
+        ];
+      }
       renderAllSections();
+      bindEvents();
     }
   } catch (e) {
     console.error("Init failed:", e);
-    if (!cachedProducts) {
-      bindEvents();
-      renderAllSections();
+    // Emergency render
+    if (state.products.length === 0) {
+      state.products = [{ id: "ERR1", name: "Lỗi tải dữ liệu", batchId: "ERROR", dosageForm: "System", quantity: 0, price: 0, finalBasePrice: 0, discount: 0, popularity: 0, isLiquid: false }];
     }
+    renderAllSections();
   }
 })();

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Giỏ hàng - Github Pharmacy</title>
     <link rel="stylesheet" href="home.css" />
+    <script src="i18n.js"></script>
     <style>
         .cart-grid {
             display: grid;
@@ -105,42 +106,47 @@
             </div>
             <div></div>
             <div class="header__actions">
-                <a href="home.html" class="btn btn--ghost">Tiếp tục mua sắm</a>
+                <a href="home.html" class="btn btn--ghost" data-i18n="cart.btn_continue">Tiếp tục mua sắm</a>
             </div>
         </div>
     </header>
 
     <main class="container main">
-        <h1 style="margin-bottom: 24px; color: var(--primary);">Giỏ hàng của bạn</h1>
+        <h1 style="margin-bottom: 24px; color: var(--primary);" data-i18n="cart.title">Giỏ hàng của bạn</h1>
 
         <div class="cart-grid">
             <div class="cart-items" id="cartList">
                 <!-- Rendered by cart.js -->
-                <p class="muted">Đang tải giỏ hàng...</p>
+                <p class="muted" data-i18n="cart.loading">Đang tải giỏ hàng...</p>
             </div>
 
             <div class="cart-summary">
-                <h2 style="font-size: 18px; margin-bottom: 20px;">Tổng quát đơn hàng</h2>
+                <h2 style="font-size: 18px; margin-bottom: 20px;" data-i18n="cart.summary_title">Tổng quát đơn hàng</h2>
                 <div class="summary-row">
-                    <span>Tạm tính</span>
+                    <span data-i18n="cart.subtotal">Tạm tính</span>
                     <span id="subtotal">0đ</span>
                 </div>
                 <div class="summary-row">
-                    <span>Phí vận chuyển</span>
-                    <span>Miễn phí</span>
+                    <span data-i18n="cart.shipping">Phí vận chuyển</span>
+                    <span data-i18n="cart.shipping_free">Miễn phí</span>
                 </div>
                 <div class="summary-row summary-total">
-                    <span>Tổng cộng</span>
+                    <span data-i18n="cart.total">Tổng cộng</span>
                     <span id="totalPrice">0đ</span>
                 </div>
                 <button id="btnCheckout" class="btn btn--primary"
-                    style="width: 100%; margin-top: 20px; justify-content: center;">
+                    style="width: 100%; margin-top: 20px; justify-content: center;" data-i18n="cart.btn_checkout">
                     XÁC NHẬN THANH TOÁN
                 </button>
             </div>
         </div>
     </main>
 
+    <footer class="footer">
+        <div class="container footer__inner" data-i18n="footer_connect">
+            Connect with us : 03xxxxxxx
+        </div>
+    </footer>
     <script src="cart.js"></script>
 </body>
 

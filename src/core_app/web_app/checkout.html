@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Thanh toán - Github Pharmacy</title>
     <link rel="stylesheet" href="home.css" />
+    <script src="i18n.js"></script>
     <style>
         .checkout-grid {
             display: grid;
@@ -206,69 +207,74 @@
             </div>
             <div></div>
             <div class="header__actions">
-                <a href="cart.html" class="btn btn--ghost">← Quay lại giỏ hàng</a>
+                <a href="cart.html" class="btn btn--ghost" data-i18n="checkout.btn_back_cart">← Quay lại giỏ hàng</a>
             </div>
         </div>
     </header>
 
     <main class="container main">
-        <h1 style="margin-bottom: 24px; color: var(--primary);">Thanh toán đơn hàng</h1>
+        <h1 style="margin-bottom: 24px; color: var(--primary);" data-i18n="checkout.title">Thanh toán đơn hàng</h1>
 
         <div class="checkout-grid">
             <!-- Order Summary -->
             <div class="checkout-box">
-                <h2>📋 Chi tiết đơn hàng</h2>
+                <h2 data-i18n="checkout.order_details">📋 Chi tiết đơn hàng</h2>
                 <div id="orderItems">
                     <!-- Rendered by JS -->
                 </div>
 
                 <div class="discount-row">
-                    <input type="text" id="discountCode" placeholder="Nhập mã giảm giá..." />
-                    <button class="btn btn--primary" id="btnApplyDiscount">Áp dụng</button>
+                    <input type="text" id="discountCode" data-i18n-placeholder="checkout.lbl_discount" />
+                    <button class="btn btn--primary" id="btnApplyDiscount" data-i18n="checkout.btn_apply">Áp
+                        dụng</button>
                 </div>
 
                 <div id="discountMessage" style="margin-bottom: 12px;"></div>
 
                 <div class="summary-line">
-                    <span>Tạm tính</span>
+                    <span data-i18n="checkout.subtotal">Tạm tính</span>
                     <span id="subtotal">0đ</span>
                 </div>
                 <div class="summary-line" id="discountLine" style="display: none;">
-                    <span>Giảm giá</span>
+                    <span data-i18n="checkout.discount">Giảm giá</span>
                     <span id="discountAmount" class="discount-applied">-0đ</span>
                 </div>
                 <div class="summary-line">
-                    <span>Phí vận chuyển</span>
-                    <span>Miễn phí</span>
+                    <span data-i18n="checkout.shipping">Phí vận chuyển</span>
+                    <span data-i18n="checkout.shipping_free">Miễn phí</span>
                 </div>
                 <div class="summary-line total">
-                    <span>Tổng cộng</span>
+                    <span data-i18n="checkout.total">Tổng cộng</span>
                     <span id="totalPrice">0đ</span>
                 </div>
             </div>
 
             <!-- Payment -->
             <div class="checkout-box">
-                <h2>💳 Thanh toán chuyển khoản</h2>
+                <h2 data-i18n="checkout.pay_title">💳 Thanh toán chuyển khoản</h2>
 
                 <!-- Khu vực Thanh toán tinh gọn -->
                 <div
                     style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 20px; padding: 25px; text-align: center; margin: 20px 0;">
                     <div style="font-size: 40px; margin-bottom: 15px;">💳</div>
-                    <h3 style="color: #1e293b; margin-bottom: 10px;">Thanh toán Ngân hàng (SePay)</h3>
-                    <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">
+                    <h3 style="color: #1e293b; margin-bottom: 10px;" data-i18n="checkout.pay_sepay">Thanh toán Ngân hàng
+                        (SePay)</h3>
+                    <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;" data-i18n="checkout.pay_desc">
                         Quét mã VietQR để hệ thống tự động xác nhận đơn hàng của bạn ngay lập tức.
                     </p>
 
                     <ul
                         style="text-align: left; display: inline-block; color: #475569; font-size: 13px; margin-bottom: 25px; list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px;">✅ Tự động điền số tiền và nội dung</li>
-                        <li style="margin-bottom: 8px;">✅ Xử lý nhanh 24/7 (kể cả ban đêm)</li>
-                        <li>✅ Bảo mật tối đa qua NAPAS 247</li>
+                        <li style="margin-bottom: 8px;" data-i18n="checkout.pay_benefit1">✅ Tự động điền số tiền và nội
+                            dung</li>
+                        <li style="margin-bottom: 8px;" data-i18n="checkout.pay_benefit2">✅ Xử lý nhanh 24/7 (kể cả ban
+                            đêm)</li>
+                        <li data-i18n="checkout.pay_benefit3">✅ Bảo mật tối đa qua NAPAS 247</li>
                     </ul>
 
                     <button class="btn btn--primary" id="btnConfirmPayment"
-                        style="width: 100%; justify-content: center; padding: 20px; font-size: 17px; font-weight: 800; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); transition: all 0.3s; transform: scale(1.02);">
+                        style="width: 100%; justify-content: center; padding: 20px; font-size: 17px; font-weight: 800; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); transition: all 0.3s; transform: scale(1.02);"
+                        data-i18n="checkout.btn_confirm">
                         🚀 XÁC NHẬN VÀ HIỆN MÃ QR
                     </button>
                 </div>
@@ -295,23 +301,29 @@
     <div class="success-modal" id="successModal">
         <div class="success-content">
             <div class="success-icon">🎉</div>
-            <h2>Đã gửi yêu cầu thanh toán!</h2>
-            <p>Bằng chứng chuyển khoản của bạn đã được gửi thành công. Hệ thống đang đợi Admin kiểm tra giao dịch.</p>
-            <p
-                style="background: #f0fdf4; padding: 10px; border-radius: 8px; color: #166534; font-size: 13px; margin-bottom: 20px; text-align: left;">
+            <h2 data-i18n="checkout.success_title">Đã gửi yêu cầu thanh toán!</h2>
+            <p data-i18n="checkout.success_desc">Bằng chứng chuyển khoản của bạn đã được gửi thành công. Hệ thống đang
+                đợi Admin kiểm tra giao dịch.</p>
+            <p style="background: #f0fdf4; padding: 10px; border-radius: 8px; color: #166534; font-size: 13px; margin-bottom: 20px; text-align: left;"
+                data-i18n="checkout.success_tip">
                 💡 Mẹo: Bạn hãy vào mục <b>"Hồ sơ -> Lịch sử mua hàng"</b> để theo dõi khi nào đơn được duyệt nhé!
             </p>
-            <p style="font-weight: 600; color: var(--primary); margin-bottom: 20px;">Mã đơn hàng: <span
-                    id="orderId">ĐH-xxxxx</span></p>
+            <p style="font-weight: 600; color: var(--primary); margin-bottom: 20px;"><span
+                    data-i18n="checkout.order_id">Mã đơn hàng</span>: <span id="orderId">ĐH-xxxxx</span></p>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn--ghost" onclick="window.location.href='home.html'"
-                    style="flex: 1; justify-content: center;">Về Trang Chủ</button>
+                    style="flex: 1; justify-content: center;" data-i18n="checkout.btn_home">Về Trang Chủ</button>
                 <button class="btn btn--primary" onclick="window.location.href='profile.html'"
-                    style="flex: 1; justify-content: center;">Vào Hồ Sơ 👤</button>
+                    style="flex: 1; justify-content: center;" data-i18n="checkout.btn_profile">Vào Hồ Sơ 👤</button>
             </div>
         </div>
     </div>
 
+    <footer class="footer">
+        <div class="container footer__inner" data-i18n="footer_connect">
+            Connect with us : 03xxxxxxx
+        </div>
+    </footer>
     <script src="checkout.js?v=3"></script>
 </body>
 

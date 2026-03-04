@@ -50,6 +50,7 @@
             color: var(--gold);
         }
     </style>
+    <script src="i18n.js"></script>
 </head>
 
 <body>
@@ -69,7 +70,7 @@
                 </a>
             </div>
             <div class="header__actions">
-                <a href="login.html" class="btn btn--ghost">Đăng nhập</a>
+                <a href="login.html" class="btn btn--ghost" data-i18n="common.nav_login">Đăng nhập</a>
             </div>
         </div>
     </header>
@@ -79,8 +80,8 @@
         <div class="login-wrapper">
             <div class="login-card">
                 <div class="login-title">
-                    <h1>Tạo tài khoản</h1>
-                    <p>Tham gia cộng đồng Github Pharmacy ngay</p>
+                    <h1 data-i18n="register.title">Tạo tài khoản</h1>
+                    <p data-i18n="register.subtitle">Tham gia cộng đồng Github Pharmacy ngay</p>
                 </div>
 
                 <div id="errorBox"
@@ -89,61 +90,67 @@
 
                 <form action="register" method="POST">
                     <label class="field">
-                        <span>Họ và tên</span>
-                        <input type="text" name="fullName" required placeholder="Nguyễn Văn A">
+                        <span data-i18n="register.lbl_fullname">Họ và tên</span>
+                        <input type="text" name="fullName" required data-i18n-placeholder="register.lbl_fullname">
                     </label>
 
                     <label class="field">
-                        <span>Số điện thoại</span>
-                        <input type="tel" name="phone" placeholder="090...">
+                        <span data-i18n="register.lbl_phone">Số điện thoại</span>
+                        <input type="tel" name="phone" data-i18n-placeholder="register.lbl_phone">
                     </label>
 
                     <label class="field">
-                        <span>Email (Để nhận mã OTP)</span>
-                        <input type="email" name="email" required placeholder="example@gmail.com">
+                        <span data-i18n="register.lbl_email">Email (Để nhận mã OTP)</span>
+                        <input type="email" name="email" required data-i18n-placeholder="register.lbl_email">
                     </label>
 
                     <label class="field">
-                        <span>Địa chỉ</span>
-                        <input type="text" name="address" placeholder="Hồ Chí Minh, Việt Nam">
+                        <span data-i18n="register.lbl_address">Địa chỉ</span>
+                        <input type="text" name="address" data-i18n-placeholder="register.lbl_address">
                     </label>
 
                     <label class="field">
-                        <span>Tên đăng nhập</span>
-                        <input type="text" name="username" required placeholder="Nhập username">
+                        <span data-i18n="register.lbl_user">Tên đăng nhập</span>
+                        <input type="text" name="username" required data-i18n-placeholder="register.lbl_user">
                     </label>
 
                     <label class="field">
-                        <span>Mật khẩu</span>
+                        <span data-i18n="register.lbl_pass">Mật khẩu</span>
                         <div class="field--password">
-                            <input type="password" id="password" name="password" required placeholder="Nhập password">
+                            <input type="password" id="password" name="password" required
+                                data-i18n-placeholder="register.lbl_pass">
                             <button type="button" class="password-toggle" id="togglePassword" title="Hiện/Ản mật khẩu">
                                 👁️
                             </button>
                         </div>
                         <div id="pwdRules"
                             style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem;">
-                            <div class="rule-item" data-rule="len">⚪ Ít nhất 8 ký tự</div>
-                            <div class="rule-item" data-rule="upper">⚪ Có chữ IN HOA</div>
-                            <div class="rule-item" data-rule="lower">⚪ Có chữ thường</div>
-                            <div class="rule-item" data-rule="num">⚪ Có con số</div>
+                            <div class="rule-item" data-rule="len">⚪ <span data-i18n="register.rule_len">Ít nhất 8 ký
+                                    tự</span></div>
+                            <div class="rule-item" data-rule="upper">⚪ <span data-i18n="register.rule_upper">Có chữ IN
+                                    HOA</span></div>
+                            <div class="rule-item" data-rule="lower">⚪ <span data-i18n="register.rule_lower">Có chữ
+                                    thường</span></div>
+                            <div class="rule-item" data-rule="num">⚪ <span data-i18n="register.rule_num">Có con
+                                    số</span></div>
                         </div>
                     </label>
 
-                    <button type="submit" id="btnRegister" class="btn btn--primary"
+                    <button type="submit" id="btnRegister" class="btn btn--primary" data-i18n="register.btn_register"
                         style="width: 100%; margin-top: 20px; justify-content: center;">Đăng Ký</button>
                 </form>
 
                 <div style="text-align: center; margin-top: 24px;">
-                    <span style="color: var(--text-muted); font-size: 14px;">Đã có tài khoản? </span>
-                    <a href="login.html" class="back-link">Đăng nhập ngay</a>
+                    <span style="color: var(--text-muted); font-size: 14px;" data-i18n="register.has_account">Đã có tài
+                        khoản? </span>
+                    <a href="login.html" class="back-link" data-i18n="register.link_login">Đăng nhập ngay</a>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <div class="container footer__inner">
+        <div class="container footer__inner" data-i18n="footer_connect">
             Connect with us : 03xxxxxxx
         </div>
     </footer>
@@ -188,9 +195,9 @@
         if (error) {
             const errorBox = document.getElementById('errorBox');
             errorBox.style.display = 'block';
-            if (error === 'weak_password') errorBox.textContent = 'Mật khẩu không đạt yêu cầu bảo mật!';
-            else if (error === 'exists') errorBox.textContent = 'Tên đăng nhập đã tồn tại!';
-            else errorBox.textContent = 'Đăng ký thất bại. Vui lòng thử lại!';
+            if (error === 'weak_password') errorBox.textContent = t('register', 'msg_weak_pass');
+            else if (error === 'exists') errorBox.textContent = t('register', 'msg_exists');
+            else errorBox.textContent = t('register', 'msg_error');
         }
 
         // Password Toggle Logic

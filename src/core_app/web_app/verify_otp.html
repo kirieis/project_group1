@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xác thực OTP - Github Pharmacy</title>
     <link rel="stylesheet" href="home.css">
+    <script src="i18n.js"></script>
     <style>
         .otp-wrapper {
             display: flex;
@@ -45,25 +46,28 @@
 <body>
     <div class="otp-wrapper">
         <div class="otp-card">
-            <h1 style="color: #6366f1; margin-bottom: 10px;">Xác thực Email</h1>
-            <p style="color: #64748b;">Mã OTP đã được gửi tới email của bạn. Vui lòng kiểm tra và nhập mã bên dưới.</p>
+            <h1 style="color: #6366f1; margin-bottom: 10px;" data-i18n="verify_otp.title">Xác thực Email</h1>
+            <p style="color: #64748b;" data-i18n="verify_otp.subtitle">Mã OTP đã được gửi tới email của bạn. Vui lòng
+                kiểm tra và nhập mã bên dưới.</p>
 
             <div id="errorBox"
-                style="display: none; background: #fee2e2; color: #ef4444; padding: 10px; border-radius: 8px; margin-top: 15px;">
+                style="display: none; background: #fee2e2; color: #ef4444; padding: 10px; border-radius: 8px; margin-top: 15px;"
+                data-i18n="verify_otp.error_invalid">
                 Mã OTP không chính xác!
             </div>
 
             <form action="verify-otp" method="POST">
                 <input type="text" name="otp" class="otp-input" maxlength="6" required placeholder="000000"
                     pattern="\d{6}">
-                <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center;">
+                <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center;"
+                    data-i18n="verify_otp.btn_verify">
                     Xác nhận đăng ký
                 </button>
             </form>
 
             <div style="margin-top: 20px;">
-                <a href="register.html" style="color: #6366f1; text-decoration: none; font-size: 14px;"> Quay lại trang
-                    đăng ký</a>
+                <a href="register.html" style="color: #6366f1; text-decoration: none; font-size: 14px;"
+                    data-i18n="verify_otp.link_back"> Quay lại trang đăng ký</a>
             </div>
         </div>
     </div>

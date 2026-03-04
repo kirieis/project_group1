@@ -44,7 +44,11 @@ public class LoginServlet extends HttpServlet {
                         customer.getFullName(), customer.getRole(), customer.getUsername());
                 resp.getWriter().print(json);
             } else {
-                resp.sendRedirect("home.html");
+                if ("ADMIN".equals(customer.getRole())) {
+                    resp.sendRedirect(req.getContextPath() + "/admin");
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/home.html");
+                }
             }
         } else {
             if (isAjax) {

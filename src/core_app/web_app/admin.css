@@ -1,0 +1,186 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   🏢 BACKOFFICE SYSTEM - Admin Dashboard
+   Design: Modern Sidebar Layout, High Contrast, Data-Focused
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --sidebar-width: 260px;
+    --admin-bg: #f3f4f6;
+    --admin-card: #ffffff;
+    --admin-primary: #1e293b;
+    /* Dark Slate */
+    --admin-accent: #6366f1;
+    /* Indigo */
+    --admin-text: #334155;
+    --admin-border: #e2e8f0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--admin-bg);
+    color: var(--admin-text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--admin-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.sidebar__header {
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar__logo-dot {
+    width: 12px;
+    height: 12px;
+    background: #6366f1;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #6366f1;
+}
+
+.sidebar__title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.sidebar__nav {
+    flex: 1;
+    padding: 1.5rem 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.8rem 1.5rem;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item.active {
+    color: white;
+    background: rgba(99, 102, 241, 0.15);
+    border-left-color: var(--admin-accent);
+}
+
+.sidebar__footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.content-header {
+    background: white;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.badge-admin {
+    background: #fef2f2;
+    color: #ef4444;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #fee2e2;
+}
+
+.content-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+/* Common Admin Components */
+.card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--admin-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.btn-admin {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-admin--primary {
+    background: var(--admin-accent);
+    color: white;
+}
+
+.btn-admin--primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Data Table Custom */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 1rem;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-table tr:hover {
+    background: #f1f5f9;
+}

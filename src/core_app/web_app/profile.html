@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Hồ sơ người dùng - Github Pharmacy</title>
     <link rel="stylesheet" href="home.css" />
+    <script src="i18n.js"></script>
 </head>
 
 <body>
@@ -26,18 +27,19 @@
             </div>
 
             <div class="search">
-                <input id="globalSearch" type="search" placeholder="Tìm tên thuốc, mã thuốc..." />
-                <button id="btnSearch" class="btn btn--icon" title="Tìm kiếm" aria-label="Tìm kiếm">
+                <input id="globalSearch" type="search" data-i18n-placeholder="common.lbl_search" />
+                <button id="btnSearch" class="btn btn--icon" title="Search" aria-label="Search">
                     🔍
                 </button>
             </div>
 
             <div class="header__actions">
-                <a href="profile.html" id="btnLogout" class="btn btn--ghost" style="text-decoration: none;">
+                <a href="profile.html" id="btnLogout" class="btn btn--ghost" style="text-decoration: none;"
+                    data-i18n="common.nav_profile">
                     👤 <span id="headerUsername">Tài khoản</span>
                 </a>
                 <button id="btnCart" class="btn btn--primary" onclick="window.location.href='cart.html'">
-                    🛒 Giỏ hàng <span id="cartBadge" class="badge">0</span>
+                    🛒 <span data-i18n="common.nav_cart">Giỏ hàng</span> <span id="cartBadge" class="badge">0</span>
                 </button>
             </div>
         </div>
@@ -58,20 +60,22 @@
                 </div>
 
                 <nav class="profile-nav">
-                    <button class="profile-nav__item active" onclick="showTab('overview')">
+                    <button class="profile-nav__item active" onclick="showTab('overview')"
+                        data-i18n="profile.tab_overview">
                         🔹 Tổng quan
                     </button>
-                    <button class="profile-nav__item" onclick="showTab('history')">
+                    <button class="profile-nav__item" onclick="showTab('history')" data-i18n="profile.tab_history">
                         📋 Lịch sử mua hàng
                     </button>
-                    <button class="profile-nav__item" onclick="showTab('info')">
+                    <button class="profile-nav__item" onclick="showTab('info')" data-i18n="profile.tab_info">
                         👤 Thông tin cá nhân
                     </button>
                     <div id="adminLinkContainer"></div>
                 </nav>
 
                 <button class="profile-logout"
-                    onclick="localStorage.removeItem('cache_auth'); window.location.href='logout'">
+                    onclick="localStorage.removeItem('cache_auth'); window.location.href='logout'"
+                    data-i18n="common.nav_logout">
                     🚪 Đăng xuất
                 </button>
             </aside>
@@ -81,27 +85,27 @@
 
                 <!-- Tab: Overview -->
                 <div id="tab-overview" class="profile-tab active">
-                    <h2 class="profile-heading">Tổng quan</h2>
+                    <h2 class="profile-heading" data-i18n="profile.tab_overview">Tổng quan</h2>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-card__icon">🛒</div>
                             <div class="stat-card__info">
                                 <div id="summaryCount" class="stat-card__value">0</div>
-                                <div class="stat-card__label">Đơn hàng đã mua</div>
+                                <div class="stat-card__label" data-i18n="profile.stat_orders">Đơn hàng đã mua</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-card__icon">💰</div>
                             <div class="stat-card__info">
                                 <div id="summaryTotal" class="stat-card__value">0đ</div>
-                                <div class="stat-card__label">Tổng tiền tích lũy</div>
+                                <div class="stat-card__label" data-i18n="profile.stat_spent">Tổng tiền tích lũy</div>
                             </div>
                         </div>
                     </div>
 
                     <div style="margin-top: 32px;">
-                        <h3 style="margin-bottom: 16px;">Đơn hàng gần đây</h3>
-                        <div class="empty-state">
+                        <h3 style="margin-bottom: 16px;" data-i18n="profile.recent_orders">Đơn hàng gần đây</h3>
+                        <div class="empty-state" data-i18n="profile.no_recent">
                             Chưa có đơn hàng nào gần đây. <a href="home.html">Mua sắm ngay</a>
                         </div>
                     </div>
@@ -109,30 +113,30 @@
 
                 <!-- Tab: Purchase History -->
                 <div id="tab-history" class="profile-tab">
-                    <h2 class="profile-heading">Lịch sử mua hàng</h2>
-                    <div class="empty-state">
+                    <h2 class="profile-heading" data-i18n="profile.tab_history">Lịch sử mua hàng</h2>
+                    <div class="empty-state" data-i18n="profile.no_orders">
                         Bạn chưa có đơn hàng nào.
                     </div>
                 </div>
 
                 <!-- Tab: Personal Info -->
                 <div id="tab-info" class="profile-tab">
-                    <h2 class="profile-heading">Thông tin cá nhân</h2>
+                    <h2 class="profile-heading" data-i18n="profile.tab_info">Thông tin cá nhân</h2>
                     <div class="info-card">
                         <div class="field">
-                            <span>Họ và tên</span>
+                            <span data-i18n="profile.lbl_name">Họ và tên</span>
                             <input type="text" id="infoName" class="info-input" readonly>
                         </div>
                         <div class="field">
-                            <span>Số điện thoại</span>
+                            <span data-i18n="profile.lbl_phone">Số điện thoại</span>
                             <input type="text" id="infoPhone" class="info-input" readonly>
                         </div>
                         <div class="field">
-                            <span>Địa chỉ</span>
+                            <span data-i18n="profile.lbl_address">Địa chỉ</span>
                             <input type="text" id="infoAddress" class="info-input" readonly>
                         </div>
                         <div class="field">
-                            <span>Tên đăng nhập</span>
+                            <span data-i18n="profile.lbl_user">Tên đăng nhập</span>
                             <input type="text" id="infoUsername" class="info-input" readonly>
                         </div>
                     </div>
@@ -143,7 +147,7 @@
     </main>
 
     <footer class="footer">
-        <div class="container footer__inner">
+        <div class="container footer__inner" data-i18n="footer_connect">
             Connect with us : 03xxxxxxx
         </div>
     </footer>
@@ -179,17 +183,17 @@
 
                 // 3. Bind Sidebar
                 document.getElementById('sbName').textContent = currentUser.fullName;
-                document.getElementById('sbRole').textContent = currentUser.role === 'ADMIN' ? 'Quản trị viên' : 'Thành viên';
+                document.getElementById('sbRole').textContent = currentUser.role === 'ADMIN' ? t('profile', 'role_admin') : t('profile', 'role_member');
 
                 // Admin Link
                 if (currentUser.role === 'ADMIN') {
                     document.getElementById('adminLinkContainer').innerHTML = `
                     <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
                         <a href="/admin/users" class="profile-nav__item" style="text-decoration:none;">
-                            ⚙️ Quản lý người dùng
+                            ⚙️ ${t('admin', 'user_title')}
                         </a>
-                        <a href="/admin/sales" class="profile-nav__item" style="text-decoration:none;">
-                            💰 Doanh thu & Tiền lời
+                        <a href="/admin/sales" class="profile-nav__item" style="text-decoration:none;"">
+                            💰 ${t('admin', 'sales_title')}
                         </a>
                     </div>
                 `;
@@ -197,8 +201,8 @@
 
                 // 4. Bind Info Tab
                 document.getElementById('infoName').value = currentUser.fullName || '';
-                document.getElementById('infoPhone').value = currentUser.phone || "Chưa cập nhật";
-                document.getElementById('infoAddress').value = currentUser.address || "Chưa cập nhật";
+                document.getElementById('infoPhone').value = currentUser.phone || t('profile', 'not_updated');
+                document.getElementById('infoAddress').value = currentUser.address || t('profile', 'not_updated');
                 document.getElementById('infoUsername').value = currentUser.username || 'user';
 
                 // 5. Fetch Orders
@@ -225,7 +229,7 @@
                 let totalSpent = paidOrders.reduce((sum, o) => sum + o.total, 0);
 
                 if (!orders || orders.length === 0) {
-                    historyTab.innerHTML = `<h2 class="profile-heading">Lịch sử mua hàng</h2><div class="empty-state">Bạn chưa có đơn hàng nào.</div>`;
+                    historyTab.innerHTML = `<h2 class="profile-heading" data-i18n="profile.tab_history">${t('profile', 'tab_history')}</h2><div class="empty-state" data-i18n="profile.no_orders">${t('profile', 'no_orders')}</div>`;
                     summaryTotal.textContent = "0đ";
                     return;
                 }
@@ -234,16 +238,16 @@
                     const dateStr = `${o.day}/${o.month}/${o.year}`;
 
                     // Logic màu sắc trạng thái
-                    let statusLabel = '⏳ Chờ xác nhận';
+                    let statusLabel = t('profile', 'order_status_pending');
                     let statusColor = '#f59e0b';
                     let statusBg = '#fffbeb';
 
                     if (o.status === 'PAID') {
-                        statusLabel = '✅ Đã hoàn tất';
+                        statusLabel = t('profile', 'order_status_paid');
                         statusColor = '#10b981';
                         statusBg = '#f0fdf4';
                     } else if (o.status === 'CANCELLED') {
-                        statusLabel = '❌ Đã bị hủy';
+                        statusLabel = t('profile', 'order_status_cancelled');
                         statusColor = '#ef4444';
                         statusBg = '#fef2f2';
                     }
@@ -252,7 +256,7 @@
                         <div class="order-card" style="border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; background: #fff; box-shadow: var(--shadow-sm); transition: transform 0.2s;">
                             <div style="display:flex; justify-content:space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px;">
                                 <div>
-                                    <span style="font-weight:700; color: var(--primary); display:block;">Đơn #INV-${o.id}</span>
+                                    <span style="font-weight:700; color: var(--primary); display:block;">${t('profile', 'order_id')} #INV-${o.id}</span>
                                     <span style="font-size: 11px; color: var(--text-muted);">${dateStr}</span>
                                 </div>
                                 <div style="text-align: right;">
@@ -273,11 +277,11 @@
                             ${o.status === 'PENDING' ? `
                                 <div style="margin-top: 10px; padding: 12px; background: #f8fafc; border-radius: 8px;">
                                     <div style="font-size: 11px; color: #64748b; font-style: italic; margin-bottom: 10px;">
-                                        💡 Đơn hàng đang chờ thanh toán qua ngân hàng.
+                                        ${t('profile', 'order_wait_pay')}
                                     </div>
                                     <div style="display: flex; gap: 8px;">
-                                        <button onclick="showQR(${o.id}, ${o.total})" style="flex: 1; padding: 8px; background: #6366f1; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">💳 Thanh toán / Xem mã QR</button>
-                                        <button onclick="cancelOrder(${o.id})" style="padding: 8px; background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">✕ Hủy đơn</button>
+                                        <button onclick="showQR(${o.id}, ${o.total})" style="flex: 1; padding: 8px; background: #6366f1; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">${t('profile', 'btn_pay_qr')}</button>
+                                        <button onclick="cancelOrder(${o.id})" style="padding: 8px; background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">${t('profile', 'btn_cancel')}</button>
                                     </div>
                                 </div>
                             ` : ''}
@@ -285,9 +289,9 @@
                     `;
                 };
 
-                historyTab.innerHTML = `<h2 class="profile-heading">Lịch sử mua hàng</h2>` + orders.map(renderOrder).join('');
+                historyTab.innerHTML = `<h2 class="profile-heading" data-i18n="profile.tab_history">${t('profile', 'tab_history')}</h2>` + orders.map(renderOrder).join('');
                 if (overviewList) {
-                    overviewList.parentElement.innerHTML = `<h3 style="margin-bottom: 16px;">Đơn hàng gần đây</h3>` + orders.slice(0, 3).map(renderOrder).join('');
+                    overviewList.parentElement.innerHTML = `<h3 style="margin-bottom: 16px;" data-i18n="profile.recent_orders">${t('profile', 'recent_orders')}</h3>` + orders.slice(0, 3).map(renderOrder).join('');
                 } else {
                     // Update content if empty state was replaced
                     const recentHeader = document.querySelector('#tab-overview h3');
@@ -313,8 +317,8 @@
                         <button onclick="closeModal()" style="background:none; border:none; font-size: 24px; cursor:pointer; color:#94a3b8;">&times;</button>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <div style="font-weight: 800; font-size: 18px; color: #1e293b;">Thanh toán đơn #${id}</div>
-                        <div style="font-size: 13px; color: #64748b;">Mở app ngân hàng để quét mã VietQR</div>
+                        <div style="font-weight: 800; font-size: 18px; color: #1e293b;">${t('checkout', 'qr_title')} #${id}</div>
+                        <div style="font-size: 13px; color: #64748b;">${t('checkout', 'qr_desc')}</div>
                     </div>
                     
                     <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
@@ -323,18 +327,18 @@
 
                     <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 15px; text-align: left;">
                          <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                            <span style="font-size: 12px; color: #64748b;">Tổng tiền:</span>
+                            <span style="font-size: 12px; color: #64748b;">${t('checkout', 'amount')}:</span>
                             <span style="font-weight: 800; color: #dc2626;">${amount.toLocaleString('vi-VN')}đ</span>
                          </div>
                          <div style="display:flex; justify-content:space-between;">
-                            <span style="font-size: 12px; color: #64748b;">Nội dung:</span>
+                            <span style="font-size: 12px; color: #64748b;">${t('checkout', 'transfer_content')}:</span>
                             <span style="font-weight: 800; color: #1e3a8a;">DH${id}</span>
                          </div>
                     </div>
 
                     <div id="pollingStatus" style="font-size: 12px; color: #6366f1; font-weight: 600; display:flex; align-items:center; justify-content:center; gap: 8px;">
                         <div style="width: 14px; height: 14px; border: 2px solid #e2e8f0; border-top-color: #6366f1; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                        Đang chờ hệ thống xác thực...
+                        ${t('checkout', 'waiting_payment')}
                     </div>
                 </div>
             `;
@@ -356,7 +360,7 @@
                         const data = await res.json();
                         if (data.status === 'PAID') {
                             clearInterval(pollingInterval);
-                            alert("✅ Thanh toán hoàn tất!");
+                            alert(t('checkout', 'payment_success'));
                             location.reload();
                         }
                     }
@@ -365,7 +369,7 @@
         }
 
         async function cancelOrder(id) {
-            if (!confirm(`Bạn có chắc muốn hủy đơn hàng #${id}?`)) return;
+            if (!confirm(t('checkout', 'cancel_order_confirm'))) return;
             try {
                 const res = await fetch('api/orders', {
                     method: 'PUT',
@@ -373,14 +377,14 @@
                     body: JSON.stringify({ orderId: id, status: 'CANCELLED' })
                 });
                 if (res.ok) {
-                    alert("🗑️ Đơn hàng đã được hủy.");
+                    alert(t('checkout', 'order_cancelled'));
                     location.reload();
                 } else {
                     const data = await res.json();
-                    alert("Lỗi: " + (data.message || "Không thể hủy đơn."));
+                    alert("Error: " + (data.message || "Failed"));
                 }
             } catch (e) {
-                alert("Lỗi kết nối server.");
+                alert("Server Connection Error");
             }
         }
 

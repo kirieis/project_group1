@@ -4,285 +4,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Quản trị - Github Pharmacy</title>
+    <title>User Management - Github Pharmacy</title>
+    <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="../home.css">
+    <script src="i18n.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar__header">
+            <div class="sidebar__logo-dot"></div>
+            <div class="sidebar__title">G-PHARMA ADMIN</div>
+        </div>
+        <nav class="sidebar__nav">
+            <a href="sales" class="nav-item" data-i18n="admin.sales_title">📊 Sales & Revenue</a>
+            <a href="users" class="nav-item active" data-i18n="admin.user_title">👥 User Management</a>
+            <a href="../home.html" class="nav-item" data-i18n="admin.nav_website">🌐 View Website</a>
+        </nav>
+        <div class="sidebar__footer">
+            <a href="../logout" class="nav-item" style="color: #ef4444; text-decoration: none;"
+                data-i18n="common.nav_logout">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <header class="content-header">
+            <div class="breadcrumb" style="font-size: 0.9rem; color: #64748b;">Admin / <b style="color: #1e293b;"
+                    data-i18n="admin.user_title">User Management</b></div>
+            <div class="header-user">
+                <span class="badge-admin">BACKOFFICE</span>
+                <span id="totalUsers" class="badge-admin"
+                    style="background: #e0e7ff; color: #4338ca; border-color: #c7d2fe; margin-left: 8px;">0 Users</span>
+            </div>
+        </header>
+
+        <section class="content-body">
+            <!-- ADD FORM -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;" data-i18n="admin.lbl_create_acc">✨ Create New
+                    Account</h2>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div class="field">
+                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
+                            data-i18n="admin.lbl_fullname">Full Name</span>
+                        <input type="text" id="addFullName" data-i18n-placeholder="admin.lbl_fullname"
+                            style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                    </div>
+                    <div class="field">
+                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
+                            data-i18n="admin.lbl_user">Username</span>
+                        <input type="text" id="addUsername" data-i18n-placeholder="admin.lbl_user"
+                            style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                    </div>
+                    <div class="field">
+                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
+                            data-i18n="admin.lbl_pass">Password</span>
+                        <div style="position: relative;">
+                            <input type="password" id="addPassword" data-i18n-placeholder="admin.lbl_pass"
+                                style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px; width: 100%;">
+                            <button type="button" id="togglePassword"
+                                style="position: absolute; right: 10px; top: 8px; background:none; border:none; cursor:pointer;">👁️</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
+                            data-i18n="admin.lbl_access_level">Access Level</span>
+                        <select id="addRole" style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            <option value="CUSTOMER" data-i18n="admin.lbl_customer">👤 CUSTOMER</option>
+                            <option value="ADMIN" data-i18n="admin.lbl_admin">🛡️ ADMIN</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;"
+                    id="pwdRules">
+                    <div style="display: flex; gap: 15px; font-size: 0.75rem;">
+                        <span class="rule-item" data-rule="len">⚪ <span data-i18n="admin.lbl_min_chars">Min 8
+                                chars</span></span>
+                        <span class="rule-item" data-rule="upper">⚪ <span data-i18n="admin.lbl_upper_case">Upper
+                                case</span></span>
+                        <span class="rule-item" data-rule="lower">⚪ <span data-i18n="admin.lbl_lower_case">Lower
+                                case</span></span>
+                        <span class="rule-item" data-rule="num">⚪ <span
+                                data-i18n="admin.lbl_numbers">Numbers</span></span>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end;">
+                    <button class="btn-admin btn-admin--primary" id="btnSubmitUser"
+                        data-i18n="admin.btn_create_acc">Create Account</button>
+                </div>
+            </div>
+
+            <!-- USER LIST -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin: 0; font-size: 1.25rem;" data-i18n="admin.lbl_account_directory">📋 Account
+                        Directory</h2>
+                    <input type="text" id="userSearch" data-i18n-placeholder="admin.lbl_search_accounts_placeholder"
+                        style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px; width: 250px;">
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="admin.header_id">ID</th>
+                                <th data-i18n="admin.header_profile">User Profile</th>
+                                <th data-i18n="admin.header_role">Role</th>
+                                <th style="text-align: right;" data-i18n="admin.header_operations">Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userList">
+                            <!-- JS populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <style>
-        :root {
-            --admin-primary: #6366f1;
-            --admin-secondary: #4f46e5;
-            --admin-success: #10b981;
-            --admin-danger: #ef4444;
-            --admin-warning: #f59e0b;
-        }
-
-        body {
-            background-color: #f8fafc;
-        }
-
-        .admin-main {
-            padding: 2rem 0;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .page-header h1 {
-            font-size: clamp(1.5rem, 5vw, 2.25rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-        }
-
-        /* Glassmorphism Card Style */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 640px) {
-            .glass-card {
-                padding: 1.25rem;
-                border-radius: 1rem;
-            }
-
-            .page-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .glass-card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Form Styling */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-            align-items: start;
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            min-width: 0;
-        }
-
-        .field span {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #475569;
-            display: block;
-        }
-
-        .field input,
-        .field select {
-            border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
-            padding: 0.75rem 1rem;
-            transition: all 0.2s;
-            width: 100%;
-            background: white;
-            box-sizing: border-box;
-        }
-
-        .field input:focus,
-        .field select:focus {
-            outline: none;
-            border-color: var(--admin-primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-
-        /* Password Rules Visualizer */
-        .pwd-rules {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 0.75rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem 1rem;
-            background: #f1f5f9;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-        }
-
-        .rule-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .rule-item.valid {
-            color: var(--admin-success);
-            font-weight: 600;
-        }
-
-        .rule-item.invalid {
-            color: var(--admin-danger);
-        }
-
-        /* Password Toggle Specific to Admin */
-        .field--password {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        .field--password input {
-            padding-right: 3rem !important;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 0.75rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #64748b;
-            padding: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: color 0.2s;
-        }
-
-        .password-toggle:hover {
-            color: var(--admin-primary);
-        }
-
-        /* Table Styling */
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .modern-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 1rem;
-        }
-
-        .modern-table th {
-            background: #f1f5f9;
-            padding: 1.25rem;
-            text-align: left;
-            font-weight: 700;
-            color: #1e293b;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-        }
-
-        .modern-table th:first-child {
-            border-top-left-radius: 1rem;
-        }
-
-        .modern-table th:last-child {
-            border-top-right-radius: 1rem;
-        }
-
-        .modern-table td {
-            padding: 1.25rem;
-            background: white;
-            border-bottom: 1px solid #f1f5f9;
-            color: #475569;
-            vertical-align: middle;
-        }
-
-        .modern-table tr:last-child td:first-child {
-            border-bottom-left-radius: 1rem;
-        }
-
-        .modern-table tr:last-child td:last-child {
-            border-bottom-right-radius: 1rem;
-        }
-
-        .modern-table tr:hover td {
-            background: #f8fafc;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            color: #64748b;
-            margin-right: 1rem;
-        }
-
         .user-name-cell {
             display: flex;
             align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: #1e293b;
         }
 
         .badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 9999px;
+            padding: 4px 10px;
+            border-radius: 99px;
             font-size: 0.7rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
         }
 
         .badge--admin {
             background: #fee2e2;
-            color: #991b1b;
+            color: #ef4444;
+            border: 1px solid #fecaca;
         }
 
         .badge--customer {
-            background: #dcfce7;
-            color: #166534;
+            background: #ecfdf5;
+            color: #10b981;
+            border: 1px solid #d1fae5;
         }
 
         .btn-action {
-            padding: 0.5rem;
-            border-radius: 0.5rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s;
         }
 
         .btn-delete {
@@ -293,7 +187,15 @@
         .btn-delete:hover {
             background: #ef4444;
             color: white;
-            transform: scale(1.1);
+        }
+
+        .rule-item.valid {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .rule-item.invalid {
+            color: #ef4444;
         }
 
         .toast-container {
@@ -307,13 +209,10 @@
             background: #1e293b;
             color: white;
             padding: 1rem 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             margin-top: 0.5rem;
-            animation: slideIn 0.3s ease-out;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            animation: slideIn 0.3s ease;
         }
 
         @keyframes slideIn {
@@ -328,118 +227,6 @@
             }
         }
     </style>
-</head>
-
-<body>
-    <header class="header">
-        <div class="header__inner container">
-            <div class="brand">
-                <a href="../home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
-                    <div class="brand__logo">
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                    </div>
-                    <div class="brand__text">
-                        <div class="brand__name">Github Pharmacy</div>
-                        <div
-                            style="font-size: 0.7rem; color: var(--admin-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                            Admin Control Panel</div>
-                    </div>
-                </a>
-            </div>
-            <div class="header__actions">
-                <a href="../home.html" class="btn btn--ghost">← Về trang chủ</a>
-            </div>
-        </div>
-    </header>
-
-    <main class="container admin-main">
-        <div class="page-header">
-            <h1>Quản trị Người dùng</h1>
-            <div id="statInfo" class="tag bg-white shadow-sm" style="padding: 0.5rem 1rem;">
-                👥 <span id="totalUsers">0</span> người dùng
-            </div>
-        </div>
-
-        <nav style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-            <a href="/admin/users"
-                style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; color: white; background: var(--admin-primary); border: 1px solid var(--admin-primary);">👥
-                Quản lý Người dùng</a>
-            <a href="/admin/sales"
-                style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; color: #64748b; background: white; border: 1px solid #e2e8f0;">💰
-                Doanh thu & Lợi nhuận</a>
-        </nav>
-
-        <!-- ADD FORM -->
-        <section class="glass-card">
-            <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">✨ Thêm nhân viên / khách hàng mới</h2>
-            <div class="form-grid">
-                <label class="field">
-                    <span>Họ và tên đầy đủ</span>
-                    <input type="text" id="addFullName" placeholder="Vd: Nguyễn Văn A">
-                </label>
-                <label class="field">
-                    <span>Tên đăng nhập</span>
-                    <input type="text" id="addUsername" placeholder="user_name_123">
-                </label>
-                <label class="field">
-                    <span>Mật khẩu bảo mật</span>
-                    <div class="field--password">
-                        <input type="password" id="addPassword" placeholder="Nhập mật khẩu">
-                        <button type="button" class="password-toggle" id="togglePassword" title="Hiện/Ản mật khẩu">
-                            👁️
-                        </button>
-                    </div>
-                    <div class="pwd-rules" id="pwdRules">
-                        <div class="rule-item" data-rule="len">⚪ Ít nhất 8 ký tự</div>
-                        <div class="rule-item" data-rule="upper">⚪ Có chữ IN HOA</div>
-                        <div class="rule-item" data-rule="lower">⚪ Có chữ thường</div>
-                        <div class="rule-item" data-rule="num">⚪ Có con số</div>
-                    </div>
-                </label>
-                <label class="field">
-                    <span>Phân quyền hệ thống</span>
-                    <select id="addRole">
-                        <option value="CUSTOMER">👤 CUSTOMER (Khách hàng)</option>
-                        <option value="ADMIN">🛡️ ADMIN (Quản trị viên)</option>
-                    </select>
-                </label>
-            </div>
-            <div style="display: flex; justify-content: flex-end;">
-                <button class="btn btn--primary" id="btnSubmitUser" style="padding: 0.8rem 2rem; border-radius: 1rem;">
-                    🚀 Tạo tài khoản ngay
-                </button>
-            </div>
-        </section>
-
-        <!-- USER LIST -->
-        <section class="glass-card">
-            <div
-                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap;">
-                <h2 style="font-size: 1.25rem; margin: 0;">📋 Danh sách tài khoản</h2>
-                <div class="search" style="width: 100%; max-width: 300px;">
-                    <input type="text" id="userSearch" placeholder="Tìm tên, username..."
-                        style="width: 100%; padding: 0.6rem 1rem; border-radius: 0.5rem; border: 1px solid #e2e8f0;">
-                </div>
-            </div>
-            <div class="table-container">
-                <table class="modern-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Thông tin người dùng</th>
-                            <th>Vai trò</th>
-                            <th style="text-align: right;">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userList">
-                        <!-- Loaded via JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
 
     <div id="toastContainer" class="toast-container"></div>
 
@@ -504,7 +291,7 @@
                     );
                 }
 
-                $('totalUsers').textContent = users.length;
+                $('totalUsers').textContent = users.length + ' ' + (t('admin', 'nav_users') || 'Users');
                 const tbody = $('userList');
                 tbody.innerHTML = users.map(u => `
                     <tr>
@@ -520,16 +307,16 @@
                         </td>
                         <td>
                             <span class="badge ${u.role === 'ADMIN' ? 'badge--admin' : 'badge--customer'}">
-                                ${u.role === 'ADMIN' ? '🛡️ Admin' : '👤 Thành viên'}
+                                ${u.role === 'ADMIN' ? t('admin', 'role_admin_badge') : t('admin', 'role_member_badge')}
                             </span>
                         </td>
                         <td style="text-align: right; display: flex; gap: 8px; justify-content: flex-end;">
                             <button class="btn-action" style="background: ${u.role === 'ADMIN' ? '#fee2e2' : '#dcfce7'}; color: ${u.role === 'ADMIN' ? '#ef4444' : '#10b981'};" 
-                                title="${u.role === 'ADMIN' ? 'Thu hồi quyền Admin' : 'Cấp quyền Admin'}" 
+                                title="${u.role === 'ADMIN' ? t('admin', 'btn_demote') : t('admin', 'btn_promote')}" 
                                 onclick="toggleRole(${u.id}, '${u.role}')">
                                 ${u.role === 'ADMIN' ? '⬇️' : '⬆️'}
                             </button>
-                            <button class="btn-action btn-delete" title="Xóa người dùng" onclick="deleteUser(${u.id})">
+                            <button class="btn-action btn-delete" title="${t('admin', 'btn_delete')}" onclick="deleteUser(${u.id})">
                                 🗑️
                             </button>
                         </td>
@@ -547,12 +334,12 @@
             const role = $('addRole').value;
 
             if (!fullName || !username || !password) {
-                showToast('Vui lòng điền đủ thông tin!', 'error');
+                showToast(t('admin', 'msg_fill_info'), 'error');
                 return;
             }
 
             if (!updatePwdUI()) {
-                showToast('Mật khẩu chưa đạt yêu cầu bảo mật!', 'error');
+                showToast(t('admin', 'msg_weak_pass'), 'error');
                 return;
             }
 
@@ -565,19 +352,19 @@
 
             const res = await fetch('users', { method: 'POST', body: params });
             if (await res.text() === 'OK') {
-                showToast('Tạo tài khoản thành công!');
+                showToast(t('login', 'msg_success'));
                 $('addFullName').value = '';
                 $('addUsername').value = '';
                 $('addPassword').value = '';
                 updatePwdUI();
                 loadUsers();
             } else {
-                showToast('Tên đăng nhập đã tồn tại hoặc có lỗi!', 'error');
+                showToast(t('admin', 'msg_account_exists'), 'error');
             }
         });
 
         async function deleteUser(id) {
-            if (!confirm('Hành động này không thể hoàn tác. Bạn chắc chứ?')) return;
+            if (!confirm(t('admin', 'msg_confirm_delete'))) return;
 
             const params = new URLSearchParams();
             params.append('action', 'delete');
@@ -585,18 +372,18 @@
 
             const res = await fetch('users', { method: 'POST', body: params });
             if (await res.text() === 'OK') {
-                showToast('Đã xóa người dùng.');
+                showToast(t('admin', 'msg_delete_success'));
                 loadUsers();
             } else {
-                showToast('Lỗi khi xóa người dùng!', 'error');
+                showToast(t('admin', 'msg_delete_error'), 'error');
             }
         }
 
         async function toggleRole(id, currentRole) {
             const newRole = currentRole === 'ADMIN' ? 'CUSTOMER' : 'ADMIN';
-            const actionText = newRole === 'ADMIN' ? 'cấp quyền Admin cho' : 'thu hồi quyền Admin của';
+            const confirmMsg = newRole === 'ADMIN' ? t('admin', 'msg_confirm_promote') : t('admin', 'msg_confirm_demote');
 
-            if (!confirm(`Bạn có chắc muốn ${actionText} người dùng này?`)) return;
+            if (!confirm(confirmMsg)) return;
 
             const params = new URLSearchParams();
             params.append('action', 'updateRole');
@@ -605,10 +392,10 @@
 
             const res = await fetch('users', { method: 'POST', body: params });
             if (await res.text() === 'OK') {
-                showToast(newRole === 'ADMIN' ? '✅ Đã cấp quyền Admin!' : '✅ Đã thu hồi quyền Admin!');
+                showToast(newRole === 'ADMIN' ? t('admin', 'btn_promote') : t('admin', 'btn_demote'));
                 loadUsers();
             } else {
-                showToast('Lỗi khi cập nhật quyền!', 'error');
+                showToast(t('admin', 'msg_update_error'), 'error');
             }
         }
 
