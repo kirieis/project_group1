@@ -185,15 +185,12 @@
                 document.getElementById('sbName').textContent = currentUser.fullName;
                 document.getElementById('sbRole').textContent = currentUser.role === 'ADMIN' ? t('profile', 'role_admin') : t('profile', 'role_member');
 
-                // Admin Link
+                // Admin Gate Access
                 if (currentUser.role === 'ADMIN') {
                     document.getElementById('adminLinkContainer').innerHTML = `
                     <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-                        <a href="/admin/users" class="profile-nav__item" style="text-decoration:none;">
-                            ⚙️ ${t('admin', 'user_title')}
-                        </a>
-                        <a href="/admin/sales" class="profile-nav__item" style="text-decoration:none;"">
-                            💰 ${t('admin', 'sales_title')}
+                        <a href="admin_gate.html" class="profile-nav__item" style="text-decoration:none;">
+                            🛡️ Cổng bảo trì hệ thống
                         </a>
                     </div>
                 `;

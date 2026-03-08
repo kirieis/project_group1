@@ -15,7 +15,7 @@ const state = {
 
   // paging
   page: 1,
-  pageSize: 12,
+  pageSize: 9,
 };
 
 // Removed local i18n object - now using global i18n.js
@@ -299,7 +299,7 @@ function calculateDisplayPrice(product, unit, qty = 1) {
 function productCard(p) {
   const saleTag = p.discount > 0
     ? `<span class="tag tag--sale">SALE -${p.discount}%</span>`
-    : `<span class="tag">NEW</span>`;
+    : `<span class="tag">MỚI</span>`;
 
   // Display base price on card
   const unitLabel = p.isLiquid ? 'chai' : 'viên';
@@ -310,17 +310,47 @@ function productCard(p) {
     ? `<span class="price">${formatVND(final)}<span class="unit">/${unitLabel}</span> <del>${formatVND(p.price)}</del></span>`
     : `<span class="price">${formatVND(final)}<span class="unit">/${unitLabel}</span></span>`;
 
+  // Format expiry date nicely
+  let expiryDisplay = p.date || 'N/A';
+  let expiryClass = 'info-pill info-pill--expiry';
+  if (p.date) {
+    let d = new Date(p.date);
+    if (!isNaN(d.getTime())) {
+      const diff = d - new Date();
+      const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      if (daysLeft <= 90 && daysLeft > 0) {
+        expiryClass += ' expiring-soon';
+        expiryDisplay = p.date + ' ⚠️';
+      } else if (daysLeft <= 0) {
+        expiryClass += ' expiring-soon';
+        expiryDisplay = 'Đã hết hạn ❌';
+      }
+    }
+  }
+
+  const productType = p.isLiquid ? 'liquid' : 'solid';
+  const unitIcon = p.isLiquid ? '🧴' : '💊';
+
   return `
-    <article class="card">
+    <article class="card" data-type="${productType}">
       <div class="card__top">
         <div>
           <h3 class="card__name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</h3>
           <div class="card__meta">
-            <div class="line">${'Mã'}: <b>${escapeHtml(p.id)}</b></div>
-            <div class="line">${'Loại'}: <b>${escapeHtml(p.dosageForm)}</b> • ${'HSD'}: <b>${escapeHtml(p.date)}</b></div>
+            <div class="line">Mã: <b>${escapeHtml(p.id)}</b></div>
           </div>
         </div>
         ${saleTag}
+      </div>
+
+      <div class="card__info">
+        <div class="card__info-line">
+          <span class="info-pill">📦 <b>${escapeHtml(p.dosageForm)}</b></span>
+          <span class="info-pill info-pill--unit info-pill--unit-${productType}">${unitIcon} <b>${unitLabel}</b></span>
+        </div>
+        <div class="card__info-line">
+          <span class="${expiryClass}">📅 HSD: <b>${escapeHtml(expiryDisplay)}</b></span>
+        </div>
       </div>
 
       <div class="card__mid">
@@ -452,13 +482,44 @@ function escapeHtml(str) {
 
 function renderSale(filtered) {
   const uniqueSale = filtered.filter(p => p.discount > 0).slice(0, 8);
-  $("saleGrid").innerHTML = uniqueSale.map(productCard).join("");
+  const saleGrid = $("saleGrid");
+
+  if (uniqueSale.length > 0) {
+    // Duplicate items for seamless infinite scroll
+    const cards = uniqueSale.map(productCard).join("");
+    saleGrid.innerHTML = `
+      <div class="carousel-wrapper">
+        <div id="saleTrack" class="carousel-track">
+          ${cards}${cards}
+        </div>
+      </div>`;
+    saleGrid.className = '';  // Remove grid class
+    startCarouselAutoScroll("saleTrack");
+  } else {
+    saleGrid.innerHTML = '';
+    saleGrid.className = 'grid';
+  }
   $("saleEmpty").classList.toggle("hidden", uniqueSale.length > 0);
 }
 
 function renderBest(filtered) {
   const uniqueBest = [...filtered].sort((a, b) => b.popularity - a.popularity).slice(0, 8);
-  $("bestGrid").innerHTML = uniqueBest.map(productCard).join("");
+  const bestGrid = $("bestGrid");
+
+  if (uniqueBest.length > 0) {
+    const cards = uniqueBest.map(productCard).join("");
+    bestGrid.innerHTML = `
+      <div class="carousel-wrapper">
+        <div id="bestTrack" class="carousel-track" style="animation-direction: reverse;">
+          ${cards}${cards}
+        </div>
+      </div>`;
+    bestGrid.className = '';  // Remove grid class
+    startCarouselAutoScroll("bestTrack");
+  } else {
+    bestGrid.innerHTML = '';
+    bestGrid.className = 'grid';
+  }
   $("bestEmpty").classList.toggle("hidden", uniqueBest.length > 0);
 }
 
@@ -490,8 +551,11 @@ function renderAllSections() {
   });
 
   const filtered = applyFilters(uniqueProducts);
-  renderSale(filtered);
-  renderBest(filtered);
+
+  // featured sections always show global top items
+  renderSale(uniqueProducts);
+  renderBest(uniqueProducts);
+
   renderAll(filtered);
 }
 
@@ -579,7 +643,7 @@ function bindEvents() {
     $("btnGoAll").onclick = () => scrollToAll();
   }
 
-  // Auth logic - Redirect to Profile Page
+  // Auth logic - Redirect to Profile Page + Admin Portal
   const authState = window.authState || { isLoggedIn: false };
   const userMenuContainer = $("userMenuContainer");
   const btnLogin = $("btnLogin");
@@ -638,12 +702,104 @@ function debounce(fn, ms) {
   };
 }
 
+// -------- Smooth Carousel Auto-Scroll (Manual-Friendly) --------
+const activeCarousels = new Map();
+
+function startCarouselAutoScroll(trackId) {
+  const track = document.getElementById(trackId);
+  if (!track || track.children.length < 2) return;
+
+  // Clear previous animation if it exists
+  if (activeCarousels.has(trackId)) {
+    cancelAnimationFrame(activeCarousels.get(trackId));
+  }
+
+  let isPaused = false;
+  let isDragging = false;
+  const isReverse = track.style.animationDirection === 'reverse';
+  const speed = isReverse ? -0.5 : 0.5;
+
+  // Find exact loop point (offset of the first card in the second set)
+  const half = track.children[Math.floor(track.children.length / 2)].offsetLeft;
+
+  // For reverse, start in the middle
+  if (isReverse) track.scrollLeft = half;
+
+  const loop = () => {
+    if (!isPaused && !isDragging) {
+      track.scrollLeft += speed;
+      // Seamless wrap
+      if (track.scrollLeft >= half) track.scrollLeft -= half;
+      if (track.scrollLeft < 0) track.scrollLeft += half;
+    }
+    activeCarousels.set(trackId, requestAnimationFrame(loop));
+  };
+
+  // Interaction events
+  track.onmouseenter = () => { isPaused = true; };
+  track.onmouseleave = () => {
+    isPaused = false;
+    isDragging = false;
+    track.classList.remove('active');
+  };
+
+  let startX;
+  let scrollLeftStart;
+
+  track.onmousedown = (e) => {
+    isDragging = true;
+    track.classList.add('active');
+    startX = e.pageX;
+    scrollLeftStart = track.scrollLeft;
+    // Disable clicks on cards while dragging
+    Array.from(track.children).forEach(c => c.style.pointerEvents = 'none');
+  };
+
+  track.onmousemove = (e) => {
+    if (!isDragging) return;
+    const x = e.pageX;
+    const walk = (x - startX) * 1.5;
+    let newScroll = scrollLeftStart - walk;
+
+    // Infinite wrap while dragging
+    if (newScroll >= half) {
+      newScroll -= half;
+      startX = x;
+      scrollLeftStart = newScroll;
+    } else if (newScroll < 0) {
+      newScroll += half;
+      startX = x;
+      scrollLeftStart = newScroll;
+    }
+
+    track.scrollLeft = newScroll;
+  };
+
+  const stopDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('active');
+    // Re-enable clicks after a tiny delay so it doesn't fire click on mouseup
+    setTimeout(() => {
+      Array.from(track.children).forEach(c => c.style.pointerEvents = '');
+    }, 50);
+  };
+
+  window.addEventListener('mouseup', stopDrag, { passive: true });
+
+  // Touch relies on native scroll, just flag to pause the auto loop
+  track.ontouchstart = () => { isDragging = true; };
+  window.addEventListener('touchend', stopDrag, { passive: true });
+
+  activeCarousels.set(trackId, requestAnimationFrame(loop));
+}
+
 // -------- Boot --------
 let isEventsBound = false;
 
 (async function init() {
   // 1. Initial UI Setup
-// 2. Instant Render from Cache (Stale-While-Revalidate)
+  // 2. Instant Render from Cache (Stale-While-Revalidate)
   const cachedAuth = localStorage.getItem("cache_auth");
   const cachedProducts = localStorage.getItem("cache_products");
 
@@ -808,9 +964,63 @@ function initLangSwitcher() {
   applyLanguage(savedLang);
 }
 
-// Boot language switcher after DOM ready
+// Boot features after DOM ready
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initLangSwitcher);
+  document.addEventListener("DOMContentLoaded", () => {
+    initLangSwitcher();
+    initCarouselAutoScroll();
+  });
 } else {
   initLangSwitcher();
+  initCarouselAutoScroll();
+}
+
+function initCarouselAutoScroll() {
+  const tracks = document.querySelectorAll('.carousel-track');
+
+  tracks.forEach(track => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // --- MOUSE DRAG LOGIC ---
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      track.classList.add('active'); // Optional: for styling cursor
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.classList.remove('active');
+    });
+
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.classList.remove('active');
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 2; // Tốc độ kéo
+      track.scrollLeft = scrollLeft - walk;
+    });
+  });
+
+  // --- AUTO SCROLL TIMER ---
+  setInterval(() => {
+    tracks.forEach(track => {
+      // Chỉ chạy nếu KHÔNG bị hover VÀ KHÔNG đang bị nhấn giữ kéo
+      const isBeingDragged = track.classList.contains('active');
+      if (!track.matches(':hover')) {
+        track.scrollLeft += 1;
+        if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 1)) {
+          track.scrollLeft = 0;
+        }
+      }
+    });
+  }, 30);
 }

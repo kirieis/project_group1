@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GITHUB PHARMACY - CORE SYSTEM GATE</title>
+    <style>
+        :root {
+            --bg: #050a10;
+            --primary: #c9a227;
+            --danger: #dc2626;
+            --text: #e2e8f0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-box {
+            background: rgba(10, 20, 30, 0.8);
+            border: 1px solid var(--primary);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 24px;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 12px;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .field label {
+            display: block;
+            font-size: 11px;
+            color: var(--primary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .field input:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #050a10;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 162, 39, 0.4);
+        }
+
+        .error-msg {
+            color: var(--danger);
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+            background: rgba(220, 38, 36, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--danger);
+        }
+
+        .field-wrap {
+            position: relative;
+        }
+
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0.6;
+            font-size: 18px;
+        }
+
+        .toggle-pass:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+        <div class="header">
+            <h1>SYSTEM ACCESS</h1>
+            <p>Github Pharmacy Management Portal</p>
+        </div>
+        <form action="./admin/auth" method="POST" onsubmit="return handleAuth(event)">
+            <div class="field">
+                <label>Admin Access Key</label>
+                <input type="text" id="userInput" name="user" required autocomplete="off" placeholder="Tên quản trị...">
+            </div>
+            <div class="field">
+                <label>Security Code</label>
+                <div class="field-wrap">
+                    <input type="password" id="passInput" name="pass" required placeholder="Mật khẩu bảo mật...">
+                    <span class="toggle-pass" onclick="togglePass()">👁️</span>
+                </div>
+            </div>
+            <button type="submit" class="btn">Authorize Access</button>
+            <div id="error" class="error-msg">⚠️ Quyền truy cập bị từ chối. Sai thông tin hoặc không đủ thẩm quyền.
+            </div>
+        </form>
+    </div>
+
+    <!-- Script to show error if redirect from servlet -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            const errDiv = document.getElementById('error');
+            errDiv.style.display = 'block';
+            if (urlParams.get('error') === 'role') {
+                errDiv.innerHTML = '⚠️ Đúng mật khẩu nhưng <b>không có quyền Admin</b>!';
+            } else {
+                errDiv.innerHTML = '⚠️ Sai <b>Tên truy cập</b> hoặc <b>Mật mã</b>.';
+            }
+        }
+
+        function handleAuth(e) {
+            const u = document.getElementById('userInput');
+            const p = document.getElementById('passInput');
+            u.value = u.value.trim();
+            p.value = p.value.trim();
+            console.log("Authorizing:", u.value);
+            return true;
+        }
+
+        function togglePass() {
+            const input = document.getElementById('passInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-medicine_id,name,batch,ingredient,dosage_form,strength,unit,manufacturer,expiry,quantity,price
+﻿medicine_id,name,batch,ingredient,dosage_form,strength,unit,manufacturer,expiry,quantity,price
 MED6,Telfast_HD_180mg,B60,Fexofenadine,Tablet,180,mg,Sanofi,2026-08-27,109,1450
 MED7,Esomeprazole_40mg,B56,Cefuroxime,Tablet,1,ml,Mega We Care,2026-10-03,109,1000
 MED9,Cefixime_200mg,B5,Cefixime,Capsule,200,mg,Imexpharm,2026-08-18,99,2000
@@ -15,7 +15,7 @@ MED34,Enterogermina,B70,Bacillus clausii,Suspension,5,ml,Sanofi,2026-10-03,175,1
 MED36,Vitamin_B1_B6_B12,A69,Amoxicillin + Clavulanate,Syrup,20,ml,Stella,2026-02-16,112,1400
 MED42,Magnesium_B6,C95,Paracetamol,Tablet,120,mg,Stella,2026-10-15,191,3000
 MED47,Ketoconazole_200mg,B86,Vitamin C,Tablet,625,ml,Kingphar,2026-05-29,170,1450
-MED49,Levothyroxine_50mcg,C39,Alpha chymotrypsin,Capsule,20,ml,Pfizer,2026-10-08,84,1450
+MED49,Levothyroxine_50mg,C39,Alpha chymotrypsin,Capsule,20,ml,Pfizer,2026-10-08,84,1450
 MED50,Calcium_D3,C66,Alpha chymotrypsin,Syrup,7.5,ml,OPV Pharma,2026-10-02,44,50000
 MED57,Levofloxacin_500mg,C46,Cefdinir,Capsule,650,mg,GSK,2026-02-06,166,1500
 MED60,Allopurinol_300mg,C28,Echinacea,Capsule,50,mg,Abbott,2026-08-25,170,2000
@@ -46,7 +46,7 @@ MED136,Acyclovir_400mg,C18,Acyclovir,Tablet,400,mg,Stella,2026-09-04,120,1200
 MED138,Desloratadine_5mg,A57,Vitamin C,Syrup,2,ml,Bayer,2026-11-10,54,50000
 MED140,Domperidone_10mg,C24,Cefuroxime,Syrup,10,ml,Pfizer,2026-06-15,96,50000
 MED142,Tiffy_Dey,A25,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-11-19,64,3000
-MED146,Levothyroxine_50mcg,A41,Zinc + Vitamin,Capsule,80,ml,Imexpharm,2026-04-12,129,1500
+MED146,Levothyroxine_50mg,A41,Zinc + Vitamin,Capsule,80,ml,Imexpharm,2026-04-12,129,1500
 MED149,Metformin_500mg,B56,Ascorbic Acid,Tablet,300,mg,Imexpharm,2026-06-25,142,1500
 MED150,Paracetamol_500mg,B18,Paracetamol,Tablet,500,mg,Sanofi,2026-11-07,109,700
 MED151,Prospan_Syrup,C33,Zinc + Vitamin,Capsule,10,ml,Stella,2026-03-15,82,1700
@@ -142,7 +142,7 @@ MED410,Zinc_Gluconate_20mg,C17,Acyclovir,Capsule,16,ml,Bayer,2026-03-27,130,1500
 MED412,Prednisolone_5mg,C39,Cefdinir,Capsule,20,mg,Mega We Care,2026-07-18,197,2500
 MED420,Iron_Folic,A77,Amoxicillin,Syrup,500,ml,Bayer,2026-10-10,100,50000
 MED421,Acyclovir_400mg,B65,Acyclovir,Tablet,400,mg,Stella,2026-09-12,66,2000
-MED423,Levothyroxine_50mcg,A98,Cefixime,Capsule,10,mg,Stella,2026-10-21,88,3000
+MED423,Levothyroxine_50mg,A98,Cefixime,Capsule,10,mg,Stella,2026-10-21,88,3000
 MED426,Amoxicillin_500mg,B12,Amoxicillin,Capsule,500,mg,GSK,2026-08-12,95,2000
 MED435,Losartan_50mg,A17,Vitamin C,Capsule,40,mg,GSK,2026-10-02,17,1600
 MED436,Fexofenadine_120mg,B79,Alpha chymotrypsin,Syrup,500,ml,United Pharma,2026-05-28,149,50000
@@ -455,7 +455,7 @@ MED1272,Amoxicillin_500mg,B30,Amoxicillin,Capsule,500,mg,GSK,2026-07-23,19,2000
 MED1273,Vitamin_C,C27,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-11-25,197,1400
 MED1275,Krebs_Cough_Syrup,C69,Aspirin,Tablet,625,ml,Traphaco,2026-05-01,122,1500
 MED1276,Losartan_50mg,B44,Paracetamol + Caffeine,Syrup,2,ml,AstraZeneca,2026-07-17,147,50000
-MED1277,Levothyroxine_50mcg,A16,Cefixime,Tablet,10,ml,Abbott,2026-08-16,181,1000
+MED1277,Levothyroxine_50mg,A16,Cefixime,Tablet,10,ml,Abbott,2026-08-16,181,1000
 MED1279,Clotrimazole_1pct,B36,Paracetamol,Capsule,400,mg,DHG Pharma,2026-10-09,67,1250
 MED1285,Zinc_Gluconate_20mg,B30,Alpha chymotrypsin,Capsule,300,mg,ASDEX,2026-09-24,111,1200
 MED1288,Bisoprolol_5mg,A62,Acyclovir,Syrup,10,ml,Sanofi,2026-11-09,117,50000
@@ -492,7 +492,7 @@ MED1373,Prednisolone_5mg,B5,Cefuroxime,Capsule,200,mg,UDI,2026-07-15,179,1500
 MED1376,Prednisolone_5mg,A99,Zinc + Vitamin,Syrup,2,ml,Imexpharm,2026-09-05,106,50000
 MED1377,Telfast_HD_180mg,C48,Fexofenadine,Tablet,180,mg,Sanofi,2026-05-29,197,1500
 MED1381,Siro_Ginkid_ZinC,A95,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-03-19,69,50000
-MED1383,Levothyroxine_50mcg,C79,Multivitamin,Capsule,250,mg,DHG Pharma,2026-06-12,57,1200
+MED1383,Levothyroxine_50mg,C79,Multivitamin,Capsule,250,mg,DHG Pharma,2026-06-12,57,1200
 MED1388,Vitamin_B1_B6_B12,B11,Amoxicillin + Clavulanate,Tablet,200,ml,Kingphar,2026-05-14,140,1400
 MED1390,Prospan_Syrup,B90,Cefuroxime,Tablet,120,ml,UDI,2026-11-22,91,2500
 MED1395,Methylprednisolone_16mg,C59,Alpha chymotrypsin,Tablet,10,ml,GSK,2026-05-05,18,2000
@@ -631,10 +631,10 @@ MED1730,Nystatin_Suspension,B63,Echinacea,Capsule,650,mg,Choay Pharma,2026-09-09
 MED1735,Insulin_Rapid,C32,Vitamin C,Tablet,5,ml,OPV Pharma,2026-09-26,104,2000
 MED1738,Fexofenadine_120mg,C12,Meloxicam,Capsule,400,ml,Sandoz,2026-08-09,196,2000
 MED1739,Prednisolone_5mg,A1,Cefixime,Syrup,120,ml,Choay Pharma,2026-02-16,113,50000
-MED1743,Levothyroxine_50mcg,C39,Amoxicillin,Capsule,7.5,ml,UPSA,2026-02-09,170,1700
+MED1743,Levothyroxine_50mg,C39,Amoxicillin,Capsule,7.5,ml,UPSA,2026-02-09,170,1700
 MED1747,Paracetamol_500mg,B68,Paracetamol,Tablet,500,mg,Sanofi,2026-03-20,178,700
 MED1753,Esomeprazole_40mg,B10,Paracetamol,Capsule,80,mg,Imexpharm,2026-02-10,91,1700
-MED1754,Levothyroxine_50mcg,B84,Echinacea,Tablet,80,mg,UDI,2026-03-06,33,2000
+MED1754,Levothyroxine_50mg,B84,Echinacea,Tablet,80,mg,UDI,2026-03-06,33,2000
 MED1756,Insulin_Rapid,B19,Acyclovir,Capsule,200,mg,UDI,2026-04-04,107,1250
 MED1759,Aspirin_500mg,C41,Aspirin,Tablet,500,mg,Bayer,2026-02-06,48,1000
 MED1761,Bromhexine_8mg,A79,Echinacea,Capsule,10,mg,OPV Pharma,2026-03-02,35,1450
@@ -723,7 +723,7 @@ MED2015,Fexofenadine_120mg,A42,Ibuprofen,Tablet,625,mg,United Pharma,2026-07-31,
 MED2021,Ambroxol_30mg,A3,Cefixime,Capsule,40,ml,AstraZeneca,2026-02-16,80,3000
 MED2022,ORS_Plus,A4,Echinacea,Tablet,10,ml,GSK,2026-10-14,181,1250
 MED2029,Fexofenadine_120mg,B26,Paracetamol + Caffeine,Tablet,300,mg,ASDEX,2026-04-30,52,1600
-MED2030,Levothyroxine_50mcg,B75,Vitamin C,Tablet,650,mg,Abbott,2026-09-13,163,1250
+MED2030,Levothyroxine_50mg,B75,Vitamin C,Tablet,650,mg,Abbott,2026-09-13,163,1250
 MED2031,Fluconazole_150mg,C66,Paracetamol + Caffeine,Tablet,500,ml,Choay Pharma,2026-04-02,70,1200
 MED2032,Pantoprazole_40mg,B10,Alpha chymotrypsin,Syrup,120,ml,United Pharma,2026-09-11,198,50000
 MED2045,Calcium_D3,B84,Paracetamol + Caffeine,Syrup,7.5,ml,AstraZeneca,2026-10-17,115,50000
@@ -842,7 +842,7 @@ MED2378,Metronidazole_500mg,B41,Paracetamol + Caffeine,Tablet,7.5,ml,UDI,2026-10
 MED2379,Loperamid_2mg,B94,Loperamide,Tablet,2,mg,Imexpharm,2026-08-01,120,1200
 MED2382,Hydrocortisone_10mg,C2,Ibuprofen,Syrup,80,ml,United Pharma,2026-06-02,24,50000
 MED2383,Hapacol_650,B92,Paracetamol,Tablet,650,mg,DHG Pharma,2026-09-30,119,700
-MED2386,Levothyroxine_50mcg,B22,Cefuroxime,Syrup,4200,ml,UPSA,2026-08-22,187,50000
+MED2386,Levothyroxine_50mg,B22,Cefuroxime,Syrup,4200,ml,UPSA,2026-08-22,187,50000
 MED2389,Meloxicam_7.5mg,C32,Meloxicam,Tablet,7.5,mg,Sanofi,2026-09-30,117,3000
 MED2397,Echina_Kingphar,C35,Echinacea,Tablet,500,mg,Kingphar,2026-10-25,75,1700
 MED2398,Efferalgan_500mg,A8,Paracetamol,Tablet,500,mg,UPSA,2026-02-06,37,2500
@@ -938,7 +938,7 @@ MED2647,Diclofenac_50mg,C64,Cefdinir,Capsule,400,mg,UPSA,2026-11-20,116,1500
 MED2650,Tramadol_50mg,C95,Cefixime,Syrup,400,ml,Mega We Care,2026-10-24,147,50000
 MED2653,Magnesium_B6,A67,Meloxicam,Capsule,400,mg,Kingphar,2026-05-20,79,1200
 MED2654,Vitamin_K2,B60,Aspirin,Syrup,500,ml,GSK,2026-06-02,97,1400
-MED2659,Levothyroxine_50mcg,A37,Aspirin,Capsule,5,mg,UDI,2026-11-02,21,1600
+MED2659,Levothyroxine_50mg,A37,Aspirin,Capsule,5,mg,UDI,2026-11-02,21,1600
 MED2661,Allopurinol_300mg,A15,Vitamin C,Tablet,400,mg,Abbott,2026-07-24,66,1200
 MED2668,Calcium_Carbonate_500mg,C40,Echinacea,Syrup,120,ml,Stella,2026-07-20,188,50000
 MED2670,Cetirizine_10mg,C58,Zinc + Vitamin,Tablet,250,ml,OPV Pharma,2026-07-17,39,1250
@@ -961,7 +961,7 @@ MED2719,Aspirin_500mg,C6,Aspirin,Tablet,500,mg,Bayer,2026-07-21,187,1000
 MED2723,Augmentin_625mg,B85,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-07-05,105,2400
 MED2724,Nystatin_Suspension,C55,Multivitamin,Tablet,2,mg,Pfizer,2026-08-11,124,1700
 MED2729,Telfast_HD_180mg,B30,Fexofenadine,Tablet,180,mg,Sanofi,2026-06-12,131,1450
-MED2731,Levothyroxine_50mcg,A48,Amoxicillin,Syrup,10,ml,UDI,2026-08-20,143,50000
+MED2731,Levothyroxine_50mg,A48,Amoxicillin,Syrup,10,ml,UDI,2026-08-20,143,50000
 MED2737,ORS_Plus,B29,Zinc + Vitamin,Tablet,650,ml,Abbott,2026-11-15,71,2000
 MED2739,Prednisolone_5mg,A68,Multivitamin,Tablet,250,ml,Traphaco,2026-04-05,194,1450
 MED2742,Enterogermina,A67,Bacillus clausii,Suspension,5,ml,Sanofi,2026-05-22,177,1450
@@ -991,12 +991,12 @@ MED2800,Tramadol_50mg,A17,Cefixime,Capsule,625,mg,GSK,2026-10-27,54,1250
 MED2801,Bromhexine_8mg,A15,Zinc + Vitamin,Capsule,16,mg,Stella,2026-07-02,64,1700
 MED2803,Fluconazole_150mg,A6,Ibuprofen,Capsule,400,ml,Sandoz,2026-02-27,14,1500
 MED2804,Prospan_Syrup,C2,Echinacea,Syrup,80,ml,Stella,2026-06-13,150,50000
-MED2805,Levothyroxine_50mcg,B75,Echinacea,Tablet,20,ml,Sandoz,2026-05-19,29,1000
+MED2805,Levothyroxine_50mg,B75,Echinacea,Tablet,20,ml,Sandoz,2026-05-19,29,1000
 MED2809,Vitamin_C,B2,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-08-17,177,1400
 MED2812,SkillMax_Ocavill,A82,Multivitamin,Syrup,10,ml,OPV Pharma,2026-02-23,6,50000
 MED2813,Esomeprazole_40mg,A76,Acyclovir,Syrup,300,ml,Traphaco,2026-04-04,29,50000
 MED2814,Ginkgo_Biloba_120mg,C23,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-05-22,86,1400
-MED2817,Levothyroxine_50mcg,A57,Acyclovir,Capsule,300,ml,ASDEX,2026-02-19,10,2000
+MED2817,Levothyroxine_50mg,A57,Acyclovir,Capsule,300,ml,ASDEX,2026-02-19,10,2000
 MED2819,Amoxicillin_500mg,C54,Amoxicillin,Capsule,500,mg,GSK,2026-06-29,136,2000
 MED2820,Cefdinir_300mg,B59,Cefdinir,Capsule,300,mg,Pfizer,2026-07-17,45,2000
 MED2822,Cefdinir_300mg,B88,Cefdinir,Capsule,300,mg,Pfizer,2026-05-10,196,2000
@@ -1263,7 +1263,7 @@ MED3475,Atorvastatin_20mg,A40,Paracetamol,Tablet,250,ml,United Pharma,2026-07-15
 MED3478,Salbutamol_4mg,C55,Paracetamol,Capsule,5,mg,ASDEX,2026-06-13,22,2500
 MED3483,Prospan_Syrup,A96,Paracetamol,Syrup,300,ml,United Pharma,2026-03-03,143,50000
 MED3486,Panadol_Extra,A94,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-11-02,55,1600
-MED3487,Levothyroxine_50mcg,C19,Cefixime,Tablet,650,ml,GSK,2026-04-03,25,1450
+MED3487,Levothyroxine_50mg,C19,Cefixime,Tablet,650,ml,GSK,2026-04-03,25,1450
 MED3489,Efferalgan_500mg,B71,Paracetamol,Tablet,500,mg,UPSA,2026-11-10,14,1250
 MED3492,Enterogermina,B21,Bacillus clausii,Suspension,5,ml,Sanofi,2026-11-10,56,2000
 MED3497,Vitamin_E_400IU,C55,Paracetamol + Caffeine,Capsule,2,mg,OPV Pharma,2026-04-24,45,1400
@@ -1288,8 +1288,8 @@ MED3544,Tramadol_50mg,A80,Paracetamol + Caffeine,Tablet,5,mg,UDI,2026-02-15,193,
 MED3546,Metoclopramide_10mg,C14,Alpha chymotrypsin,Tablet,7.5,ml,Imexpharm,2026-02-13,10,1000
 MED3555,Cefuroxim_500mg,A84,Cefuroxime,Tablet,500,mg,Sandoz,2026-09-25,12,2000
 MED3558,Alphachoay,C31,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-04-01,17,2000
-MED3560,Levothyroxine_50mcg,C37,Multivitamin,Capsule,300,mg,AstraZeneca,2026-03-01,142,1250
-MED3563,Levothyroxine_50mcg,B1,Cefdinir,Capsule,16,mg,Choay Pharma,2026-02-07,71,1500
+MED3560,Levothyroxine_50mg,C37,Multivitamin,Capsule,300,mg,AstraZeneca,2026-03-01,142,1250
+MED3563,Levothyroxine_50mg,B1,Cefdinir,Capsule,16,mg,Choay Pharma,2026-02-07,71,1500
 MED3566,Insulin_Basal,C60,Vitamin C,Syrup,120,ml,AstraZeneca,2026-08-05,149,50000
 MED3570,Enat_400,B49,Vitamin E,Tablet,400,IU,Mega We Care,2026-07-30,157,1200
 MED3573,Fexofenadine_120mg,C3,Cefdinir,Tablet,120,mg,Sanofi,2026-09-17,28,2000
@@ -1310,7 +1310,7 @@ MED3600,Alphachoay,C97,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-09-12
 MED3601,Calcium_Carbonate_500mg,B41,Meloxicam,Tablet,250,mg,Bayer,2026-08-26,113,3000
 MED3602,Desloratadine_5mg,B91,Paracetamol,Tablet,5,ml,AstraZeneca,2026-06-30,71,2500
 MED3605,Insulin_Basal,B48,Paracetamol,Capsule,16,ml,ASDEX,2026-01-30,99,1450
-MED3612,Levothyroxine_50mcg,A19,Paracetamol + Caffeine,Syrup,400,ml,Kingphar,2026-04-22,126,50000
+MED3612,Levothyroxine_50mg,A19,Paracetamol + Caffeine,Syrup,400,ml,Kingphar,2026-04-22,126,50000
 MED3616,Domperidone_10mg,C94,Cefuroxime,Capsule,300,mg,DHG Pharma,2026-06-28,9,1700
 MED3620,Clarithromycin_500mg,A44,Ibuprofen,Capsule,400,ml,Imexpharm,2026-10-30,43,2000
 MED3626,Ginkgo_Biloba_120mg,A7,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-10-16,170,1400
@@ -1346,7 +1346,7 @@ MED3715,Methylprednisolone_16mg,A52,Cefdinir,Tablet,120,mg,Sandoz,2026-02-26,160
 MED3717,Augmentin_625mg,C24,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-07-07,65,2400
 MED3718,Gliclazide_80mg,A60,Amoxicillin,Syrup,300,ml,OPV Pharma,2026-09-16,125,50000
 MED3719,Calcium_D3,A40,Paracetamol + Caffeine,Tablet,625,ml,ASDEX,2026-02-10,181,1250
-MED3720,Levothyroxine_50mcg,B62,Aspirin,Capsule,200,mg,Kingphar,2026-10-31,68,2500
+MED3720,Levothyroxine_50mg,B62,Aspirin,Capsule,200,mg,Kingphar,2026-10-31,68,2500
 MED3721,Vitamin_B1_B6_B12,C73,Cefuroxime,Capsule,20,ml,United Pharma,2026-04-14,180,1400
 MED3725,Ciprofloxacin_500mg,B14,Paracetamol,Syrup,5,ml,Sandoz,2026-09-01,70,50000
 MED3733,Telfast_HD_180mg,C71,Fexofenadine,Tablet,180,mg,Sanofi,2026-10-30,129,1500
@@ -1533,7 +1533,7 @@ MED4237,Ginkgo_Biloba_120mg,B95,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-07-06,
 MED4238,Amoxicillin_500mg,C48,Amoxicillin,Capsule,500,mg,GSK,2026-04-05,18,2000
 MED4239,Salbutamol_4mg,A58,Alpha chymotrypsin,Syrup,200,ml,Traphaco,2026-03-17,177,50000
 MED4244,Paracetamol_500mg,B33,Paracetamol,Tablet,500,mg,Sanofi,2026-05-23,150,700
-MED4247,Levothyroxine_50mcg,C83,Cefuroxime,Capsule,250,mg,Stella,2026-05-01,65,1600
+MED4247,Levothyroxine_50mg,C83,Cefuroxime,Capsule,250,mg,Stella,2026-05-01,65,1600
 MED4248,Alphachoay,A5,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-11-06,59,1450
 MED4254,Enat_400,B74,Vitamin E,Tablet,400,IU,Mega We Care,2026-03-30,15,3000
 MED4265,Losartan_50mg,A58,Ibuprofen,Syrup,650,ml,UDI,2026-04-21,164,50000
@@ -1697,10 +1697,10 @@ MED4666,Colchicine_1mg,A10,Paracetamol,Syrup,300,ml,AstraZeneca,2026-10-16,119,5
 MED4667,Ciprofloxacin_500mg,A64,Aspirin,Tablet,7.5,ml,Imexpharm,2026-10-05,162,1450
 MED4669,Diclofenac_50mg,A93,Ascorbic Acid,Tablet,500,mg,AstraZeneca,2026-08-18,19,1250
 MED4670,ORS_Plus,C38,Aspirin,Tablet,200,mg,GSK,2026-02-17,197,1500
-MED4671,Levothyroxine_50mcg,B79,Ibuprofen,Syrup,4200,ml,UDI,2026-09-07,163,50000
+MED4671,Levothyroxine_50mg,B79,Ibuprofen,Syrup,4200,ml,UDI,2026-09-07,163,50000
 MED4672,Cefuroxim_500mg,A42,Cefuroxime,Tablet,500,mg,Sandoz,2026-09-01,114,2000
 MED4673,Calcium_Carbonate_500mg,A0,Cefixime,Capsule,20,mg,UDI,2026-08-02,189,1200
-MED4677,Levothyroxine_50mcg,C67,Aspirin,Syrup,5,ml,Imexpharm,2026-04-16,59,50000
+MED4677,Levothyroxine_50mg,C67,Aspirin,Syrup,5,ml,Imexpharm,2026-04-16,59,50000
 MED4681,Fexofenadine_120mg,A97,Amoxicillin + Clavulanate,Syrup,16,ml,Pfizer,2026-04-07,179,50000
 MED4682,Prospan_Syrup,C99,Acyclovir,Tablet,40,ml,Choay Pharma,2026-07-23,107,3000
 MED4692,Amoxicillin_500mg,B92,Amoxicillin,Capsule,500,mg,GSK,2026-06-17,165,2000
@@ -1731,7 +1731,7 @@ MED4756,Domperidone_10mg,B53,Cefixime,Tablet,5,mg,DHG Pharma,2026-03-12,14,2000
 MED4758,Metronidazole_500mg,A60,Cefdinir,Tablet,625,mg,Pfizer,2026-05-08,130,2000
 MED4759,Magnesium_B6,B26,Paracetamol,Syrup,5,ml,AstraZeneca,2026-10-22,111,50000
 MED4761,Ibuprofen_200mg,B38,Ibuprofen,Tablet,200,mg,Abbott,2026-05-03,67,1000
-MED4763,Levothyroxine_50mcg,A49,Ascorbic Acid,Capsule,50,ml,UPSA,2026-10-02,99,1000
+MED4763,Levothyroxine_50mg,A49,Ascorbic Acid,Capsule,50,ml,UPSA,2026-10-02,99,1000
 MED4771,Simvastatin_20mg,C99,Multivitamin,Syrup,50,ml,Stella,2026-04-26,71,50000
 MED4772,Siro_Ginkid_ZinC,B98,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-02-27,20,50000
 MED4773,Insulin_Rapid,B44,Zinc + Vitamin,Capsule,5,ml,Bayer,2026-05-30,104,1200
@@ -2452,7 +2452,7 @@ MED6652,Loratadine_10mg,A30,Alpha chymotrypsin,Syrup,16,ml,Traphaco,2026-06-20,7
 MED6654,Echina_Kingphar,A19,Echinacea,Tablet,500,mg,Kingphar,2026-07-06,20,1250
 MED6656,Ketoconazole_200mg,B66,Paracetamol + Caffeine,Capsule,120,ml,Traphaco,2026-07-02,117,2500
 MED6657,Bromhexine_8mg,C96,Acyclovir,Tablet,80,mg,DHG Pharma,2026-11-02,50,3000
-MED6659,Levothyroxine_50mcg,C58,Amoxicillin,Capsule,4200,mg,Kingphar,2026-11-19,158,1700
+MED6659,Levothyroxine_50mg,C58,Amoxicillin,Capsule,4200,mg,Kingphar,2026-11-19,158,1700
 MED6661,Salbutamol_4mg,C43,Paracetamol + Caffeine,Capsule,250,mg,DHG Pharma,2026-02-24,145,2500
 MED6665,Clarithromycin_500mg,C56,Amoxicillin + Clavulanate,Capsule,4200,ml,Imexpharm,2026-08-27,99,2000
 MED6668,Tiffy_Dey,B46,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-02-25,125,1700
@@ -2479,7 +2479,7 @@ MED6727,Metoclopramide_10mg,A12,Echinacea,Capsule,200,mg,Traphaco,2026-05-13,152
 MED6741,Fluconazole_150mg,A27,Paracetamol + Caffeine,Syrup,1,ml,Pfizer,2026-08-15,163,50000
 MED6743,Pantoprazole_40mg,C95,Vitamin C,Syrup,400,ml,ASDEX,2026-08-30,9,50000
 MED6744,Hapacol_650,B38,Paracetamol,Tablet,650,mg,DHG Pharma,2026-03-26,152,700
-MED6747,Levothyroxine_50mcg,B74,Echinacea,Syrup,625,ml,Stella,2026-03-12,20,50000
+MED6747,Levothyroxine_50mg,B74,Echinacea,Syrup,625,ml,Stella,2026-03-12,20,50000
 MED6750,Simvastatin_20mg,B84,Alpha chymotrypsin,Capsule,50,ml,Pfizer,2026-09-22,55,2000
 MED6751,Bromhexine_8mg,A84,Paracetamol,Syrup,10,ml,Mega We Care,2026-09-22,167,50000
 MED6753,Bisoprolol_5mg,C87,Paracetamol,Syrup,120,ml,Sanofi,2026-11-18,20,50000
@@ -2738,7 +2738,7 @@ MED7452,Smecta,B58,Paracetamol,Capsule,1,ml,United Pharma,2026-10-06,44,1250
 MED7457,Siro_Ginkid_ZinC,B13,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-03-06,178,50000
 MED7459,Colchicine_1mg,B82,Amoxicillin,Tablet,7.5,mg,Stella,2026-05-26,160,1200
 MED7460,Eugica,B56,Herbal Extract,Syrup,10,ml,Mega We Care,2026-07-28,22,50000
-MED7461,Levothyroxine_50mcg,B48,Aspirin,Capsule,400,ml,UPSA,2026-05-23,176,1600
+MED7461,Levothyroxine_50mg,B48,Aspirin,Capsule,400,ml,UPSA,2026-05-23,176,1600
 MED7462,Bisoprolol_5mg,C33,Vitamin C,Tablet,4200,mg,Stella,2026-06-08,52,1250
 MED7465,Metformin_500mg,B62,Alpha chymotrypsin,Capsule,5,mg,United Pharma,2026-08-21,31,1500
 MED7469,Enat_400,C0,Vitamin E,Tablet,400,IU,Mega We Care,2026-10-21,35,2000
@@ -2921,7 +2921,7 @@ MED7954,Ciprofloxacin_500mg,B23,Aspirin,Capsule,40,ml,Abbott,2026-09-28,139,1500
 MED7959,Celecoxib_200mg,A50,Acyclovir,Syrup,500,ml,Choay Pharma,2026-04-20,168,50000
 MED7960,Allopurinol_300mg,C57,Aspirin,Tablet,5,mg,GSK,2026-08-05,148,3000
 MED7961,Cefixime_200mg,C29,Cefixime,Capsule,200,mg,Imexpharm,2026-09-11,52,2000
-MED7962,Levothyroxine_50mcg,C44,Ibuprofen,Tablet,400,ml,Mega We Care,2026-05-08,99,3000
+MED7962,Levothyroxine_50mg,C44,Ibuprofen,Tablet,400,ml,Mega We Care,2026-05-08,99,3000
 MED7965,Domperidone_10mg,A23,Paracetamol + Caffeine,Capsule,10,mg,Sanofi,2026-05-30,128,1500
 MED7967,Smecta,A77,Acyclovir,Capsule,400,ml,Sanofi,2026-09-05,111,1600
 MED7968,Esomeprazole_40mg,A52,Echinacea,Capsule,20,mg,Choay Pharma,2026-07-27,155,1450
@@ -3138,7 +3138,7 @@ MED8576,Cetirizine_10mg,A58,Multivitamin,Syrup,5,ml,Kingphar,2026-04-06,172,5000
 MED8578,ORS_Plus,C71,Zinc + Vitamin,Tablet,300,ml,United Pharma,2026-03-29,11,3000
 MED8581,Acyclovir_400mg,A57,Acyclovir,Tablet,400,mg,Stella,2026-03-13,40,2500
 MED8583,Magnesium_B6,A57,Amoxicillin,Syrup,250,ml,Kingphar,2026-09-26,64,50000
-MED8588,Levothyroxine_50mcg,A14,Echinacea,Tablet,500,mg,DHG Pharma,2026-08-08,157,2500
+MED8588,Levothyroxine_50mg,A14,Echinacea,Tablet,500,mg,DHG Pharma,2026-08-08,157,2500
 MED8590,Ginkgo_Biloba_120mg,A55,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-06-29,55,1400
 MED8592,Clarithromycin_500mg,A40,Paracetamol,Tablet,500,mg,DHG Pharma,2026-08-25,35,1200
 MED8594,Hydrocortisone_10mg,C79,Amoxicillin,Syrup,40,ml,AstraZeneca,2026-09-23,7,50000
@@ -3323,7 +3323,7 @@ MED9115,Calcium_Carbonate_500mg,C7,Echinacea,Syrup,625,ml,Sandoz,2026-09-26,61,5
 MED9121,Nystatin_Suspension,B27,Zinc + Vitamin,Capsule,40,ml,AstraZeneca,2026-10-23,127,1700
 MED9122,Smecta,B64,Multivitamin,Syrup,625,ml,DHG Pharma,2026-08-17,183,50000
 MED9128,Atorvastatin_20mg,B66,Ibuprofen,Capsule,80,mg,Imexpharm,2026-11-24,165,3000
-MED9129,Levothyroxine_50mcg,B87,Amoxicillin,Syrup,16,ml,Abbott,2026-07-10,54,50000
+MED9129,Levothyroxine_50mg,B87,Amoxicillin,Syrup,16,ml,Abbott,2026-07-10,54,50000
 MED9130,Diclofenac_50mg,B54,Acyclovir,Tablet,625,ml,AstraZeneca,2026-11-17,84,1450
 MED9131,Metformin_500mg,A3,Paracetamol,Capsule,625,ml,United Pharma,2026-10-01,179,1700
 MED9132,Insulin_Basal,C34,Paracetamol + Caffeine,Syrup,300,ml,Choay Pharma,2026-04-28,114,50000
@@ -3383,7 +3383,7 @@ MED9264,Losartan_50mg,C78,Echinacea,Capsule,625,ml,GSK,2026-06-08,160,2500
 MED9266,Enat_400,C87,Vitamin E,Tablet,400,IU,Mega We Care,2026-08-29,28,1600
 MED9267,Insulin_Rapid,A80,Cefixime,Syrup,20,ml,ASDEX,2026-06-11,109,50000
 MED9268,Esomeprazole_40mg,B91,Alpha chymotrypsin,Tablet,4200,mg,Pfizer,2026-03-07,102,2500
-MED9269,Levothyroxine_50mcg,A49,Vitamin C,Syrup,40,ml,UPSA,2026-07-18,52,50000
+MED9269,Levothyroxine_50mg,A49,Vitamin C,Syrup,40,ml,UPSA,2026-07-18,52,50000
 MED9271,Loratadine_10mg,B43,Amoxicillin,Syrup,625,ml,Choay Pharma,2026-10-01,35,50000
 MED9273,Gliclazide_80mg,B5,Vitamin C,Tablet,5,mg,OPV Pharma,2026-09-16,64,1700
 MED9275,Paracetamol_500mg,B34,Paracetamol,Tablet,500,mg,Sanofi,2026-11-13,167,700
@@ -3456,7 +3456,7 @@ MED9464,Vitamin_B1_B6_B12,C5,Paracetamol + Caffeine,Syrup,200,ml,Pfizer,2026-11-
 MED9468,Augmentin_625mg,B65,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-03-31,40,2400
 MED9469,Fexofenadine_120mg,C52,Multivitamin,Syrup,16,ml,UDI,2026-09-14,26,50000
 MED9470,Ciprofloxacin_500mg,A9,Aspirin,Capsule,4200,ml,OPV Pharma,2026-10-25,40,1200
-MED9474,Levothyroxine_50mcg,A18,Paracetamol,Tablet,625,ml,Kingphar,2026-04-28,72,1200
+MED9474,Levothyroxine_50mg,A18,Paracetamol,Tablet,625,ml,Kingphar,2026-04-28,72,1200
 MED9477,Ginkgo_Biloba_120mg,C24,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-11-25,156,1400
 MED9480,Gliclazide_80mg,A57,Amoxicillin,Syrup,7.5,ml,UDI,2026-05-17,112,50000
 MED9481,Efferalgan_500mg,A23,Paracetamol,Tablet,500,mg,UPSA,2026-06-05,179,1000
@@ -3505,7 +3505,7 @@ MED9593,Allopurinol_300mg,A84,Cefuroxime,Tablet,16,ml,Choay Pharma,2026-03-19,12
 MED9594,Atorvastatin_20mg,C72,Alpha chymotrypsin,Capsule,300,ml,OPV Pharma,2026-05-09,51,1600
 MED9595,Prospan_Syrup,C67,Paracetamol,Capsule,200,mg,GSK,2026-02-01,159,2500
 MED9596,ORS_Plus,C18,Multivitamin,Capsule,650,ml,DHG Pharma,2026-09-24,161,1700
-MED9599,Levothyroxine_50mcg,A82,Meloxicam,Syrup,120,ml,AstraZeneca,2026-04-27,169,50000
+MED9599,Levothyroxine_50mg,A82,Meloxicam,Syrup,120,ml,AstraZeneca,2026-04-27,169,50000
 MED9601,Iron_Folic,B54,Meloxicam,Syrup,5,ml,Imexpharm,2026-03-29,8,50000
 MED9605,Panadol_Extra,C12,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-09-08,136,1000
 MED9606,Ginkgo_Biloba_120mg,C65,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-03-18,43,1400
@@ -3522,7 +3522,7 @@ MED9630,Azithromycin_250mg,A53,Ascorbic Acid,Tablet,16,mg,Sanofi,2026-08-21,190,
 MED9631,Loratadine_10mg,A26,Paracetamol + Caffeine,Capsule,250,mg,Mega We Care,2026-02-20,31,2500
 MED9632,Atorvastatin_20mg,B88,Amoxicillin + Clavulanate,Tablet,4200,ml,Kingphar,2026-09-18,200,1450
 MED9635,Vitamin_C,C82,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-06-11,127,1400
-MED9637,Levothyroxine_50mcg,C65,Ascorbic Acid,Tablet,300,ml,Mega We Care,2026-05-23,112,1600
+MED9637,Levothyroxine_50mg,C65,Ascorbic Acid,Tablet,300,ml,Mega We Care,2026-05-23,112,1600
 MED9639,Ambroxol_30mg,B30,Acyclovir,Capsule,80,ml,Imexpharm,2026-03-26,119,1450
 MED9640,Simvastatin_20mg,B33,Echinacea,Tablet,20,ml,Sanofi,2026-07-18,161,1450
 MED9643,Bromhexine_8mg,C10,Amoxicillin + Clavulanate,Tablet,300,ml,Abbott,2026-08-04,58,1250
@@ -3590,7 +3590,7 @@ MED9822,Allopurinol_300mg,A45,Paracetamol + Caffeine,Capsule,200,ml,UPSA,2026-06
 MED9826,Atorvastatin_20mg,C72,Vitamin C,Syrup,120,ml,GSK,2026-06-22,36,50000
 MED9827,Amlodipine_5mg,C4,Echinacea,Syrup,200,ml,Abbott,2026-03-27,8,50000
 MED9829,Eugica,A43,Herbal Extract,Syrup,10,ml,Mega We Care,2026-10-06,98,50000
-MED9831,Levothyroxine_50mcg,A11,Paracetamol,Tablet,40,ml,Stella,2026-06-16,63,1700
+MED9831,Levothyroxine_50mg,A11,Paracetamol,Tablet,40,ml,Stella,2026-06-16,63,1700
 MED9832,Vitamin_E_400IU,B69,Meloxicam,Tablet,625,mg,Sanofi,2026-05-11,43,1400
 MED9834,Clarithromycin_500mg,B77,Meloxicam,Tablet,650,ml,Pfizer,2026-05-07,163,2000
 MED9837,Fexofenadine_120mg,B59,Zinc + Vitamin,Syrup,400,ml,Stella,2026-04-28,197,50000
@@ -3644,7 +3644,7 @@ MED9949,Simvastatin_20mg,B61,Paracetamol + Caffeine,Tablet,300,mg,OPV Pharma,202
 MED9952,Alphachoay,B79,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-02-12,103,1200
 MED9954,Vitamin_B1_B6_B12,B82,Cefuroxime,Capsule,625,mg,Sandoz,2026-11-21,143,1400
 MED9956,Iron_Folic,C99,Alpha chymotrypsin,Syrup,1,ml,UPSA,2026-07-18,39,50000
-MED9958,Levothyroxine_50mcg,B42,Acyclovir,Capsule,400,ml,Mega We Care,2026-09-07,88,1450
+MED9958,Levothyroxine_50mg,B42,Acyclovir,Capsule,400,ml,Mega We Care,2026-09-07,88,1450
 MED9966,Salbutamol_4mg,C78,Alpha chymotrypsin,Tablet,40,mg,ASDEX,2026-10-19,98,1500
 MED9968,Cefixime_200mg,A35,Cefixime,Capsule,200,mg,Imexpharm,2026-09-29,48,2000
 MED9969,Iron_Folic,A0,Vitamin C,Tablet,2,mg,Abbott,2026-10-23,63,1700
@@ -3716,7 +3716,7 @@ MED10111,Aspirin_500mg,B42,Aspirin,Tablet,500,mg,Bayer,2026-02-09,23,1000
 MED10113,Cefuroxim_500mg,A38,Cefuroxime,Tablet,500,mg,Sandoz,2026-04-19,137,2000
 MED10120,Fexofenadine_120mg,C30,Ibuprofen,Tablet,5,ml,Sanofi,2026-06-30,175,2000
 MED10122,Domperidone_10mg,B55,Multivitamin,Capsule,4200,ml,Pfizer,2026-07-08,85,2000
-MED10124,Levothyroxine_50mcg,A75,Cefdinir,Capsule,300,mg,Sanofi,2026-09-17,16,2000
+MED10124,Levothyroxine_50mg,A75,Cefdinir,Capsule,300,mg,Sanofi,2026-09-17,16,2000
 MED10125,Echina_Kingphar,C54,Echinacea,Tablet,500,mg,Kingphar,2026-11-19,53,1000
 MED10128,Magnesium_B6,A28,Echinacea,Capsule,1,ml,Choay Pharma,2026-07-28,117,1500
 MED10130,Betadine_Solution,B66,Aspirin,Capsule,2,mg,AstraZeneca,2026-07-04,22,2000
@@ -3782,7 +3782,7 @@ MED10267,Simvastatin_20mg,B9,Multivitamin,Syrup,16,ml,United Pharma,2026-08-18,3
 MED10269,Colchicine_1mg,B27,Multivitamin,Syrup,1,ml,UPSA,2026-03-02,39,50000
 MED10270,Prospan_Syrup,B42,Meloxicam,Syrup,80,ml,AstraZeneca,2026-09-08,164,50000
 MED10271,Tramadol_50mg,A43,Acyclovir,Syrup,250,ml,Imexpharm,2026-09-24,161,50000
-MED10280,Levothyroxine_50mcg,B21,Paracetamol + Caffeine,Syrup,7.5,ml,Kingphar,2026-11-13,166,50000
+MED10280,Levothyroxine_50mg,B21,Paracetamol + Caffeine,Syrup,7.5,ml,Kingphar,2026-11-13,166,50000
 MED10282,Iron_Folic,A54,Amoxicillin,Syrup,625,ml,GSK,2026-08-03,100,50000
 MED10283,Fluconazole_150mg,A17,Ibuprofen,Tablet,40,mg,DHG Pharma,2026-05-01,153,1500
 MED10286,Clarithromycin_500mg,B39,Cefuroxime,Syrup,200,ml,Mega We Care,2026-09-23,150,50000
@@ -3857,7 +3857,7 @@ MED10483,Cefixime_200mg,C35,Cefixime,Capsule,200,mg,Imexpharm,2026-09-13,145,200
 MED10485,Acyclovir_400mg,C67,Acyclovir,Tablet,400,mg,Stella,2026-09-15,58,1200
 MED10486,Hydrocortisone_10mg,B30,Cefuroxime,Syrup,200,ml,Bayer,2026-06-16,26,50000
 MED10490,Cefixime_200mg,B42,Cefixime,Capsule,200,mg,Imexpharm,2026-07-19,64,2000
-MED10491,Levothyroxine_50mcg,C60,Amoxicillin + Clavulanate,Syrup,7.5,ml,Kingphar,2026-08-27,138,50000
+MED10491,Levothyroxine_50mg,C60,Amoxicillin + Clavulanate,Syrup,7.5,ml,Kingphar,2026-08-27,138,50000
 MED10493,Telfast_HD_180mg,B94,Fexofenadine,Tablet,180,mg,Sanofi,2026-06-16,82,3000
 MED10497,Panadol_Extra,C12,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-05-26,62,3000
 MED10498,Colchicine_1mg,C91,Paracetamol,Capsule,625,ml,UDI,2026-06-29,148,1200
@@ -4021,7 +4021,7 @@ MED10956,Betadine_Solution,B82,Cefixime,Syrup,1,ml,Pfizer,2026-11-15,113,50000
 MED10957,Levofloxacin_500mg,A3,Paracetamol,Capsule,16,mg,Sandoz,2026-04-09,72,3000
 MED10960,Prospan_Syrup,B32,Meloxicam,Capsule,4200,ml,DHG Pharma,2026-05-18,15,3000
 MED10962,Fluconazole_150mg,B84,Aspirin,Capsule,5,mg,United Pharma,2026-08-10,22,1450
-MED10964,Levothyroxine_50mcg,C73,Ascorbic Acid,Tablet,4200,ml,Kingphar,2026-09-04,159,1500
+MED10964,Levothyroxine_50mg,C73,Ascorbic Acid,Tablet,4200,ml,Kingphar,2026-09-04,159,1500
 MED10966,Betadine_Solution,A57,Ibuprofen,Syrup,4200,ml,Choay Pharma,2026-07-24,171,50000
 MED10970,Hydrocortisone_10mg,A49,Cefuroxime,Capsule,650,ml,ASDEX,2026-04-26,188,1500
 MED10971,Siro_Ginkid_ZinC,A97,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-08-28,71,50000
@@ -4075,7 +4075,7 @@ MED11102,Metformin_500mg,B16,Vitamin C,Capsule,7.5,mg,Choay Pharma,2026-10-08,14
 MED11103,Calcium_Carbonate_500mg,A39,Zinc + Vitamin,Syrup,650,ml,OPV Pharma,2026-08-02,69,50000
 MED11104,Zinc_Gluconate_20mg,A25,Paracetamol + Caffeine,Tablet,625,mg,UPSA,2026-10-17,171,2500
 MED11109,Celecoxib_200mg,C64,Acyclovir,Syrup,625,ml,ASDEX,2026-09-22,174,50000
-MED11114,Levothyroxine_50mcg,A37,Vitamin C,Capsule,16,mg,Imexpharm,2026-04-30,143,1600
+MED11114,Levothyroxine_50mg,A37,Vitamin C,Capsule,16,mg,Imexpharm,2026-04-30,143,1600
 MED11116,Echina_Kingphar,A15,Echinacea,Tablet,500,mg,Kingphar,2026-10-23,197,1500
 MED11120,Ibuprofen_200mg,B24,Ibuprofen,Tablet,200,mg,Abbott,2026-10-10,128,1000
 MED11123,Gliclazide_80mg,A50,Cefuroxime,Tablet,300,mg,Choay Pharma,2026-06-14,32,1450
@@ -4190,7 +4190,7 @@ MED11410,Insulin_Rapid,C99,Paracetamol,Capsule,7.5,ml,Abbott,2026-11-13,61,1200
 MED11412,Prospan_Syrup,A42,Alpha chymotrypsin,Capsule,650,mg,Choay Pharma,2026-02-19,121,1600
 MED11416,Fexofenadine_120mg,A24,Zinc + Vitamin,Syrup,40,ml,Traphaco,2026-05-05,139,50000
 MED11417,Nexium_mups_20mg,A38,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-08-08,40,1450
-MED11418,Levothyroxine_50mcg,C97,Echinacea,Syrup,625,ml,GSK,2026-08-29,139,50000
+MED11418,Levothyroxine_50mg,C97,Echinacea,Syrup,625,ml,GSK,2026-08-29,139,50000
 MED11419,Ibuprofen_200mg,A31,Ibuprofen,Tablet,200,mg,Abbott,2026-11-13,127,1000
 MED11420,Diclofenac_50mg,C86,Zinc + Vitamin,Capsule,120,ml,ASDEX,2026-10-03,179,2500
 MED11422,Bisoprolol_5mg,A37,Ascorbic Acid,Syrup,5,ml,Imexpharm,2026-07-15,153,50000
@@ -4384,7 +4384,7 @@ MED11939,Prospan_Syrup,A6,Aspirin,Syrup,10,ml,United Pharma,2026-06-17,100,50000
 MED11941,Vitamin_K2,A59,Amoxicillin,Syrup,2,ml,Bayer,2026-06-01,161,1400
 MED11943,Ambroxol_30mg,C63,Ascorbic Acid,Capsule,650,ml,Sanofi,2026-11-02,65,1450
 MED11945,Diclofenac_50mg,A77,Amoxicillin + Clavulanate,Syrup,4200,ml,Abbott,2026-02-25,192,50000
-MED11949,Levothyroxine_50mcg,C15,Amoxicillin,Capsule,1,ml,DHG Pharma,2026-04-14,20,2000
+MED11949,Levothyroxine_50mg,C15,Amoxicillin,Capsule,1,ml,DHG Pharma,2026-04-14,20,2000
 MED11950,Domperidone_10mg,B70,Zinc + Vitamin,Syrup,1,ml,GSK,2026-06-12,18,50000
 MED11954,Atorvastatin_20mg,C59,Amoxicillin,Capsule,300,ml,Sanofi,2026-08-01,197,1200
 MED11957,Cefdinir_300mg,A90,Cefdinir,Capsule,300,mg,Pfizer,2026-07-28,2,2000
@@ -4595,7 +4595,7 @@ MED12573,Calcium_D3,B46,Vitamin C,Syrup,300,ml,Mega We Care,2026-04-13,83,50000
 MED12577,Cefixime_200mg,C20,Cefixime,Capsule,200,mg,Imexpharm,2026-10-29,48,2000
 MED12581,Tiffy_Dey,B67,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-10-28,83,1700
 MED12582,Ambroxol_30mg,A29,Paracetamol,Tablet,7.5,ml,Sanofi,2026-06-30,41,2500
-MED12586,Levothyroxine_50mcg,C6,Meloxicam,Syrup,500,ml,Mega We Care,2026-02-19,197,50000
+MED12586,Levothyroxine_50mg,C6,Meloxicam,Syrup,500,ml,Mega We Care,2026-02-19,197,50000
 MED12587,Metronidazole_500mg,A56,Ibuprofen,Tablet,7.5,mg,ASDEX,2026-08-20,171,1200
 MED12588,Diclofenac_50mg,C51,Paracetamol,Syrup,300,ml,DHG Pharma,2026-09-29,7,50000
 MED12589,Desloratadine_5mg,C66,Paracetamol + Caffeine,Syrup,200,ml,Stella,2026-05-09,79,50000
@@ -4649,7 +4649,7 @@ MED12751,Calcium_D3,B18,Vitamin C,Tablet,5,mg,Imexpharm,2026-02-15,55,2000
 MED12756,Hapacol_650,B27,Paracetamol,Tablet,650,mg,DHG Pharma,2026-07-06,190,700
 MED12757,Insulin_Basal,C61,Echinacea,Syrup,650,ml,DHG Pharma,2026-07-06,102,50000
 MED12758,Fexofenadine_120mg,A21,Cefixime,Capsule,400,ml,GSK,2026-08-29,43,1600
-MED12759,Levothyroxine_50mcg,C78,Amoxicillin,Tablet,80,mg,Stella,2026-08-22,106,2000
+MED12759,Levothyroxine_50mg,C78,Amoxicillin,Tablet,80,mg,Stella,2026-08-22,106,2000
 MED12763,Insulin_Rapid,B67,Aspirin,Capsule,80,mg,AstraZeneca,2026-05-09,133,1000
 MED12764,Simvastatin_20mg,A87,Zinc + Vitamin,Syrup,250,ml,Choay Pharma,2026-10-06,81,50000
 MED12766,Vitamin_B1_B6_B12,C58,Multivitamin,Capsule,625,mg,DHG Pharma,2026-09-27,14,1400
@@ -4755,7 +4755,7 @@ MED13058,Vitamin_K2,B26,Ascorbic Acid,Syrup,5,ml,Mega We Care,2026-04-20,52,1400
 MED13060,ORS_Plus,A56,Multivitamin,Capsule,20,ml,GSK,2026-08-07,21,1600
 MED13069,Allopurinol_300mg,C53,Zinc + Vitamin,Tablet,7.5,mg,UDI,2026-05-11,18,2000
 MED13071,Esomeprazole_40mg,B97,Aspirin,Syrup,10,ml,Bayer,2026-11-13,60,50000
-MED13072,Levothyroxine_50mcg,A79,Amoxicillin + Clavulanate,Tablet,10,mg,United Pharma,2026-04-24,174,2500
+MED13072,Levothyroxine_50mg,A79,Amoxicillin + Clavulanate,Tablet,10,mg,United Pharma,2026-04-24,174,2500
 MED13073,Ketoconazole_200mg,C29,Amoxicillin,Capsule,300,mg,Mega We Care,2026-09-28,182,1500
 MED13075,Vitamin_B1_B6_B12,C83,Echinacea,Capsule,5,ml,GSK,2026-08-17,26,1400
 MED13076,Hydrocortisone_10mg,A80,Multivitamin,Capsule,2,mg,DHG Pharma,2026-09-07,94,3000
@@ -4882,13 +4882,13 @@ MED13383,Enterogermina,B48,Bacillus clausii,Suspension,5,ml,Sanofi,2026-11-02,14
 MED13387,Cefdinir_300mg,B68,Cefdinir,Capsule,300,mg,Pfizer,2026-11-15,127,2000
 MED13388,Desloratadine_5mg,A30,Amoxicillin + Clavulanate,Tablet,500,mg,Traphaco,2026-05-28,70,1600
 MED13395,Prospan_Syrup,B47,Cefixime,Capsule,4200,mg,United Pharma,2026-04-27,68,1250
-MED13404,Levothyroxine_50mcg,A92,Aspirin,Capsule,10,ml,UPSA,2026-06-04,78,1250
+MED13404,Levothyroxine_50mg,A92,Aspirin,Capsule,10,ml,UPSA,2026-06-04,78,1250
 MED13407,Hapacol_650,B79,Paracetamol,Tablet,650,mg,DHG Pharma,2026-08-27,149,700
 MED13411,Bisoprolol_5mg,B46,Amoxicillin + Clavulanate,Tablet,50,ml,DHG Pharma,2026-09-20,82,1700
 MED13413,Eugica,A25,Herbal Extract,Syrup,10,ml,Mega We Care,2026-02-02,88,50000
 MED13414,Meloxicam_7.5mg,B10,Meloxicam,Tablet,7.5,mg,Sanofi,2026-11-22,121,1200
 MED13416,Augmentin_625mg,C27,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-07-07,153,2400
-MED13418,Levothyroxine_50mcg,B1,Zinc + Vitamin,Syrup,200,ml,Sanofi,2026-05-28,184,50000
+MED13418,Levothyroxine_50mg,B1,Zinc + Vitamin,Syrup,200,ml,Sanofi,2026-05-28,184,50000
 MED13422,Methylprednisolone_16mg,A31,Cefdinir,Tablet,20,ml,UPSA,2026-08-01,172,1000
 MED13423,Paracetamol_500mg,C10,Paracetamol,Tablet,500,mg,Sanofi,2026-07-21,32,700
 MED13424,Hapacol_650,B77,Paracetamol,Tablet,650,mg,DHG Pharma,2026-09-26,114,700
@@ -4983,7 +4983,7 @@ MED13663,Metronidazole_500mg,C26,Paracetamol + Caffeine,Capsule,500,mg,ASDEX,202
 MED13664,Panadol_Extra,A40,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-11-15,175,1700
 MED13668,Pantoprazole_40mg,A98,Multivitamin,Tablet,300,mg,Mega We Care,2026-03-11,134,1700
 MED13669,Tiffy_Dey,A10,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-05-11,198,1200
-MED13670,Levothyroxine_50mcg,C87,Acyclovir,Capsule,650,mg,GSK,2026-03-07,55,1600
+MED13670,Levothyroxine_50mg,C87,Acyclovir,Capsule,650,mg,GSK,2026-03-07,55,1600
 MED13672,Cefixime_200mg,C95,Cefixime,Capsule,200,mg,Imexpharm,2026-04-09,155,2000
 MED13674,Metronidazole_500mg,B39,Vitamin C,Tablet,2,ml,UPSA,2026-03-27,4,1600
 MED13675,Echina_Kingphar,A30,Echinacea,Tablet,500,mg,Kingphar,2026-04-24,79,1200
@@ -5041,7 +5041,7 @@ MED13839,Enat_400,C24,Vitamin E,Tablet,400,IU,Mega We Care,2026-10-27,62,2000
 MED13840,Enat_400,A93,Vitamin E,Tablet,400,IU,Mega We Care,2026-09-30,150,1250
 MED13841,Salbutamol_4mg,A72,Acyclovir,Capsule,200,ml,DHG Pharma,2026-06-05,100,2500
 MED13843,Amoxicillin_500mg,B4,Amoxicillin,Capsule,500,mg,GSK,2026-09-17,101,2000
-MED13844,Levothyroxine_50mcg,C25,Aspirin,Tablet,200,mg,Abbott,2026-10-08,123,1600
+MED13844,Levothyroxine_50mg,C25,Aspirin,Tablet,200,mg,Abbott,2026-10-08,123,1600
 MED13845,Tiffy_Dey,C95,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-09-30,65,1200
 MED13846,Amlodipine_5mg,B23,Paracetamol + Caffeine,Tablet,400,ml,GSK,2026-08-25,86,1500
 MED13847,Prospan_Syrup,B61,Acyclovir,Capsule,5,ml,Stella,2026-07-31,65,1250
@@ -5099,7 +5099,7 @@ MED14018,Fluconazole_150mg,C60,Vitamin C,Tablet,5,mg,Mega We Care,2026-03-23,44,
 MED14021,Krebs_Cough_Syrup,C2,Aspirin,Capsule,50,mg,Sandoz,2026-09-03,54,1600
 MED14022,Simvastatin_20mg,A60,Acyclovir,Tablet,500,mg,Choay Pharma,2026-03-25,30,1250
 MED14028,Hapacol_650,A76,Paracetamol,Tablet,650,mg,DHG Pharma,2026-05-21,101,700
-MED14029,Levothyroxine_50mcg,B31,Echinacea,Syrup,50,ml,Kingphar,2026-06-04,40,50000
+MED14029,Levothyroxine_50mg,B31,Echinacea,Syrup,50,ml,Kingphar,2026-06-04,40,50000
 MED14032,Calcium_Carbonate_500mg,C4,Aspirin,Syrup,650,ml,DHG Pharma,2026-09-21,49,50000
 MED14039,Salbutamol_4mg,C73,Aspirin,Tablet,10,mg,Traphaco,2026-03-13,14,1600
 MED14042,Allopurinol_300mg,A63,Ascorbic Acid,Syrup,5,ml,OPV Pharma,2026-11-20,57,50000
@@ -5114,7 +5114,7 @@ MED14059,Hydrocortisone_10mg,A96,Echinacea,Syrup,650,ml,Sanofi,2026-04-14,98,500
 MED14061,Diclofenac_50mg,C74,Alpha chymotrypsin,Syrup,7.5,ml,GSK,2026-03-14,70,50000
 MED14063,Ambroxol_30mg,B58,Alpha chymotrypsin,Capsule,2,ml,Mega We Care,2026-10-06,9,1250
 MED14070,ORS_Plus,B58,Echinacea,Capsule,400,mg,Sandoz,2026-08-28,101,2000
-MED14073,Levothyroxine_50mcg,C8,Alpha chymotrypsin,Capsule,40,ml,DHG Pharma,2026-04-24,51,1450
+MED14073,Levothyroxine_50mg,C8,Alpha chymotrypsin,Capsule,40,ml,DHG Pharma,2026-04-24,51,1450
 MED14075,Alphachoay,A47,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-07-23,51,2500
 MED14076,Vitamin_E_400IU,A87,Vitamin C,Tablet,2,ml,Mega We Care,2026-08-12,146,1400
 MED14077,Cefuroxim_500mg,C99,Cefuroxime,Tablet,500,mg,Sandoz,2026-09-25,181,2000
@@ -5122,7 +5122,7 @@ MED14079,Iron_Folic,A2,Paracetamol,Syrup,2,ml,Kingphar,2026-11-25,175,50000
 MED14080,Colchicine_1mg,A57,Amoxicillin + Clavulanate,Tablet,200,mg,Abbott,2026-06-15,186,2000
 MED14082,Aspirin_500mg,A53,Aspirin,Tablet,500,mg,Bayer,2026-03-17,133,1000
 MED14084,Vitamin_E_400IU,B13,Paracetamol + Caffeine,Capsule,7.5,mg,OPV Pharma,2026-11-03,116,1400
-MED14085,Levothyroxine_50mcg,B24,Zinc + Vitamin,Tablet,7.5,ml,OPV Pharma,2026-07-13,119,1450
+MED14085,Levothyroxine_50mg,B24,Zinc + Vitamin,Tablet,7.5,ml,OPV Pharma,2026-07-13,119,1450
 MED14086,Esomeprazole_40mg,C10,Aspirin,Syrup,120,ml,Sandoz,2026-04-12,181,50000
 MED14087,Metronidazole_500mg,B16,Cefixime,Capsule,400,mg,AstraZeneca,2026-07-17,121,1450
 MED14088,Krebs_Cough_Syrup,B32,Acyclovir,Tablet,50,mg,ASDEX,2026-06-10,48,1600
@@ -5139,7 +5139,7 @@ MED14118,Vitamin_C,A75,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-08-12,28,1400
 MED14122,Loratadine_10mg,B10,Vitamin C,Syrup,20,ml,Sanofi,2026-07-03,191,50000
 MED14127,Ginkgo_Biloba_120mg,C65,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-02-02,166,1400
 MED14130,Domperidone_10mg,B15,Amoxicillin,Syrup,625,ml,Choay Pharma,2026-08-02,42,50000
-MED14133,Levothyroxine_50mcg,A71,Ascorbic Acid,Syrup,300,ml,United Pharma,2026-10-16,154,50000
+MED14133,Levothyroxine_50mg,A71,Ascorbic Acid,Syrup,300,ml,United Pharma,2026-10-16,154,50000
 MED14136,Efferalgan_500mg,C23,Paracetamol,Tablet,500,mg,UPSA,2026-03-20,191,1200
 MED14139,Esomeprazole_40mg,B88,Cefdinir,Tablet,20,mg,ASDEX,2026-06-27,193,2000
 MED14141,Diclofenac_50mg,A38,Ascorbic Acid,Tablet,500,ml,OPV Pharma,2026-05-24,3,1250
@@ -5192,7 +5192,7 @@ MED14264,Insulin_Rapid,B51,Amoxicillin + Clavulanate,Capsule,16,mg,Abbott,2026-0
 MED14268,Iron_Folic,B10,Cefdinir,Syrup,10,ml,UDI,2026-04-26,187,50000
 MED14270,Krebs_Cough_Syrup,B78,Zinc + Vitamin,Syrup,40,ml,Sandoz,2026-09-03,164,50000
 MED14271,Metformin_500mg,C8,Meloxicam,Syrup,40,ml,ASDEX,2026-05-11,50,50000
-MED14272,Levothyroxine_50mcg,B9,Meloxicam,Syrup,10,ml,Abbott,2026-09-05,65,50000
+MED14272,Levothyroxine_50mg,B9,Meloxicam,Syrup,10,ml,Abbott,2026-09-05,65,50000
 MED14273,Enat_400,C19,Vitamin E,Tablet,400,IU,Mega We Care,2026-03-14,99,1600
 MED14274,Metformin_500mg,C25,Aspirin,Syrup,300,ml,Bayer,2026-05-28,147,50000
 MED14278,Omeprazole_20mg,C66,Cefdinir,Capsule,50,ml,Sandoz,2026-02-08,114,3000
@@ -5271,7 +5271,7 @@ MED14480,Ketoconazole_200mg,A13,Meloxicam,Capsule,4200,mg,Pfizer,2026-09-20,40,3
 MED14484,Ambroxol_30mg,A36,Cefixime,Syrup,20,ml,Mega We Care,2026-10-20,174,50000
 MED14491,Methylprednisolone_16mg,B32,Zinc + Vitamin,Tablet,50,ml,Kingphar,2026-05-01,27,1200
 MED14493,Diclofenac_50mg,B74,Ascorbic Acid,Capsule,300,ml,GSK,2026-04-04,51,1250
-MED14497,Levothyroxine_50mcg,A43,Multivitamin,Tablet,16,ml,Abbott,2026-08-26,180,1600
+MED14497,Levothyroxine_50mg,A43,Multivitamin,Tablet,16,ml,Abbott,2026-08-26,180,1600
 MED14499,Fexofenadine_120mg,B8,Amoxicillin,Syrup,10,ml,Sanofi,2026-07-20,168,50000
 MED14501,Ketoconazole_200mg,A91,Amoxicillin,Capsule,40,ml,Abbott,2026-08-01,89,1500
 MED14505,Allopurinol_300mg,A65,Zinc + Vitamin,Syrup,10,ml,ASDEX,2026-06-27,67,50000
@@ -5317,7 +5317,7 @@ MED14617,Ambroxol_30mg,C80,Alpha chymotrypsin,Syrup,650,ml,UDI,2026-09-08,192,50
 MED14619,Iron_Folic,C45,Cefuroxime,Tablet,7.5,mg,ASDEX,2026-04-29,144,2500
 MED14620,Enterogermina,A28,Bacillus clausii,Suspension,5,ml,Sanofi,2026-04-25,129,2500
 MED14621,Eugica,A22,Herbal Extract,Syrup,10,ml,Mega We Care,2026-06-14,133,50000
-MED14624,Levothyroxine_50mcg,C0,Meloxicam,Tablet,300,mg,Stella,2026-08-14,62,1200
+MED14624,Levothyroxine_50mg,C0,Meloxicam,Tablet,300,mg,Stella,2026-08-14,62,1200
 MED14626,Cefixime_200mg,C39,Cefixime,Capsule,200,mg,Imexpharm,2026-10-09,86,2000
 MED14627,Vitamin_B1_B6_B12,A73,Cefuroxime,Tablet,50,ml,ASDEX,2026-11-17,94,1400
 MED14629,Metformin_500mg,C20,Zinc + Vitamin,Capsule,5,mg,Imexpharm,2026-04-26,136,2000
@@ -5363,7 +5363,7 @@ MED14726,Cefixime_200mg,C11,Cefixime,Capsule,200,mg,Imexpharm,2026-07-17,21,2000
 MED14727,Paracetamol_500mg,C77,Paracetamol,Tablet,500,mg,Sanofi,2026-04-11,111,700
 MED14731,Aspirin_500mg,A64,Aspirin,Tablet,500,mg,Bayer,2026-07-07,179,1000
 MED14734,Pantoprazole_40mg,C19,Cefuroxime,Syrup,250,ml,United Pharma,2026-02-02,168,50000
-MED14737,Levothyroxine_50mcg,A36,Aspirin,Syrup,4200,ml,ASDEX,2026-02-05,144,50000
+MED14737,Levothyroxine_50mg,A36,Aspirin,Syrup,4200,ml,ASDEX,2026-02-05,144,50000
 MED14742,Loperamid_2mg,C44,Loperamide,Tablet,2,mg,Imexpharm,2026-11-20,36,1200
 MED14746,Hapacol_650,C53,Paracetamol,Tablet,650,mg,DHG Pharma,2026-09-30,168,700
 MED14748,Iron_Folic,B94,Paracetamol + Caffeine,Capsule,120,mg,GSK,2026-03-31,153,1000
@@ -5486,7 +5486,7 @@ MED15078,Omeprazole_20mg,B85,Echinacea,Tablet,4200,mg,ASDEX,2026-02-23,108,3000
 MED15079,ORS_Plus,B80,Cefuroxime,Capsule,300,mg,UPSA,2026-10-30,47,1700
 MED15080,Smecta,C27,Vitamin C,Tablet,80,mg,Abbott,2026-07-04,25,1500
 MED15082,Augmentin_625mg,C40,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-09-20,85,2400
-MED15084,Levothyroxine_50mcg,A38,Cefuroxime,Capsule,250,ml,OPV Pharma,2026-07-18,78,3000
+MED15084,Levothyroxine_50mg,A38,Cefuroxime,Capsule,250,ml,OPV Pharma,2026-07-18,78,3000
 MED15087,Ginkgo_Biloba_120mg,A84,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-02-21,36,1400
 MED15089,Magnesium_B6,B54,Ascorbic Acid,Capsule,7.5,mg,Imexpharm,2026-04-24,170,2500
 MED15090,Vitamin_E_400IU,A1,Amoxicillin + Clavulanate,Syrup,5,ml,Choay Pharma,2026-05-05,196,1400
@@ -5506,7 +5506,7 @@ MED15112,Metoclopramide_10mg,B40,Cefdinir,Capsule,200,ml,Kingphar,2026-08-04,36,
 MED15113,Celecoxib_200mg,B43,Amoxicillin,Tablet,200,mg,GSK,2026-11-23,141,1600
 MED15122,Cefixime_200mg,B54,Cefixime,Capsule,200,mg,Imexpharm,2026-10-20,152,2000
 MED15126,Telfast_HD_180mg,A43,Fexofenadine,Tablet,180,mg,Sanofi,2026-03-09,88,1200
-MED15127,Levothyroxine_50mcg,B77,Cefdinir,Syrup,300,ml,UDI,2026-09-14,81,50000
+MED15127,Levothyroxine_50mg,B77,Cefdinir,Syrup,300,ml,UDI,2026-09-14,81,50000
 MED15128,Methylprednisolone_16mg,A44,Vitamin C,Capsule,650,mg,ASDEX,2026-04-14,157,1250
 MED15134,Simvastatin_20mg,C73,Multivitamin,Tablet,625,ml,DHG Pharma,2026-06-15,89,1200
 MED15139,Levofloxacin_500mg,B46,Cefuroxime,Tablet,40,mg,Traphaco,2026-02-15,44,1200
@@ -5630,7 +5630,7 @@ MED15448,Metformin_500mg,C31,Multivitamin,Tablet,650,mg,Kingphar,2026-02-07,93,1
 MED15455,Nystatin_Suspension,A94,Alpha chymotrypsin,Tablet,300,mg,Choay Pharma,2026-04-08,78,1700
 MED15456,Vitamin_K2,A82,Paracetamol + Caffeine,Capsule,400,ml,UPSA,2026-11-05,64,1400
 MED15462,Tramadol_50mg,C16,Meloxicam,Capsule,50,mg,UPSA,2026-08-26,142,1250
-MED15463,Levothyroxine_50mcg,B51,Vitamin C,Capsule,300,mg,UPSA,2026-08-16,198,1600
+MED15463,Levothyroxine_50mg,B51,Vitamin C,Capsule,300,mg,UPSA,2026-08-16,198,1600
 MED15466,Cetirizine_10mg,C99,Aspirin,Capsule,120,mg,OPV Pharma,2026-11-19,153,1200
 MED15467,Tramadol_50mg,C52,Amoxicillin + Clavulanate,Syrup,4200,ml,Sandoz,2026-09-03,194,50000
 MED15469,Alphachoay,B2,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-08-31,161,3000
@@ -5675,7 +5675,7 @@ MED15573,Efferalgan_500mg,B84,Paracetamol,Tablet,500,mg,UPSA,2026-04-27,144,2000
 MED15574,Tiffy_Dey,A81,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-02-26,29,1200
 MED15579,Krebs_Cough_Syrup,A4,Cefixime,Tablet,200,ml,OPV Pharma,2026-04-03,99,1600
 MED15580,Clotrimazole_1pct,A62,Multivitamin,Tablet,120,mg,ASDEX,2026-06-17,121,1000
-MED15583,Levothyroxine_50mcg,A75,Acyclovir,Capsule,10,mg,OPV Pharma,2026-06-16,60,1600
+MED15583,Levothyroxine_50mg,A75,Acyclovir,Capsule,10,mg,OPV Pharma,2026-06-16,60,1600
 MED15584,Krebs_Cough_Syrup,C30,Paracetamol + Caffeine,Tablet,20,mg,Imexpharm,2026-08-22,43,2000
 MED15585,Desloratadine_5mg,A98,Meloxicam,Syrup,250,ml,United Pharma,2026-03-11,69,50000
 MED15587,Smecta,C31,Zinc + Vitamin,Capsule,200,mg,Sanofi,2026-09-28,127,1700
@@ -5814,7 +5814,7 @@ MED15995,ORS_Plus,C74,Amoxicillin,Capsule,400,mg,Stella,2026-04-16,29,2000
 MED15999,Acetylcysteine_200mg,B76,Alpha chymotrypsin,Syrup,200,ml,Kingphar,2026-03-27,193,50000
 MED16000,Bisoprolol_5mg,B81,Amoxicillin + Clavulanate,Tablet,120,ml,Choay Pharma,2026-03-03,159,1450
 MED16001,Metronidazole_500mg,B24,Aspirin,Syrup,400,ml,Imexpharm,2026-04-21,87,50000
-MED16002,Levothyroxine_50mcg,A81,Cefixime,Syrup,5,ml,Abbott,2026-02-18,30,50000
+MED16002,Levothyroxine_50mg,A81,Cefixime,Syrup,5,ml,Abbott,2026-02-18,30,50000
 MED16004,Clarithromycin_500mg,C7,Paracetamol,Syrup,500,ml,Kingphar,2026-08-28,185,50000
 MED16006,Cetirizine_10mg,A2,Cefixime,Syrup,400,ml,Pfizer,2026-03-05,124,50000
 MED16010,Methylprednisolone_16mg,C61,Amoxicillin + Clavulanate,Capsule,1,mg,United Pharma,2026-07-11,171,2000
@@ -5894,7 +5894,7 @@ MED16231,Bromhexine_8mg,C0,Paracetamol,Capsule,250,mg,ASDEX,2026-04-11,26,2500
 MED16237,Amoxicillin_500mg,A51,Amoxicillin,Capsule,500,mg,GSK,2026-03-09,143,2000
 MED16238,Augmentin_625mg,B43,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-11-11,118,2400
 MED16239,Augmentin_625mg,A63,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-05-11,12,2400
-MED16243,Levothyroxine_50mcg,A17,Paracetamol + Caffeine,Syrup,20,ml,Choay Pharma,2026-03-28,115,50000
+MED16243,Levothyroxine_50mg,A17,Paracetamol + Caffeine,Syrup,20,ml,Choay Pharma,2026-03-28,115,50000
 MED16250,Ciprofloxacin_500mg,A2,Aspirin,Tablet,20,ml,AstraZeneca,2026-09-22,132,1450
 MED16251,Metoclopramide_10mg,B11,Paracetamol,Capsule,50,mg,United Pharma,2026-04-28,132,1600
 MED16252,Vitamin_E_400IU,C11,Ibuprofen,Syrup,5,ml,Bayer,2026-09-10,13,1400
@@ -5923,7 +5923,7 @@ MED16307,Nexium_mups_20mg,A97,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-09-23,6
 MED16308,Alphachoay,A26,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-07-02,186,2500
 MED16312,SkillMax_Ocavill,A20,Multivitamin,Syrup,10,ml,OPV Pharma,2026-11-24,13,50000
 MED16313,Omeprazole_20mg,A4,Amoxicillin,Tablet,4200,ml,Stella,2026-09-11,62,2500
-MED16316,Levothyroxine_50mcg,B65,Amoxicillin + Clavulanate,Syrup,2,ml,OPV Pharma,2026-09-20,1,50000
+MED16316,Levothyroxine_50mg,B65,Amoxicillin + Clavulanate,Syrup,2,ml,OPV Pharma,2026-09-20,1,50000
 MED16317,Krebs_Cough_Syrup,C11,Alpha chymotrypsin,Syrup,625,ml,Traphaco,2026-05-02,38,50000
 MED16318,Ketoconazole_200mg,C60,Vitamin C,Capsule,500,ml,GSK,2026-09-13,93,1500
 MED16320,Echina_Kingphar,C0,Echinacea,Tablet,500,mg,Kingphar,2026-02-20,24,1000
@@ -5936,7 +5936,7 @@ MED16335,Eugica,B77,Herbal Extract,Syrup,10,ml,Mega We Care,2026-02-05,5,50000
 MED16339,Allopurinol_300mg,A54,Cefdinir,Syrup,500,ml,Choay Pharma,2026-05-21,74,50000
 MED16340,Eugica,B92,Herbal Extract,Syrup,10,ml,Mega We Care,2026-04-28,175,50000
 MED16343,Desloratadine_5mg,C58,Alpha chymotrypsin,Tablet,625,ml,Sanofi,2026-06-01,52,1700
-MED16347,Levothyroxine_50mcg,B38,Amoxicillin,Tablet,40,ml,Sandoz,2026-07-14,98,2500
+MED16347,Levothyroxine_50mg,B38,Amoxicillin,Tablet,40,ml,Sandoz,2026-07-14,98,2500
 MED16351,Hydrocortisone_10mg,C44,Vitamin C,Capsule,20,mg,Traphaco,2026-11-05,50,1250
 MED16352,Fexofenadine_120mg,B36,Ibuprofen,Syrup,300,ml,OPV Pharma,2026-05-14,186,50000
 MED16353,Omeprazole_20mg,A15,Zinc + Vitamin,Capsule,400,mg,Imexpharm,2026-02-06,3,1000
@@ -6004,7 +6004,7 @@ MED16521,ORS_Plus,A94,Ibuprofen,Tablet,250,ml,Mega We Care,2026-11-02,187,2000
 MED16522,Ambroxol_30mg,A16,Amoxicillin,Capsule,20,ml,UDI,2026-07-28,68,1700
 MED16523,Eugica,B77,Herbal Extract,Syrup,10,ml,Mega We Care,2026-10-22,12,50000
 MED16524,ORS_Plus,B1,Echinacea,Syrup,2,ml,Pfizer,2026-09-30,45,50000
-MED16525,Levothyroxine_50mcg,B40,Meloxicam,Syrup,2,ml,Sandoz,2026-10-05,188,50000
+MED16525,Levothyroxine_50mg,B40,Meloxicam,Syrup,2,ml,Sandoz,2026-10-05,188,50000
 MED16528,Vitamin_C,B65,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-03-22,138,1400
 MED16532,Ibuprofen_200mg,A91,Ibuprofen,Tablet,200,mg,Abbott,2026-10-09,170,1000
 MED16533,Efferalgan_500mg,B66,Paracetamol,Tablet,500,mg,UPSA,2026-09-28,77,1700
@@ -6029,14 +6029,14 @@ MED16572,Acetylcysteine_200mg,B25,Aspirin,Tablet,625,ml,Sanofi,2026-10-06,152,10
 MED16573,Nystatin_Suspension,C80,Alpha chymotrypsin,Tablet,4200,mg,Mega We Care,2026-10-15,21,1250
 MED16577,Magnesium_B6,A86,Amoxicillin,Capsule,625,mg,United Pharma,2026-10-09,96,1250
 MED16581,Siro_Ginkid_ZinC,B19,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-09-20,142,50000
-MED16584,Levothyroxine_50mcg,A31,Alpha chymotrypsin,Syrup,7.5,ml,Abbott,2026-10-09,23,50000
+MED16584,Levothyroxine_50mg,A31,Alpha chymotrypsin,Syrup,7.5,ml,Abbott,2026-10-09,23,50000
 MED16585,Telfast_HD_180mg,C56,Fexofenadine,Tablet,180,mg,Sanofi,2026-01-31,186,1200
 MED16587,Atorvastatin_20mg,A70,Meloxicam,Tablet,650,mg,GSK,2026-05-20,74,1200
 MED16590,Aspirin_500mg,B39,Aspirin,Tablet,500,mg,Bayer,2026-07-24,73,1000
 MED16592,Insulin_Basal,C29,Ascorbic Acid,Syrup,1,ml,UDI,2026-04-14,154,50000
 MED16597,Telfast_HD_180mg,C40,Fexofenadine,Tablet,180,mg,Sanofi,2026-05-20,56,1700
 MED16598,Tramadol_50mg,B38,Acyclovir,Syrup,10,ml,Kingphar,2026-03-24,73,50000
-MED16610,Levothyroxine_50mcg,A94,Cefuroxime,Syrup,400,ml,Traphaco,2026-09-11,95,50000
+MED16610,Levothyroxine_50mg,A94,Cefuroxime,Syrup,400,ml,Traphaco,2026-09-11,95,50000
 MED16613,Nexium_mups_20mg,C98,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-07-13,40,1700
 MED16618,Hydrocortisone_10mg,C12,Paracetamol,Tablet,200,ml,ASDEX,2026-02-13,9,1200
 MED16619,Clarithromycin_500mg,A41,Ascorbic Acid,Tablet,16,mg,Mega We Care,2026-10-29,90,2500
@@ -6054,7 +6054,7 @@ MED16639,Aspirin_500mg,C62,Aspirin,Tablet,500,mg,Bayer,2026-09-05,125,1000
 MED16640,Augmentin_625mg,B14,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-10-26,109,2400
 MED16641,Gliclazide_80mg,C94,Amoxicillin,Tablet,2,ml,Imexpharm,2026-09-22,139,1700
 MED16644,Amoxicillin_500mg,C3,Amoxicillin,Capsule,500,mg,GSK,2026-03-20,68,2000
-MED16646,Levothyroxine_50mcg,C64,Meloxicam,Syrup,400,ml,DHG Pharma,2026-04-06,39,50000
+MED16646,Levothyroxine_50mg,C64,Meloxicam,Syrup,400,ml,DHG Pharma,2026-04-06,39,50000
 MED16651,Insulin_Basal,B63,Cefdinir,Tablet,200,mg,Mega We Care,2026-04-12,109,3000
 MED16653,Calcium_Carbonate_500mg,B78,Vitamin C,Syrup,300,ml,Stella,2026-08-01,70,50000
 MED16658,Ciprofloxacin_500mg,B11,Ibuprofen,Capsule,50,mg,Kingphar,2026-02-17,24,2500
@@ -6135,7 +6135,7 @@ MED16883,Colchicine_1mg,C24,Alpha chymotrypsin,Capsule,16,mg,Kingphar,2026-03-21
 MED16886,Efferalgan_500mg,C0,Paracetamol,Tablet,500,mg,UPSA,2026-02-17,84,1250
 MED16892,Amoxicillin_500mg,A29,Amoxicillin,Capsule,500,mg,GSK,2026-11-18,144,2000
 MED16894,Diclofenac_50mg,C66,Meloxicam,Tablet,400,mg,Stella,2026-06-22,111,1250
-MED16900,Levothyroxine_50mcg,B6,Zinc + Vitamin,Capsule,40,ml,Imexpharm,2026-09-12,92,1450
+MED16900,Levothyroxine_50mg,B6,Zinc + Vitamin,Capsule,40,ml,Imexpharm,2026-09-12,92,1450
 MED16901,Insulin_Rapid,B19,Zinc + Vitamin,Syrup,1,ml,Pfizer,2026-10-26,170,50000
 MED16905,Insulin_Rapid,B43,Paracetamol,Syrup,120,ml,UPSA,2026-11-12,59,50000
 MED16910,Acetylcysteine_200mg,B2,Echinacea,Capsule,5,ml,Kingphar,2026-05-11,36,1600
@@ -6399,7 +6399,7 @@ MED17572,Clotrimazole_1pct,A10,Echinacea,Capsule,650,ml,United Pharma,2026-08-31
 MED17575,Clotrimazole_1pct,B12,Paracetamol + Caffeine,Tablet,120,mg,AstraZeneca,2026-10-04,91,1600
 MED17576,Alphachoay,A4,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-08-08,32,2500
 MED17578,Nexium_mups_20mg,B97,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-10-29,158,1500
-MED17579,Levothyroxine_50mcg,C27,Zinc + Vitamin,Tablet,7.5,ml,Stella,2026-10-17,58,1500
+MED17579,Levothyroxine_50mg,C27,Zinc + Vitamin,Tablet,7.5,ml,Stella,2026-10-17,58,1500
 MED17588,Insulin_Basal,A3,Meloxicam,Syrup,625,ml,Stella,2026-10-21,65,50000
 MED17590,Krebs_Cough_Syrup,A54,Vitamin C,Capsule,300,mg,Imexpharm,2026-08-26,92,3000
 MED17594,Panadol_Extra,B66,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-08-13,171,2000
@@ -6459,7 +6459,7 @@ MED17786,Telfast_HD_180mg,C51,Fexofenadine,Tablet,180,mg,Sanofi,2026-07-20,37,12
 MED17788,Calcium_Carbonate_500mg,A59,Ibuprofen,Capsule,10,ml,GSK,2026-10-18,122,1000
 MED17789,Efferalgan_500mg,A37,Paracetamol,Tablet,500,mg,UPSA,2026-08-22,95,1000
 MED17792,Augmentin_625mg,B36,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-07-12,3,2400
-MED17797,Levothyroxine_50mcg,B7,Cefixime,Capsule,2,mg,Abbott,2026-07-08,87,1000
+MED17797,Levothyroxine_50mg,B7,Cefixime,Capsule,2,mg,Abbott,2026-07-08,87,1000
 MED17801,Zinc_Gluconate_20mg,C86,Cefixime,Capsule,625,mg,Bayer,2026-06-11,172,1500
 MED17806,Calcium_D3,B36,Echinacea,Syrup,16,ml,Stella,2026-07-08,127,50000
 MED17809,Loratadine_10mg,B80,Zinc + Vitamin,Syrup,120,ml,Mega We Care,2026-11-14,84,50000
@@ -6536,7 +6536,7 @@ MED17993,Nystatin_Suspension,B59,Vitamin C,Syrup,1,ml,ASDEX,2026-10-23,46,50000
 MED17994,Panadol_Extra,B45,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-05-04,188,1200
 MED17999,Eugica,B40,Herbal Extract,Syrup,10,ml,Mega We Care,2026-03-23,104,50000
 MED18004,Meloxicam_7.5mg,A84,Meloxicam,Tablet,7.5,mg,Sanofi,2026-06-01,16,1000
-MED18005,Levothyroxine_50mcg,C79,Vitamin C,Syrup,650,ml,Stella,2026-06-20,153,50000
+MED18005,Levothyroxine_50mg,C79,Vitamin C,Syrup,650,ml,Stella,2026-06-20,153,50000
 MED18007,Zinc_Gluconate_20mg,C12,Alpha chymotrypsin,Tablet,650,ml,Stella,2026-01-30,180,2500
 MED18008,Azithromycin_250mg,B81,Ibuprofen,Syrup,10,ml,United Pharma,2026-11-13,5,50000
 MED18013,Loperamid_2mg,B20,Loperamide,Tablet,2,mg,Imexpharm,2026-06-17,8,2500
@@ -6546,7 +6546,7 @@ MED18025,Eugica,C72,Herbal Extract,Syrup,10,ml,Mega We Care,2026-09-21,24,50000
 MED18027,Metronidazole_500mg,C55,Cefdinir,Capsule,120,mg,UDI,2026-03-02,17,1250
 MED18029,Methylprednisolone_16mg,B66,Aspirin,Tablet,1,mg,Sandoz,2026-09-23,107,1600
 MED18038,Nexium_mups_20mg,B51,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-08-08,83,1500
-MED18039,Levothyroxine_50mcg,B83,Zinc + Vitamin,Capsule,1,mg,Stella,2026-11-01,79,1000
+MED18039,Levothyroxine_50mg,B83,Zinc + Vitamin,Capsule,1,mg,Stella,2026-11-01,79,1000
 MED18040,Azithromycin_250mg,A10,Echinacea,Syrup,200,ml,Kingphar,2026-04-10,10,50000
 MED18044,Insulin_Basal,C1,Ibuprofen,Tablet,300,ml,Kingphar,2026-07-21,151,1000
 MED18045,Augmentin_625mg,A76,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-10-20,150,2400
@@ -6574,7 +6574,7 @@ MED18100,Panadol_Extra,C6,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-04-14,17
 MED18101,Tramadol_50mg,B38,Echinacea,Syrup,16,ml,OPV Pharma,2026-03-27,57,50000
 MED18102,Echina_Kingphar,B14,Echinacea,Tablet,500,mg,Kingphar,2026-05-07,187,1000
 MED18103,Metformin_500mg,C2,Cefdinir,Tablet,50,ml,Mega We Care,2026-09-05,148,1700
-MED18106,Levothyroxine_50mcg,B55,Zinc + Vitamin,Capsule,1,mg,UPSA,2026-07-10,67,1500
+MED18106,Levothyroxine_50mg,B55,Zinc + Vitamin,Capsule,1,mg,UPSA,2026-07-10,67,1500
 MED18107,Azithromycin_250mg,A86,Ascorbic Acid,Capsule,20,mg,United Pharma,2026-04-10,5,1250
 MED18108,Paracetamol_500mg,A93,Paracetamol,Tablet,500,mg,Sanofi,2026-04-18,136,700
 MED18109,Tramadol_50mg,C55,Acyclovir,Capsule,400,mg,Traphaco,2026-03-03,102,1250
@@ -6615,7 +6615,7 @@ MED18218,Cetirizine_10mg,C27,Acyclovir,Capsule,1,mg,Kingphar,2026-04-05,65,1200
 MED18223,Pantoprazole_40mg,B90,Acyclovir,Syrup,400,ml,GSK,2026-03-19,46,50000
 MED18228,Loratadine_10mg,A50,Paracetamol,Tablet,500,mg,Abbott,2026-10-07,123,1500
 MED18229,Enat_400,A61,Vitamin E,Tablet,400,IU,Mega We Care,2026-05-29,35,1450
-MED18233,Levothyroxine_50mcg,A54,Amoxicillin,Tablet,10,ml,Pfizer,2026-07-01,4,1600
+MED18233,Levothyroxine_50mg,A54,Amoxicillin,Tablet,10,ml,Pfizer,2026-07-01,4,1600
 MED18234,Domperidone_10mg,A69,Vitamin C,Tablet,16,ml,UPSA,2026-03-13,97,3000
 MED18236,Vitamin_E_400IU,C57,Cefdinir,Syrup,7.5,ml,Kingphar,2026-06-22,50,1400
 MED18239,Amlodipine_5mg,C14,Zinc + Vitamin,Tablet,20,mg,United Pharma,2026-11-23,150,1600
@@ -6627,7 +6627,7 @@ MED18257,Iron_Folic,A2,Ascorbic Acid,Tablet,400,mg,ASDEX,2026-08-08,12,1000
 MED18258,Domperidone_10mg,C58,Paracetamol,Tablet,625,mg,UPSA,2026-04-07,172,2500
 MED18260,Fexofenadine_120mg,A67,Meloxicam,Capsule,400,mg,Stella,2026-07-18,120,1450
 MED18261,Ginkgo_Biloba_120mg,A70,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-06-19,160,1400
-MED18267,Levothyroxine_50mcg,B60,Multivitamin,Capsule,250,ml,GSK,2026-07-19,27,2500
+MED18267,Levothyroxine_50mg,B60,Multivitamin,Capsule,250,ml,GSK,2026-07-19,27,2500
 MED18272,Calcium_Carbonate_500mg,C71,Multivitamin,Capsule,500,ml,Mega We Care,2026-06-24,40,1000
 MED18275,Eugica,A66,Herbal Extract,Syrup,10,ml,Mega We Care,2026-03-31,75,50000
 MED18283,Vitamin_C,C28,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-08-12,30,1400
@@ -6680,7 +6680,7 @@ MED18417,Calcium_D3,B61,Multivitamin,Tablet,20,mg,Abbott,2026-05-01,134,1500
 MED18420,Krebs_Cough_Syrup,C26,Echinacea,Tablet,300,ml,Abbott,2026-09-12,7,1000
 MED18427,Insulin_Basal,B25,Alpha chymotrypsin,Syrup,500,ml,Pfizer,2026-05-14,168,50000
 MED18429,Diclofenac_50mg,B53,Multivitamin,Tablet,300,mg,Abbott,2026-05-19,117,2000
-MED18430,Levothyroxine_50mcg,C57,Multivitamin,Syrup,200,ml,ASDEX,2026-11-09,200,50000
+MED18430,Levothyroxine_50mg,C57,Multivitamin,Syrup,200,ml,ASDEX,2026-11-09,200,50000
 MED18433,Amoxicillin_500mg,A90,Amoxicillin,Capsule,500,mg,GSK,2026-08-20,73,2000
 MED18438,Siro_Ginkid_ZinC,B75,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-11-15,196,50000
 MED18441,Acetylcysteine_200mg,A58,Paracetamol,Syrup,7.5,ml,Choay Pharma,2026-03-19,127,50000
@@ -6772,11 +6772,11 @@ MED18687,Vitamin_E_400IU,B43,Alpha chymotrypsin,Tablet,250,ml,Sanofi,2026-07-21,
 MED18688,Efferalgan_500mg,C85,Paracetamol,Tablet,500,mg,UPSA,2026-07-03,61,1250
 MED18691,Augmentin_625mg,B68,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-02-21,109,2400
 MED18694,Tiffy_Dey,B48,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-05-26,120,1450
-MED18697,Levothyroxine_50mcg,A62,Amoxicillin + Clavulanate,Tablet,300,mg,ASDEX,2026-07-26,36,3000
+MED18697,Levothyroxine_50mg,A62,Amoxicillin + Clavulanate,Tablet,300,mg,ASDEX,2026-07-26,36,3000
 MED18699,Tiffy_Dey,A98,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-09-14,189,3000
 MED18700,Gliclazide_80mg,B69,Aspirin,Tablet,7.5,mg,Abbott,2026-03-04,109,1450
 MED18704,Aspirin_500mg,A40,Aspirin,Tablet,500,mg,Bayer,2026-06-28,139,1000
-MED18706,Levothyroxine_50mcg,C71,Ibuprofen,Syrup,20,ml,Sandoz,2026-04-07,62,50000
+MED18706,Levothyroxine_50mg,C71,Ibuprofen,Syrup,20,ml,Sandoz,2026-04-07,62,50000
 MED18707,Meloxicam_7.5mg,B12,Meloxicam,Tablet,7.5,mg,Sanofi,2026-08-29,171,1450
 MED18712,Bisoprolol_5mg,A67,Cefuroxime,Capsule,300,ml,Mega We Care,2026-08-27,40,3000
 MED18715,Amlodipine_5mg,A57,Aspirin,Capsule,20,ml,Kingphar,2026-05-07,127,1000
@@ -6811,7 +6811,7 @@ MED18774,Nexium_mups_20mg,B82,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-05-29,1
 MED18777,Domperidone_10mg,C66,Ibuprofen,Tablet,50,ml,UPSA,2026-05-25,98,1700
 MED18784,Gliclazide_80mg,C31,Zinc + Vitamin,Tablet,120,ml,Sandoz,2026-07-28,125,2500
 MED18787,Gliclazide_80mg,B68,Echinacea,Capsule,1,mg,UDI,2026-06-25,30,1700
-MED18789,Levothyroxine_50mcg,A83,Echinacea,Syrup,250,ml,United Pharma,2026-09-02,128,50000
+MED18789,Levothyroxine_50mg,A83,Echinacea,Syrup,250,ml,United Pharma,2026-09-02,128,50000
 MED18794,Panadol_Extra,B57,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-06-30,70,1250
 MED18795,Echina_Kingphar,B68,Echinacea,Tablet,500,mg,Kingphar,2026-04-07,57,1000
 MED18797,Azithromycin_250mg,A3,Zinc + Vitamin,Capsule,10,mg,Imexpharm,2026-08-30,21,3000
@@ -6873,7 +6873,7 @@ MED18941,Omeprazole_20mg,A30,Echinacea,Tablet,5,mg,DHG Pharma,2026-10-07,67,1450
 MED18947,Azithromycin_250mg,C16,Amoxicillin + Clavulanate,Syrup,20,ml,Bayer,2026-08-10,82,50000
 MED18948,Metformin_500mg,C31,Amoxicillin + Clavulanate,Syrup,650,ml,AstraZeneca,2026-10-20,74,50000
 MED18949,Siro_Ginkid_ZinC,C8,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-08-20,65,50000
-MED18950,Levothyroxine_50mcg,B65,Amoxicillin + Clavulanate,Capsule,120,ml,GSK,2026-04-28,108,1700
+MED18950,Levothyroxine_50mg,B65,Amoxicillin + Clavulanate,Capsule,120,ml,GSK,2026-04-28,108,1700
 MED18951,Hydrocortisone_10mg,B82,Paracetamol,Syrup,1,ml,OPV Pharma,2026-10-20,192,50000
 MED18952,Salbutamol_4mg,A73,Aspirin,Capsule,400,mg,UDI,2026-08-02,92,1600
 MED18954,Diclofenac_50mg,C66,Echinacea,Syrup,500,ml,Bayer,2026-08-23,85,50000
@@ -6888,13 +6888,13 @@ MED18974,Bisoprolol_5mg,A94,Cefuroxime,Syrup,1,ml,UDI,2026-07-23,141,50000
 MED18982,Allopurinol_300mg,A4,Acyclovir,Tablet,650,ml,UPSA,2026-07-28,109,1500
 MED18984,Vitamin_B1_B6_B12,B2,Cefixime,Capsule,200,ml,Mega We Care,2026-11-13,2,1400
 MED18986,Amlodipine_5mg,B67,Paracetamol,Tablet,10,mg,Kingphar,2026-04-30,173,2000
-MED18987,Levothyroxine_50mcg,B95,Amoxicillin + Clavulanate,Capsule,5,mg,GSK,2026-02-01,121,1250
+MED18987,Levothyroxine_50mg,B95,Amoxicillin + Clavulanate,Capsule,5,mg,GSK,2026-02-01,121,1250
 MED18989,Atorvastatin_20mg,A12,Paracetamol,Tablet,16,ml,Sandoz,2026-06-07,57,1250
 MED18995,Metformin_500mg,B10,Alpha chymotrypsin,Capsule,10,ml,DHG Pharma,2026-02-06,58,1000
 MED18998,Insulin_Rapid,B23,Cefdinir,Capsule,40,mg,GSK,2026-03-03,142,2500
 MED18999,Eugica,B14,Herbal Extract,Syrup,10,ml,Mega We Care,2026-04-05,68,50000
 MED19000,Azithromycin_250mg,A2,Cefixime,Tablet,300,ml,Sandoz,2026-04-29,172,2500
-MED19002,Levothyroxine_50mcg,C44,Amoxicillin,Capsule,200,mg,OPV Pharma,2026-08-01,185,2500
+MED19002,Levothyroxine_50mg,C44,Amoxicillin,Capsule,200,mg,OPV Pharma,2026-08-01,185,2500
 MED19007,Atorvastatin_20mg,B20,Meloxicam,Capsule,7.5,mg,Traphaco,2026-11-21,200,2000
 MED19009,Loratadine_10mg,C87,Cefixime,Tablet,50,mg,Mega We Care,2026-02-07,118,2000
 MED19011,Vitamin_C,B58,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-03-13,38,1400
@@ -6925,7 +6925,7 @@ MED19064,Insulin_Basal,A40,Cefixime,Capsule,80,mg,Stella,2026-06-14,69,1500
 MED19066,Enterogermina,B6,Bacillus clausii,Suspension,5,ml,Sanofi,2026-10-20,117,1450
 MED19070,Methylprednisolone_16mg,C77,Acyclovir,Capsule,625,mg,OPV Pharma,2026-03-07,106,1500
 MED19072,Cefdinir_300mg,A32,Cefdinir,Capsule,300,mg,Pfizer,2026-10-24,103,2000
-MED19073,Levothyroxine_50mcg,B89,Cefuroxime,Syrup,5,ml,Imexpharm,2026-09-17,17,50000
+MED19073,Levothyroxine_50mg,B89,Cefuroxime,Syrup,5,ml,Imexpharm,2026-09-17,17,50000
 MED19074,Acetylcysteine_200mg,C48,Ascorbic Acid,Syrup,4200,ml,Sanofi,2026-05-07,60,50000
 MED19076,Echina_Kingphar,C89,Echinacea,Tablet,500,mg,Kingphar,2026-02-23,169,1600
 MED19080,Celecoxib_200mg,B65,Amoxicillin,Tablet,200,ml,Bayer,2026-03-20,124,2500
@@ -7126,7 +7126,7 @@ MED19641,Nystatin_Suspension,A14,Cefixime,Capsule,40,ml,ASDEX,2026-04-10,151,120
 MED19643,Augmentin_625mg,B81,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-08-26,66,2400
 MED19650,Vitamin_K2,B20,Cefuroxime,Syrup,300,ml,United Pharma,2026-07-26,76,1400
 MED19653,Clarithromycin_500mg,A42,Paracetamol + Caffeine,Capsule,5,ml,Sandoz,2026-08-22,2,1250
-MED19654,Levothyroxine_50mcg,C53,Cefuroxime,Tablet,500,ml,Choay Pharma,2026-07-16,164,1700
+MED19654,Levothyroxine_50mg,C53,Cefuroxime,Tablet,500,ml,Choay Pharma,2026-07-16,164,1700
 MED19655,Gliclazide_80mg,C72,Cefixime,Tablet,250,mg,UPSA,2026-07-07,112,1600
 MED19656,Allopurinol_300mg,C85,Meloxicam,Capsule,200,mg,Sandoz,2026-06-27,49,3000
 MED19661,Calcium_D3,B92,Amoxicillin + Clavulanate,Syrup,120,ml,ASDEX,2026-05-28,111,50000
@@ -7311,7 +7311,7 @@ MED20165,Bromhexine_8mg,A60,Multivitamin,Syrup,20,ml,OPV Pharma,2026-02-03,199,5
 MED20167,Metoclopramide_10mg,C85,Paracetamol,Capsule,500,ml,ASDEX,2026-04-14,73,3000
 MED20171,Cefuroxim_500mg,B88,Cefuroxime,Tablet,500,mg,Sandoz,2026-09-14,155,2000
 MED20174,Simvastatin_20mg,C1,Acyclovir,Capsule,7.5,mg,Abbott,2026-05-05,16,1700
-MED20178,Levothyroxine_50mcg,A28,Cefuroxime,Capsule,20,ml,United Pharma,2026-02-14,149,1500
+MED20178,Levothyroxine_50mg,A28,Cefuroxime,Capsule,20,ml,United Pharma,2026-02-14,149,1500
 MED20183,Vitamin_C,C42,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-09-25,100,1400
 MED20187,Aspirin_500mg,C83,Aspirin,Tablet,500,mg,Bayer,2026-03-03,178,1000
 MED20192,Insulin_Basal,C95,Echinacea,Capsule,300,ml,Imexpharm,2026-04-26,181,1200
@@ -7326,7 +7326,7 @@ MED20206,Vitamin_C,B96,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-07-26,92,1400
 MED20223,ORS_Plus,C83,Meloxicam,Tablet,4200,mg,DHG Pharma,2026-05-29,99,2000
 MED20228,Paracetamol_500mg,A5,Paracetamol,Tablet,500,mg,Sanofi,2026-03-26,20,700
 MED20231,Domperidone_10mg,C93,Alpha chymotrypsin,Syrup,80,ml,United Pharma,2026-08-18,103,50000
-MED20232,Levothyroxine_50mcg,C25,Zinc + Vitamin,Syrup,5,ml,Abbott,2026-11-19,175,50000
+MED20232,Levothyroxine_50mg,C25,Zinc + Vitamin,Syrup,5,ml,Abbott,2026-11-19,175,50000
 MED20235,Ibuprofen_200mg,A9,Ibuprofen,Tablet,200,mg,Abbott,2026-05-27,99,1000
 MED20236,Loperamid_2mg,A64,Loperamide,Tablet,2,mg,Imexpharm,2026-07-07,183,2500
 MED20241,Meloxicam_7.5mg,B44,Meloxicam,Tablet,7.5,mg,Sanofi,2026-09-16,123,3000
@@ -7415,13 +7415,13 @@ MED20464,Telfast_HD_180mg,B51,Fexofenadine,Tablet,180,mg,Sanofi,2026-02-27,120,1
 MED20470,Allopurinol_300mg,C36,Vitamin C,Tablet,300,ml,Mega We Care,2026-03-27,144,2000
 MED20475,Paracetamol_500mg,B98,Paracetamol,Tablet,500,mg,Sanofi,2026-03-25,160,700
 MED20476,Colchicine_1mg,A55,Aspirin,Syrup,500,ml,Mega We Care,2026-07-14,63,50000
-MED20479,Levothyroxine_50mcg,B70,Zinc + Vitamin,Tablet,20,ml,Traphaco,2026-04-24,36,1250
+MED20479,Levothyroxine_50mg,B70,Zinc + Vitamin,Tablet,20,ml,Traphaco,2026-04-24,36,1250
 MED20480,Calcium_D3,A7,Aspirin,Syrup,300,ml,Sanofi,2026-06-01,23,50000
 MED20484,Vitamin_C,C37,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-07-15,173,1400
 MED20486,Augmentin_625mg,C84,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-06-23,72,2400
 MED20487,Metformin_500mg,B9,Cefdinir,Tablet,300,ml,United Pharma,2026-02-04,76,2000
 MED20488,Vitamin_C,B33,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-08-07,83,1400
-MED20489,Levothyroxine_50mcg,B64,Paracetamol,Capsule,16,ml,United Pharma,2026-02-05,194,1500
+MED20489,Levothyroxine_50mg,B64,Paracetamol,Capsule,16,ml,United Pharma,2026-02-05,194,1500
 MED20490,Amoxicillin_500mg,A63,Amoxicillin,Capsule,500,mg,GSK,2026-09-09,68,2000
 MED20491,Domperidone_10mg,B72,Echinacea,Syrup,10,ml,Sandoz,2026-03-21,158,50000
 MED20494,Iron_Folic,A78,Paracetamol + Caffeine,Tablet,5,mg,OPV Pharma,2026-11-23,164,1600
@@ -7443,7 +7443,7 @@ MED20543,Vitamin_C,B36,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-04-30,8,1400
 MED20544,Insulin_Rapid,B64,Alpha chymotrypsin,Capsule,50,ml,UPSA,2026-03-23,185,1450
 MED20550,Amlodipine_5mg,C87,Paracetamol,Tablet,625,ml,DHG Pharma,2026-02-22,162,1700
 MED20551,Insulin_Basal,C40,Acyclovir,Syrup,120,ml,Imexpharm,2026-07-29,177,50000
-MED20552,Levothyroxine_50mcg,B7,Zinc + Vitamin,Syrup,250,ml,DHG Pharma,2026-05-15,28,50000
+MED20552,Levothyroxine_50mg,B7,Zinc + Vitamin,Syrup,250,ml,DHG Pharma,2026-05-15,28,50000
 MED20554,Magnesium_B6,B98,Echinacea,Tablet,300,ml,Sanofi,2026-05-10,12,3000
 MED20555,Ketoconazole_200mg,C30,Paracetamol,Tablet,50,ml,Sanofi,2026-05-31,77,1500
 MED20556,Metformin_500mg,B8,Vitamin C,Capsule,4200,ml,Imexpharm,2026-04-10,105,2000
@@ -7649,7 +7649,7 @@ MED21073,Betadine_Solution,A54,Ibuprofen,Syrup,120,ml,DHG Pharma,2026-06-26,102,
 MED21076,Prednisolone_5mg,C61,Multivitamin,Capsule,7.5,mg,Sanofi,2026-08-18,104,2500
 MED21078,Loratadine_10mg,C25,Vitamin C,Syrup,120,ml,Mega We Care,2026-08-23,178,50000
 MED21080,Esomeprazole_40mg,C46,Cefuroxime,Capsule,7.5,ml,GSK,2026-11-11,111,3000
-MED21081,Levothyroxine_50mcg,A79,Cefuroxime,Tablet,1,ml,Imexpharm,2026-10-19,120,1700
+MED21081,Levothyroxine_50mg,A79,Cefuroxime,Tablet,1,ml,Imexpharm,2026-10-19,120,1700
 MED21082,Metronidazole_500mg,A51,Cefuroxime,Syrup,5,ml,Stella,2026-05-11,144,50000
 MED21084,Betadine_Solution,B50,Paracetamol + Caffeine,Tablet,500,mg,Abbott,2026-06-11,144,3000
 MED21093,Atorvastatin_20mg,B23,Aspirin,Syrup,4200,ml,United Pharma,2026-06-27,161,50000
@@ -7766,7 +7766,7 @@ MED21382,Atorvastatin_20mg,B41,Cefixime,Tablet,1,mg,ASDEX,2026-11-07,99,1450
 MED21385,Gliclazide_80mg,C36,Echinacea,Syrup,650,ml,Abbott,2026-02-04,72,50000
 MED21387,Betadine_Solution,C74,Echinacea,Capsule,2,ml,Kingphar,2026-04-19,135,2000
 MED21389,Calcium_D3,A3,Ibuprofen,Syrup,1,ml,Bayer,2026-02-16,17,50000
-MED21391,Levothyroxine_50mcg,B61,Ibuprofen,Capsule,650,ml,Pfizer,2026-10-05,67,1500
+MED21391,Levothyroxine_50mg,B61,Ibuprofen,Capsule,650,ml,Pfizer,2026-10-05,67,1500
 MED21393,Vitamin_C,A40,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-10-23,185,1400
 MED21394,Desloratadine_5mg,A95,Cefuroxime,Syrup,50,ml,Sandoz,2026-08-20,170,50000
 MED21396,Domperidone_10mg,C19,Cefdinir,Capsule,300,mg,Imexpharm,2026-08-13,27,1250
@@ -7866,9 +7866,9 @@ MED21662,Amoxicillin_500mg,A87,Amoxicillin,Capsule,500,mg,GSK,2026-05-27,11,2000
 MED21663,Ketoconazole_200mg,A45,Zinc + Vitamin,Tablet,5,mg,ASDEX,2026-04-10,190,1250
 MED21664,Enat_400,A67,Vitamin E,Tablet,400,IU,Mega We Care,2026-05-15,159,2500
 MED21668,Atorvastatin_20mg,B10,Amoxicillin + Clavulanate,Tablet,250,mg,Sandoz,2026-06-08,86,1600
-MED21672,Levothyroxine_50mcg,B71,Ibuprofen,Tablet,650,mg,GSK,2026-05-27,43,2000
+MED21672,Levothyroxine_50mg,B71,Ibuprofen,Tablet,650,mg,GSK,2026-05-27,43,2000
 MED21673,Meloxicam_7.5mg,A65,Meloxicam,Tablet,7.5,mg,Sanofi,2026-09-30,86,1500
-MED21675,Levothyroxine_50mcg,A68,Meloxicam,Capsule,250,mg,UPSA,2026-07-16,49,3000
+MED21675,Levothyroxine_50mg,A68,Meloxicam,Capsule,250,mg,UPSA,2026-07-16,49,3000
 MED21678,Cetirizine_10mg,A63,Multivitamin,Tablet,5,mg,United Pharma,2026-03-11,108,3000
 MED21679,Fluconazole_150mg,B63,Zinc + Vitamin,Capsule,625,mg,ASDEX,2026-05-17,112,2500
 MED21680,Allopurinol_300mg,A69,Echinacea,Capsule,20,ml,Pfizer,2026-02-24,33,1600
@@ -7947,7 +7947,7 @@ MED21855,Pantoprazole_40mg,B56,Cefuroxime,Syrup,4200,ml,Pfizer,2026-11-16,32,500
 MED21857,Clotrimazole_1pct,B31,Cefuroxime,Tablet,120,ml,UDI,2026-02-03,158,1200
 MED21858,Insulin_Basal,A63,Amoxicillin,Capsule,120,ml,Choay Pharma,2026-05-26,16,1200
 MED21863,Cefuroxim_500mg,C32,Cefuroxime,Tablet,500,mg,Sandoz,2026-08-17,173,2000
-MED21867,Levothyroxine_50mcg,C62,Meloxicam,Capsule,300,mg,GSK,2026-10-22,145,1500
+MED21867,Levothyroxine_50mg,C62,Meloxicam,Capsule,300,mg,GSK,2026-10-22,145,1500
 MED21869,Levofloxacin_500mg,C61,Paracetamol,Capsule,300,mg,GSK,2026-09-11,28,1500
 MED21877,Ambroxol_30mg,C41,Cefuroxime,Tablet,650,ml,Traphaco,2026-11-06,191,1000
 MED21884,Smecta,C48,Zinc + Vitamin,Tablet,120,mg,Abbott,2026-09-17,179,1200
@@ -7979,7 +7979,7 @@ MED21959,Vitamin_C,A52,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-03-22,78,1400
 MED21964,Amlodipine_5mg,C29,Acyclovir,Tablet,2,ml,ASDEX,2026-04-27,17,1200
 MED21965,Metformin_500mg,A24,Alpha chymotrypsin,Syrup,650,ml,Traphaco,2026-05-02,40,50000
 MED21966,Losartan_50mg,A70,Amoxicillin + Clavulanate,Syrup,80,ml,OPV Pharma,2026-05-03,170,50000
-MED21969,Levothyroxine_50mcg,C21,Vitamin C,Tablet,7.5,ml,Sanofi,2026-10-29,71,1600
+MED21969,Levothyroxine_50mg,C21,Vitamin C,Tablet,7.5,ml,Sanofi,2026-10-29,71,1600
 MED21970,Iron_Folic,C9,Cefdinir,Syrup,250,ml,UPSA,2026-10-08,93,50000
 MED21974,Tramadol_50mg,C3,Aspirin,Syrup,16,ml,GSK,2026-09-01,127,50000
 MED21978,Allopurinol_300mg,B44,Alpha chymotrypsin,Capsule,300,mg,Kingphar,2026-11-04,163,1000
@@ -8116,7 +8116,7 @@ MED22358,Augmentin_625mg,B5,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-11-
 MED22360,Esomeprazole_40mg,A68,Cefdinir,Capsule,7.5,mg,OPV Pharma,2026-04-22,160,1450
 MED22361,Panadol_Extra,C31,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-08-22,16,1250
 MED22362,Alphachoay,B75,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-03-30,157,1250
-MED22365,Levothyroxine_50mcg,B54,Paracetamol,Syrup,500,ml,Kingphar,2026-08-13,14,50000
+MED22365,Levothyroxine_50mg,B54,Paracetamol,Syrup,500,ml,Kingphar,2026-08-13,14,50000
 MED22369,Simvastatin_20mg,B15,Vitamin C,Syrup,650,ml,Stella,2026-08-10,116,50000
 MED22370,Echina_Kingphar,C44,Echinacea,Tablet,500,mg,Kingphar,2026-06-25,106,2500
 MED22375,Calcium_Carbonate_500mg,B0,Ascorbic Acid,Syrup,120,ml,UPSA,2026-03-24,88,50000
@@ -8161,7 +8161,7 @@ MED22485,Fluconazole_150mg,B11,Acyclovir,Syrup,16,ml,United Pharma,2026-02-23,55
 MED22486,Clarithromycin_500mg,A31,Paracetamol,Capsule,16,ml,ASDEX,2026-08-15,96,1600
 MED22487,Prospan_Syrup,C15,Alpha chymotrypsin,Syrup,16,ml,Imexpharm,2026-10-28,154,50000
 MED22490,Loperamid_2mg,C77,Loperamide,Tablet,2,mg,Imexpharm,2026-06-25,112,1500
-MED22492,Levothyroxine_50mcg,B65,Cefdinir,Tablet,250,ml,United Pharma,2026-04-29,146,1450
+MED22492,Levothyroxine_50mg,B65,Cefdinir,Tablet,250,ml,United Pharma,2026-04-29,146,1450
 MED22498,Ambroxol_30mg,A88,Meloxicam,Capsule,20,mg,OPV Pharma,2026-04-18,140,2000
 MED22502,Bisoprolol_5mg,B27,Alpha chymotrypsin,Tablet,16,ml,Mega We Care,2026-10-01,177,1200
 MED22503,Vitamin_C,A64,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-08-08,41,1400
@@ -8265,7 +8265,7 @@ MED22765,Paracetamol_500mg,B58,Paracetamol,Tablet,500,mg,Sanofi,2026-04-25,115,7
 MED22767,Pantoprazole_40mg,B82,Zinc + Vitamin,Tablet,200,ml,Choay Pharma,2026-06-22,179,1700
 MED22768,Vitamin_B1_B6_B12,B95,Meloxicam,Tablet,650,ml,Pfizer,2026-05-15,135,1400
 MED22769,Celecoxib_200mg,B45,Ibuprofen,Syrup,200,ml,Sandoz,2026-05-16,12,50000
-MED22770,Levothyroxine_50mcg,B82,Multivitamin,Capsule,20,mg,AstraZeneca,2026-10-04,140,1600
+MED22770,Levothyroxine_50mg,B82,Multivitamin,Capsule,20,mg,AstraZeneca,2026-10-04,140,1600
 MED22772,Desloratadine_5mg,C39,Amoxicillin + Clavulanate,Tablet,1,ml,GSK,2026-10-25,196,2000
 MED22774,Cetirizine_10mg,B28,Paracetamol + Caffeine,Syrup,625,ml,GSK,2026-07-15,104,50000
 MED22781,Simvastatin_20mg,C58,Cefuroxime,Tablet,200,mg,Stella,2026-07-13,18,1500
@@ -8385,7 +8385,7 @@ MED23045,Esomeprazole_40mg,B46,Paracetamol + Caffeine,Syrup,20,ml,Kingphar,2026-
 MED23047,Acyclovir_400mg,A57,Acyclovir,Tablet,400,mg,Stella,2026-05-12,99,1000
 MED23049,Pantoprazole_40mg,A86,Acyclovir,Syrup,250,ml,Stella,2026-09-01,27,50000
 MED23052,Cefixime_200mg,A87,Cefixime,Capsule,200,mg,Imexpharm,2026-05-23,92,2000
-MED23053,Levothyroxine_50mcg,C73,Zinc + Vitamin,Syrup,20,ml,Stella,2026-07-20,196,50000
+MED23053,Levothyroxine_50mg,C73,Zinc + Vitamin,Syrup,20,ml,Stella,2026-07-20,196,50000
 MED23055,Tiffy_Dey,A24,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-04-11,129,3000
 MED23056,Prednisolone_5mg,B10,Paracetamol + Caffeine,Syrup,400,ml,Sanofi,2026-03-31,154,50000
 MED23061,Bromhexine_8mg,B62,Cefuroxime,Tablet,1,mg,DHG Pharma,2026-10-30,135,2500
@@ -8528,14 +8528,14 @@ MED23412,Ginkgo_Biloba_120mg,A87,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-10-16
 MED23413,Losartan_50mg,B36,Paracetamol + Caffeine,Tablet,16,mg,Bayer,2026-10-30,31,1250
 MED23415,Clotrimazole_1pct,C82,Multivitamin,Syrup,50,ml,DHG Pharma,2026-09-24,175,50000
 MED23416,SkillMax_Ocavill,A70,Multivitamin,Syrup,10,ml,OPV Pharma,2026-03-30,81,50000
-MED23418,Levothyroxine_50mcg,B6,Acyclovir,Tablet,625,ml,Pfizer,2026-03-07,113,1250
+MED23418,Levothyroxine_50mg,B6,Acyclovir,Tablet,625,ml,Pfizer,2026-03-07,113,1250
 MED23419,Smecta,C76,Meloxicam,Tablet,20,mg,Bayer,2026-03-24,132,1700
 MED23421,Desloratadine_5mg,B42,Paracetamol,Capsule,20,ml,DHG Pharma,2026-05-14,107,1500
 MED23426,Hapacol_650,B72,Paracetamol,Tablet,650,mg,DHG Pharma,2026-10-27,27,700
 MED23427,Zinc_Gluconate_20mg,A15,Cefuroxime,Capsule,650,mg,UDI,2026-04-21,54,2000
 MED23430,Efferalgan_500mg,A94,Paracetamol,Tablet,500,mg,UPSA,2026-07-29,171,1000
 MED23435,Echina_Kingphar,B76,Echinacea,Tablet,500,mg,Kingphar,2026-05-17,71,1200
-MED23437,Levothyroxine_50mcg,B27,Vitamin C,Capsule,625,ml,United Pharma,2026-06-10,54,2500
+MED23437,Levothyroxine_50mg,B27,Vitamin C,Capsule,625,ml,United Pharma,2026-06-10,54,2500
 MED23439,Paracetamol_500mg,C43,Paracetamol,Tablet,500,mg,Sanofi,2026-10-12,125,700
 MED23440,Losartan_50mg,B79,Multivitamin,Syrup,625,ml,GSK,2026-09-28,91,50000
 MED23441,Esomeprazole_40mg,A15,Meloxicam,Tablet,650,mg,Stella,2026-03-29,104,2500
@@ -8738,7 +8738,7 @@ MED24010,Bisoprolol_5mg,A71,Paracetamol + Caffeine,Tablet,300,ml,OPV Pharma,2026
 MED24011,Esomeprazole_40mg,C38,Cefixime,Capsule,4200,mg,Imexpharm,2026-11-25,155,3000
 MED24012,Meloxicam_7.5mg,C98,Meloxicam,Tablet,7.5,mg,Sanofi,2026-06-17,159,1700
 MED24015,Cefdinir_300mg,C58,Cefdinir,Capsule,300,mg,Pfizer,2026-09-29,154,2000
-MED24018,Levothyroxine_50mcg,C16,Cefuroxime,Syrup,300,ml,Imexpharm,2026-05-18,142,50000
+MED24018,Levothyroxine_50mg,C16,Cefuroxime,Syrup,300,ml,Imexpharm,2026-05-18,142,50000
 MED24019,Esomeprazole_40mg,B22,Ascorbic Acid,Syrup,5,ml,DHG Pharma,2026-07-13,13,50000
 MED24030,Efferalgan_500mg,B97,Paracetamol,Tablet,500,mg,UPSA,2026-03-04,190,1500
 MED24031,Acyclovir_400mg,C44,Acyclovir,Tablet,400,mg,Stella,2026-03-13,155,1450
@@ -8823,7 +8823,7 @@ MED24239,Metformin_500mg,B76,Amoxicillin,Capsule,500,mg,Sandoz,2026-05-08,109,15
 MED24242,Fluconazole_150mg,B13,Paracetamol + Caffeine,Tablet,50,mg,Sandoz,2026-08-27,200,1200
 MED24245,Clotrimazole_1pct,A5,Paracetamol + Caffeine,Tablet,250,ml,UDI,2026-05-28,99,1000
 MED24246,Magnesium_B6,B82,Cefuroxime,Capsule,400,mg,Stella,2026-04-21,79,1600
-MED24247,Levothyroxine_50mcg,C74,Paracetamol,Syrup,1,ml,Sanofi,2026-05-08,51,50000
+MED24247,Levothyroxine_50mg,C74,Paracetamol,Syrup,1,ml,Sanofi,2026-05-08,51,50000
 MED24249,Amoxicillin_500mg,A78,Amoxicillin,Capsule,500,mg,GSK,2026-08-26,55,2000
 MED24253,Hydrocortisone_10mg,C18,Cefuroxime,Capsule,10,ml,UDI,2026-11-24,17,1500
 MED24254,Diclofenac_50mg,B38,Vitamin C,Tablet,10,ml,Choay Pharma,2026-10-08,191,2000
@@ -8875,7 +8875,7 @@ MED24380,Atorvastatin_20mg,B44,Cefdinir,Tablet,400,ml,United Pharma,2026-03-05,9
 MED24381,Nexium_mups_20mg,B28,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-06-22,76,1450
 MED24385,Aspirin_500mg,B67,Aspirin,Tablet,500,mg,Bayer,2026-05-19,196,1000
 MED24387,Iron_Folic,A81,Ascorbic Acid,Syrup,300,ml,UDI,2026-03-31,95,50000
-MED24389,Levothyroxine_50mcg,B56,Cefixime,Capsule,2,mg,Kingphar,2026-05-14,174,1700
+MED24389,Levothyroxine_50mg,B56,Cefixime,Capsule,2,mg,Kingphar,2026-05-14,174,1700
 MED24399,Gliclazide_80mg,B80,Acyclovir,Tablet,20,mg,UPSA,2026-06-24,66,1000
 MED24400,Tiffy_Dey,A70,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-02-24,93,2500
 MED24402,Vitamin_K2,B20,Zinc + Vitamin,Tablet,500,ml,Pfizer,2026-05-05,18,1400
@@ -8891,7 +8891,7 @@ MED24423,SkillMax_Ocavill,A74,Multivitamin,Syrup,10,ml,OPV Pharma,2026-08-02,37,
 MED24433,Bisoprolol_5mg,B85,Cefixime,Capsule,300,mg,Imexpharm,2026-09-01,127,2000
 MED24434,Acetylcysteine_200mg,B15,Amoxicillin,Syrup,10,ml,Bayer,2026-06-24,197,50000
 MED24435,Diclofenac_50mg,B58,Cefdinir,Syrup,625,ml,UPSA,2026-07-10,61,50000
-MED24436,Levothyroxine_50mcg,C67,Echinacea,Syrup,250,ml,Abbott,2026-05-06,49,50000
+MED24436,Levothyroxine_50mg,C67,Echinacea,Syrup,250,ml,Abbott,2026-05-06,49,50000
 MED24438,Metformin_500mg,A61,Cefdinir,Syrup,500,ml,UPSA,2026-07-09,180,50000
 MED24445,Ambroxol_30mg,C32,Cefuroxime,Syrup,200,ml,Sandoz,2026-03-04,178,50000
 MED24449,Enterogermina,A31,Bacillus clausii,Suspension,5,ml,Sanofi,2026-04-23,102,1450
@@ -8916,7 +8916,7 @@ MED24507,Amoxicillin_500mg,B73,Amoxicillin,Capsule,500,mg,GSK,2026-05-15,84,2000
 MED24511,Siro_Ginkid_ZinC,A81,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-06-19,105,50000
 MED24513,Alphachoay,B37,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-06-16,24,2500
 MED24517,Desloratadine_5mg,A69,Zinc + Vitamin,Capsule,40,mg,Pfizer,2026-02-21,140,3000
-MED24519,Levothyroxine_50mcg,B21,Paracetamol,Capsule,300,ml,UDI,2026-11-08,75,1200
+MED24519,Levothyroxine_50mg,B21,Paracetamol,Capsule,300,ml,UDI,2026-11-08,75,1200
 MED24521,Desloratadine_5mg,A95,Amoxicillin + Clavulanate,Tablet,625,mg,UPSA,2026-09-13,139,1600
 MED24524,Diclofenac_50mg,B38,Cefuroxime,Syrup,5,ml,Mega We Care,2026-05-06,59,50000
 MED24525,Clarithromycin_500mg,B77,Echinacea,Capsule,50,ml,ASDEX,2026-10-03,193,1250
@@ -8997,7 +8997,7 @@ MED24692,Aspirin_500mg,B65,Aspirin,Tablet,500,mg,Bayer,2026-08-12,128,1000
 MED24696,Ginkgo_Biloba_120mg,A93,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-04-01,173,1400
 MED24698,Cefdinir_300mg,A35,Cefdinir,Capsule,300,mg,Pfizer,2026-04-18,51,2000
 MED24705,Nystatin_Suspension,B30,Amoxicillin,Capsule,5,ml,Kingphar,2026-07-10,84,1450
-MED24707,Levothyroxine_50mcg,B87,Zinc + Vitamin,Tablet,50,mg,Stella,2026-03-07,60,3000
+MED24707,Levothyroxine_50mg,B87,Zinc + Vitamin,Tablet,50,mg,Stella,2026-03-07,60,3000
 MED24708,Iron_Folic,C86,Zinc + Vitamin,Syrup,16,ml,Kingphar,2026-10-01,45,50000
 MED24709,Fluconazole_150mg,C86,Cefuroxime,Tablet,120,ml,ASDEX,2026-03-09,187,2500
 MED24711,Celecoxib_200mg,B65,Aspirin,Capsule,10,mg,GSK,2026-08-27,60,1700
@@ -9406,7 +9406,7 @@ MED25761,Metronidazole_500mg,B19,Acyclovir,Capsule,200,ml,GSK,2026-05-28,79,1000
 MED25765,Calcium_Carbonate_500mg,B52,Amoxicillin,Tablet,650,ml,OPV Pharma,2026-05-07,135,2500
 MED25766,Nystatin_Suspension,B30,Amoxicillin,Capsule,200,mg,Stella,2026-05-27,109,2500
 MED25767,Alphachoay,C53,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-08-24,141,1700
-MED25768,Levothyroxine_50mcg,A83,Multivitamin,Syrup,300,ml,UDI,2026-10-12,78,50000
+MED25768,Levothyroxine_50mg,A83,Multivitamin,Syrup,300,ml,UDI,2026-10-12,78,50000
 MED25769,Salbutamol_4mg,C11,Cefuroxime,Syrup,10,ml,Pfizer,2026-04-04,3,50000
 MED25776,Hydrocortisone_10mg,A69,Amoxicillin,Capsule,250,ml,UPSA,2026-06-10,25,1450
 MED25777,Bisoprolol_5mg,B16,Acyclovir,Syrup,4200,ml,Sanofi,2026-08-23,67,50000
@@ -9414,7 +9414,7 @@ MED25778,Azithromycin_250mg,B82,Vitamin C,Tablet,1,ml,Pfizer,2026-10-27,102,3000
 MED25780,Amoxicillin_500mg,B76,Amoxicillin,Capsule,500,mg,GSK,2026-03-14,30,2000
 MED25784,Paracetamol_500mg,C52,Paracetamol,Tablet,500,mg,Sanofi,2026-10-21,165,700
 MED25786,Calcium_Carbonate_500mg,C90,Ascorbic Acid,Tablet,7.5,ml,Choay Pharma,2026-08-21,54,1600
-MED25787,Levothyroxine_50mcg,A75,Cefixime,Tablet,400,ml,Bayer,2026-04-15,97,1200
+MED25787,Levothyroxine_50mg,A75,Cefixime,Tablet,400,ml,Bayer,2026-04-15,97,1200
 MED25788,Levofloxacin_500mg,A28,Meloxicam,Capsule,300,ml,Choay Pharma,2026-04-02,52,1000
 MED25789,Panadol_Extra,A23,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-02-25,7,1700
 MED25790,Allopurinol_300mg,A35,Echinacea,Capsule,625,mg,Sandoz,2026-04-16,66,1250
@@ -9484,7 +9484,7 @@ MED25943,Amlodipine_5mg,A43,Echinacea,Capsule,300,mg,GSK,2026-07-09,151,2500
 MED25950,Vitamin_K2,B59,Alpha chymotrypsin,Tablet,120,mg,Stella,2026-02-09,113,1400
 MED25960,Diclofenac_50mg,B5,Acyclovir,Capsule,400,mg,Mega We Care,2026-06-03,17,1500
 MED25961,Omeprazole_20mg,A75,Paracetamol,Capsule,120,mg,Sandoz,2026-07-27,25,1200
-MED25962,Levothyroxine_50mcg,B60,Alpha chymotrypsin,Capsule,300,ml,AstraZeneca,2026-05-02,106,1250
+MED25962,Levothyroxine_50mg,B60,Alpha chymotrypsin,Capsule,300,ml,AstraZeneca,2026-05-02,106,1250
 MED25963,Alphachoay,C49,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-03-05,76,3000
 MED25972,Loperamid_2mg,B38,Loperamide,Tablet,2,mg,Imexpharm,2026-09-17,199,1250
 MED25976,Hydrocortisone_10mg,C34,Acyclovir,Syrup,7.5,ml,UPSA,2026-07-31,25,50000
@@ -9574,7 +9574,7 @@ MED26189,Echina_Kingphar,A12,Echinacea,Tablet,500,mg,Kingphar,2026-02-04,12,2000
 MED26192,Cefixime_200mg,B50,Cefixime,Capsule,200,mg,Imexpharm,2026-05-21,84,2000
 MED26193,Amoxicillin_500mg,C42,Amoxicillin,Capsule,500,mg,GSK,2026-06-01,72,2000
 MED26194,Vitamin_C,C90,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-04-22,191,1400
-MED26202,Levothyroxine_50mcg,C11,Amoxicillin + Clavulanate,Capsule,400,ml,Mega We Care,2026-04-29,46,1200
+MED26202,Levothyroxine_50mg,C11,Amoxicillin + Clavulanate,Capsule,400,ml,Mega We Care,2026-04-29,46,1200
 MED26203,Cefdinir_300mg,C47,Cefdinir,Capsule,300,mg,Pfizer,2026-06-13,60,2000
 MED26207,Bromhexine_8mg,B21,Acyclovir,Tablet,5,mg,GSK,2026-03-09,143,2500
 MED26208,Calcium_D3,A93,Multivitamin,Capsule,650,ml,Mega We Care,2026-09-02,42,1500
@@ -9659,7 +9659,7 @@ MED26408,Levofloxacin_500mg,A28,Alpha chymotrypsin,Syrup,80,ml,Sandoz,2026-02-22
 MED26409,Alphachoay,B21,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-04-10,146,1250
 MED26413,Efferalgan_500mg,C83,Paracetamol,Tablet,500,mg,UPSA,2026-05-02,48,2500
 MED26414,Allopurinol_300mg,C30,Paracetamol,Capsule,40,mg,Traphaco,2026-07-22,98,1450
-MED26420,Levothyroxine_50mcg,B26,Ascorbic Acid,Capsule,16,mg,Abbott,2026-06-12,146,2500
+MED26420,Levothyroxine_50mg,B26,Ascorbic Acid,Capsule,16,mg,Abbott,2026-06-12,146,2500
 MED26426,Domperidone_10mg,B13,Acyclovir,Syrup,200,ml,Bayer,2026-10-06,120,50000
 MED26427,Enterogermina,B11,Bacillus clausii,Suspension,5,ml,Sanofi,2026-05-03,141,1000
 MED26432,Insulin_Basal,C27,Aspirin,Syrup,300,ml,Abbott,2026-02-14,190,50000
@@ -9702,7 +9702,7 @@ MED26542,Tiffy_Dey,C35,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharm
 MED26544,Tramadol_50mg,A43,Aspirin,Tablet,625,mg,Kingphar,2026-04-23,21,1250
 MED26545,Telfast_HD_180mg,B15,Fexofenadine,Tablet,180,mg,Sanofi,2026-04-19,63,1200
 MED26546,Desloratadine_5mg,C24,Vitamin C,Syrup,80,ml,Bayer,2026-04-03,65,50000
-MED26548,Levothyroxine_50mcg,B32,Cefuroxime,Tablet,80,ml,Kingphar,2026-10-22,9,2500
+MED26548,Levothyroxine_50mg,B32,Cefuroxime,Tablet,80,ml,Kingphar,2026-10-22,9,2500
 MED26551,Levofloxacin_500mg,C52,Ascorbic Acid,Tablet,400,mg,Traphaco,2026-02-27,97,1500
 MED26552,Acetylcysteine_200mg,C72,Zinc + Vitamin,Tablet,200,mg,Traphaco,2026-10-01,151,1450
 MED26554,Salbutamol_4mg,B18,Meloxicam,Capsule,300,ml,Choay Pharma,2026-09-27,174,2500
@@ -9755,7 +9755,7 @@ MED26678,Aspirin_500mg,B87,Aspirin,Tablet,500,mg,Bayer,2026-11-25,36,1000
 MED26681,Vitamin_B1_B6_B12,A91,Amoxicillin + Clavulanate,Tablet,7.5,ml,GSK,2026-06-30,9,1400
 MED26682,Losartan_50mg,C33,Alpha chymotrypsin,Syrup,500,ml,Bayer,2026-04-28,32,50000
 MED26684,Bisoprolol_5mg,B62,Zinc + Vitamin,Syrup,200,ml,ASDEX,2026-04-24,3,50000
-MED26686,Levothyroxine_50mcg,A9,Amoxicillin,Tablet,625,ml,Stella,2026-11-11,144,1700
+MED26686,Levothyroxine_50mg,A9,Amoxicillin,Tablet,625,ml,Stella,2026-11-11,144,1700
 MED26687,Ibuprofen_200mg,C1,Ibuprofen,Tablet,200,mg,Abbott,2026-10-13,105,1000
 MED26689,Enat_400,C38,Vitamin E,Tablet,400,IU,Mega We Care,2026-04-20,163,1000
 MED26695,Iron_Folic,A66,Ascorbic Acid,Syrup,4200,ml,Kingphar,2026-06-27,51,50000
@@ -9841,7 +9841,7 @@ MED26903,Desloratadine_5mg,B60,Ascorbic Acid,Capsule,5,mg,Abbott,2026-09-03,186,
 MED26904,Methylprednisolone_16mg,B1,Ibuprofen,Tablet,2,mg,DHG Pharma,2026-09-06,65,2000
 MED26905,Betadine_Solution,B78,Cefdinir,Tablet,50,mg,United Pharma,2026-05-28,25,2500
 MED26906,Acetylcysteine_200mg,C42,Zinc + Vitamin,Capsule,4200,ml,DHG Pharma,2026-07-26,110,1500
-MED26908,Levothyroxine_50mcg,B41,Cefdinir,Syrup,300,ml,DHG Pharma,2026-11-09,190,50000
+MED26908,Levothyroxine_50mg,B41,Cefdinir,Syrup,300,ml,DHG Pharma,2026-11-09,190,50000
 MED26921,Tiffy_Dey,A20,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-10-31,133,1450
 MED26924,Loperamid_2mg,C76,Loperamide,Tablet,2,mg,Imexpharm,2026-10-12,134,1000
 MED26926,Vitamin_B1_B6_B12,B37,Paracetamol + Caffeine,Capsule,2,mg,United Pharma,2026-08-04,75,1400
@@ -9889,7 +9889,7 @@ MED27047,Nexium_mups_20mg,A2,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-08-09,99
 MED27048,Atorvastatin_20mg,A71,Amoxicillin,Tablet,4200,mg,Sandoz,2026-08-06,168,1000
 MED27053,Insulin_Basal,B77,Aspirin,Syrup,625,ml,Bayer,2026-05-18,161,50000
 MED27055,Betadine_Solution,C81,Meloxicam,Capsule,5,ml,United Pharma,2026-06-12,99,1600
-MED27060,Levothyroxine_50mcg,B11,Paracetamol,Tablet,7.5,ml,Imexpharm,2026-02-01,182,2000
+MED27060,Levothyroxine_50mg,B11,Paracetamol,Tablet,7.5,ml,Imexpharm,2026-02-01,182,2000
 MED27066,Domperidone_10mg,B51,Cefuroxime,Tablet,625,ml,OPV Pharma,2026-07-19,141,2000
 MED27068,Echina_Kingphar,A60,Echinacea,Tablet,500,mg,Kingphar,2026-09-10,178,1500
 MED27074,Colchicine_1mg,A27,Cefuroxime,Syrup,7.5,ml,United Pharma,2026-08-09,167,50000
@@ -9904,7 +9904,7 @@ MED27090,Calcium_D3,B70,Echinacea,Tablet,5,ml,Sanofi,2026-08-31,120,1200
 MED27091,Panadol_Extra,A21,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-03-09,143,1450
 MED27097,Prednisolone_5mg,C73,Paracetamol + Caffeine,Syrup,4200,ml,Sanofi,2026-07-05,61,50000
 MED27098,Metformin_500mg,A28,Zinc + Vitamin,Syrup,650,ml,Traphaco,2026-05-12,133,50000
-MED27099,Levothyroxine_50mcg,A92,Zinc + Vitamin,Tablet,20,mg,GSK,2026-06-21,123,1700
+MED27099,Levothyroxine_50mg,A92,Zinc + Vitamin,Tablet,20,mg,GSK,2026-06-21,123,1700
 MED27100,Loratadine_10mg,A73,Zinc + Vitamin,Tablet,80,ml,Abbott,2026-08-05,124,1700
 MED27101,Fluconazole_150mg,B75,Acyclovir,Capsule,120,mg,Sanofi,2026-10-30,49,1700
 MED27106,Vitamin_B1_B6_B12,B1,Ibuprofen,Tablet,20,ml,Sanofi,2026-02-03,140,1400
@@ -10043,7 +10043,7 @@ MED27483,Methylprednisolone_16mg,C77,Echinacea,Tablet,400,ml,AstraZeneca,2026-09
 MED27488,Ambroxol_30mg,C3,Echinacea,Capsule,300,mg,Sanofi,2026-11-07,182,2500
 MED27489,Simvastatin_20mg,B54,Acyclovir,Tablet,80,ml,Kingphar,2026-08-20,185,1500
 MED27491,Ketoconazole_200mg,C47,Meloxicam,Tablet,300,mg,Abbott,2026-06-09,185,1200
-MED27493,Levothyroxine_50mcg,B50,Cefdinir,Tablet,20,ml,Traphaco,2026-10-13,139,1600
+MED27493,Levothyroxine_50mg,B50,Cefdinir,Tablet,20,ml,Traphaco,2026-10-13,139,1600
 MED27495,Meloxicam_7.5mg,A1,Meloxicam,Tablet,7.5,mg,Sanofi,2026-10-23,140,1600
 MED27496,Hapacol_650,C29,Paracetamol,Tablet,650,mg,DHG Pharma,2026-10-21,152,700
 MED27502,Bisoprolol_5mg,C50,Paracetamol,Syrup,300,ml,UDI,2026-09-03,28,50000
@@ -10264,7 +10264,7 @@ MED28097,Vitamin_B1_B6_B12,B84,Meloxicam,Syrup,250,ml,Choay Pharma,2026-06-12,85
 MED28099,Calcium_D3,B59,Ascorbic Acid,Capsule,20,ml,Bayer,2026-02-03,86,1200
 MED28106,Desloratadine_5mg,C68,Amoxicillin + Clavulanate,Syrup,625,ml,UPSA,2026-05-17,97,50000
 MED28108,Tiffy_Dey,C31,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-07-21,151,1200
-MED28111,Levothyroxine_50mcg,A39,Amoxicillin + Clavulanate,Tablet,40,ml,UPSA,2026-03-15,134,1500
+MED28111,Levothyroxine_50mg,A39,Amoxicillin + Clavulanate,Tablet,40,ml,UPSA,2026-03-15,134,1500
 MED28114,Domperidone_10mg,B4,Alpha chymotrypsin,Tablet,250,ml,Abbott,2026-08-02,66,1250
 MED28116,Metronidazole_500mg,C82,Paracetamol + Caffeine,Syrup,300,ml,Traphaco,2026-05-16,180,50000
 MED28117,Colchicine_1mg,A97,Cefixime,Capsule,500,mg,United Pharma,2026-09-15,54,3000
@@ -10388,7 +10388,7 @@ MED28417,Calcium_Carbonate_500mg,C53,Amoxicillin,Capsule,300,mg,GSK,2026-02-24,4
 MED28418,Prednisolone_5mg,B63,Acyclovir,Tablet,20,ml,Traphaco,2026-10-02,10,1600
 MED28427,Vitamin_E_400IU,A47,Cefixime,Syrup,200,ml,Stella,2026-10-18,135,1400
 MED28430,Meloxicam_7.5mg,B77,Meloxicam,Tablet,7.5,mg,Sanofi,2026-04-27,159,1000
-MED28431,Levothyroxine_50mcg,A38,Paracetamol + Caffeine,Capsule,400,mg,UPSA,2026-05-08,71,1200
+MED28431,Levothyroxine_50mg,A38,Paracetamol + Caffeine,Capsule,400,mg,UPSA,2026-05-08,71,1200
 MED28434,Simvastatin_20mg,B46,Echinacea,Capsule,1,mg,United Pharma,2026-02-18,45,1600
 MED28435,Enterogermina,A43,Bacillus clausii,Suspension,5,ml,Sanofi,2026-02-26,175,1200
 MED28437,Amlodipine_5mg,C26,Paracetamol + Caffeine,Capsule,7.5,mg,Bayer,2026-06-08,65,2000
@@ -10444,7 +10444,7 @@ MED28584,Methylprednisolone_16mg,C65,Multivitamin,Capsule,300,mg,DHG Pharma,2026
 MED28585,Magnesium_B6,B9,Ascorbic Acid,Tablet,300,ml,DHG Pharma,2026-06-25,103,3000
 MED28588,Prednisolone_5mg,A30,Echinacea,Syrup,10,ml,Mega We Care,2026-07-05,21,50000
 MED28590,Acyclovir_400mg,C10,Acyclovir,Tablet,400,mg,Stella,2026-04-21,137,1000
-MED28595,Levothyroxine_50mcg,C4,Cefixime,Tablet,16,ml,Mega We Care,2026-10-22,78,1200
+MED28595,Levothyroxine_50mg,C4,Cefixime,Tablet,16,ml,Mega We Care,2026-10-22,78,1200
 MED28596,Diclofenac_50mg,A97,Amoxicillin,Capsule,300,ml,Abbott,2026-11-14,87,1200
 MED28597,Tiffy_Dey,C37,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-02-27,54,1000
 MED28598,Metoclopramide_10mg,C61,Alpha chymotrypsin,Syrup,625,ml,Kingphar,2026-08-30,34,50000
@@ -10585,7 +10585,7 @@ MED28977,Ibuprofen_200mg,A30,Ibuprofen,Tablet,200,mg,Abbott,2026-10-05,65,1000
 MED28979,Clarithromycin_500mg,A49,Vitamin C,Syrup,4200,ml,DHG Pharma,2026-11-08,109,50000
 MED28981,Efferalgan_500mg,A66,Paracetamol,Tablet,500,mg,UPSA,2026-04-08,148,1600
 MED28983,Iron_Folic,A20,Acyclovir,Capsule,80,mg,AstraZeneca,2026-10-01,159,1250
-MED28986,Levothyroxine_50mcg,C98,Ascorbic Acid,Tablet,7.5,ml,Imexpharm,2026-02-27,156,1600
+MED28986,Levothyroxine_50mg,C98,Ascorbic Acid,Tablet,7.5,ml,Imexpharm,2026-02-27,156,1600
 MED28989,Fluconazole_150mg,C71,Acyclovir,Capsule,200,ml,GSK,2026-09-24,125,3000
 MED28990,Calcium_Carbonate_500mg,C58,Cefixime,Tablet,300,ml,Sanofi,2026-08-29,30,3000
 MED28998,Metformin_500mg,A56,Cefixime,Syrup,120,ml,Sandoz,2026-10-13,121,50000
@@ -10667,7 +10667,7 @@ MED29184,Insulin_Basal,A27,Acyclovir,Tablet,20,ml,United Pharma,2026-08-07,72,14
 MED29185,Ciprofloxacin_500mg,B3,Echinacea,Syrup,4200,ml,Imexpharm,2026-10-14,151,50000
 MED29186,Magnesium_B6,B52,Vitamin C,Syrup,500,ml,United Pharma,2026-11-01,25,50000
 MED29187,Loratadine_10mg,B88,Alpha chymotrypsin,Capsule,7.5,mg,ASDEX,2026-03-11,11,1000
-MED29190,Levothyroxine_50mcg,A99,Acyclovir,Tablet,80,ml,Stella,2026-04-27,56,1200
+MED29190,Levothyroxine_50mg,A99,Acyclovir,Tablet,80,ml,Stella,2026-04-27,56,1200
 MED29191,Gliclazide_80mg,B36,Echinacea,Syrup,10,ml,Mega We Care,2026-10-09,182,50000
 MED29192,Domperidone_10mg,C61,Zinc + Vitamin,Tablet,2,mg,OPV Pharma,2026-11-17,2,1000
 MED29195,Vitamin_K2,C99,Multivitamin,Tablet,40,mg,UDI,2026-04-05,14,1400
@@ -10867,7 +10867,7 @@ MED29731,Salbutamol_4mg,C73,Amoxicillin + Clavulanate,Syrup,2,ml,AstraZeneca,202
 MED29739,Simvastatin_20mg,B46,Ibuprofen,Syrup,7.5,ml,ASDEX,2026-04-26,53,50000
 MED29740,Hydrocortisone_10mg,A92,Cefdinir,Capsule,80,mg,Choay Pharma,2026-05-03,52,1450
 MED29741,Magnesium_B6,B13,Paracetamol + Caffeine,Tablet,50,mg,Choay Pharma,2026-11-23,34,1000
-MED29743,Levothyroxine_50mcg,A59,Amoxicillin + Clavulanate,Capsule,120,ml,United Pharma,2026-07-27,17,1700
+MED29743,Levothyroxine_50mg,A59,Amoxicillin + Clavulanate,Capsule,120,ml,United Pharma,2026-07-27,17,1700
 MED29744,Omeprazole_20mg,A85,Alpha chymotrypsin,Tablet,400,ml,Sandoz,2026-02-16,114,3000
 MED29747,Allopurinol_300mg,B49,Paracetamol + Caffeine,Capsule,120,mg,Kingphar,2026-04-25,167,1700
 MED29749,Nystatin_Suspension,A57,Aspirin,Capsule,4200,mg,ASDEX,2026-02-16,82,1500
@@ -10952,7 +10952,7 @@ MED29943,Celecoxib_200mg,B72,Vitamin C,Tablet,4200,mg,Bayer,2026-08-25,110,1600
 MED29946,Desloratadine_5mg,B26,Zinc + Vitamin,Capsule,200,ml,DHG Pharma,2026-09-08,27,3000
 MED29947,Cetirizine_10mg,C80,Paracetamol + Caffeine,Capsule,250,mg,ASDEX,2026-06-22,24,1700
 MED29950,Alphachoay,C57,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-05-18,39,1600
-MED29951,Levothyroxine_50mcg,B4,Cefixime,Tablet,300,ml,UDI,2026-06-01,53,1000
+MED29951,Levothyroxine_50mg,B4,Cefixime,Tablet,300,ml,UDI,2026-06-01,53,1000
 MED29954,Fexofenadine_120mg,C40,Alpha chymotrypsin,Capsule,1,ml,UDI,2026-03-11,195,1000
 MED29955,Esomeprazole_40mg,B56,Zinc + Vitamin,Tablet,7.5,mg,Bayer,2026-11-01,175,1250
 MED29957,Enat_400,B38,Vitamin E,Tablet,400,IU,Mega We Care,2026-07-26,36,1600
@@ -10995,7 +10995,7 @@ MED30070,SkillMax_Ocavill,B88,Multivitamin,Syrup,10,ml,OPV Pharma,2026-11-13,33,
 MED30073,Gliclazide_80mg,C5,Paracetamol + Caffeine,Syrup,20,ml,ASDEX,2026-08-08,48,50000
 MED30075,Nexium_mups_20mg,B24,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-11-19,189,2500
 MED30076,Hapacol_650,B77,Paracetamol,Tablet,650,mg,DHG Pharma,2026-08-18,90,700
-MED30079,Levothyroxine_50mcg,B55,Ascorbic Acid,Syrup,5,ml,GSK,2026-08-08,147,50000
+MED30079,Levothyroxine_50mg,B55,Ascorbic Acid,Syrup,5,ml,GSK,2026-08-08,147,50000
 MED30082,Loperamid_2mg,B76,Loperamide,Tablet,2,mg,Imexpharm,2026-05-20,193,2500
 MED30086,Vitamin_E_400IU,B65,Vitamin C,Capsule,4200,ml,United Pharma,2026-07-26,164,1400
 MED30087,Metronidazole_500mg,C1,Multivitamin,Syrup,16,ml,Bayer,2026-08-24,111,50000
@@ -11191,7 +11191,7 @@ MED30586,Cetirizine_10mg,B37,Ascorbic Acid,Tablet,200,ml,Sanofi,2026-08-03,86,20
 MED30590,Ambroxol_30mg,A13,Meloxicam,Tablet,120,mg,ASDEX,2026-03-04,89,1500
 MED30593,Loratadine_10mg,A74,Aspirin,Tablet,80,mg,ASDEX,2026-05-04,60,1200
 MED30594,Ketoconazole_200mg,C87,Alpha chymotrypsin,Capsule,120,ml,UPSA,2026-03-22,8,2500
-MED30595,Levothyroxine_50mcg,B86,Paracetamol,Capsule,300,mg,UPSA,2026-04-14,48,1450
+MED30595,Levothyroxine_50mg,B86,Paracetamol,Capsule,300,mg,UPSA,2026-04-14,48,1450
 MED30596,Iron_Folic,C76,Amoxicillin + Clavulanate,Tablet,80,ml,Sandoz,2026-11-16,24,1000
 MED30598,Fexofenadine_120mg,B35,Paracetamol + Caffeine,Syrup,80,ml,DHG Pharma,2026-04-13,75,50000
 MED30602,Telfast_HD_180mg,C43,Fexofenadine,Tablet,180,mg,Sanofi,2026-10-30,40,2000
@@ -11207,7 +11207,7 @@ MED30640,Levofloxacin_500mg,C0,Ibuprofen,Tablet,300,ml,GSK,2026-11-07,54,1200
 MED30644,Clotrimazole_1pct,A5,Amoxicillin,Tablet,50,ml,OPV Pharma,2026-06-24,154,1250
 MED30645,Ciprofloxacin_500mg,C82,Cefdinir,Tablet,20,ml,Stella,2026-09-30,77,3000
 MED30654,Hapacol_650,C82,Paracetamol,Tablet,650,mg,DHG Pharma,2026-05-07,183,700
-MED30656,Levothyroxine_50mcg,C39,Aspirin,Capsule,5,mg,OPV Pharma,2026-01-31,186,1450
+MED30656,Levothyroxine_50mg,C39,Aspirin,Capsule,5,mg,OPV Pharma,2026-01-31,186,1450
 MED30664,Smecta,B80,Acyclovir,Capsule,4200,mg,Sandoz,2026-08-08,90,1600
 MED30665,Bisoprolol_5mg,B5,Aspirin,Capsule,7.5,ml,Sanofi,2026-04-08,172,1200
 MED30671,Prednisolone_5mg,A67,Ascorbic Acid,Capsule,2,mg,GSK,2026-03-11,155,1500
@@ -11495,7 +11495,7 @@ MED31442,SkillMax_Ocavill,B73,Multivitamin,Syrup,10,ml,OPV Pharma,2026-04-30,72,
 MED31443,ORS_Plus,B60,Echinacea,Tablet,2,mg,Abbott,2026-11-03,90,2000
 MED31446,Telfast_HD_180mg,C73,Fexofenadine,Tablet,180,mg,Sanofi,2026-09-24,98,1500
 MED31448,Eugica,B7,Herbal Extract,Syrup,10,ml,Mega We Care,2026-06-30,20,50000
-MED31454,Levothyroxine_50mcg,A41,Aspirin,Capsule,120,ml,OPV Pharma,2026-02-02,18,1200
+MED31454,Levothyroxine_50mg,A41,Aspirin,Capsule,120,ml,OPV Pharma,2026-02-02,18,1200
 MED31455,Clotrimazole_1pct,A74,Vitamin C,Syrup,120,ml,United Pharma,2026-07-21,12,50000
 MED31457,Amlodipine_5mg,B10,Paracetamol,Syrup,50,ml,Pfizer,2026-07-09,27,50000
 MED31459,Cefixime_200mg,A13,Cefixime,Capsule,200,mg,Imexpharm,2026-10-05,145,2000
@@ -11524,21 +11524,21 @@ MED31515,Ciprofloxacin_500mg,A3,Alpha chymotrypsin,Tablet,250,mg,AstraZeneca,202
 MED31516,Enat_400,C48,Vitamin E,Tablet,400,IU,Mega We Care,2026-07-22,60,1700
 MED31520,Azithromycin_250mg,B57,Multivitamin,Syrup,7.5,ml,DHG Pharma,2026-11-10,49,50000
 MED31521,Siro_Ginkid_ZinC,C56,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-09-24,198,50000
-MED31523,Levothyroxine_50mcg,C9,Meloxicam,Tablet,250,ml,UDI,2026-10-11,69,1200
+MED31523,Levothyroxine_50mg,C9,Meloxicam,Tablet,250,ml,UDI,2026-10-11,69,1200
 MED31526,Levofloxacin_500mg,C31,Alpha chymotrypsin,Tablet,7.5,mg,AstraZeneca,2026-02-24,80,1000
 MED31528,Desloratadine_5mg,A31,Aspirin,Tablet,200,mg,OPV Pharma,2026-03-19,188,1250
 MED31529,Vitamin_C,A11,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-08-10,72,1400
 MED31534,Omeprazole_20mg,B6,Ascorbic Acid,Tablet,650,mg,DHG Pharma,2026-09-21,64,1250
 MED31537,Ambroxol_30mg,A79,Cefdinir,Capsule,120,mg,OPV Pharma,2026-10-06,77,3000
 MED31539,Vitamin_C,A82,Ascorbic Acid,Tablet,500,mg,DHG Pharma,2026-05-01,85,1400
-MED31540,Levothyroxine_50mcg,A36,Acyclovir,Syrup,650,ml,Sandoz,2026-03-03,106,50000
+MED31540,Levothyroxine_50mg,A36,Acyclovir,Syrup,650,ml,Sandoz,2026-03-03,106,50000
 MED31542,Ketoconazole_200mg,A51,Zinc + Vitamin,Syrup,625,ml,Mega We Care,2026-07-19,149,50000
 MED31543,Enterogermina,C92,Bacillus clausii,Suspension,5,ml,Sanofi,2026-07-05,81,3000
 MED31544,Methylprednisolone_16mg,B33,Meloxicam,Capsule,2,ml,Sanofi,2026-03-15,42,2000
 MED31551,Clarithromycin_500mg,C91,Alpha chymotrypsin,Capsule,50,ml,Mega We Care,2026-02-01,106,2000
 MED31554,Cefdinir_300mg,C43,Cefdinir,Capsule,300,mg,Pfizer,2026-05-29,95,2000
 MED31557,Amlodipine_5mg,A56,Acyclovir,Syrup,500,ml,Sandoz,2026-10-30,45,50000
-MED31560,Levothyroxine_50mcg,B55,Cefuroxime,Tablet,625,ml,Abbott,2026-08-14,65,1500
+MED31560,Levothyroxine_50mg,B55,Cefuroxime,Tablet,625,ml,Abbott,2026-08-14,65,1500
 MED31561,Cefixime_200mg,B57,Cefixime,Capsule,200,mg,Imexpharm,2026-03-08,128,2000
 MED31565,Vitamin_K2,A56,Paracetamol,Tablet,120,mg,Bayer,2026-09-09,107,1400
 MED31566,Meloxicam_7.5mg,A82,Meloxicam,Tablet,7.5,mg,Sanofi,2026-03-01,103,1450
@@ -11624,7 +11624,7 @@ MED31771,Magnesium_B6,A70,Amoxicillin,Capsule,2,ml,UPSA,2026-09-05,200,1250
 MED31772,Loperamid_2mg,B32,Loperamide,Tablet,2,mg,Imexpharm,2026-11-24,41,1200
 MED31774,Cetirizine_10mg,B0,Aspirin,Capsule,40,mg,Pfizer,2026-08-29,51,3000
 MED31775,Bromhexine_8mg,A56,Cefixime,Capsule,500,ml,Mega We Care,2026-08-24,109,1000
-MED31777,Levothyroxine_50mcg,C71,Multivitamin,Syrup,500,ml,OPV Pharma,2026-11-08,84,50000
+MED31777,Levothyroxine_50mg,C71,Multivitamin,Syrup,500,ml,OPV Pharma,2026-11-08,84,50000
 MED31778,Eugica,C84,Herbal Extract,Syrup,10,ml,Mega We Care,2026-04-30,144,50000
 MED31779,Bisoprolol_5mg,A24,Vitamin C,Tablet,20,mg,UDI,2026-07-27,169,3000
 MED31788,Augmentin_625mg,A60,Amoxicillin + Clavulanate,Tablet,625,mg,GSK,2026-07-20,21,2400
@@ -11785,7 +11785,7 @@ MED32252,Calcium_Carbonate_500mg,A33,Amoxicillin + Clavulanate,Capsule,16,mg,OPV
 MED32253,Methylprednisolone_16mg,C15,Alpha chymotrypsin,Tablet,10,ml,AstraZeneca,2026-10-31,65,2000
 MED32255,Zinc_Gluconate_20mg,A88,Echinacea,Capsule,200,ml,Stella,2026-10-12,194,2000
 MED32262,Calcium_D3,A2,Amoxicillin,Syrup,300,ml,UDI,2026-08-06,101,50000
-MED32263,Levothyroxine_50mcg,C43,Multivitamin,Tablet,625,ml,Abbott,2026-08-13,83,3000
+MED32263,Levothyroxine_50mg,C43,Multivitamin,Tablet,625,ml,Abbott,2026-08-13,83,3000
 MED32267,Betadine_Solution,C16,Ascorbic Acid,Tablet,16,mg,United Pharma,2026-06-06,114,2000
 MED32272,Hydrocortisone_10mg,B85,Cefuroxime,Tablet,300,ml,GSK,2026-08-31,87,1000
 MED32273,Ambroxol_30mg,C76,Paracetamol,Capsule,1,ml,Bayer,2026-11-12,155,1200
@@ -11852,7 +11852,7 @@ MED32446,Desloratadine_5mg,C14,Paracetamol,Tablet,250,mg,Abbott,2026-10-27,56,12
 MED32447,Acyclovir_400mg,C97,Acyclovir,Tablet,400,mg,Stella,2026-07-31,122,1250
 MED32450,Alphachoay,A60,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-02-27,153,1600
 MED32451,Bromhexine_8mg,B48,Cefixime,Tablet,500,ml,Imexpharm,2026-09-16,122,3000
-MED32455,Levothyroxine_50mcg,A41,Multivitamin,Tablet,20,mg,Stella,2026-09-23,192,1600
+MED32455,Levothyroxine_50mg,A41,Multivitamin,Tablet,20,mg,Stella,2026-09-23,192,1600
 MED32456,ORS_Plus,C52,Amoxicillin + Clavulanate,Capsule,625,ml,Bayer,2026-02-21,200,1200
 MED32457,Nexium_mups_20mg,C79,Esomeprazole,Tablet,20,mg,AstraZeneca,2026-08-11,192,2000
 MED32459,Bisoprolol_5mg,B73,Ascorbic Acid,Syrup,300,ml,DHG Pharma,2026-09-13,82,50000
@@ -11904,7 +11904,7 @@ MED32626,Echina_Kingphar,C16,Echinacea,Tablet,500,mg,Kingphar,2026-03-17,161,300
 MED32627,Smecta,A32,Cefixime,Tablet,250,mg,Bayer,2026-02-15,182,1000
 MED32629,Atorvastatin_20mg,A64,Meloxicam,Tablet,300,ml,Kingphar,2026-06-21,127,3000
 MED32632,Hydrocortisone_10mg,B48,Meloxicam,Tablet,40,mg,Pfizer,2026-05-07,177,1600
-MED32639,Levothyroxine_50mcg,C59,Paracetamol + Caffeine,Syrup,500,ml,Abbott,2026-11-09,77,50000
+MED32639,Levothyroxine_50mg,C59,Paracetamol + Caffeine,Syrup,500,ml,Abbott,2026-11-09,77,50000
 MED32640,Ginkgo_Biloba_120mg,A4,Ginkgo Biloba,Tablet,120,mg,Traphaco,2026-09-07,92,1400
 MED32641,Esomeprazole_40mg,A2,Echinacea,Capsule,400,mg,Sanofi,2026-06-23,11,1200
 MED32642,Clotrimazole_1pct,C13,Alpha chymotrypsin,Tablet,40,ml,Choay Pharma,2026-03-10,91,1700
@@ -12013,7 +12013,7 @@ MED32931,Esomeprazole_40mg,A77,Cefdinir,Tablet,50,mg,Abbott,2026-06-09,185,1700
 MED32933,Domperidone_10mg,A7,Paracetamol + Caffeine,Syrup,4200,ml,Abbott,2026-07-27,170,50000
 MED32934,Vitamin_K2,A52,Cefixime,Tablet,10,ml,Kingphar,2026-07-30,126,1400
 MED32936,Enterogermina,B20,Bacillus clausii,Suspension,5,ml,Sanofi,2026-08-11,171,3000
-MED32938,Levothyroxine_50mcg,B83,Ibuprofen,Syrup,120,ml,United Pharma,2026-02-03,93,50000
+MED32938,Levothyroxine_50mg,B83,Ibuprofen,Syrup,120,ml,United Pharma,2026-02-03,93,50000
 MED32939,Siro_Ginkid_ZinC,C61,Zinc + Vitamin,Syrup,10,ml,OPV Pharma,2026-07-22,72,50000
 MED32940,Enat_400,A93,Vitamin E,Tablet,400,IU,Mega We Care,2026-02-14,61,1200
 MED32945,Methylprednisolone_16mg,A63,Amoxicillin,Syrup,300,ml,United Pharma,2026-09-16,163,50000
@@ -12069,7 +12069,7 @@ MED33096,Esomeprazole_40mg,C37,Cefdinir,Capsule,4200,ml,Mega We Care,2026-09-20,
 MED33097,Prednisolone_5mg,A66,Paracetamol,Syrup,1,ml,ASDEX,2026-06-21,158,50000
 MED33101,ORS_Plus,B54,Cefuroxime,Tablet,250,ml,Mega We Care,2026-05-26,179,1250
 MED33104,Calcium_Carbonate_500mg,C0,Vitamin C,Tablet,500,mg,Choay Pharma,2026-04-29,5,1000
-MED33107,Levothyroxine_50mcg,C82,Ascorbic Acid,Capsule,625,ml,Choay Pharma,2026-10-18,175,2500
+MED33107,Levothyroxine_50mg,C82,Ascorbic Acid,Capsule,625,ml,Choay Pharma,2026-10-18,175,2500
 MED33111,Efferalgan_500mg,C52,Paracetamol,Tablet,500,mg,UPSA,2026-07-16,84,1250
 MED33112,Enterogermina,A63,Bacillus clausii,Suspension,5,ml,Sanofi,2026-03-07,54,1700
 MED33117,Paracetamol_500mg,C83,Paracetamol,Tablet,500,mg,Sanofi,2026-06-08,84,700
@@ -12474,7 +12474,7 @@ MED34212,Calcium_Carbonate_500mg,C89,Vitamin C,Tablet,300,ml,ASDEX,2026-04-04,20
 MED34213,Enterogermina,A24,Bacillus clausii,Suspension,5,ml,Sanofi,2026-02-06,188,2000
 MED34219,Tiffy_Dey,B30,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-08-27,165,1250
 MED34220,Cetirizine_10mg,C26,Acyclovir,Capsule,2,mg,United Pharma,2026-11-05,144,1500
-MED34223,Levothyroxine_50mcg,B30,Paracetamol,Tablet,500,ml,Pfizer,2026-03-19,170,1700
+MED34223,Levothyroxine_50mg,B30,Paracetamol,Tablet,500,ml,Pfizer,2026-03-19,170,1700
 MED34226,Loratadine_10mg,A19,Cefuroxime,Tablet,300,mg,Pfizer,2026-04-09,120,1000
 MED34228,Aspirin_500mg,C67,Aspirin,Tablet,500,mg,Bayer,2026-10-25,150,1000
 MED34231,Tramadol_50mg,C60,Ascorbic Acid,Syrup,250,ml,ASDEX,2026-04-19,177,50000
@@ -12560,7 +12560,7 @@ MED34464,Eugica,C68,Herbal Extract,Syrup,10,ml,Mega We Care,2026-07-02,198,50000
 MED34467,Prednisolone_5mg,A28,Zinc + Vitamin,Tablet,80,mg,ASDEX,2026-10-08,60,2000
 MED34468,Esomeprazole_40mg,B61,Echinacea,Capsule,7.5,ml,Bayer,2026-07-14,98,2500
 MED34469,Tiffy_Dey,A39,Paracetamol + Chlorpheniramine,Tablet,500,mg,United Pharma,2026-03-27,150,1600
-MED34470,Levothyroxine_50mcg,A49,Ibuprofen,Capsule,650,mg,Imexpharm,2026-02-11,61,1700
+MED34470,Levothyroxine_50mg,A49,Ibuprofen,Capsule,650,mg,Imexpharm,2026-02-11,61,1700
 MED34471,Panadol_Extra,A71,Paracetamol + Caffeine,Tablet,500,mg,GSK,2026-05-12,196,1000
 MED34472,Desloratadine_5mg,B29,Echinacea,Capsule,5,mg,ASDEX,2026-11-02,49,2500
 MED34473,Clarithromycin_500mg,A24,Aspirin,Tablet,7.5,ml,Traphaco,2026-03-16,199,1600
@@ -12591,7 +12591,7 @@ MED34535,Pantoprazole_40mg,A6,Aspirin,Capsule,200,ml,DHG Pharma,2026-07-13,59,10
 MED34536,Eugica,C85,Herbal Extract,Syrup,10,ml,Mega We Care,2026-11-19,174,50000
 MED34539,Diclofenac_50mg,B8,Echinacea,Tablet,20,mg,Bayer,2026-07-20,2,1000
 MED34541,Cetirizine_10mg,B0,Meloxicam,Tablet,625,ml,Imexpharm,2026-08-26,161,1000
-MED34545,Levothyroxine_50mcg,C4,Zinc + Vitamin,Syrup,20,ml,UDI,2026-08-01,57,50000
+MED34545,Levothyroxine_50mg,C4,Zinc + Vitamin,Syrup,20,ml,UDI,2026-08-01,57,50000
 MED34546,Clarithromycin_500mg,B94,Paracetamol + Caffeine,Syrup,1,ml,Traphaco,2026-10-18,169,50000
 MED34561,Alphachoay,A40,Alpha chymotrypsin,Tablet,4200,IU,Choay Pharma,2026-07-28,25,1700
 MED34567,Colchicine_1mg,C98,Paracetamol,Syrup,250,ml,United Pharma,2026-06-17,188,50000
@@ -12702,7 +12702,7 @@ MED34880,Vitamin_B1_B6_B12,C87,Vitamin C,Syrup,10,ml,ASDEX,2026-10-08,173,1400
 MED34881,Vitamin_E_400IU,C73,Ascorbic Acid,Syrup,80,ml,Bayer,2026-04-16,109,1400
 MED34883,Clotrimazole_1pct,B83,Vitamin C,Tablet,1,ml,UDI,2026-02-09,86,2500
 MED34886,Betadine_Solution,B95,Paracetamol + Caffeine,Tablet,1,ml,Pfizer,2026-02-24,66,3000
-MED34888,Levothyroxine_50mcg,B81,Amoxicillin + Clavulanate,Syrup,20,ml,ASDEX,2026-09-14,42,50000
+MED34888,Levothyroxine_50mg,B81,Amoxicillin + Clavulanate,Syrup,20,ml,ASDEX,2026-09-14,42,50000
 MED34889,Clotrimazole_1pct,A85,Cefixime,Tablet,80,mg,Mega We Care,2026-10-12,154,1600
 MED34890,Amoxicillin_500mg,C40,Amoxicillin,Capsule,500,mg,GSK,2026-02-15,115,2000
 MED34893,Losartan_50mg,C24,Ibuprofen,Capsule,625,ml,DHG Pharma,2026-06-10,57,1000

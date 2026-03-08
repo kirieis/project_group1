@@ -100,15 +100,28 @@ public class SepayWebhookServlet extends HttpServlet {
     private String extractOrderCode(String content) {
         if (content == null || content.isEmpty())
             return "";
-        // Tìm pattern "DH" + số (ví dụ "DH17", "DH123")
-        java.util.regex.Matcher m = java.util.regex.Pattern.compile("DH(\\d+)").matcher(content.toUpperCase());
-        if (m.find()) {
-            return "DH" + m.group(1);
+
+        String upper = content.toUpperCase().trim();
+
+        // Pattern 1: DH + digits (e.g. DH17, DH 17, DH-17)
+        java.util.regex.Matcher m1 = java.util.regex.Pattern.compile("DH\\s*[-]?\\s*(\\d+)").matcher(upper);
+        if (m1.find()) {
+            return "DH" + m1.group(1);
         }
-        // Nếu content chỉ toàn số
-        if (content.trim().matches("\\d+")) {
-            return content.trim();
+
+        // Pattern 2: SEPAY + digits
+        java.util.regex.Matcher m2 = java.util.regex.Pattern.compile("SEPAY\\s*(\\d+)").matcher(upper);
+        if (m2.find()) {
+            return m2.group(1);
         }
-        return content;
+
+        // Pattern 3: Look for any distinct group of 1-6 digits (Invoice IDs are usually
+        // small)
+        java.util.regex.Matcher m3 = java.util.regex.Pattern.compile("\\b(\\d{1,6})\\b").matcher(upper);
+        if (m3.find()) {
+            return m3.group(1);
+        }
+
+        return content.trim();
     }
 }

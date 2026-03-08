@@ -193,11 +193,8 @@
                     localStorage.setItem('cache_auth', JSON.stringify(userData));
 
                     // Real-world logic: Redirect based on role
-                    if (userData.role === 'ADMIN') {
-                        window.location.href = 'admin'; // Go to Admin Dashboard
-                    } else {
-                        window.location.href = 'home.html'; // Go to Shop
-                    }
+                    // Redirect all to Shop. Admin should enter via Gate.
+                    window.location.href = 'home.html';
                 } else {
                     window.location.href = 'login.html?error=true';
                 }

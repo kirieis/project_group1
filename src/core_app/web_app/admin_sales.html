@@ -5,25 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Dashboard - Github Pharmacy</title>
-    <link rel="stylesheet" href="admin.css">
-    <script src="i18n.js"></script>
+    <link rel="stylesheet" href="../admin.css">
+    <script src="../i18n.js"></script>
+    <script>
+        // Admin pages should always be in Vietnamese as per user request
+        if (typeof setLanguage === 'function') setLanguage('vi');
+    </script>
 </head>
 
 <body>
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar__header">
-            <div class="sidebar__logo-dot"></div>
-            <div class="sidebar__title">G-PHARMA ADMIN</div>
+            <div class="sidebar__logo">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="sidebar__title">Github Pharmacy</div>
         </div>
         <nav class="sidebar__nav">
-            <a href="sales" class="nav-item active" data-i18n="admin.sales_title">📊 Sales & Revenue</a>
-            <a href="users" class="nav-item" data-i18n="admin.user_title">👥 User Management</a>
-            <a href="../home.html" class="nav-item" data-i18n="admin.nav_website">🌐 View Website</a>
+            <a href="sales" class="nav-item active" data-i18n="admin.sales_title">📊 Doanh thu & Tiền lời</a>
+            <a href="users" class="nav-item" data-i18n="admin.user_title">👥 Quản lý người dùng</a>
+            <a href="../home.html" class="nav-item" data-i18n="admin.nav_website">🌐 Xem website</a>
         </nav>
         <div class="sidebar__footer">
             <a href="../logout" class="nav-item" style="color: #ef4444; text-decoration: none;"
-                data-i18n="common.nav_logout">🚪 Logout</a>
+                data-i18n="common.nav_logout">🚪 Đăng xuất</a>
         </div>
     </aside>
 
@@ -40,66 +48,52 @@
 
         <section class="content-body">
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-card__label" data-i18n="admin.lbl_orders">PAID ORDERS</div>
+                <div class="stat-card stat-card--orders">
+                    <span class="stat-card__icon">📦</span>
+                    <div class="stat-card__label" data-i18n="admin.lbl_orders">ĐƠN ĐÃ TRẢ</div>
                     <div id="statOrders" class="stat-card__value">0</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-card__label" data-i18n="admin.lbl_revenue">REVENUE</div>
-                    <div id="statRevenue" class="stat-card__value revenue">0đ</div>
+                <div class="stat-card stat-card--revenue">
+                    <span class="stat-card__icon">💰</span>
+                    <div class="stat-card__label" data-i18n="admin.lbl_revenue">DOANH THU</div>
+                    <div id="statRevenue" class="stat-card__value">0đ</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-card__label" data-i18n="admin.lbl_profit">EST. PROFIT</div>
-                    <div id="statProfit" class="stat-card__value profit">0đ</div>
+                <div class="stat-card stat-card--profit">
+                    <span class="stat-card__icon">📈</span>
+                    <div class="stat-card__label" data-i18n="admin.lbl_profit">LỢI NHUẬN GỘP</div>
+                    <div id="statProfit" class="stat-card__value">0đ</div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="page-header"
                     style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                    <h2 style="margin:0; font-size: 1.25rem;" data-i18n="admin.lbl_recent">Recent Transactions</h2>
-                    <div class="search-bar" style="display: flex; gap: 10px;">
+                    <h2 style="margin:0; font-size: 1.25rem;" data-i18n="admin.lbl_recent">Giao dịch gần đây</h2>
+                    <div class="search-bar" style="display: flex; gap: 12px; align-items: center;">
                         <input type="date" id="dateFrom" onchange="renderTable()"
-                            style="padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            style="padding: 0.6rem; border: 1px solid var(--admin-border); border-radius: 10px;">
                         <input type="date" id="dateTo" onchange="renderTable()"
-                            style="padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            style="padding: 0.6rem; border: 1px solid var(--admin-border); border-radius: 10px;">
                         <input type="text" id="searchTerm" data-i18n-placeholder="admin.lbl_search_placeholder"
                             oninput="renderTable()"
-                            style="padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px; width: 250px;">
+                            style="padding: 0.6rem; border: 1px solid var(--admin-border); border-radius: 10px; width: 280px;">
                         <button onclick="loadSales()" class="btn-admin btn-admin--primary"
-                            style="background: #6366f1; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;"
-                            data-i18n="admin.btn_refresh">Refresh</button>
+                            data-i18n="admin.btn_refresh">Làm mới</button>
                     </div>
                 </div>
 
                 <div class="table-container" style="overflow-x: auto;">
                     <table class="admin-table">
                         <thead>
-                            <tr style="background: #f8fafc; text-align: left;">
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_id">
-                                    Order ID</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_date">
-                                    Date</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_buyer">
-                                    Buyer</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_method">
-                                    Method</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_total">
-                                    Total</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_profit">
-                                    Profit</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_status">
-                                    Status</th>
-                                <th style="padding: 1rem; color: #64748b; font-size: 0.75rem; text-transform: uppercase;"
-                                    data-i18n="admin.header_action">
-                                    Action</th>
+                            <tr>
+                                <th data-i18n="admin.header_id">MÃ ĐƠN</th>
+                                <th data-i18n="admin.header_date">NGÀY</th>
+                                <th data-i18n="admin.header_buyer">NGƯỜI MUA</th>
+                                <th data-i18n="admin.header_method">PTTT</th>
+                                <th data-i18n="admin.header_total">TỔNG TIỀN</th>
+                                <th data-i18n="admin.header_profit">LỢI NHUẬN</th>
+                                <th data-i18n="admin.header_status">TRẠNG THÁI</th>
+                                <th data-i18n="admin.header_action">THAO TÁC</th>
                             </tr>
                         </thead>
                         <tbody id="salesList">
@@ -232,22 +226,25 @@
                     totalProfit += orderProfit;
                 }
 
+                const methodLabel = order.method === 'BANK_TRANSFER' ? 'Chuyển khoản' : (order.method === 'SEPAY' ? 'Cổng SEPAY' : order.method);
+                const methodClass = order.method === 'BANK_TRANSFER' ? 'badge-pending' : 'badge-paid';
+
                 return `
                     <tr>
-                        <td style="font-weight: 700;">#${order.id}</td>
-                        <td>${order.day}/${order.month}/${order.year}</td>
-                        <td style="font-weight: 600; color: #1e293b;">${order.customerName || t('admin', 'guest_customer')}</td>
-                        <td><span class="badge ${order.method === 'BANK_TRANSFER' ? 'badge--admin' : 'badge--customer'}" style="font-size: 0.7rem;">${order.method}</span></td>
-                        <td class="total-cell">${formatVND(order.total)}</td>
-                        <td class="profit-cell">+${formatVND(orderProfit)}</td>
+                        <td style="font-weight: 700; color: var(--admin-primary);">#${order.id}</td>
+                        <td style="color: var(--admin-muted); font-size: 0.85rem;">${order.day}/${order.month}/${order.year}</td>
+                        <td style="font-weight: 700; color: var(--admin-primary);">${order.customerName || t('admin', 'guest_customer')}</td>
+                        <td><span class="badge ${methodClass}">${methodLabel}</span></td>
+                        <td class="total-cell" style="color: var(--admin-accent);">${formatVND(order.total)}</td>
+                        <td class="profit-cell" style="color: var(--admin-success); font-weight: 700;">+${formatVND(orderProfit)}</td>
                         <td>
                             ${order.status === 'PAID' ?
-                        `<span class="badge" style="background: #10b981; color: white; font-size: 0.7rem;">✅ ${t('admin', 'status_paid')}</span>` :
+                        `<span class="badge badge-paid">✅ ${t('admin', 'status_paid') || 'Đã thanh toán'}</span>` :
                         order.status === 'CANCELLED' ?
-                            `<span class="badge" style="background: #ef4444; color: white; font-size: 0.7rem;">❌ ${t('admin', 'status_cancelled')}</span>` :
-                            `<span class="badge" style="background: #f59e0b; color: white; font-size: 0.7rem;">⏳ ${t('admin', 'status_pending')}</span>`}
+                            `<span class="badge badge-cancelled">❌ ${t('admin', 'status_cancelled') || 'Đã hủy'}</span>` :
+                            `<span class="badge badge-pending">⏳ ${t('admin', 'status_pending') || 'Chờ duyệt'}</span>`}
                         </td>
-                        <td><button class="btn-view" onclick="toggleDetails(${order.id})">${t('admin', 'header_action')}</button></td>
+                        <td><button class="btn-view" onclick="toggleDetails(${order.id})">👁️</button></td>
                     </tr>
                     <tr id="details-${order.id}" class="detail-row">
                         <td colspan="8">
@@ -327,6 +324,8 @@
                 alert(t('admin', 'msg_update_error'));
             }
         }
+
+
 
         loadSales();
     </script>

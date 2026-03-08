@@ -21,6 +21,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String fullName = req.getParameter("fullName");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
@@ -45,8 +46,26 @@ public class RegisterServlet extends HttpServlet {
 
         // Gửi OTP (Bất đồng bộ)
         String otp = core_app.util.EmailUtil.generateOTP();
+
+        // IN MÃ OTP RA CONSOLE NGAY LẬP TỨC (ĐỒNG BỘ) - KHÔNG PHỤ THUỘC EMAIL
+        System.out.println("\n================================================");
+        System.out.println("   DANG KY MOI - " + new java.util.Date());
+        System.out.println("   Email: " + email);
+        System.out.println("   >>>> MA OTP: " + otp + " <<<<");
+        System.out.println("================================================\n");
+
         java.util.concurrent.CompletableFuture.runAsync(() -> {
-            core_app.util.EmailUtil.sendOTP(email, otp);
+            try {
+                boolean sent = core_app.util.EmailUtil.sendOTP(email, otp);
+                if (sent) {
+                    System.out.println("[OK] Email OTP da gui thanh cong toi: " + email);
+                } else {
+                    System.out.println("[WARN] Email KHONG gui duoc toi: " + email);
+                }
+            } catch (Exception ex) {
+                System.err.println("[ERROR] Loi gui email: " + ex.getMessage());
+                ex.printStackTrace();
+            }
         });
 
         jakarta.servlet.http.HttpSession session = req.getSession();

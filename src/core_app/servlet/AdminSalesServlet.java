@@ -15,10 +15,25 @@ public class AdminSalesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!isAdmin(req)) {
-            resp.sendRedirect("../login.html");
+            resp.sendRedirect(req.getContextPath() + "/admin_gate.html");
             return;
         }
         req.getRequestDispatcher("/admin_sales.html").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!isAdmin(req)) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
+
+        String action = req.getParameter("action");
+        if ("approve_all_sepay".equals(action)) {
+            core_app.dao.InvoiceDAO dao = new core_app.dao.InvoiceDAO();
+            int count = dao.approveAllSepayOrders();
+            resp.getWriter().print("OK:" + count);
+        }
     }
 
     private boolean isAdmin(HttpServletRequest req) {

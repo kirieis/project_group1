@@ -32,23 +32,30 @@ public class LoginServlet extends HttpServlet {
         boolean isAjax = acceptHeader != null && acceptHeader.contains("application/json");
 
         if (customer != null) {
+            // Chặn ADMIN đăng nhập ở cổng thường
+            if ("ADMIN".equals(customer.getRole())) {
+                if (isAjax) {
+                    resp.setStatus(403);
+                    resp.setContentType("application/json");
+                    resp.getWriter().print("{\"status\":\"error\", \"message\":\"ADMIN_MUST_USE_GATE\"}");
+                } else {
+                    resp.sendRedirect("login.html?error=admin_denied");
+                }
+                return;
+            }
+
             HttpSession session = req.getSession();
             session.setAttribute("currentUser", customer);
 
             if (isAjax) {
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
-                // Return simple JSON with user info for caching
                 String json = String.format(
                         "{\"status\":\"success\", \"isLoggedIn\":true, \"fullName\":\"%s\", \"role\":\"%s\", \"username\":\"%s\"}",
                         customer.getFullName(), customer.getRole(), customer.getUsername());
                 resp.getWriter().print(json);
             } else {
-                if ("ADMIN".equals(customer.getRole())) {
-                    resp.sendRedirect(req.getContextPath() + "/admin");
-                } else {
-                    resp.sendRedirect(req.getContextPath() + "/home.html");
-                }
+                resp.sendRedirect(req.getContextPath() + "/home.html");
             }
         } else {
             if (isAjax) {

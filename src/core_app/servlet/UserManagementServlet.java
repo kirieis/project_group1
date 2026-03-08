@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/admin/users")
@@ -20,7 +19,7 @@ public class UserManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!isAdmin(req)) {
-            resp.sendRedirect("../login.html");
+            resp.sendRedirect(req.getContextPath() + "/admin_gate.html");
             return;
         }
 
@@ -35,6 +34,7 @@ public class UserManagementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         if (!isAdmin(req)) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
@@ -99,16 +99,6 @@ public class UserManagementServlet extends HttpServlet {
     private void renderJsonList(HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json; charset=UTF-8");
         List<Customer> list = customerDAO.getAll();
-        PrintWriter out = resp.getWriter();
-        out.print("[");
-        for (int i = 0; i < list.size(); i++) {
-            Customer c = list.get(i);
-            out.print(String.format(
-                    "{\"id\":%d, \"fullName\":\"%s\", \"username\":\"%s\", \"role\":\"%s\"}",
-                    c.getCustomerId(), c.getFullName(), c.getUsername(), c.getRole()));
-            if (i < list.size() - 1)
-                out.print(",");
-        }
-        out.print("]");
+        resp.getWriter().print(new com.google.gson.Gson().toJson(list));
     }
 }

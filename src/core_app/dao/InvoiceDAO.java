@@ -223,4 +223,17 @@ public class InvoiceDAO {
         }
         return null;
     }
+
+    public int approveAllSepayOrders() {
+        String sql = "UPDATE Invoice SET status = 'PAID' WHERE payment_method = 'SEPAY' AND status = 'PENDING'";
+        try (Connection conn = DBConnection.getConnection();
+                Statement stmt = conn.createStatement()) {
+            int rows = stmt.executeUpdate(sql);
+            System.out.println("[InvoiceDAO] approveAllSepayOrders: updated " + rows + " rows");
+            return rows;
+        } catch (SQLException e) {
+            System.err.println("[InvoiceDAO] approveAllSepayOrders ERROR: " + e.getMessage());
+            return -1;
+        }
+    }
 }
