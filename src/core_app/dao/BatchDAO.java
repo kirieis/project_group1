@@ -15,27 +15,13 @@ import java.util.List;
  * - REMOVED (≤ 15 ngày): Loại khỏi bán, ghi log kiểm kê
  * - EXPIRED (≤ 0 ngày): Đã hết hạn
  */
+
 public class BatchDAO {
 
-    // ============================================================
-    // CONSTANTS – Ngưỡng quản lý hạn sử dụng
-    // ============================================================
     public static final int DAYS_REMOVE_THRESHOLD = 15; // ≤ 15 ngày → loại khỏi bán
     public static final int DAYS_SALE_THRESHOLD = 30; // 16–30 ngày → sale 30%
     public static final int NEAR_EXPIRY_DISCOUNT = 30; // % giảm giá
 
-    // ============================================================
-    // getAvailableBatches – Batch CÒN BÁN ĐƯỢC (> 15 ngày), FEFO
-    // ============================================================
-
-    /**
-     * Lấy tất cả batch CÒN BÁN ĐƯỢC của một thuốc, sắp xếp FEFO.
-     * FEFO = batch hết hạn sớm nhất đứng trước.
-     * Điều kiện: còn > 15 ngày trước hết hạn AND còn tồn kho > 0.
-     * 
-     * Batch 16–30 ngày vẫn bán được (với discount 30%).
-     * Batch ≤ 15 ngày bị loại khỏi danh sách bán.
-     */
     public List<BatchInfo> getAvailableBatches(String medicineId) {
         List<BatchInfo> list = new ArrayList<>();
         String sql = """
