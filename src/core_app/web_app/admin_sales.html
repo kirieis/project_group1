@@ -164,6 +164,7 @@
         }
 
         let allOrders = [];
+        let isUpdating = false;
 
         async function loadSales() {
             try {
@@ -304,11 +305,13 @@
 
         // Event delegation for approve/reject buttons
         document.addEventListener('click', async (e) => {
-            if (e.target.classList && e.target.classList.contains('btn-approve')) {
+            if (!e.target.classList) return;
+            
+            if (e.target.classList.contains('btn-approve') && !isUpdating) {
                 const orderId = e.target.getAttribute('data-order-id');
                 const newStatus = e.target.getAttribute('data-status');
                 updateOrderStatus(parseInt(orderId), newStatus);
-            } else if (e.target.classList && e.target.classList.contains('btn-reject')) {
+            } else if (e.target.classList.contains('btn-reject') && !isUpdating) {
                 const orderId = e.target.getAttribute('data-order-id');
                 const newStatus = e.target.getAttribute('data-status');
                 updateOrderStatus(parseInt(orderId), newStatus);
@@ -316,8 +319,12 @@
         });
 
         async function updateOrderStatus(orderId, newStatus) {
+            if (isUpdating) return; // Prevent multiple requests
+            
             if (!confirm(newStatus === 'PAID' ? 'Xác nhận duyệt đơn hàng này?' : 'Xác nhận hủy đơn hàng này?')) return;
 
+            isUpdating = true; // Set flag to prevent duplicate clicks
+            
             try {
                 const res = await fetch('../api/orders', {
                     method: 'PUT',
@@ -327,7 +334,7 @@
 
                 if (res.ok) {
                     alert(newStatus === 'PAID' ? 'Duyệt đơn hàng thành công!' : 'Hủy đơn hàng thành công!');
-                    loadSales(); // Reload data
+                    await loadSales(); // Wait for reload to complete
                 } else {
                     const err = await res.json();
                     alert('Lỗi: ' + (err.message || 'Không xác định'));
@@ -335,6 +342,8 @@
             } catch (e) {
                 console.error(e);
                 alert('Lỗi kết nối server!');
+            } finally {
+                isUpdating = false; // Reset flag after done
             }
         }
 
