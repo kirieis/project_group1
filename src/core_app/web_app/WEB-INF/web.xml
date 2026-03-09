@@ -29,14 +29,7 @@
     <!-- UserManagementServlet has @WebServlet("/admin/users") - REMOVED from XML to avoid duplicate error -->
 
     <!-- Filters -->
-    <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>core_app.filter.AuthFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
-    </filter-mapping>
+    <!-- AdminSecurityFilter is handled by @WebFilter annotation in Java code -->
 
     <welcome-file-list>
         <welcome-file>home.html</welcome-file>

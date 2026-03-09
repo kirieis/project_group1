@@ -14,23 +14,41 @@ public class CustomerDAO {
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
+            System.out.println("[DAO AUTH] Looking up user: '" + username + "'");
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String storedHash = rs.getString("password");
-                    // Kiểm tra mật khẩu bằng BCrypt (Hàng hiệu Siêu VIP)
+                    String role = rs.getString("role");
+                    System.out.println("[DAO AUTH] Found user! Role=" + role);
+                    System.out.println("[DAO AUTH] Stored password starts with: '"
+                            + (storedHash != null ? storedHash.substring(0, Math.min(10, storedHash.length())) : "NULL")
+                            + "...'");
+                    System.out.println("[DAO AUTH] Input password: '" + password + "'");
+
                     if (storedHash != null && (storedHash.startsWith("$2a$") || storedHash.startsWith("$2b$"))) {
+                        System.out.println("[DAO AUTH] Mode: BCrypt comparison");
                         if (BCrypt.checkpw(password, storedHash)) {
+                            System.out.println("[DAO AUTH] BCrypt match SUCCESS!");
                             return mapResultSetToCustomer(rs);
+                        } else {
+                            System.out.println("[DAO AUTH] BCrypt match FAILED!");
                         }
                     } else {
-                        // Fallback cho mật khẩu cũ (plain text) - nên update sau
+                        System.out.println("[DAO AUTH] Mode: Plain text comparison");
                         if (password.equals(storedHash)) {
+                            System.out.println("[DAO AUTH] Plain text match SUCCESS!");
                             return mapResultSetToCustomer(rs);
+                        } else {
+                            System.out.println("[DAO AUTH] Plain text match FAILED! stored='" + storedHash
+                                    + "' vs input='" + password + "'");
                         }
                     }
+                } else {
+                    System.out.println("[DAO AUTH] User '" + username + "' NOT FOUND in database!");
                 }
             }
         } catch (SQLException e) {
+            System.out.println("[DAO AUTH] SQL ERROR: " + e.getMessage());
             e.printStackTrace();
         }
         return null;

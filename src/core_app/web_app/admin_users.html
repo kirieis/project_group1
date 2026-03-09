@@ -5,26 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management - Github Pharmacy</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../admin.css">
     <link rel="stylesheet" href="../home.css">
-    <script src="i18n.js"></script>
+    <script src="../i18n.js"></script>
+    <script>
+        // Admin pages should always be in Vietnamese as per user request
+        if (typeof setLanguage === 'function') setLanguage('vi');
+    </script>
 </head>
 
 <body>
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar__header">
-            <div class="sidebar__logo-dot"></div>
-            <div class="sidebar__title">G-PHARMA ADMIN</div>
+            <div class="sidebar__logo">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="sidebar__title">Github Pharmacy</div>
         </div>
         <nav class="sidebar__nav">
-            <a href="sales" class="nav-item" data-i18n="admin.sales_title">📊 Sales & Revenue</a>
-            <a href="users" class="nav-item active" data-i18n="admin.user_title">👥 User Management</a>
-            <a href="../home.html" class="nav-item" data-i18n="admin.nav_website">🌐 View Website</a>
+            <a href="sales" class="nav-item" data-i18n="admin.sales_title">📊 Doanh thu & Tiền lời</a>
+            <a href="users" class="nav-item active" data-i18n="admin.user_title">👥 Quản lý người dùng</a>
+            <a href="../home.html" class="nav-item" data-i18n="admin.nav_website">🌐 Xem website</a>
         </nav>
         <div class="sidebar__footer">
             <a href="../logout" class="nav-item" style="color: #ef4444; text-decoration: none;"
-                data-i18n="common.nav_logout">🚪 Logout</a>
+                data-i18n="common.nav_logout">🚪 Đăng xuất</a>
         </div>
     </aside>
 
@@ -34,68 +42,82 @@
             <div class="breadcrumb" style="font-size: 0.9rem; color: #64748b;">Admin / <b style="color: #1e293b;"
                     data-i18n="admin.user_title">User Management</b></div>
             <div class="header-user">
-                <span class="badge-admin">BACKOFFICE</span>
+                <span class="badge-admin">Quản trị viên (Admin)</span>
                 <span id="totalUsers" class="badge-admin"
-                    style="background: #e0e7ff; color: #4338ca; border-color: #c7d2fe; margin-left: 8px;">0 Users</span>
+                    style="background: #e0e7ff; color: #4338ca; border-color: #c7d2fe; margin-left: 8px;">0 Thành
+                    viên</span>
             </div>
         </header>
 
         <section class="content-body">
             <!-- ADD FORM -->
-            <div class="card" style="margin-bottom: 2rem;">
-                <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;" data-i18n="admin.lbl_create_acc">✨ Create New
-                    Account</h2>
+            <div class="card" style="margin-bottom: 32px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2rem;">
+                    <div
+                        style="width: 40px; height: 40px; background: #fef3c7; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        ✨</div>
+                    <h2 style="margin: 0; font-size: 1.25rem;" data-i18n="admin.lbl_create_acc">Tạo tài khoản mới</h2>
+                </div>
+
                 <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                     <div class="field">
-                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
-                            data-i18n="admin.lbl_fullname">Full Name</span>
+                        <label
+                            style="display: block; font-weight: 700; font-size: 0.8rem; color: var(--admin-muted); margin-bottom: 8px; text-transform: uppercase;"
+                            data-i18n="admin.lbl_fullname">Họ và tên</label>
                         <input type="text" id="addFullName" data-i18n-placeholder="admin.lbl_fullname"
-                            style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            style="width: 100%; padding: 0.8rem; border: 1px solid var(--admin-border); border-radius: 12px; font-family: inherit;">
                     </div>
                     <div class="field">
-                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
-                            data-i18n="admin.lbl_user">Username</span>
+                        <label
+                            style="display: block; font-weight: 700; font-size: 0.8rem; color: var(--admin-muted); margin-bottom: 8px; text-transform: uppercase;"
+                            data-i18n="admin.lbl_user">Tên đăng nhập</label>
                         <input type="text" id="addUsername" data-i18n-placeholder="admin.lbl_user"
-                            style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            style="width: 100%; padding: 0.8rem; border: 1px solid var(--admin-border); border-radius: 12px; font-family: inherit;">
                     </div>
                     <div class="field">
-                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
-                            data-i18n="admin.lbl_pass">Password</span>
+                        <label
+                            style="display: block; font-weight: 700; font-size: 0.8rem; color: var(--admin-muted); margin-bottom: 8px; text-transform: uppercase;"
+                            data-i18n="admin.lbl_pass">Mật khẩu</label>
                         <div style="position: relative;">
                             <input type="password" id="addPassword" data-i18n-placeholder="admin.lbl_pass"
-                                style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px; width: 100%;">
+                                style="width: 100%; padding: 0.8rem; border: 1px solid var(--admin-border); border-radius: 12px; font-family: inherit;">
                             <button type="button" id="togglePassword"
-                                style="position: absolute; right: 10px; top: 8px; background:none; border:none; cursor:pointer;">👁️</button>
+                                style="position: absolute; right: 12px; top: 10px; background:none; border:none; cursor:pointer; font-size: 18px;">👁️</button>
                         </div>
                     </div>
                     <div class="field">
-                        <span style="font-weight:600; font-size: 0.8rem; color: #64748b;"
-                            data-i18n="admin.lbl_access_level">Access Level</span>
-                        <select id="addRole" style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px;">
-                            <option value="CUSTOMER" data-i18n="admin.lbl_customer">👤 CUSTOMER</option>
-                            <option value="ADMIN" data-i18n="admin.lbl_admin">🛡️ ADMIN</option>
+                        <label
+                            style="display: block; font-weight: 700; font-size: 0.8rem; color: var(--admin-muted); margin-bottom: 8px; text-transform: uppercase;"
+                            data-i18n="admin.lbl_access_level">Quyền truy cập</label>
+                        <select id="addRole"
+                            style="width: 100%; padding: 0.8rem; border: 1px solid var(--admin-border); border-radius: 12px; font-family: inherit; background: white; cursor: pointer;">
+                            <option value="CUSTOMER" data-i18n="admin.lbl_customer">👤 Khách hàng (Member)</option>
+                            <option value="ADMIN" data-i18n="admin.lbl_admin">🛡️ Quản trị viên (Admin)</option>
                         </select>
                     </div>
                 </div>
 
-                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;"
+                <div style="background: #f8fafc; padding: 1.25rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--admin-border);"
                     id="pwdRules">
-                    <div style="display: flex; gap: 15px; font-size: 0.75rem;">
-                        <span class="rule-item" data-rule="len">⚪ <span data-i18n="admin.lbl_min_chars">Min 8
-                                chars</span></span>
-                        <span class="rule-item" data-rule="upper">⚪ <span data-i18n="admin.lbl_upper_case">Upper
-                                case</span></span>
-                        <span class="rule-item" data-rule="lower">⚪ <span data-i18n="admin.lbl_lower_case">Lower
-                                case</span></span>
-                        <span class="rule-item" data-rule="num">⚪ <span
-                                data-i18n="admin.lbl_numbers">Numbers</span></span>
+                    <div
+                        style="font-weight: 700; font-size: 0.75rem; color: var(--admin-muted); margin-bottom: 12px; text-transform: uppercase;">
+                        Tiêu chuẩn mật khẩu:</div>
+                    <div style="display: flex; gap: 20px; font-size: 0.8rem;">
+                        <span class="rule-item" data-rule="len">⚪ <span data-i18n="admin.lbl_min_chars">Tối thiểu 8 ký
+                                tự</span></span>
+                        <span class="rule-item" data-rule="upper">⚪ <span data-i18n="admin.lbl_upper_case">Chữ
+                                hoa</span></span>
+                        <span class="rule-item" data-rule="lower">⚪ <span data-i18n="admin.lbl_lower_case">Chữ
+                                thường</span></span>
+                        <span class="rule-item" data-rule="num">⚪ <span data-i18n="admin.lbl_numbers">Chữ
+                                số</span></span>
                     </div>
                 </div>
 
                 <div style="display: flex; justify-content: flex-end;">
-                    <button class="btn-admin btn-admin--primary" id="btnSubmitUser"
-                        data-i18n="admin.btn_create_acc">Create Account</button>
+                    <button class="btn-admin btn-admin--primary" id="btnSubmitUser" data-i18n="admin.btn_create_acc">🚀
+                        Tạo tài khoản</button>
                 </div>
             </div>
 
@@ -112,10 +134,10 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th data-i18n="admin.header_id">ID</th>
-                                <th data-i18n="admin.header_profile">User Profile</th>
-                                <th data-i18n="admin.header_role">Role</th>
-                                <th style="text-align: right;" data-i18n="admin.header_operations">Operations</th>
+                                <th style="width: 80px;" data-i18n="admin.header_user_id">MÃ TK</th>
+                                <th data-i18n="admin.header_profile">Hồ sơ người dùng</th>
+                                <th data-i18n="admin.header_role">Quyền hạn</th>
+                                <th style="text-align: right;" data-i18n="admin.header_operations">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="userList">
@@ -295,7 +317,7 @@
                 const tbody = $('userList');
                 tbody.innerHTML = users.map(u => `
                     <tr>
-                        <td style="font-weight: 700;">#${u.id}</td>
+                        <td style="font-weight: 700;">#${u.customerId}</td>
                         <td>
                             <div class="user-name-cell">
                                 <div class="user-avatar">${u.fullName.charAt(0).toUpperCase()}</div>
@@ -313,10 +335,10 @@
                         <td style="text-align: right; display: flex; gap: 8px; justify-content: flex-end;">
                             <button class="btn-action" style="background: ${u.role === 'ADMIN' ? '#fee2e2' : '#dcfce7'}; color: ${u.role === 'ADMIN' ? '#ef4444' : '#10b981'};" 
                                 title="${u.role === 'ADMIN' ? t('admin', 'btn_demote') : t('admin', 'btn_promote')}" 
-                                onclick="toggleRole(${u.id}, '${u.role}')">
+                                onclick="toggleRole(${u.customerId}, '${u.role}')">
                                 ${u.role === 'ADMIN' ? '⬇️' : '⬆️'}
                             </button>
-                            <button class="btn-action btn-delete" title="${t('admin', 'btn_delete')}" onclick="deleteUser(${u.id})">
+                            <button class="btn-action btn-delete" title="${t('admin', 'btn_delete')}" onclick="deleteUser(${u.customerId})">
                                 🗑️
                             </button>
                         </td>

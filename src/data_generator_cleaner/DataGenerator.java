@@ -85,7 +85,7 @@ public class DataGenerator {
                 "Gliclazide_80mg",
                 "Insulin_Rapid",
                 "Insulin_Basal",
-                "Levothyroxine_50mcg",
+                "Levothyroxine_50mg",
                 "Allopurinol_300mg",
                 "Colchicine_1mg",
                 "Vitamin_K2",
@@ -627,10 +627,10 @@ public class DataGenerator {
                     manufacturer = "Sanofi";
                     break;
 
-                case "Levothyroxine_50mcg":
+                case "Levothyroxine_50mg":
                     ingredient = "Levothyroxine";
                     strength = "50";
-                    unit = "mcg";
+                    unit = "mg";
                     manufacturer = "Abbott";
                     break;
 

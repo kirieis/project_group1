@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Github Pharmacy</title>
   <link rel="stylesheet" href="home.css" />
-  </head>
+  <script src="i18n.js"></script>
+</head>
 
 <body>
   <!-- HEADER -->
@@ -33,13 +34,12 @@
       <div class="header__actions">
         <!-- User Menu (populated by JS based on auth state) -->
         <div id="userMenuContainer">
-          <a href="login.html" id="btnLogin" class="btn btn--ghost" style="text-decoration: none;"
-           >
-            👤 Đăng nhập
+          <a href="login.html" id="btnLogin" class="btn btn--ghost" style="text-decoration: none;">
+            👤 <span data-i18n="common.nav_login">Đăng nhập</span>
           </a>
         </div>
         <button id="btnCart" class="btn btn--primary">
-          🛒 <span>Giỏ hàng</span> <span id="cartBadge" class="badge">0</span>
+          🛒 <span data-i18n="common.nav_cart">Giỏ hàng</span> <span id="cartBadge" class="badge">0</span>
         </button>
       </div>
     </div>
@@ -50,11 +50,11 @@
     <!-- HERO / BANNER -->
     <section class="hero">
       <div class="hero__left">
-        <h1>Mua thuốc nhanh – tìm dễ – lọc chuẩn</h1>
-        <p>Cập nhật trực tiếp từ hệ thống quản lý kho.</p>
+        <h1 data-i18n="home.hero_title">Mua thuốc nhanh – tìm dễ – lọc chuẩn</h1>
+        <p data-i18n="home.hero_subtitle">Cập nhật trực tiếp từ hệ thống quản lý kho.</p>
         <div class="hero__cta">
-          <button class="btn btn--primary" id="btnGoSale">Xem Sale 🔥</button>
-          <button class="btn btn--ghost" id="btnGoAll">Xem toàn bộ</button>
+          <button class="btn btn--primary" id="btnGoSale" data-i18n="home.hero_btn_sale">Xem Sale 🔥</button>
+          <button class="btn btn--ghost" id="btnGoAll" data-i18n="home.hero_btn_all">Xem toàn bộ</button>
         </div>
       </div>
     </section>
@@ -62,22 +62,22 @@
     <!-- SALE -->
     <section id="saleSection" class="section">
       <div class="section__head">
-        <h2>On Sale</h2>
-        <p class="muted">Hot deals on premium medicines</p>
+        <h2 data-i18n="home.section_sale">Đang Sale</h2>
+        <p class="muted" data-i18n="home.section_sale_sub">Các sản phẩm giảm giá hấp dẫn</p>
       </div>
       <div id="saleGrid" class="grid"></div>
-      <div id="saleEmpty" class="empty hidden">No products found.
+      <div id="saleEmpty" class="empty hidden" data-i18n="home.empty_msg">Không tìm thấy sản phẩm.
       </div>
     </section>
 
     <!-- BEST SELLER -->
     <section id="bestSection" class="section">
       <div class="section__head">
-        <h2>Best Sellers</h2>
-        <p class="muted">Most popular picks this week</p>
+        <h2 data-i18n="home.section_best">Bán chạy nhất</h2>
+        <p class="muted" data-i18n="home.section_best_sub">Sản phẩm được khách hàng tin dùng</p>
       </div>
       <div id="bestGrid" class="grid"></div>
-      <div id="bestEmpty" class="empty hidden">No products found.
+      <div id="bestEmpty" class="empty hidden" data-i18n="home.empty_msg">Không tìm thấy sản phẩm.
       </div>
     </section>
 
@@ -85,10 +85,11 @@
     <section id="allSection" class="section">
       <div class="section__head section__head--row">
         <div>
-          <h2>Tất cả sản phẩm</h2>
+          <h2 data-i18n="home.section_all">Tất cả sản phẩm</h2>
+          <p class="muted" data-i18n="home.section_all_sub">Khám phá danh mục dược phẩm đầy đủ</p>
         </div>
         <div class="pill">
-          <span id="resultsCount">0</span> <span>kết quả</span>
+          <span id="resultsCount">0</span> <span data-i18n="home.results_count">kết quả</span>
         </div>
       </div>
 
@@ -96,42 +97,42 @@
         <!-- FILTER PANEL -->
         <!-- FILTER PANEL -->
         <aside class="filters">
-          <div class="filters__title">Filters</div>
+          <div class="filters__title" data-i18n="home.filter_title">Bộ lọc</div>
 
           <label class="field">
-            <span>Keywords</span>
+            <span data-i18n="home.filter_keywords">Từ khóa</span>
             <input id="filterQuery" type="text" />
           </label>
 
           <label class="field">
-            <span>Min Price</span>
+            <span data-i18n="home.filter_price_min">Giá thấp nhất</span>
             <input id="filterMin" type="number" min="0" step="1000" placeholder="0" />
           </label>
 
           <label class="field">
-            <span>Max Price</span>
+            <span data-i18n="home.filter_price_max">Giá cao nhất</span>
             <input id="filterMax" type="number" min="0" step="1000" placeholder="" />
           </label>
 
           <label class="field">
-            <span>Sort By</span>
+            <span data-i18n="home.filter_sort">Sắp xếp</span>
             <select id="filterSort">
-              <option value="pop_desc">Most Popular</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="date_desc">Newest</option>
-              <option value="name_asc">Name A-Z</option>
+              <option value="pop_desc">Phổ biến nhất</option>
+              <option value="price_asc">Giá: Thấp đến Cao</option>
+              <option value="price_desc">Giá: Cao đến Thấp</option>
+              <option value="date_desc">Mới nhất</option>
+              <option value="name_asc">Tên A-Z</option>
             </select>
           </label>
 
           <label class="field checkbox">
             <input id="filterOnlySale" type="checkbox" />
-            <span>Sale Only</span>
+            <span data-i18n="home.filter_sale_only">Chỉ hiện Sale</span>
           </label>
 
           <div class="filters__actions">
-            <button id="btnReset" class="btn btn--ghost">Reset</button>
-            <button id="btnApply" class="btn btn--primary">Apply</button>
+            <button id="btnReset" class="btn btn--ghost" data-i18n="home.filter_reset">Xóa lọc</button>
+            <button id="btnApply" class="btn btn--primary" data-i18n="home.filter_apply">Áp dụng</button>
           </div>
         </aside>
 
@@ -140,14 +141,14 @@
           <div id="allGrid" class="grid"></div>
 
           <div class="pager">
-            <button id="prevPage" class="btn btn--ghost">← Prev</button>
+            <button id="prevPage" class="btn btn--ghost" data-i18n="home.btn_prev">← Trước</button>
             <div id="pagerDisplay" class="pager__info">
               <!-- JS Populated -->
             </div>
-            <button id="nextPage" class="btn btn--ghost">Next →</button>
+            <button id="nextPage" class="btn btn--ghost" data-i18n="home.btn_next">Sau →</button>
           </div>
 
-          <div id="allEmpty" class="empty hidden">No products match your filters.</div>
+          <div id="allEmpty" class="empty hidden" data-i18n="home.empty_filter">Không có sản phẩm phù hợp bộ lọc.</div>
         </div>
       </div>
     </section>
@@ -155,7 +156,7 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      Connect with us : 03xxxxxxx
+      <span data-i18n="common.footer_connect">Kết nối với chúng tôi : 03xxxxxxx</span>
     </div>
   </footer>
 

@@ -85,16 +85,11 @@
             <version>2.10.1</version>
         </dependency>
 
-        <!-- Jakarta Mail -->
-        <dependency>
-            <groupId>jakarta.mail</groupId>
-            <artifactId>jakarta.mail-api</artifactId>
-            <version>2.1.2</version>
-        </dependency>
+        <!-- Jakarta Mail (All-in-one: API + Implementation) -->
         <dependency>
             <groupId>org.eclipse.angus</groupId>
-            <artifactId>jakarta.mail</artifactId>
-            <version>2.0.2</version>
+            <artifactId>angus-mail</artifactId>
+            <version>2.0.3</version>
         </dependency>
 
         <!-- BCrypt for Password Hashing -->

@@ -110,37 +110,6 @@
   transform: scale(0.95);
 }
 
-/* Admin Dashboard Button Style */
-.btn--admin-portal {
-  background: linear-gradient(135deg, var(--gold), #f59e0b);
-  color: var(--primary) !important;
-  font-weight: 800 !important;
-  border: none;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn--admin-portal::after {
-  content: 'NEW';
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  background: #ff4d4d;
-  color: white;
-  font-size: 8px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: 900;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.btn--admin-portal:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-  filter: brightness(1.1);
-}
-
 /* Spinner Animation */
 .skeleton-ring {
   display: inline-block;
@@ -680,8 +649,8 @@ body.lang-en .pixel-card::before {
    ═══════════════════════════════════════════════════════════════════════════ */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
 }
 
 .card {
@@ -704,11 +673,10 @@ body.lang-en .pixel-card::before {
 }
 
 .card__top {
-  padding: 24px 24px 16px;
+  padding: 24px 24px 12px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-grow: 1;
   background: linear-gradient(180deg, #fafbfc 0%, var(--white) 100%);
 }
 
@@ -717,7 +685,6 @@ body.lang-en .pixel-card::before {
   min-width: 0;
   margin-right: 0;
   padding-right: 80px;
-  /* Make space for absolute tag */
 }
 
 .card__name {
@@ -726,13 +693,77 @@ body.lang-en .pixel-card::before {
   font-weight: 800;
   color: var(--text-dark);
   margin: 0;
-  line-height: 1.3;
-  white-space: nowrap;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-  display: block;
   letter-spacing: -0.3px;
+  min-height: 48px;
+  /* Đảm bảo tên thuốc luôn cùng chiều cao */
+}
+
+.card__info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 0 24px 8px;
+}
+
+.card__info .info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.card__info-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+}
+
+.card__info .info-pill b {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.card__info .info-pill--expiry {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.card__info .info-pill--expiry.expiring-soon {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.card__info .info-pill--unit-solid {
+  background: #eff6ff;
+  border-color: #dbeafe;
+  color: #1e40af;
+}
+
+.card__info .info-pill--unit-liquid {
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+  color: #6d28d9;
 }
 
 .card__meta {
@@ -781,11 +812,12 @@ body.lang-en .pixel-card::before {
 }
 
 .card__mid {
-  padding: 12px 20px 16px;
+  padding: 12px 24px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
+  border-top: 1px solid var(--border);
 }
 
 .price {
@@ -1868,8 +1900,15 @@ body.lang-en .pixel-card::before {
 }
 
 @keyframes langDropIn {
-  from { opacity: 0; transform: translateY(-8px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Current language label header */
@@ -1914,7 +1953,7 @@ body.lang-en .pixel-card::before {
 }
 
 .lang-option.active {
-  background: linear-gradient(90deg, rgba(201,162,39,0.12), transparent);
+  background: linear-gradient(90deg, rgba(201, 162, 39, 0.12), transparent);
   color: var(--primary);
   font-weight: 700;
 }
@@ -1953,7 +1992,7 @@ body.lang-en .pixel-card::before {
 }
 
 .tay-error-toast button {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   color: #fff;
   border-radius: 50%;
@@ -1971,10 +2010,379 @@ body.lang-en .pixel-card::before {
 }
 
 .tay-error-toast button:hover {
-  background: rgba(255,255,255,0.35);
+  background: rgba(255, 255, 255, 0.35);
 }
 
 @keyframes tayToastIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.9); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🎠 CAROUSEL - Auto-scroll Sale & Best Sellers (Kiểu gian hàng điện tử)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Carousel wrapper */
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -20px;
+  padding: 10px 20px 24px;
+  /* Tăng padding bottom cho scrollbar */
+}
+
+.carousel-wrapper::before,
+.carousel-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.carousel-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--light-bg) 0%, transparent 100%);
+}
+
+.carousel-wrapper::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--light-bg) 0%, transparent 100%);
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px 0 20px;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel-track.active {
+  cursor: grabbing;
+}
+
+.carousel-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.carousel-track::-webkit-scrollbar-track {
+  background: rgba(10, 37, 64, 0.03);
+  border-radius: 10px;
+}
+
+.carousel-track::-webkit-scrollbar-thumb {
+  background: var(--gold-light);
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+.carousel-track::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+.carousel-track .card {
+  scroll-snap-align: start;
+  min-width: 320px;
+  max-width: 320px;
+  flex-shrink: 0;
+  height: auto;
+}
+
+/* Removed CSS animation to allow manual scrolling */
+
+/* Section backgrounds - Màu mè lung linh */
+#saleSection {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 30%, #fffbeb 100%);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+#saleSection::before {
+  content: '🔥';
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 110px;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.7));
+  animation: fireFloat 3s ease-in-out infinite;
+}
+
+@keyframes fireFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+#saleSection .carousel-wrapper::before {
+  background: linear-gradient(90deg, #fff7ed 0%, transparent 100%);
+}
+
+#saleSection .carousel-wrapper::after {
+  background: linear-gradient(270deg, #fffbeb 0%, transparent 100%);
+}
+
+#saleSection .section__head h2 {
+  color: #92400e;
+}
+
+#saleSection .section__head .muted {
+  color: #b45309;
+}
+
+#bestSection {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 30%, #f0f9ff 100%);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+#bestSection::before {
+  content: '⭐';
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 110px;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.7));
+  animation: starPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.25;
+  }
+}
+
+#bestSection .carousel-wrapper::before {
+  background: linear-gradient(90deg, #eff6ff 0%, transparent 100%);
+}
+
+#bestSection .carousel-wrapper::after {
+  background: linear-gradient(270deg, #f0f9ff 0%, transparent 100%);
+}
+
+#bestSection .section__head h2 {
+  color: #1e40af;
+}
+
+#bestSection .card[data-type="liquid"] {
+  border-left-color: #7c3aed;
+}
+
+/* All Products Section - Medical Clean Synchronization */
+#allSection {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 35%, #f7fee7 100%);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(22, 163, 74, 0.12);
+  box-shadow: 0 4px 20px rgba(22, 163, 74, 0.05);
+}
+
+#allSection::before {
+  content: '🏥';
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 110px;
+  opacity: 0.15;
+  filter: drop-shadow(0 0 20px rgba(22, 163, 74, 0.4));
+  animation: medFloat 4s ease-in-out infinite;
+}
+
+@keyframes medFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+#allSection .section__head h2 {
+  color: #166534;
+}
+
+#allSection .section__head .muted {
+  color: #15803d;
+}
+
+#allSection .card[data-type="solid"] {
+  border-left-color: var(--primary);
+}
+
+#allSection .card[data-type="liquid"] {
+  border-left-color: #7c3aed;
+}
+
+/* Card shimmer/glow effect on hover (Hiệu ứng lấp lánh) */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(201, 162, 39, 0.08) 50%,
+      transparent 100%);
+  transition: left 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+/* Card colorful left border - Phân loại theo dạng thuốc */
+.card {
+  border-left: 5px solid #e5e7eb;
+  /* Default light border */
+}
+
+/* 💊 Thuốc viên (Tablet/Capsule) - Vibrant Navy */
+.card[data-type="solid"] {
+  border-left-color: #1e40af;
+}
+
+/* 🧴 Thuốc nước (Syrup/Liquid) - Deep Purple */
+.card[data-type="liquid"] {
+  border-left-color: #7c3aed;
+}
+
+#saleSection .card__mid .price {
+  color: #b45309;
+}
+
+#bestSection .card__mid .price {
+  color: #1e40af;
+}
+
+#allSection .card[data-type="solid"] {
+  border-left-color: #1e40af;
+}
+
+/* Colorful sale tag animation */
+.tag--sale {
+  background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%) !important;
+  color: #78350f !important;
+  animation: tagPop 0.5s ease-out;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+@keyframes tagPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Floating particles background for hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -50px;
+  left: -50px;
+  animation: particleFloat1 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat1 {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(30px, 40px);
+  }
+
+  66% {
+    transform: translate(-20px, 20px);
+  }
+}
+
+/* Price glow effect */
+.card__mid .price {
+  position: relative;
+}
+
+#saleSection .card__mid .price {
+  color: #b45309;
+}
+
+#bestSection .card__mid .price {
+  color: #1e40af;
+}
+
+/* Responsive carousel */
+@media (max-width: 768px) {
+  .carousel-track .card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+
+  #saleSection,
+  #bestSection,
+  #allSection {
+    padding: 24px 16px;
+    border-radius: var(--radius-lg);
+  }
 }
