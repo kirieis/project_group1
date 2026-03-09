@@ -6,16 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * BatchDAO – Quản lý truy vấn liên quan đến Batch (Lô thuốc).
- * 
- * Hệ thống 3-tier quản lý hạn sử dụng:
- * - OK (> 30 ngày): Bán bình thường
- * - NEAR_EXPIRY (16–30 ngày): Sale 30%, vẫn bán được
- * - REMOVED (≤ 15 ngày): Loại khỏi bán, ghi log kiểm kê
- * - EXPIRED (≤ 0 ngày): Đã hết hạn
- */
-
 public class BatchDAO {
 
     public static final int DAYS_REMOVE_THRESHOLD = 15; // ≤ 15 ngày → loại khỏi bán
@@ -25,7 +15,12 @@ public class BatchDAO {
     public List<BatchInfo> getAvailableBatches(String medicineId) {
         List<BatchInfo> list = new ArrayList<>();
         String sql = """
-                SELECT batch_id, medicine_id, batch_number, expiry_date, quantity_available, import_price,
+                SELECT batch_id,
+                       medicine_id,
+                       batch_number,
+                       expiry_date,
+                       quantity_available,
+                       import_price,
                        DATEDIFF(DAY, CAST(GETDATE() AS DATE), expiry_date) AS days_left
                 FROM Batch
                 WHERE medicine_id = ?
@@ -57,7 +52,12 @@ public class BatchDAO {
     public List<BatchInfo> getAvailableBatches(Connection conn, String medicineId) throws SQLException {
         List<BatchInfo> list = new ArrayList<>();
         String sql = """
-                SELECT batch_id, medicine_id, batch_number, expiry_date, quantity_available, import_price,
+                SELECT batch_id,
+                       medicine_id,
+                       batch_number,
+                       expiry_date,
+                       quantity_available,
+                       import_price,
                        DATEDIFF(DAY, CAST(GETDATE() AS DATE), expiry_date) AS days_left
                 FROM Batch
                 WHERE medicine_id = ?
