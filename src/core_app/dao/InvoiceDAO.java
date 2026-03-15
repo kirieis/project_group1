@@ -2,6 +2,7 @@ package core_app.dao;
 
 import core_app.model.Invoice;
 import core_app.model.InvoiceDetail;
+import core_app.service.InventoryService;
 import core_app.util.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class InvoiceDAO {
     }
 
     private final MedicineDAO medicineDAO = new MedicineDAO();
+    private final InventoryService inventoryService = new InventoryService();
 
     public int addInvoice(Invoice invoice) {
         String sqlInvoice = "INSERT INTO Invoice (customer_id, total_amount, payment_method, status, payment_proof) VALUES (?, ?, ?, ?, ?)";
@@ -67,6 +69,14 @@ public class InvoiceDAO {
                             psDetail.setInt(4, d.getQuantity());
                             psDetail.setDouble(5, d.getUnitPrice());
                             psDetail.addBatch();
+                            
+                            // Deduct stock
+                            InventoryService.FEFOResult fefoResult = inventoryService.sellFEFO(conn, mId, d.getQuantity());
+                            if (!fefoResult.success) {
+                                System.err.println("[InvoiceDAO] ERROR deducting stock for " + mId + ": " + fefoResult.errorMessage);
+                                conn.rollback();
+                                throw new RuntimeException("Insufficient stock for " + d.getMedicineName() + ": " + fefoResult.errorMessage);
+                            }
                         }
                         psDetail.executeBatch();
                     }

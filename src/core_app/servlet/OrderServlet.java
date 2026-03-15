@@ -172,6 +172,17 @@ public class OrderServlet extends HttpServlet {
                     break;
                 }
             }
+            
+            // Nếu là admin, thử lấy thông tin đơn hàng từ list tất cả đơn hàng nếu chưa tìm thấy
+            if (existingInvoice == null && "ADMIN".equals(user.getRole())) {
+                List<Invoice> allOrders = invoiceDAO.getAllInvoices();
+                for (Invoice o : allOrders) {
+                    if (o.getInvoiceId() == orderId) {
+                        existingInvoice = o;
+                        break;
+                    }
+                }
+            }
 
             boolean canUpdate = false;
 
@@ -186,6 +197,29 @@ public class OrderServlet extends HttpServlet {
 
             if (canUpdate) {
                 if (invoiceDAO.updateStatus(orderId, newStatus)) {
+                    // Nếu trạng thái mới là hủy (hoặc từ chối), hoàn lại số lượng thuốc vào kho
+                    if (("CANCELLED".equals(newStatus) || "DENIED".equals(newStatus)) 
+                            && existingInvoice != null 
+                            && "PENDING".equals(currentStatus)) { // Chỉ hoàn kho nếu đang từ PENDING sang hủy
+                        System.out.println("🔄 [OrderServlet] Hoàn trả số lượng kho cho đơn hàng " + orderId);
+                        core_app.dao.BatchDAO batchDAO = new core_app.dao.BatchDAO();
+                        try (java.sql.Connection conn = core_app.util.DBConnection.getConnection()) {
+                            conn.setAutoCommit(false);
+                            try {
+                                for (InvoiceDetail detail : existingInvoice.getInvoiceDetails()) {
+                                    batchDAO.addStock(conn, detail.getMedicineId(), detail.getQuantity());
+                                }
+                                conn.commit();
+                                System.out.println("✅ [OrderServlet] Hoàn trả kho thành công");
+                            } catch (Exception ex) {
+                                conn.rollback();
+                                System.err.println("❌ [OrderServlet] Lỗi khi hoàn trả kho: " + ex.getMessage());
+                            }
+                        } catch (Exception e) {
+                            System.err.println("❌ [OrderServlet] Lỗi kết nối CSDL khi hoàn trả kho: " + e.getMessage());
+                        }
+                    }
+                    
                     resp.getWriter().print("{\"status\":\"success\"}");
                 } else {
                     resp.getWriter().print("{\"status\":\"error\", \"message\":\"Update failed\"}");

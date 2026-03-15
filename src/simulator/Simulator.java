@@ -1,37 +1,65 @@
 package simulator;
 
+import core_app.util.DBConnection;
+
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Simulator {
 
-    // Danh sách medicine IDs thực tế từ database
-    private static final String[] MEDICINE_IDS = {
-            "MED6", "MED7", "MED9", "MED11", "MED12", "MED25", "MED26", "MED27", "MED28", "MED30",
-            "MED31", "MED32", "MED34", "MED36", "MED42", "MED47", "MED49", "MED50", "MED57", "MED60",
-            "MED62", "MED75", "MED76", "MED77", "MED81", "MED88", "MED92", "MED93", "MED95", "MED97"
-    };
+    static class AvailableMedicine {
+        String id;
+        String name;
+        int price;
+        int maxQuantity;
 
-    // Tên thuốc tương ứng
-    private static final String[] MEDICINE_NAMES = {
-            "Telfast HD 180mg", "Esomeprazole 40mg", "Cefixime 200mg", "Acetylcysteine 200mg",
-            "Smecta", "Zinc Gluconate 20mg", "Levofloxacin 500mg", "Omeprazole 20mg",
-            "Vitamin K2", "Panadol Extra", "Cefdinir 300mg", "Enat 400", "Enterogermina",
-            "Vitamin B1 B6 B12", "Magnesium B6", "Ketoconazole 200mg", "Levothyroxine 50mcg",
-            "Calcium D3", "Levofloxacin 500mg", "Allopurinol 300mg", "Esomeprazole 40mg",
-            "Hapacol 650", "Vitamin E 400IU", "Clotrimazole 1%", "Loperamid 2mg",
-            "Eugica", "Colchicine 1mg", "Loperamid 2mg", "Enat 400", "Enat 400"
-    };
+        public AvailableMedicine(String id, String name, int price, int maxQuantity) {
+            this.id = id;
+            this.name = name;
+            this.price = price;
+            this.maxQuantity = maxQuantity;
+        }
+    }
 
-    // Giá bán tương ứng
-    private static final int[] MEDICINE_PRICES = {
-            1450, 1000, 2000, 50000, 1500, 1000, 1500, 2500, 1400, 2500,
-            2000, 2000, 1250, 1400, 3000, 1450, 1450, 50000, 1500, 2000,
-            50000, 700, 1400, 50000, 1500, 50000, 50000, 3000, 1250, 1700
-    };
+    private static List<AvailableMedicine> fetchAvailableMedicines() {
+        List<AvailableMedicine> list = new ArrayList<>();
+        // Query to get medicines that have available stock in batches > 15 days
+        String sql = """
+                SELECT m.medicine_id, m.name, m.price, COALESCE(SUM(b.quantity_available), 0) as total_qty
+                FROM Medicine m
+                JOIN Batch b ON m.medicine_id = b.medicine_id
+                WHERE b.expiry_date > DATEADD(DAY, 15, CAST(GETDATE() AS DATE))
+                  AND b.quantity_available > 0
+                GROUP BY m.medicine_id, m.name, m.price
+                HAVING COALESCE(SUM(b.quantity_available), 0) > 0
+                """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                list.add(new AvailableMedicine(
+                    rs.getString("medicine_id"),
+                    rs.getString("name"),
+                    rs.getInt("price"),
+                    rs.getInt("total_qty")
+                ));
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Lỗi khi lấy danh sách thuốc từ DB: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public static void main(String[] args) throws Exception {
         String endpoint = "https://unplanked-inculpably-malorie.ngrok-free.dev/api/orders";
@@ -41,26 +69,44 @@ public class Simulator {
         System.out.println("   BẮT ĐẦU GIẢ LẬP ĐƠN HÀNG - ORDER SIMULATOR");
         System.out.println("═══════════════════════════════════════════════\n");
 
+        List<AvailableMedicine> dbMedicines = fetchAvailableMedicines();
+        if (dbMedicines.isEmpty()) {
+            System.out.println("❌ Không có thuốc nào còn tồn kho trong database! Hãy nhập thêm hàng.");
+            return;
+        }
+        
+        System.out.println("✅ Đã tải " + dbMedicines.size() + " loại thuốc từ database.");
+
         for (int i = 1; i <= 20; i++) {
             // Tạo 1-5 items ngẫu nhiên cho mỗi đơn hàng
             int numItems = rnd.nextInt(5) + 1;
+            // Limit numItems to available medicines to avoid duplicates (optional, we could just allow duplicates)
+            numItems = Math.min(numItems, dbMedicines.size());
+            
             StringBuilder itemsJson = new StringBuilder();
             double totalAmount = 0;
+            
+            // To avoid picking the same medicine twice in one order
+            List<AvailableMedicine> availableForThisOrder = new ArrayList<>(dbMedicines);
 
             for (int j = 0; j < numItems; j++) {
-                int medicineIndex = rnd.nextInt(MEDICINE_IDS.length);
-                String medId = MEDICINE_IDS[medicineIndex];
-                String medName = MEDICINE_NAMES[medicineIndex];
-                int price = MEDICINE_PRICES[medicineIndex];
-                int quantity = rnd.nextInt(10) + 1; // Số lượng 1-10
+                if (availableForThisOrder.isEmpty()) break;
+                
+                int index = rnd.nextInt(availableForThisOrder.size());
+                AvailableMedicine med = availableForThisOrder.remove(index);
+                
+                // Random quantity from 1 to MIN(10, availableQuantity)
+                int maxRandomQty = Math.min(10, med.maxQuantity);
+                if (maxRandomQty < 1) maxRandomQty = 1; // Safeguard
+                int quantity = rnd.nextInt(maxRandomQty) + 1;
 
-                totalAmount += price * quantity;
+                totalAmount += med.price * quantity;
 
                 if (j > 0)
                     itemsJson.append(",");
                 itemsJson.append(String.format(
                         "{\"id\":\"%s\",\"name\":\"%s\",\"price\":%d,\"qty\":%d}",
-                        medId, medName, price, quantity));
+                        med.id, med.name, med.price, quantity));
             }
 
             // Tạo JSON payload theo format của OrderServlet

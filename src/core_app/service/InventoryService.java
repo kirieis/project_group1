@@ -147,6 +147,68 @@ public class InventoryService {
         }
     }
 
+    /**
+     * Bán thuốc theo FEFO (Sử dụng Connection có sẵn từ transaction bên ngoài).
+     * Dùng khi tạo Invoice để đảm bảo cả Invoice và Stock Deduction nằm trong cùng 1 transaction.
+     */
+    public FEFOResult sellFEFO(Connection conn, String medicineId, int quantity) throws SQLException {
+        FEFOResult result = new FEFOResult();
+        
+        // 1. Lấy batch khả dụng, FEFO order (expiry sớm nhất trước)
+        // Query đã loại batch ≤ 15 ngày
+        List<BatchInfo> batches = batchDAO.getAvailableBatches(conn, medicineId);
+
+        if (batches.isEmpty()) {
+            result.success = false;
+            result.errorMessage = "Thuốc " + medicineId + " đã hết hàng hoặc tất cả lô đã hết hạn/sắp hết hạn";
+            return result;
+        }
+
+        // 2. Tính tổng tồn kho
+        int totalAvailable = 0;
+        for (BatchInfo b : batches) {
+            totalAvailable += b.quantityAvailable;
+        }
+
+        if (totalAvailable < quantity) {
+            result.success = false;
+            result.errorMessage = "Không đủ tồn kho cho thuốc " + medicineId
+                    + ". Yêu cầu: " + quantity + ", Còn: " + totalAvailable;
+            return result;
+        }
+
+        // 3. FEFO: Trừ từ batch hết hạn sớm nhất trước
+        int remaining = quantity;
+        for (BatchInfo batch : batches) {
+            if (remaining <= 0)
+                break;
+
+            int deduct = Math.min(remaining, batch.quantityAvailable);
+            boolean ok = batchDAO.deductStock(conn, batch.batchId, deduct);
+            if (!ok) {
+                throw new SQLException("Không thể trừ kho batch " + batch.batchId);
+            }
+
+            // Ghi nhận discount nếu batch nằm trong vùng near-expiry (16–30 ngày)
+            result.allocations.add(new FEFOResult.FEFOAllocation(
+                    batch.batchId, batch.batchNumber, deduct,
+                    batch.importPrice, batch.discountPercent));
+
+            remaining -= deduct;
+
+            String discountTag = batch.discountPercent > 0
+                    ? " [SALE -" + batch.discountPercent + "%]"
+                    : "";
+            System.out.println("📦 [FEFO] Trừ " + deduct + " từ batch " + batch.batchNumber
+                    + " (HSD: " + batch.expiryDate + ", còn " + batch.daysLeft + " ngày"
+                    + ", còn lại: " + (batch.quantityAvailable - deduct) + ")" + discountTag);
+        }
+
+        result.success = true;
+        System.out.println("✅ [FEFO] Bán thành công " + quantity + " đơn vị thuốc " + medicineId);
+        return result;
+    }
+
     // ============================================================
     // validateStock – Kiểm tra tồn kho trước khi bán
     // ============================================================

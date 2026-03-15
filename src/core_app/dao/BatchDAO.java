@@ -121,6 +121,47 @@ public class BatchDAO {
     }
 
     // ============================================================
+    // addStock – Cộng lại kho (vd: khi hủy đơn hàng)
+    // ============================================================
+
+    public boolean addStock(Connection conn, String medicineId, int quantity) throws SQLException {
+        // Find the batch with the latest expiry date that is still valid (> 15 days) to add stock back to
+        String selectSql = """
+                SELECT TOP 1 batch_id 
+                FROM Batch 
+                WHERE medicine_id = ? 
+                  AND expiry_date > DATEADD(DAY, ?, CAST(GETDATE() AS DATE))
+                ORDER BY expiry_date DESC
+                """;
+                
+        String updateSql = "UPDATE Batch SET quantity_available = quantity_available + ? WHERE batch_id = ?";
+        
+        try (PreparedStatement selectPs = conn.prepareStatement(selectSql)) {
+            selectPs.setString(1, medicineId);
+            selectPs.setInt(2, DAYS_REMOVE_THRESHOLD);
+            ResultSet rs = selectPs.executeQuery();
+            
+            if (rs.next()) {
+                int batchId = rs.getInt("batch_id");
+                try (PreparedStatement updatePs = conn.prepareStatement(updateSql)) {
+                    updatePs.setInt(1, quantity);
+                    updatePs.setInt(2, batchId);
+                    int rows = updatePs.executeUpdate();
+                    if (rows > 0) {
+                        System.out.println("🔄 [BatchDAO] Hoàn lại " + quantity + " vào batch " + batchId);
+                        return true;
+                    }
+                }
+            } else {
+                System.err.println("⚠️ [BatchDAO] Không tìm thấy batch hợp lệ để hoàn lại stock cho thuốc " + medicineId);
+                // In a real system, you might need to create a new batch or log this anomaly
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // ============================================================
     // getExpiringBatches – Batch sắp hết hạn trong N ngày (cảnh báo)
     // ============================================================
 
