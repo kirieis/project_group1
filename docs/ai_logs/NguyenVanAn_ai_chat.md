@@ -20490,3 +20490,132 @@ sqlcmd -S localhost -U an -P Kahapoli123# -Q "SELECT name FROM sys.databases"
 **Nếu bạn đã chắc chắn user/mật khẩu đúng và đã cấp quyền, hãy khởi động lại SQL Server và thử lại. Nếu vẫn lỗi, hãy gửi lại thông tin user/mật khẩu hoặc xác nhận user khác để tôi cập nhật lại cấu hình.**
 
 **Lưu ý:** Đây là lỗi xác thực từ phía SQL Server, không phải do code Java. Code đã đúng, chỉ cần đảm bảo user/mật khẩu và quyền trên SQL Server là sẽ kết nối được.
+
+16/3/2026:
+
+run-simulator.bat sau khi chạy thì nó tự tắt mà chưa chạy được gì hãy kiểm tra và fix
+
+Analyzed
+1 result
+1 result
+Analyzed
+Analyzed
+Vấn đề đã rõ. File 
+
+pom.xml
+ không có cấu hình exec-maven-plugin, vì vậy lệnh mvn exec:java bị lỗi ngay lập tức và cửa sổ tắt trước khi pause được thực thi (hoặc Maven báo lỗi build failure rồi thoát).
+
+Có 2 cách fix:
+
+Cách 1 (Đơn giản nhất): Thêm exec-maven-plugin vào 
+
+pom.xml
+
+Cách 2 (Không cần Maven plugin): Build classpath thủ công trong 
+
+.bat
+
+Cách tốt nhất là thêm exec-maven-plugin vào 
+
+pom.xml
+:
+
+Edited
++8
+-0
+Tiếp theo, cũng cần sửa file 
+
+.bat
+ để hiển thị lỗi rõ hơn khi có vấn đề (thêm mvn compile trước và giữ cửa sổ mở khi lỗi):
+
+Edited
++13
+-1
+Đã fix xong! Đây là nguyên nhân và những gì đã được sửa:
+
+Nguyên nhân lỗi
+
+run-simulator.bat
+ dùng lệnh mvn exec:java, nhưng 
+
+pom.xml
+ thiếu exec-maven-plugin — plugin này là bắt buộc để Maven biết cách chạy lệnh exec:java. Khi plugin không có, Maven báo lỗi ngay và thoát trước khi pause được thực thi → cửa sổ tắt ngay.
+
+Những thay đổi đã thực hiện
+1. 
+
+pom.xml
+ — Thêm exec-maven-plugin
+xml
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>3.1.0</version>
+    <configuration>
+        <mainClass>simulator.Simulator</mainClass>
+    </configuration>
+</plugin>
+2. 
+
+run-simulator.bat
+ — Cải thiện script
+Thêm bước mvn compile trước khi chạy
+Kiểm tra lỗi compile và hiển thị thông báo rõ ràng
+Cửa sổ luôn được giữ mở (pause) kể cả khi có lỗi
+Bây giờ bạn có thể double-click vào 
+
+run-simulator.bat
+ và nó sẽ chạy bình thường. Lưu ý: endpoint trong 
+
+Simulator.java
+ đang hardcode là https://unplanked-inculpably-malorie.ngrok-free.dev/api/orders — hãy đảm bảo ngrok đang chạy và URL này còn hợp lệ.
+
+-----
+
+simulator.bat chỉ random thuốc trong danh sách được khai báo trong simulator.java. Tôi muốn hệ thống sẽ đọc các thuốc trong database của máy và chọn lấy random các loại thuốc và số lượng. Sau khi đã chọn và gửi đơn mua lên hệ thống thì các loại thuốc trong database sẽ bị trừ tuy nhiên nếu đơn (pending) bị denied bởi admin thì các loại thuốc đấy sẽ được trả lại vào database.
+
+
+Planning Simulator Database Integration
+Reviewed 
+
+Simulator.java
+ (hardcoded medicine lists), 
+
+SimulatorConfig.java
+ (config properties), and project structure. Now exploring backend layers.
+
+Progress Updates
+1
+Researching current codebase structure and simulator implementation
+
+2
+Exploring DAO, model, servlet layers to understand medicine/order data flow
+
+khi chạy run-simulator.bat chỉ random thuốc trong danh sách được khai báo trong simulator.java. Tôi muốn hệ thống sẽ đọc các thuốc trong database của máy và chọn lấy random các loại thuốc và số lượng. Sau khi đã chọn và gửi đơn mua lên hệ thống thì các loại thuốc trong database sẽ bị trừ tuy nhiên nếu đơn (pending) bị denied bởi admin thì các loại thuốc đấy sẽ được trả lại vào database.
+
+
+
+
+Planning Simulator Database Integration
+Found that stock is deducted via sellFEFO but never called during order creation. Planning to modify Simulator.java to use DB, InvoiceDAO to deduct stock via FEFO, and OrderServlet to restore stock on cancel/deny.
+
+Files Edited
+Progress Updates
+1
+Reviewing OrderServlet, MedicineDAO, and BatchDAO
+
+2
+Checking InvoiceDAO methods for order creation and status updates
+
+3
+Checking where stock deduction occurs and how Simulator is executed
+
+4
+Reading run-simulator.bat and InventoryService to find deductStock usage
+
+5
+Searching for sellFEFO usage to understand current stock deduction logic
+
+6
+Creating implementation plan and task checklist for user review
+
