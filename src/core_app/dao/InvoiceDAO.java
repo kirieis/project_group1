@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InvoiceDAO {
-
-    static {
-        core_app.util.SchemaUpdate.updateSchema();
-    }
-
     private final MedicineDAO medicineDAO = new MedicineDAO();
 
     public int addInvoice(Invoice invoice) {
