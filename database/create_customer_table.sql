@@ -32,6 +32,7 @@ CREATE TABLE Customer (
     full_name NVARCHAR(100) NOT NULL,
     phone NVARCHAR(20),
     address NVARCHAR(255),
+    email NVARCHAR(255),
     username NVARCHAR(50) NOT NULL UNIQUE,
     password NVARCHAR(255) NOT NULL,
     role NVARCHAR(20) DEFAULT 'CUSTOMER' CHECK (role IN ('ADMIN', 'CUSTOMER'))
