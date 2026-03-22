@@ -406,3 +406,266 @@ DB: RDBMS (PostgreSQL / MySQL) — giao dịch ACID quan trọng cho consistency
 Index: index trên (store_id, medicine_id) và (store_id, batch_id, expiry_date) để truy vấn FIFO nhanh.
 
 Concurrency control: dùng optimistic locking hoặc SELECT ... FOR UPDATE khi phân bổ batc
+
+
+*Prompt: dưới đây là sales flowchart của dự án này mình vừa tạo ra, bạn hãy chỉnh sửa lại theo đúng từ khóa chuyên môn và bằng tiếng anh: B1 Start ->B2 Login ->B3 Mua hàng ->B4 Thanh toán ->B5 Áp dụng mã giảm giá(nếu có) ->B6 Xác nhận thanh toán và hiện mã QR -> 
+B7a Người dung quét mã QR để thanh toán  -> Hiển thị đã thanh toán thành công 
+B7b Người dung không thanh toán -> Hiển thị đã hủy đơn hang
+B7c Người dung thanh toán quá lâu -> Hiển thị đã quá thời gian thanh toán 
+B8 End
+
+*CODE AI:Mình sẽ **chuẩn hóa lại flowchart theo thuật ngữ thường dùng trong hệ thống e-commerce / payment system** và viết **hoàn toàn bằng tiếng Anh**.
+Các từ như *Mua hàng, Thanh toán, Hủy đơn…* sẽ được đổi sang **chuẩn nghiệp vụ (business terminology)**.
+
+---
+
+## Sales / Checkout Flowchart (Revised)
+
+**Step 1:** Start
+**Step 2:** User Login
+**Step 3:** Select Products / Place Order
+**Step 4:** Proceed to Checkout
+**Step 5:** Apply Discount Code (Optional)
+**Step 6:** Confirm Payment & Generate QR Code
+
+**Step 7A:**
+User scans the QR Code and completes payment
+→ Display **Payment Successful**
+
+**Step 7B:**
+User does not complete the payment
+→ Display **Order Cancelled**
+
+**Step 7C:**
+Payment exceeds the allowed time
+→ Display **Payment Timeout**
+
+**Step 8:** End
+
+---
+
+## Phiên bản **chuẩn hơn để dùng trong tài liệu Software / SRS**
+
+Start
+→ **User Authentication (Login)**
+→ **Product Selection**
+→ **Checkout Process**
+→ **Apply Discount Code (Optional)**
+→ **Payment Confirmation & QR Code Generation**
+
+Decision:
+
+* **Payment Completed** → Payment Successful
+* **Payment Cancelled by User** → Order Cancelled
+* **Payment Timeout** → Payment Session Expired
+
+→ End
+
+---
+
+✅ **Các thuật ngữ chuyên môn đã chỉnh:**
+
+| Bạn viết            | Chuẩn hơn                       |
+| ------------------- | ------------------------------- |
+| Login               | User Authentication             |
+| Mua hàng            | Product Selection / Place Order |
+| Thanh toán          | Checkout / Payment              |
+| Áp dụng mã giảm giá | Apply Discount Code             |
+| Xác nhận thanh toán | Confirm Payment                 |
+| Hiện mã QR          | Generate QR Code                |
+| Hủy đơn hàng        | Order Cancelled                 |
+| Quá thời gian       | Payment Timeout                 |
+
+---
+
+💡 Nếu bạn muốn, mình có thể:
+
+* **Vẽ lại flowchart chuẩn UML / BPMN cho dự án này**
+* Hoặc **viết lại theo format chuẩn để đưa vào báo cáo / slide thuyết trình** (rất dễ được điểm cao trong môn Software / Database / Project).
+
+
+*Prompt:đây là những loại thuốc mình đã có bạn hãy liệt kê 20 loại thuốc mà không trùng với danh sách này:
+    "Paracetamol_500mg",
+    "Aspirin_500mg",
+    "Amoxicillin_500mg",
+    "Ibuprofen_200mg",
+    "Cefixime_200mg",
+    "Vitamin_C",
+    "Meloxicam_7.5mg",
+    "Cefdinir_300mg",
+    "SkillMax_Ocavill",
+    "Siro_Ginkid_ZinC",
+    "Echina_Kingphar",
+    "Panadol_Extra",
+    "Efferalgan_500mg",
+    "Hapacol_650",
+    "Alphachoay",
+    "Augmentin_625mg",
+    "Cefuroxim_500mg",
+    "Acyclovir_400mg",
+    "Nexium_mups_20mg",
+    "Loperamid_2mg",
+    "Enterogermina",
+    "Tiffy_Dey",
+    "Telfast_HD_180mg",
+    "Eugica",
+    "Enat_400",
+    "Ginkgo_Biloba_120mg",
+    "Clarithromycin_500mg",
+    "Azithromycin_250mg",
+    "Ciprofloxacin_500mg",
+    "Levofloxacin_500mg",
+    "Metronidazole_500mg",
+    "Omeprazole_20mg",
+    "Pantoprazole_40mg",
+    "Esomeprazole_40mg",
+    "Domperidone_10mg",
+    "Metoclopramide_10mg",
+    "Cetirizine_10mg",
+    "Loratadine_10mg",
+    "Desloratadine_5mg",
+    "Fexofenadine_120mg",
+    "Salbutamol_4mg",
+    "Ambroxol_30mg",
+    "Bromhexine_8mg",
+    "Acetylcysteine_200mg",
+    "Calcium_Carbonate_500mg",
+    "Calcium_D3",
+    "Magnesium_B6",
+    "Vitamin_B1_B6_B12",
+    "Vitamin_E_400IU",
+    "Iron_Folic",
+    "ORS_Plus",
+    "Smecta",
+    "Krebs_Cough_Syrup",
+    "Prospan_Syrup",
+    "Zinc_Gluconate_20mg",
+    "Hydrocortisone_10mg",
+    "Betadine_Solution",
+    "Clotrimazole_1pct",
+    "Ketoconazole_200mg",
+    "Fluconazole_150mg",
+    "Nystatin_Suspension",
+    "Diclofenac_50mg",
+    "Celecoxib_200mg",
+    "Tramadol_50mg",
+    "Prednisolone_5mg",
+    "Methylprednisolone_16mg",
+    "Losartan_50mg",
+    "Amlodipine_5mg",
+    "Bisoprolol_5mg",
+    "Atorvastatin_20mg",
+    "Simvastatin_20mg",
+    "Metformin_500mg",
+    "Gliclazide_80mg",
+    "Insulin_Rapid",
+    "Insulin_Basal",
+    "Levothyroxine_50mcg",
+    "Allopurinol_300mg",
+    "Colchicine_1mg",
+    "Vitamin_K2"
+
+*CODE AI:Ok 👍 mình đã **đối chiếu kỹ** danh sách rất dài của bạn rồi.
+Dưới đây là **20 loại thuốc KHÔNG TRÙNG** với bất kỳ tên nào bạn đã có, đều là **thuốc phổ biến – hợp lý để seed database – dễ bảo vệ**.
+
+Mình giữ **format giống bạn đang dùng** (`Ten_Thuoc_HamLuong`).
+
+---
+
+## ✅ 20 LOẠI THUỐC KHÔNG TRÙNG (ĐÃ CHECK)
+
+```text
+Ranitidine_150mg
+Famotidine_20mg
+Sucralfate_1g
+Bismuth_Subsalicylate
+Montelukast_10mg
+Theophylline_200mg
+Spironolactone_25mg
+Furosemide_40mg
+Hydrochlorothiazide_25mg
+Clopidogrel_75mg
+Aspirin_81mg
+Warfarin_5mg
+Enalapril_10mg
+Captopril_25mg
+Valsartan_80mg
+Glimepiride_2mg
+Sitagliptin_100mg
+Gabapentin_300mg
+Carbamazepine_200mg
+Diazepam_5mg
+```
+
+---
+
+## 🧠 Phân nhóm (để bạn dễ giải thích khi bảo vệ)
+
+### 💊 Tiêu hóa
+
+* Ranitidine_150mg
+* Famotidine_20mg
+* Sucralfate_1g
+* Bismuth_Subsalicylate
+
+### 🌬️ Hô hấp – dị ứng
+
+* Montelukast_10mg
+* Theophylline_200mg
+
+### ❤️ Tim mạch – huyết áp
+
+* Spironolactone_25mg
+* Furosemide_40mg
+* Hydrochlorothiazide_25mg
+* Enalapril_10mg
+* Captopril_25mg
+* Valsartan_80mg
+
+### 🩸 Chống đông – tim mạch
+
+* Clopidogrel_75mg
+* Aspirin_81mg
+* Warfarin_5mg
+
+### 🩺 Đái tháo đường
+
+* Glimepiride_2mg
+* Sitagliptin_100mg
+
+### 🧠 Thần kinh
+
+* Gabapentin_300mg
+* Carbamazepine_200mg
+* Diazepam_5mg
+
+---
+
+## 🎯 Vì sao danh sách này “đẹp” cho đồ án?
+
+✅ Không trùng
+✅ Có nhiều **nhóm bệnh khác nhau**
+✅ Có thuốc **kê đơn** → nói được về nghiệp vụ
+✅ Phù hợp logic **giá theo viên / vỉ / hộp**
+✅ Không quá hiếm → giảng viên không bắt bẻ
+
+---
+
+## 💬 Câu trả lời ăn điểm khi bị hỏi
+
+> “Nhóm em mở rộng danh mục thuốc để mô phỏng dữ liệu nhà thuốc đa dạng, phục vụ test hệ thống chứ không nhằm mục đích kinh doanh.”
+
+💯 Câu này rất an toàn.
+
+---
+
+## 👉 Bước tiếp theo hợp lý
+
+Mình có thể:
+1️⃣ Gán **vien_per_vi / vi_per_hop** cho 20 thuốc này
+2️⃣ Gợi ý **giá theo viên** phù hợp từng nhóm
+3️⃣ Viết luôn **INSERT SQL** cho toàn bộ danh sách
+
+👉 Chỉ cần trả lời **1 / 2 / 3**, mình làm tiếp cho bạn 🚀
+
+
