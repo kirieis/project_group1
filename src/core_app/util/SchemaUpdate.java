@@ -36,6 +36,7 @@ public class SchemaUpdate {
             addColumnIfNotExists(stmt, "Invoice", "status", "NVARCHAR(20) DEFAULT 'PENDING'");
             addColumnIfNotExists(stmt, "Invoice_Detail", "medicine_name", "NVARCHAR(255)");
             addColumnIfNotExists(stmt, "Invoice_Detail", "import_price", "DECIMAL(12,2) DEFAULT 0");
+            addColumnIfNotExists(stmt, "Customer", "email", "NVARCHAR(255)");
 
             System.out.println("✅ [SchemaUpdate] Database upgrade completed successfully!");
 
