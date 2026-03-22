@@ -61,4 +61,42 @@ public class EmailUtil {
             return false;
         }
     }
+
+    public static boolean sendEmail(String recipientEmail, String subject, String body) {
+        String cleanPassword = APP_PASSWORD.replaceAll("\\s+", "");
+
+        if (SENDER_EMAIL.contains("your-email"))
+            return false;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(SENDER_EMAIL, cleanPassword);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(SENDER_EMAIL, "Github Pharmacy"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            message.setSubject(subject);
+            message.setText(body);
+
+            Transport.send(message);
+            System.out.println("[SUCCESS] Da gui email thanh cong (Subject: " + subject + ").");
+            return true;
+        } catch (MessagingException | java.io.UnsupportedEncodingException e) {
+            System.err.println("[ERROR] Loi khi gui email: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
