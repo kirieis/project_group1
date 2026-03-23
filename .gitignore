@@ -51,3 +51,7 @@ bin/
 
 # AI Tools
 .claude/
+
+# JMeter reporter
+stress-test-results.jtl
+jmeter-reporter.log
