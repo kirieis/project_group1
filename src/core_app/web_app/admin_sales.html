@@ -40,7 +40,8 @@
         <div class="notif-content">
             <span class="notif-icon">🔔</span>
             <span id="notification-text"></span>
-            <button class="notif-close" onclick="document.getElementById('notification-banner').style.display='none'">✕</button>
+            <button class="notif-close"
+                onclick="document.getElementById('notification-banner').style.display='none'">✕</button>
         </div>
     </div>
     <style>
@@ -56,6 +57,7 @@
             box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
             animation: notifSlideDown 0.5s ease;
         }
+
         .notif-content {
             max-width: 900px;
             margin: 0 auto;
@@ -66,13 +68,15 @@
             font-size: 14px;
             font-weight: 600;
         }
+
         .notif-icon {
             font-size: 20px;
             animation: notifBell 1s ease infinite;
         }
+
         .notif-close {
             margin-left: auto;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
             width: 28px;
@@ -85,16 +89,41 @@
             justify-content: center;
             transition: background 0.2s;
         }
-        .notif-close:hover { background: rgba(255,255,255,0.35); }
-        @keyframes notifSlideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+
+        .notif-close:hover {
+            background: rgba(255, 255, 255, 0.35);
         }
+
+        @keyframes notifSlideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         @keyframes notifBell {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(15deg); }
-            50% { transform: rotate(-15deg); }
-            75% { transform: rotate(5deg); }
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(15deg);
+            }
+
+            50% {
+                transform: rotate(-15deg);
+            }
+
+            75% {
+                transform: rotate(5deg);
+            }
         }
     </style>
     <script>
@@ -387,26 +416,22 @@
 
         // Event delegation for approve/reject buttons
         document.addEventListener('click', async (e) => {
-            if (!e.target.classList) return;
-            
-            if (e.target.classList.contains('btn-approve') && !isUpdating) {
-                const orderId = e.target.getAttribute('data-order-id');
-                const newStatus = e.target.getAttribute('data-status');
-                updateOrderStatus(parseInt(orderId), newStatus);
-            } else if (e.target.classList.contains('btn-reject') && !isUpdating) {
-                const orderId = e.target.getAttribute('data-order-id');
-                const newStatus = e.target.getAttribute('data-status');
-                updateOrderStatus(parseInt(orderId), newStatus);
+            const btn = e.target.closest('.btn-approve, .btn-reject');
+            if (!btn) return;
+
+            const orderId = btn.getAttribute('data-order-id');
+            const newStatus = btn.getAttribute('data-status');
+            if (orderId && newStatus) {
+                updateOrderStatus(parseInt(orderId), newStatus, btn);
             }
         });
 
-        async function updateOrderStatus(orderId, newStatus) {
-            if (isUpdating) return; // Prevent multiple requests
-            
-            if (!confirm(newStatus === 'PAID' ? 'Xác nhận duyệt đơn hàng này?' : 'Xác nhận hủy đơn hàng này?')) return;
+        async function updateOrderStatus(orderId, newStatus, btn) {
+            if (btn.disabled) return;
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.textContent = '⏳ Đang xử lý...';
 
-            isUpdating = true; // Set flag to prevent duplicate clicks
-            
             try {
                 const res = await fetch('../api/orders', {
                     method: 'PUT',
@@ -415,17 +440,20 @@
                 });
 
                 if (res.ok) {
-                    alert(newStatus === 'PAID' ? 'Duyệt đơn hàng thành công!' : 'Hủy đơn hàng thành công!');
-                    await loadSales(); // Wait for reload to complete
+                    btn.textContent = '✅ Xong!';
+                    btn.style.background = '#10b981';
+                    await loadSales();
                 } else {
                     const err = await res.json();
                     alert('Lỗi: ' + (err.message || 'Không xác định'));
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
                 }
             } catch (e) {
                 console.error(e);
                 alert('Lỗi kết nối server!');
-            } finally {
-                isUpdating = false; // Reset flag after done
+                btn.disabled = false;
+                btn.style.opacity = '1';
             }
         }
 

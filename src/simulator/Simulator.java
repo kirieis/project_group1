@@ -39,9 +39,13 @@ public class Simulator {
 
         System.out.println("═══════════════════════════════════════════════");
         System.out.println("   BẮT ĐẦU GIẢ LẬP ĐƠN HÀNG - ORDER SIMULATOR");
+        System.out.println("   50 đơn hàng | Status: PAID (auto-approved)");
         System.out.println("═══════════════════════════════════════════════\n");
 
-        for (int i = 1; i <= 20; i++) {
+        int successCount = 0;
+        int failCount = 0;
+
+        for (int i = 1; i <= 50; i++) {
             // Tạo 1-5 items ngẫu nhiên cho mỗi đơn hàng
             int numItems = rnd.nextInt(5) + 1;
             StringBuilder itemsJson = new StringBuilder();
@@ -63,10 +67,10 @@ public class Simulator {
                         medId, medName, price, quantity));
             }
 
-            // Tạo JSON payload theo format của OrderServlet
+            // Tạo JSON payload - status = PAID để tự động duyệt + trừ kho
             String payload = String.format("""
                     {
-                      "status":"PENDING",
+                      "status":"PAID",
                       "paymentProof":"",
                       "totalAmount":%.2f,
                       "items":[%s]
@@ -86,16 +90,20 @@ public class Simulator {
             }
 
             int responseCode = conn.getResponseCode();
-            String status = (responseCode == 200) ? " SUCCESS" : " FAILED";
+            String status = (responseCode == 200) ? "✅ OK" : "❌ FAIL";
+            if (responseCode == 200)
+                successCount++;
+            else
+                failCount++;
 
-            System.out.printf("don #%02d | Items: %d | Total: %,.0f VND | %s (HTTP %d)\n",
+            System.out.printf("đơn #%02d | Items: %d | Total: %,10.0f VND | %s (HTTP %d)\n",
                     i, numItems, totalAmount, status, responseCode);
 
-            Thread.sleep(200); // Delay 200ms giữa các requests
+            Thread.sleep(50); // 50ms delay - siêu nhanh
         }
 
         System.out.println("\n═══════════════════════════════════════════════");
-        System.out.println("   DONE - 20 simulator orders");
+        System.out.printf("   DONE - %d thành công / %d thất bại\n", successCount, failCount);
         System.out.println("═══════════════════════════════════════════════");
     }
 }

@@ -745,20 +745,30 @@ function startCarouselAutoScroll(trackId) {
 
   let startX;
   let scrollLeftStart;
+  let hasMoved = false;
 
   track.onmousedown = (e) => {
     isDragging = true;
+    hasMoved = false;
     track.classList.add('active');
     startX = e.pageX;
     scrollLeftStart = track.scrollLeft;
-    // Disable clicks on cards while dragging
-    Array.from(track.children).forEach(c => c.style.pointerEvents = 'none');
+    // Do NOT disable pointer-events here - only after actual drag movement
   };
 
   track.onmousemove = (e) => {
     if (!isDragging) return;
     const x = e.pageX;
     const walk = (x - startX) * 1.5;
+
+    // Only disable clicks after significant mouse movement (real drag, not accidental)
+    if (!hasMoved && Math.abs(e.pageX - startX) > 5) {
+      hasMoved = true;
+      Array.from(track.children).forEach(c => c.style.pointerEvents = 'none');
+    }
+
+    if (!hasMoved) return;
+
     let newScroll = scrollLeftStart - walk;
 
     // Infinite wrap while dragging
@@ -780,16 +790,19 @@ function startCarouselAutoScroll(trackId) {
     isDragging = false;
     track.classList.remove('active');
     // Re-enable clicks after a tiny delay so it doesn't fire click on mouseup
-    setTimeout(() => {
-      Array.from(track.children).forEach(c => c.style.pointerEvents = '');
-    }, 50);
+    if (hasMoved) {
+      setTimeout(() => {
+        Array.from(track.children).forEach(c => c.style.pointerEvents = '');
+      }, 50);
+    }
+    hasMoved = false;
   };
 
   window.addEventListener('mouseup', stopDrag, { passive: true });
 
-  // Touch relies on native scroll, just flag to pause the auto loop
-  track.ontouchstart = () => { isDragging = true; };
-  window.addEventListener('touchend', stopDrag, { passive: true });
+  // Touch relies on native scroll, just pause the auto loop
+  track.ontouchstart = () => { isPaused = true; };
+  track.ontouchend = () => { isPaused = false; };
 
   activeCarousels.set(trackId, requestAnimationFrame(loop));
 }

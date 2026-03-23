@@ -41,7 +41,8 @@
         <div class="notif-content">
             <span class="notif-icon">🔔</span>
             <span id="notification-text"></span>
-            <button class="notif-close" onclick="document.getElementById('notification-banner').style.display='none'">✕</button>
+            <button class="notif-close"
+                onclick="document.getElementById('notification-banner').style.display='none'">✕</button>
         </div>
     </div>
     <style>
@@ -57,6 +58,7 @@
             box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
             animation: notifSlideDown 0.5s ease;
         }
+
         .notif-content {
             max-width: 900px;
             margin: 0 auto;
@@ -67,13 +69,15 @@
             font-size: 14px;
             font-weight: 600;
         }
+
         .notif-icon {
             font-size: 20px;
             animation: notifBell 1s ease infinite;
         }
+
         .notif-close {
             margin-left: auto;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
             width: 28px;
@@ -86,16 +90,41 @@
             justify-content: center;
             transition: background 0.2s;
         }
-        .notif-close:hover { background: rgba(255,255,255,0.35); }
-        @keyframes notifSlideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+
+        .notif-close:hover {
+            background: rgba(255, 255, 255, 0.35);
         }
+
+        @keyframes notifSlideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         @keyframes notifBell {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(15deg); }
-            50% { transform: rotate(-15deg); }
-            75% { transform: rotate(5deg); }
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(15deg);
+            }
+
+            50% {
+                transform: rotate(-15deg);
+            }
+
+            75% {
+                transform: rotate(5deg);
+            }
         }
     </style>
     <script>
@@ -212,14 +241,19 @@
                         style="padding: 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px; width: 250px;">
                 </div>
 
-                <div class="table-container">
+                <div class="table-container"
+                    style="max-height: 55vh; overflow-y: auto; border-radius: 12px; border: 1px solid #e2e8f0;">
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th style="width: 80px;" data-i18n="admin.header_user_id">MÃ TK</th>
-                                <th data-i18n="admin.header_profile">Hồ sơ người dùng</th>
-                                <th data-i18n="admin.header_role">Quyền hạn</th>
-                                <th style="text-align: right;" data-i18n="admin.header_operations">Thao tác</th>
+                                <th style="width: 80px; position: sticky; top: 0; z-index: 2; background: #f8fafc;"
+                                    data-i18n="admin.header_user_id">MÃ TK</th>
+                                <th style="position: sticky; top: 0; z-index: 2; background: #f8fafc;"
+                                    data-i18n="admin.header_profile">THÔNG TIN</th>
+                                <th style="position: sticky; top: 0; z-index: 2; background: #f8fafc;"
+                                    data-i18n="admin.header_role">QUYỀN</th>
+                                <th style="text-align: right; position: sticky; top: 0; z-index: 2; background: #f8fafc;"
+                                    data-i18n="admin.header_operations">THAO TÁC</th>
                             </tr>
                         </thead>
                         <tbody id="userList">

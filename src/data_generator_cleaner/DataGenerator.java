@@ -811,7 +811,6 @@ public class DataGenerator {
                     basePrice = pricePool[r.nextInt(pricePool.length)];
                 }
             }
-
             String expiry = errorexpiry ? "invalid-date"
                     : LocalDate.now().plusDays(r.nextInt(500) - 200).toString();
             int qty = errorqty ? -r.nextInt(100) : r.nextInt(200) + 1;

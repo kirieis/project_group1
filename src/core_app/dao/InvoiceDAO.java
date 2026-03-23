@@ -68,6 +68,13 @@ public class InvoiceDAO {
 
                     conn.commit();
                     System.out.println("[InvoiceDAO] Invoice committed successfully: " + invId);
+
+                    // ✅ Nếu đơn hàng được tạo với status PAID → trừ kho ngay
+                    if ("PAID".equals(invoice.getStatus())) {
+                        deductStock(invId);
+                        System.out.println("📦 [STOCK] Auto-deducted for PAID invoice #" + invId);
+                    }
+
                     return invId;
                 }
                 System.err.println("[InvoiceDAO] ERROR: No generated key returned");
@@ -196,6 +203,12 @@ public class InvoiceDAO {
             ps.setInt(2, orderId);
             int rows = ps.executeUpdate();
             System.out.println("[InvoiceDAO] updateStatus: orderId=" + orderId + " status=" + status + " rows=" + rows);
+
+            // ✅ STOCK DEDUCTION: Khi đơn hàng được duyệt (PAID) → trừ kho
+            if (rows > 0 && "PAID".equals(status)) {
+                deductStock(orderId);
+            }
+
             return rows > 0;
         } catch (SQLException e) {
             System.err.println("[InvoiceDAO] updateStatus ERROR: " + e.getMessage());
@@ -220,15 +233,93 @@ public class InvoiceDAO {
     }
 
     public int approveAllSepayOrders() {
-        String sql = "UPDATE Invoice SET status = 'PAID' WHERE payment_method = 'SEPAY' AND status = 'PENDING'";
+        // Lấy danh sách các đơn SEPAY đang PENDING trước khi approve
+        String selectSql = "SELECT invoice_id FROM Invoice WHERE payment_method = 'SEPAY' AND status = 'PENDING'";
+        String updateSql = "UPDATE Invoice SET status = 'PAID' WHERE payment_method = 'SEPAY' AND status = 'PENDING'";
         try (Connection conn = DBConnection.getConnection();
                 Statement stmt = conn.createStatement()) {
-            int rows = stmt.executeUpdate(sql);
+
+            // 1. Lấy danh sách order IDs trước
+            List<Integer> orderIds = new ArrayList<>();
+            ResultSet rs = stmt.executeQuery(selectSql);
+            while (rs.next()) {
+                orderIds.add(rs.getInt("invoice_id"));
+            }
+
+            // 2. Update status
+            int rows = stmt.executeUpdate(updateSql);
             System.out.println("[InvoiceDAO] approveAllSepayOrders: updated " + rows + " rows");
+
+            // 3. Trừ kho cho từng đơn
+            for (int orderId : orderIds) {
+                deductStock(orderId);
+            }
+
             return rows;
         } catch (SQLException e) {
             System.err.println("[InvoiceDAO] approveAllSepayOrders ERROR: " + e.getMessage());
             return -1;
         }
+    }
+
+    /**
+     * ✅ STOCK DEDUCTION - Trừ kho khi đơn hàng được duyệt
+     * Logic: Giảm quantity trong bảng Medicine theo từng item trong Invoice_Detail
+     */
+    private void deductStock(int invoiceId) {
+        String sqlGetDetails = "SELECT medicine_id, quantity FROM Invoice_Detail WHERE invoice_id = ?";
+        String sqlUpdateStock = "UPDATE Medicine SET quantity = CASE WHEN quantity - ? < 0 THEN 0 ELSE quantity - ? END WHERE medicine_id = ?";
+
+        try (Connection conn = DBConnection.getConnection()) {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement psGet = conn.prepareStatement(sqlGetDetails)) {
+                psGet.setInt(1, invoiceId);
+                ResultSet rs = psGet.executeQuery();
+
+                try (PreparedStatement psUpdate = conn.prepareStatement(sqlUpdateStock)) {
+                    while (rs.next()) {
+                        String medId = rs.getString("medicine_id");
+                        int qty = rs.getInt("quantity");
+
+                        psUpdate.setInt(1, qty);
+                        psUpdate.setInt(2, qty);
+                        psUpdate.setString(3, medId);
+                        psUpdate.addBatch();
+
+                        System.out.println("📦 [STOCK] Deducting " + qty + " from medicine: " + medId);
+                    }
+                    psUpdate.executeBatch();
+                }
+
+                conn.commit();
+                System.out.println("✅ [STOCK] Stock deduction completed for invoice #" + invoiceId);
+
+            } catch (SQLException e) {
+                conn.rollback();
+                System.err.println("🔴 [STOCK] Deduction FAILED for invoice #" + invoiceId + ": " + e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            System.err.println("🔴 [STOCK] Connection error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * ✅ GET TOTAL STOCK - Tổng tồn kho toàn bộ hệ thống
+     * Dùng để verify trên dashboard: SUM(quantity) FROM Medicine
+     */
+    public long getTotalStock() {
+        String sql = "SELECT SUM(CAST(quantity AS BIGINT)) AS total_stock FROM Medicine";
+        try (Connection conn = DBConnection.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getLong("total_stock");
+            }
+        } catch (SQLException e) {
+            System.err.println("[InvoiceDAO] getTotalStock ERROR: " + e.getMessage());
+        }
+        return 0;
     }
 }
