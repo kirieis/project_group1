@@ -408,80 +408,110 @@ Index: index trên (store_id, medicine_id) và (store_id, batch_id, expiry_date)
 Concurrency control: dùng optimistic locking hoặc SELECT ... FOR UPDATE khi phân bổ batc
 
 
-*Prompt: dưới đây là sales flowchart của dự án này mình vừa tạo ra, bạn hãy chỉnh sửa lại theo đúng từ khóa chuyên môn và bằng tiếng anh: B1 Start ->B2 Login ->B3 Mua hàng ->B4 Thanh toán ->B5 Áp dụng mã giảm giá(nếu có) ->B6 Xác nhận thanh toán và hiện mã QR -> 
-B7a Người dung quét mã QR để thanh toán  -> Hiển thị đã thanh toán thành công 
-B7b Người dung không thanh toán -> Hiển thị đã hủy đơn hang
-B7c Người dung thanh toán quá lâu -> Hiển thị đã quá thời gian thanh toán 
-B8 End
+*Prompt:mình muốn bạn liệt kê ra khoảng 20 loại thuốc vỉ khác nhau để mình thêm vào database
 
-*CODE AI:Mình sẽ **chuẩn hóa lại flowchart theo thuật ngữ thường dùng trong hệ thống e-commerce / payment system** và viết **hoàn toàn bằng tiếng Anh**.
-Các từ như *Mua hàng, Thanh toán, Hủy đơn…* sẽ được đổi sang **chuẩn nghiệp vụ (business terminology)**.
+*Code AI: Ok 👍 dưới đây là **~20 loại thuốc dạng vỉ (blister)** rất **phổ biến ở nhà thuốc Việt Nam**, tên **dễ hiểu – dễ giải thích – không gây tranh cãi khi bảo vệ**.
+Bạn có thể dùng **nguyên danh sách này để seed database** hoặc cho `DataGenerator`.
 
 ---
 
-## Sales / Checkout Flowchart (Revised)
+## 🟦 DANH SÁCH 20 THUỐC DẠNG VỈ (PHỔ BIẾN)
 
-**Step 1:** Start
-**Step 2:** User Login
-**Step 3:** Select Products / Place Order
-**Step 4:** Proceed to Checkout
-**Step 5:** Apply Discount Code (Optional)
-**Step 6:** Confirm Payment & Generate QR Code
+### 💊 Thuốc giảm đau – hạ sốt
 
-**Step 7A:**
-User scans the QR Code and completes payment
-→ Display **Payment Successful**
-
-**Step 7B:**
-User does not complete the payment
-→ Display **Order Cancelled**
-
-**Step 7C:**
-Payment exceeds the allowed time
-→ Display **Payment Timeout**
-
-**Step 8:** End
+1. **Paracetamol 500mg**
+2. **Hapacol 650mg**
+3. **Efferalgan 500mg**
+4. **Panadol Extra**
 
 ---
 
-## Phiên bản **chuẩn hơn để dùng trong tài liệu Software / SRS**
+### 💊 Thuốc kháng viêm – giảm đau
 
-Start
-→ **User Authentication (Login)**
-→ **Product Selection**
-→ **Checkout Process**
-→ **Apply Discount Code (Optional)**
-→ **Payment Confirmation & QR Code Generation**
-
-Decision:
-
-* **Payment Completed** → Payment Successful
-* **Payment Cancelled by User** → Order Cancelled
-* **Payment Timeout** → Payment Session Expired
-
-→ End
+5. **Ibuprofen 400mg**
+6. **Aspirin 81mg**
+7. **Diclofenac 50mg**
+8. **Meloxicam 7.5mg**
 
 ---
 
-✅ **Các thuật ngữ chuyên môn đã chỉnh:**
+### 💊 Thuốc kháng sinh (rất hay bán theo vỉ)
 
-| Bạn viết            | Chuẩn hơn                       |
-| ------------------- | ------------------------------- |
-| Login               | User Authentication             |
-| Mua hàng            | Product Selection / Place Order |
-| Thanh toán          | Checkout / Payment              |
-| Áp dụng mã giảm giá | Apply Discount Code             |
-| Xác nhận thanh toán | Confirm Payment                 |
-| Hiện mã QR          | Generate QR Code                |
-| Hủy đơn hàng        | Order Cancelled                 |
-| Quá thời gian       | Payment Timeout                 |
+9. **Amoxicillin 500mg**
+10. **Cefuroxime 250mg**
+11. **Cefixime 200mg**
+12. **Azithromycin 250mg**
+
+⚠️ (Khi bảo vệ có thể nói: *“kháng sinh chỉ bán khi có đơn”* → điểm cộng)
 
 ---
 
-💡 Nếu bạn muốn, mình có thể:
+### 💊 Thuốc tiêu hóa
 
-* **Vẽ lại flowchart chuẩn UML / BPMN cho dự án này**
-* Hoặc **viết lại theo format chuẩn để đưa vào báo cáo / slide thuyết trình** (rất dễ được điểm cao trong môn Software / Database / Project).
+13. **Domperidone 10mg**
+14. **Loperamide 2mg**
+15. **Smecta (gói – vẫn xếp dạng vỉ/gói)**
+
+---
+
+### 💊 Thuốc dị ứng – hô hấp
+
+16. **Loratadine 10mg**
+17. **Cetirizine 10mg**
+18. **Clorpheniramine 4mg**
+
+---
+
+### 💊 Vitamin – bổ sung
+
+19. **Vitamin C 500mg**
+20. **Vitamin B1 B6 B12**
+
+---
+
+## 🟨 GỢI Ý CHUẨN HÓA CHO DATABASE
+
+Bạn nên lưu như sau (rất đẹp khi bảo vệ):
+
+| Thuộc tính            | Ví dụ             |
+| --------------------- | ----------------- |
+| medicine_name         | Paracetamol 500mg |
+| dosage_form           | Tablet            |
+| unit_type             | VI                |
+| vien_per_vi           | 10                |
+| vi_per_hop            | 3                 |
+| prescription_required | true / false      |
+
+---
+
+## 🟩 GỢI Ý GIÁ GỐC THEO VIÊN (để khớp logic trước)
+
+| Nhóm thuốc  | Giá / viên (VND) |
+| ----------- | ---------------- |
+| Paracetamol | 400 – 600        |
+| Ibuprofen   | 600 – 800        |
+| Vitamin     | 800 – 1.500      |
+| Kháng sinh  | 3.000 – 5.000    |
+| Dị ứng      | 700 – 1.000      |
+
+---
+
+## 🎯 CÂU NÓI ĂN ĐIỂM KHI BẢO VỆ
+
+> “Nhóm em chọn các thuốc phổ biến ngoài nhà thuốc Việt Nam, chủ yếu bán theo vỉ, để dữ liệu sát thực tế.”
+
+💯 Câu này **rất an toàn**.
+
+---
+
+## 👉 BƯỚC TIẾP THEO (RẤT HỢP LOGIC)
+
+Mình có thể giúp bạn:
+1️⃣ Viết **INSERT SQL** cho 20 thuốc này
+2️⃣ Chuẩn hóa **vien_per_vi / vi_per_hop** cho từng thuốc
+3️⃣ Gắn luôn **logic giá theo viên → vỉ → hộp** cho từng loại
+
+👉 Chỉ cần nói **1 / 2 / 3**, mình làm tiếp cho bạn ngay 🚀
 
 
 *Prompt:đây là những loại thuốc mình đã có bạn hãy liệt kê 20 loại thuốc mà không trùng với danh sách này:
@@ -669,3 +699,158 @@ Mình có thể:
 👉 Chỉ cần trả lời **1 / 2 / 3**, mình làm tiếp cho bạn 🚀
 
 
+*Prompt: dưới đây là sales flowchart của dự án này mình vừa tạo ra, bạn hãy chỉnh sửa lại theo đúng từ khóa chuyên môn và bằng tiếng anh: b1 start -> b2 nhận yêu cầu bán thuốc -> b3 kiểm tra có còn hạn không -> b4a Nếu hết hạn hãy hiển thị show out of stock 
+b4b nếu còn hạn -> b5 deduct quantity fifo -> b6 create invoice & update inventory 
+-> b7 end
+
+
+*CODE AI: Mình sẽ chuẩn hóa lại flow theo **ngôn ngữ chuyên môn trong hệ thống POS / Pharmacy Management System**, đồng thời sửa các chỗ chưa đúng logic (ví dụ: “hết hạn” ≠ “out of stock”).
+
+---
+
+## ✅ **Revised Sales Flowchart (Pharmacy System)**
+
+**Step 1:** Start
+**Step 2:** Receive Sales Request (Medication Order)
+**Step 3:** Check Product Expiry Status
+
+**Step 4A:**
+If the product is **expired**
+→ Display **Product Expired (Not Available for Sale)**
+
+**Step 4B:**
+If the product is **valid (not expired)**
+→ **Step 5:** Deduct Inventory using FIFO (First-In, First-Out)
+→ **Step 6:** Generate Invoice & Update Inventory
+
+**Step 7:** End
+
+---
+
+## 🔥 Phiên bản chuẩn hơn (dùng cho SRS / báo cáo)
+
+Start
+→ **Receive Sales Order**
+→ **Validate Product Expiry Date**
+
+Decision:
+
+* **Expired Product**
+  → Reject Sale
+  → Display *Product Expired*
+
+* **Valid Product**
+  → **Apply FIFO Inventory Deduction**
+  → **Generate Sales Invoice**
+  → **Update Inventory Records**
+
+→ End
+
+---
+
+## ⚠️ Chỉnh sửa quan trọng (rất dễ bị trừ điểm nếu sai)
+
+* ❌ *Expired → Out of Stock* → **SAI**
+* ✅ Đúng phải là:
+
+  * **Expired Product** (hết hạn)
+  * **Out of Stock** (hết hàng)
+
+👉 Đây là 2 khái niệm hoàn toàn khác trong hệ thống kho.
+
+---
+
+## 💡 Thuật ngữ chuyên môn bạn vừa dùng (đã chuẩn hóa)
+
+| Gốc                    | Chuẩn                               |
+| ---------------------- | ----------------------------------- |
+| nhận yêu cầu bán thuốc | Receive Sales Request / Sales Order |
+| kiểm tra còn hạn       | Validate Product Expiry Date        |
+| hết hạn                | Expired Product                     |
+| deduct quantity fifo   | Apply FIFO Inventory Deduction      |
+| create invoice         | Generate Invoice                    |
+| update inventory       | Update Inventory Records            |
+
+---
+
+Nếu bạn muốn nâng cấp thêm, mình có thể:
+
+* Vẽ lại **flowchart dạng UML / BPMN chuẩn** (rất đẹp để nộp)
+* Hoặc **kết hợp thêm kiểm tra tồn kho + batch + lot number** (chuẩn hệ thống bán thuốc thực tế)
+
+
+
+*Prompt: dưới đây là sales flowchart của dự án này mình vừa tạo ra, bạn hãy chỉnh sửa lại theo đúng từ khóa chuyên môn và bằng tiếng anh: B1 Start ->B2 Login ->B3 Mua hàng ->B4 Thanh toán ->B5 Áp dụng mã giảm giá(nếu có) ->B6 Xác nhận thanh toán và hiện mã QR -> 
+B7a Người dung quét mã QR để thanh toán  -> Hiển thị đã thanh toán thành công 
+B7b Người dung không thanh toán -> Hiển thị đã hủy đơn hang
+B7c Người dung thanh toán quá lâu -> Hiển thị đã quá thời gian thanh toán 
+B8 End
+
+*CODE AI:Mình sẽ **chuẩn hóa lại flowchart theo thuật ngữ thường dùng trong hệ thống e-commerce / payment system** và viết **hoàn toàn bằng tiếng Anh**.
+Các từ như *Mua hàng, Thanh toán, Hủy đơn…* sẽ được đổi sang **chuẩn nghiệp vụ (business terminology)**.
+
+---
+
+## Sales / Checkout Flowchart (Revised)
+
+**Step 1:** Start
+**Step 2:** User Login
+**Step 3:** Select Products / Place Order
+**Step 4:** Proceed to Checkout
+**Step 5:** Apply Discount Code (Optional)
+**Step 6:** Confirm Payment & Generate QR Code
+
+**Step 7A:**
+User scans the QR Code and completes payment
+→ Display **Payment Successful**
+
+**Step 7B:**
+User does not complete the payment
+→ Display **Order Cancelled**
+
+**Step 7C:**
+Payment exceeds the allowed time
+→ Display **Payment Timeout**
+
+**Step 8:** End
+
+---
+
+## Phiên bản **chuẩn hơn để dùng trong tài liệu Software / SRS**
+
+Start
+→ **User Authentication (Login)**
+→ **Product Selection**
+→ **Checkout Process**
+→ **Apply Discount Code (Optional)**
+→ **Payment Confirmation & QR Code Generation**
+
+Decision:
+
+* **Payment Completed** → Payment Successful
+* **Payment Cancelled by User** → Order Cancelled
+* **Payment Timeout** → Payment Session Expired
+
+→ End
+
+---
+
+✅ **Các thuật ngữ chuyên môn đã chỉnh:**
+
+| Bạn viết            | Chuẩn hơn                       |
+| ------------------- | ------------------------------- |
+| Login               | User Authentication             |
+| Mua hàng            | Product Selection / Place Order |
+| Thanh toán          | Checkout / Payment              |
+| Áp dụng mã giảm giá | Apply Discount Code             |
+| Xác nhận thanh toán | Confirm Payment                 |
+| Hiện mã QR          | Generate QR Code                |
+| Hủy đơn hàng        | Order Cancelled                 |
+| Quá thời gian       | Payment Timeout                 |
+
+---
+
+💡 Nếu bạn muốn, mình có thể:
+
+* **Vẽ lại flowchart chuẩn UML / BPMN cho dự án này**
+* Hoặc **viết lại theo format chuẩn để đưa vào báo cáo / slide thuyết trình** (rất dễ được điểm cao trong môn Software / Database / Project).
