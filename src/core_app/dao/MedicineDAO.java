@@ -22,7 +22,7 @@ public class MedicineDAO {
 
         String checkSql = "SELECT COUNT(*) FROM Medicine WHERE medicine_id = ?";
         String insertSql = "INSERT INTO Medicine (medicine_id, name, price, quantity, unit, dosage_form, manufacturer) "
-                + "VALUES (?, ?, ?, 100, N'Viên', N'Tablet', N'Unknown')";
+                + "VALUES (?, ?, ?, 0, N'Viên', N'Tablet', N'Unknown')";
 
         // Dùng connection RIÊNG (auto-commit = true) để INSERT được commit ngay lập tức
         try (Connection conn = DBConnection.getConnection()) {

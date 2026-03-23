@@ -1,0 +1,1929 @@
+{
+  "version": "1.0.0",
+  "producer": "Java AppCAT CLI",
+  "metadata": {
+    "analysisStartTime": "2026-03-16T04:46:01.4673686Z",
+    "analysisEndTime": "2026-03-16T04:47:27.9629586Z",
+    "status": "completed",
+    "privacyMode": "Protected",
+    "privacyModeHelpUrl": "https://aka.ms/appcat-privacy-mode",
+    "targetIds": [
+      "azure-aks",
+      "azure-appservice",
+      "azure-container-apps"
+    ],
+    "targetDisplayNames": [
+      "Azure Kubernetes Service",
+      "Azure App Service",
+      "Azure Container Apps"
+    ],
+    "capabilities": [],
+    "os": [],
+    "id": "1773636361467",
+    "name": "Report_202603161146",
+    "domains": [
+      "cloud-readiness",
+      "java-upgrade"
+    ],
+    "mode": "issue-only"
+  },
+  "summary": {
+    "totalProjects": 1,
+    "totalIssues": 13,
+    "totalIncidents": 56,
+    "totalEffort": 220,
+    "charts": {
+      "severity": {
+        "mandatory": 26,
+        "optional": 4,
+        "potential": 26,
+        "information": 0
+      },
+      "category": {
+        "configuration-management": 2,
+        "containerization": 1,
+        "credential-migration": 2,
+        "database-migration": 2,
+        "default-encoding": 6,
+        "deprecated-apis": 1,
+        "file-system-management": 20,
+        "local-resource-access": 1,
+        "remote-communication": 6,
+        "session-management": 15
+      }
+    },
+    "security": {}
+  },
+  "projects": [
+    {
+      "path": ".",
+      "issues": 13,
+      "storyPoints": 220,
+      "properties": {
+        "appName": "pharmacy-system",
+        "jdkVersion": "17",
+        "frameworks": [
+          "JakartaEE"
+        ],
+        "languages": [
+          "Java",
+          "JavaScript"
+        ],
+        "tools": [
+          "Maven"
+        ]
+      },
+      "incidents": [
+        {
+          "ruleId": "azure-database-microsoft-sql-03000",
+          "incidentId": "8e8ab8d0-4162-449d-ab58-7bac6068e12e",
+          "location": "bin/core_app/jars/mssql-jdbc-13.2.1.jre11.jar",
+          "locationKind": "File",
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-database-microsoft-sql-03000",
+          "incidentId": "5d329bb4-2b4e-4975-9b43-796aeb0d4c33",
+          "location": "src/core_app/jars/mssql-jdbc-13.2.1.jre11.jar",
+          "locationKind": "File",
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-aws-config-credential-01000",
+          "incidentId": "fa1f3ff4-0134-4e9c-82a6-e1db487e401f",
+          "location": "ngrok.exe",
+          "locationKind": "File",
+          "line": 20336,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 8,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 8,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 8,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-aws-config-credential-01000",
+          "incidentId": "22f42ba8-a401-411b-ae39-a141268f7f42",
+          "location": "ngrok.exe",
+          "locationKind": "File",
+          "line": 20483,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 8,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 8,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 8,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-system-config-01000",
+          "incidentId": "22bd5c87-2423-4695-84c4-920c60b0c263",
+          "location": "src/core_app/servlet/SepayWebhookServlet.java",
+          "locationKind": "File",
+          "line": 29,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "27ff97ef-3808-4106-aa84-49c237095dfc",
+          "location": "src/core_app/servlet/DashboardServlet.java",
+          "locationKind": "File",
+          "line": 4,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "f4a5b257-ad12-4501-acbb-544a756c0d9a",
+          "location": "src/core_app/servlet/ExpiryAlertServlet.java",
+          "locationKind": "File",
+          "line": 15,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "d8efe9c4-643a-4b62-8f20-bae290000157",
+          "location": "src/core_app/servlet/OrderServlet.java",
+          "locationKind": "File",
+          "line": 13,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "e83f7648-a32a-44d7-9b01-750b557bdd3f",
+          "location": "src/core_app/servlet/OrderServlet.java",
+          "locationKind": "File",
+          "line": 15,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "53c5a3b5-4e58-41f7-ba96-a66011213afa",
+          "location": "src/core_app/servlet/OrderStatusServlet.java",
+          "locationKind": "File",
+          "line": 11,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "f5be11e0-8bd2-43c4-8d1d-f2fef4cf3468",
+          "location": "src/core_app/servlet/POSOrderServlet.java",
+          "locationKind": "File",
+          "line": 8,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "993bd8e6-221e-41e2-9dde-32ea404f7327",
+          "location": "src/core_app/servlet/SepayOrderServlet.java",
+          "locationKind": "File",
+          "line": 19,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "771b373f-8315-40ec-b43a-891b22f23501",
+          "location": "src/core_app/servlet/SepayOrderServlet.java",
+          "locationKind": "File",
+          "line": 17,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "b5949b9c-f240-42b8-89b5-7bbb6d6bd0ec",
+          "location": "src/core_app/servlet/SepayWebhookServlet.java",
+          "locationKind": "File",
+          "line": 12,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "a907d828-df20-4fbc-9220-3f6dc6211a35",
+          "location": "src/core_app/servlet/SessionAuthServlet.java",
+          "locationKind": "File",
+          "line": 7,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "019c6b5b-dadd-41c9-b85c-fccebdb25ca2",
+          "location": "src/core_app/util/ExpiryLogger.java",
+          "locationKind": "File",
+          "line": 9,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "9f8914f7-b96c-4991-b9e7-90f21975239f",
+          "location": "src/core_app/util/ExpiryLogger.java",
+          "locationKind": "File",
+          "line": 7,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "9aad6886-e6a3-455d-b0c4-364d9c4acb4d",
+          "location": "src/core_app/util/ExpiryLogger.java",
+          "locationKind": "File",
+          "line": 6,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "92e8261e-2c58-4384-bc75-a494cae600f4",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 2,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "4c1a4841-988e-4067-ac14-d799354de862",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 5,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "9271fb25-5995-49b3-8b5f-d946c2a86bb8",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 4,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "d64f0993-194e-4e64-bf74-0b9e4ad2394e",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 3,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "f244acca-6cf9-4ae5-b7fc-2584ef2b0dc2",
+          "location": "src/data_generator_cleaner/DataGenerator.java",
+          "locationKind": "File",
+          "line": 2,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00001",
+          "incidentId": "af352711-d396-448b-aa83-e3a114bea552",
+          "location": "src/simulator/SimulatorConfig.java",
+          "locationKind": "File",
+          "line": 3,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "30335d27-b86a-41f9-9bc3-8cb20b866258",
+          "location": "src/core_app/servlet/AdminAuthServlet.java",
+          "locationKind": "File",
+          "line": 27,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "9b833aee-76d9-491e-8798-24fe5692284e",
+          "location": "src/core_app/servlet/AdminAuthServlet.java",
+          "locationKind": "File",
+          "line": 40,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "e0ac474a-a7fd-4e75-9675-1862d57526ce",
+          "location": "src/core_app/servlet/LoginServlet.java",
+          "locationKind": "File",
+          "line": 48,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "0709f208-aac4-433f-8ff3-084679cc7ce0",
+          "location": "src/core_app/filter/AdminSecurityFilter.java",
+          "locationKind": "File",
+          "line": 8,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "aa66250a-82a0-4f39-950b-c5e651573e9e",
+          "location": "src/core_app/filter/AuthFilter.java",
+          "locationKind": "File",
+          "line": 7,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "2f4de519-76a8-43e9-ae4a-318f8bea79b2",
+          "location": "src/core_app/servlet/AdminSalesServlet.java",
+          "locationKind": "File",
+          "line": 9,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "3b438793-baba-4d19-835a-718d43c17730",
+          "location": "src/core_app/servlet/ExpiryAlertServlet.java",
+          "locationKind": "File",
+          "line": 12,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "e6a449c0-b57d-471a-82e8-170aa01072e8",
+          "location": "src/core_app/servlet/LoginServlet.java",
+          "locationKind": "File",
+          "line": 10,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "f0b2db97-a9ef-4363-b596-ea0059c891bb",
+          "location": "src/core_app/servlet/LogoutServlet.java",
+          "locationKind": "File",
+          "line": 8,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "7940f9c7-c3a7-4fdd-b144-ab06bfaa2ce1",
+          "location": "src/core_app/servlet/OrderServlet.java",
+          "locationKind": "File",
+          "line": 12,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "b14f14ac-1f3c-43e2-a545-a08ef64c93b1",
+          "location": "src/core_app/servlet/SepayOrderServlet.java",
+          "locationKind": "File",
+          "line": 15,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "89791b62-b4e4-480e-82e7-297acc98f4c1",
+          "location": "src/core_app/servlet/SessionAuthServlet.java",
+          "locationKind": "File",
+          "line": 12,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "d549cc10-12e3-4d7b-ae0d-b20c1da3d8e4",
+          "location": "src/core_app/servlet/SystemMaintenanceServlet.java",
+          "locationKind": "File",
+          "line": 10,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "2f6b252a-6ac0-4176-8ef5-f23adb8dc997",
+          "location": "src/core_app/servlet/UserManagementServlet.java",
+          "locationKind": "File",
+          "line": 10,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "session-00001",
+          "incidentId": "8120d1f5-c18b-4f3a-928c-b47fe445de95",
+          "location": "src/core_app/servlet/VerifyOTPServlet.java",
+          "locationKind": "File",
+          "line": 10,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "localhost-jdbc-00002",
+          "incidentId": "ed2ddde9-b709-4fe9-aaf4-c67a616eef51",
+          "location": "src/core_app/util/DBConnection.java",
+          "locationKind": "File",
+          "line": 9,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "hardcoded-urls-00001",
+          "incidentId": "edf5cc16-b781-48d0-be1a-7b105f5f429a",
+          "location": "src/simulator/SimulatorConfig.java",
+          "locationKind": "File",
+          "line": 16,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "hardcoded-urls-00001",
+          "incidentId": "d866c416-87a2-4404-9d1b-7763898bbae2",
+          "location": "src/simulator/Simulator.java",
+          "locationKind": "File",
+          "line": 37,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "hardcoded-urls-00001",
+          "incidentId": "a0dc7760-8392-4b5a-ae2e-4e5929bb6b02",
+          "location": "simulator.properties",
+          "locationKind": "File",
+          "line": 10,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "external-config-00000",
+          "incidentId": "ada7189d-f44c-4be7-9d38-5464a2e6908d",
+          "location": "src/simulator/SimulatorConfig.java",
+          "locationKind": "File",
+          "line": 33,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "dockerfile-00000",
+          "incidentId": "e74700ad-2282-442a-805a-c8faf449c4fa",
+          "location": "",
+          "locationKind": "",
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "mail-00000",
+          "incidentId": "6c176d64-c11c-4735-90b7-386c3b76946e",
+          "location": "src/core_app/util/EmailUtil.java",
+          "locationKind": "File",
+          "line": 3,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "mail-00000",
+          "incidentId": "c1479b95-f4a4-46e2-9260-43059adb2577",
+          "location": "src/core_app/util/EmailUtil.java",
+          "locationKind": "File",
+          "line": 4,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "mail-00000",
+          "incidentId": "afa0da8c-3586-4943-870f-90817b94e691",
+          "location": "src/core_app/util/EmailUtil.java",
+          "locationKind": "File",
+          "line": 5,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "local-storage-00002",
+          "incidentId": "fd2d7449-fc18-4745-9b64-63f3698e5245",
+          "location": "src/simulator/Simulator.java",
+          "locationKind": "File",
+          "line": 77,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "java-20-deprecate-net-00000",
+          "incidentId": "7c17e119-3a76-4e5c-9e2f-9232cf8868f5",
+          "location": "src/simulator/Simulator.java",
+          "locationKind": "File",
+          "line": 77,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        },
+        {
+          "ruleId": "utf-8-by-default-00000",
+          "incidentId": "c0ffe6d2-248c-43d1-8aff-dbdcd31e17b9",
+          "location": "src/core_app/util/ExpiryLogger.java",
+          "locationKind": "File",
+          "line": 48,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        },
+        {
+          "ruleId": "utf-8-by-default-00000",
+          "incidentId": "0ad78a6c-644a-44c6-aed5-230a4d9f3eb5",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 68,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        },
+        {
+          "ruleId": "utf-8-by-default-00000",
+          "incidentId": "d5843806-ec53-4d1b-a37b-74dc7b3fb00b",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 69,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        },
+        {
+          "ruleId": "utf-8-by-default-00000",
+          "incidentId": "8a2567fb-ef5b-42b9-b2b8-082998a00b04",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 70,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        },
+        {
+          "ruleId": "utf-8-by-default-00000",
+          "incidentId": "1b3d6bf9-e563-48c2-82da-da5c4447426d",
+          "location": "src/data_generator_cleaner/DataCleaner.java",
+          "locationKind": "File",
+          "line": 71,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        },
+        {
+          "ruleId": "utf-8-by-default-00000",
+          "incidentId": "d570b99f-2fb0-49cb-956b-1b7a326e097f",
+          "location": "src/data_generator_cleaner/DataGenerator.java",
+          "locationKind": "File",
+          "line": 9,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=openjdk21/openjdk17"
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "azure-aws-config-credential-01000": {
+      "id": "azure-aws-config-credential-01000",
+      "description": "The application contains AWS credential configuration.\n\n * Migrate credentials to **Azure Key Vault**: Create an Azure Key Vault to securely store your application's credentials and sensitive information. Migrate the AWS credentials to Azure Key Vault, which provides a centralized and highly secure storage solution.\n\n * **Modify application code**: Update the Java application's code to retrieve the required credentials from Azure Key Vault instead of AWS. Use the appropriate Azure SDK or libraries to integrate with Azure Key Vault and fetch the credentials securely during runtime.\n\n * Implement **Azure Active Directory (Azure AD) authentication**: If the AWS credentials are used for authentication purposes, consider migrating to Azure AD for user authentication and authorization. Implement Azure AD authentication in your Java application to ensure secure access to Azure resources.",
+      "title": "AWS credential configuration",
+      "severity": "mandatory",
+      "effort": 8,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/key-vault",
+          "title": "Azure Key Vault documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/key-vault/secrets/quick-create-java",
+          "title": "Quickstart: Azure Key Vault Secret client library for Java"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/active-directory",
+          "title": "Azure Active Directory documentation"
+        }
+      ],
+      "labels": [
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "source",
+        "domain=cloud-readiness",
+        "category=credential-migration",
+        "AWS",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "azure-database-microsoft-sql-03000": {
+      "id": "azure-database-microsoft-sql-03000",
+      "description": "To migrate a Java application that uses a Microsoft SQL database to Azure, you can follow these recommendations:\n\n * Use a managed **Azure SQL**: For that create a managed Azure SQL database in Azure and choose the appropriate pricing tier based on your application's requirements for performance, storage, and availability.\n\n * **Migrate** the existing Microsoft SQL database: For that you can use the Azure Database Migration Service (DMS) to perform an online migration with minimal downtime.\n\n * Update the application's **database connection** details: Modify the Java application's configuration to point to the newly provisioned Azure SQL. Update the connection string, hostname, port, username, and password information accordingly.\n\n * Enable **monitoring and diagnostics**: Utilize Azure Monitor to gain insights into the performance and health of your Java application and the underlying Azure SQL database. Set up metrics, alerts, and log analytics to proactively identify and resolve issues.\n\n * Implement **security** measures: Apply security best practices to protect your Java application and the Azure SQL database. This includes implementing authentication and authorization mechanisms with passwordless connections and leveraging Microsoft Defender for Cloud for threat detection and vulnerability assessments.\n\n * **Backup** your data: Azure SQL provides automated backups by default. You can configure the retention period for backups based on your requirements. You can also enable geo-redundant backups, if needed, to enhance data durability and availability.",
+      "title": "Microsoft SQL database found",
+      "severity": "potential",
+      "effort": 5,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/azure-sql",
+          "title": "Azure SQL documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/dms",
+          "title": "Azure Database Migration Service documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-monitor",
+          "title": "Azure Monitor documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/defender-for-cloud",
+          "title": "Microsoft Defender for Cloud"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-sql/database/automated-backups-change-settings",
+          "title": "Change automated backup settings for Azure SQL Database"
+        }
+      ],
+      "labels": [
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "source",
+        "domain=cloud-readiness",
+        "category=database-migration",
+        "database",
+        "microsoft-sql",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "azure-system-config-01000": {
+      "id": "azure-system-config-01000",
+      "description": "The application uses environment variables/system properties.\n To migrate a Java application that uses environment variables/system properties to Azure, you can follow these recommendations:\n \n * **Identify environment variables and system properties**: Review the usage of environment variables and system properties and externalize them.\n\n * **Add environment variables in Azure**: You can inject any per-service configuration settings into each service as environment variables.\n\n * **Define system properties in JVM options**: Any system properties that the code depends on will need to be defined in JVM options.\n\n * Consider using**Azure App Configuration**: You can also replace the usage of environment variables with **Azure App Configuration**. By migrating to Azure App Configuration, you can centralize and manage your application's configuration settings, making it easier to maintain and update them. Azure App Configuration provides features like versioning, dynamic updates, and integration with Azure Key Vault for secure storage of sensitive configuration values.",
+      "title": "Environment variables/system properties",
+      "severity": "optional",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/azure-app-configuration",
+          "title": "Azure App Configuration documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/key-vault",
+          "title": "Azure Key Vault documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps#configure-per-service-secrets-and-externalized-settings",
+          "title": "Configure per-service secrets and externalized settings"
+        }
+      ],
+      "labels": [
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=configuration-management",
+        "config",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "dockerfile-00000": {
+      "id": "dockerfile-00000",
+      "description": "No Dockerfile was found in the project. This suggests the application may not yet be containerized. \nConsider creating a Dockerfile to enable container-based replatforming to Azure services such as Azure Container Apps or AKS.",
+      "title": "No Dockerfile found",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://www.baeldung.com/java-dockerize-app",
+          "title": "Dockerizing a Java Application"
+        }
+      ],
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=containerization",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "external-config-00000": {
+      "id": "external-config-00000",
+      "description": "Storing application settings in external files other than web.config and that are not manageable in the Cloud platform is not recommended as such settings will not be easily changeable.",
+      "title": "Using other configuration files than Web configuration",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://stackoverflow.com/questions/10961862/its-possible-to-have-one-web-config-specific-to-windows-azure",
+          "title": "Docker ARG and ENV - a Complete Guide"
+        },
+        {
+          "url": "https://docs.docker.com/engine/swarm/configs/",
+          "title": "Azure App Service - Configuration"
+        }
+      ],
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "source",
+        "domain=cloud-readiness",
+        "category=configuration-management",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "hardcoded-urls-00001": {
+      "id": "hardcoded-urls-00001",
+      "description": "This patterns verifies in source code and configuration files the presence of hardcoded URLs using the HTTP protocol (HTTP/HTTPS). This URL would need to be replaced by the new resource's URL during the Cloud migration, if any change occured.",
+      "title": "Avoid using hardcoded URLs (HTTP protocol) in source code",
+      "severity": "optional",
+      "effort": 3,
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "source",
+        "domain=cloud-readiness",
+        "category=remote-communication",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "java-20-deprecate-net-00000": {
+      "id": "java-20-deprecate-net-00000",
+      "description": "The `java.net.URL` constructors are deprecated in JDK 20 release.\n\nDevelopers are encouraged to use `java.net.URI` to parse or construct a URL. In cases where an instance of `java.net.URL` is needed to open a connection, `java.net.URI` can be used to construct or parse the URL string, possibly calling `URI::parseServerAuthority()` to validate that the authority component can be parsed as a server-based authority, and then `calling URI::toURL()` to create the URL instance.\n\nA new method, `URL::of(URI, URLStreamHandler)` is provided for the advanced usages where there is a need to construct a URL with a given custom stream handler.",
+      "title": "java.net.URL Constructors Are Deprecated",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://www.oracle.com/java/technologies/javase/20-relnote-issues.html#JDK-8294241",
+          "title": "java.net.URL Constructors Are Deprecated"
+        }
+      ],
+      "labels": [
+        "source=openjdk20-",
+        "source=openjdk",
+        "capability=openjdk20+",
+        "capability=openjdk",
+        "domain=java-upgrade",
+        "category=deprecated-apis",
+        "os=windows",
+        "os=linux",
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps"
+      ]
+    },
+    "local-storage-00001": {
+      "id": "local-storage-00001",
+      "description": "When migrating an application that relies on the file system to Azure, it's important to consider the limitations of local storage in a cloud environment.\n An application running inside a container could lose access to a file in local storage.\n\n The following recommendations depend on the function of the file in local storage:\n * Determine the **storage needs** for your application: Ephemeral storage or persistent storage. Ephemeral storage only persists until the cloud environment is restarted. Persistent storage is required for data that needs to persist across restarts.\n \n * If persistent storage is needed, consider **mounting Azure File Share** or **using Azure Blob Storage**. Mount Azure file share allows your application to access files via the mount location. Azure blob storage is a scalable object store for data objects, such as text or binary files.\n\n * **Logging**: Log to standard output and use Azure Monitor to collect and analyze the logs.\n\n * **Caching**: Use Azure Cache for Redis as a cache backing service.\n\n * **Configuration**: Store configuration in Azure App Configuration instead of using the file system. Also store configuration settings in environment variables so that they can be updated without code changes.",
+      "title": "File system - Java IO",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/storage",
+          "title": "Azure Storage documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/container-apps/storage-mounts-azure-files",
+          "title": "Create an Azure Files volume mount in Azure Container Apps"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/container-apps/storage-mounts",
+          "title": "Use storage mounts in Azure Container Apps"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-monitor/logs/data-platform-logs",
+          "title": "Azure Monitor Logs overview"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-cache-for-redis",
+          "title": "Azure Cache for Redis documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-app-configuration",
+          "title": "Azure App Configuration documentation"
+        }
+      ],
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=file-system-management",
+        "storage",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "local-storage-00002": {
+      "id": "local-storage-00002",
+      "description": "When migrating an application that relies on the file system to Azure, it's important to consider the limitations of local storage in a cloud environment.\n An application running inside a container could lose access to a file in local storage.\n\n The following recommendations depend on the function of the file in local storage:\n\n * Determine the storage needs for your application: Ephemeral storage or persistent storage. Ephemeral storage only persists until the cloud environment is restarted. Persistent storage is required for data that needs to persist across restarts.\n \n * If persistent storage is needed, consider using Azure File Share or Azure Blob Storage. Mount Azure file share allows your application to access files via the mount location. Azure blob storage is a scalable object store for data objects, such as text or binary files.\n\n * **Logging**: Log to standard output and use Azure Monitor to collect and analyze the logs.\n\n * **Caching**: Use Azure Cache for Redis as a cache backing service.\n\n * **Configuration**: Store configuration in Azure App Configuration instead of using the file system. Also store configuration settings in environment variables so that they can be updated without code changes.",
+      "title": "File system - java.net.URL/URI",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/storage",
+          "title": "Azure Storage documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/container-apps/storage-mounts-azure-files",
+          "title": "Create an Azure Files volume mount in Azure Container Apps"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/container-apps/storage-mounts",
+          "title": "Use storage mounts in Azure Container Apps"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-monitor/logs/data-platform-logs",
+          "title": "Azure Monitor Logs overview"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-cache-for-redis",
+          "title": "Azure Cache for Redis documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-app-configuration",
+          "title": "Azure App Configuration documentation"
+        }
+      ],
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=file-system-management",
+        "storage",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "localhost-jdbc-00002": {
+      "id": "localhost-jdbc-00002",
+      "description": "The app is trying to access local resource by JDBC, please try to migrate the resource to cloud",
+      "title": "Local JDBC Calls",
+      "severity": "mandatory",
+      "effort": 5,
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=local-resource-access",
+        "localhost",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "mail-00000": {
+      "id": "mail-00000",
+      "description": "The application uses email APIs to send or receive emails.\n In a cloud environment, mail systems should be considered backing services and treated like attached resources.\n You can either use SMTP directly, or use Azure Communication Services Email and migrate the email functionality of your application to Azure.\n\n * Using **Azure Communication Services**: Create an Azure Communication Services resource in your Azure subscription. This will provide you with the necessary capabilities to send emails. Update your application's email sending code to use the Azure Communication Services Email SDK or REST API. This involves integrating the Azure Communication Services Email client libraries into your application and configuring the required settings, such as the sender's email address, recipient addresses, subject, and email content.\n\n * Using **SMTP directly**: You can also use your own SMTP provider. In this case, check if port 25 is open in the App Service SKU.",
+      "title": "Java Mail API",
+      "severity": "potential",
+      "effort": 5,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/communication-services",
+          "title": "Azure Communication Services documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/communication-services/quickstarts/email/send-email",
+          "title": "Quickstart: How to send an email using Azure Communication Service"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/virtual-network/troubleshoot-outbound-smtp-connectivity",
+          "title": "Troubleshoot outbound SMTP connectivity problems in Azure"
+        }
+      ],
+      "labels": [
+        "source=java",
+        "source=java-ee",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "domain=cloud-readiness",
+        "category=remote-communication",
+        "mail",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "session-00001": {
+      "id": "session-00001",
+      "description": "When migrating an application that stores data in an HTTP Session to Azure, it's important to consider that the HTTP Session is not a suitable mechanism for maintaining state in a cloud environment due to scaling in and out as load changes.\n Instead, you can leverage Azure Cache for Redis to achieve session management in a cloud-native way.\n\n * Provide **Azure Cache for Redis**: Azure Cache for Redis is a fully managed, highly scalable, and distributed caching service. It allows you to store and manage session data in-memory, providing fast and efficient access.\n\n * **Configure** Azure Cache for Redis: Configure the cache settings, such as cache size, eviction policies, and access control.\n\n * **Update session management**: Modify your application's session management code to use Azure Cache for Redis. Replace the usage of HTTP Session objects with the appropriate Redis-based session management implementation.\n\n * **Store and retrieve session data**: Use the Azure Cache for Redis client libraries or connectors within your application to store and retrieve session data. This ensures that session state is securely managed and accessible across multiple instances of your application.\n\n * **Test and validate**: Test your application to ensure that session state is maintained correctly using Azure Cache for Redis. Verify that session data is stored and retrieved accurately across multiple instances of your application.",
+      "title": "HTTP Session data storage",
+      "severity": "potential",
+      "effort": 5,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/azure-cache-for-redis",
+          "title": "Azure Cache for Redis Documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-cache-for-redis/cache-java-get-started",
+          "title": "Quickstart: Use Azure Cache for Redis in Java"
+        }
+      ],
+      "labels": [
+        "source=java",
+        "source=java-ee",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "domain=cloud-readiness",
+        "category=session-management",
+        "clustering",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "utf-8-by-default-00000": {
+      "id": "utf-8-by-default-00000",
+      "description": "If not supplied, the `java.io.{{className}}` constructor uses UTF-8 by default. \n If you haven't provided the character set, and UTF-8 is not appropriate for your class, then supply the appropriate character set to the constructor call.",
+      "title": "The 'java.io' constructor defaults to UTF-8",
+      "severity": "potential",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://openjdk.org/jeps/400",
+          "title": "JEP 400: UTF-8 by Default"
+        }
+      ],
+      "labels": [
+        "capability=openjdk18+",
+        "capability=openjdk",
+        "source",
+        "domain=cloud-readiness",
+        "category=default-encoding",
+        "os=windows",
+        "os=linux",
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps"
+      ]
+    }
+  },
+  "security": []
+}

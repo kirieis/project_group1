@@ -1,0 +1,14 @@
+{
+  "jmeter": {
+    "home": "E:\\Project-LAB-github\\apache-jmeter-5.6.3\\apache-jmeter-5.6.3",
+    "jmx": "E:\\Project-LAB-github\\apache-jmeter-5.6.3\\apache-jmeter-5.6.3\\bin\\unplanked-inculpably-malorie.ngrok-free.dev.jmx"
+  },
+  "paths": {
+    "resultsJtl": "stress-test-results.jtl",
+    "outputHtml": "stress-test-report.html"
+  },
+  "watch": {
+    "idleSecondsBeforeComplete": 5,
+    "pollIntervalMs": 1000
+  }
+}
