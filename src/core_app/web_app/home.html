@@ -59,6 +59,17 @@
       </div>
     </section>
 
+    <!-- QUICK CATEGORIES -->
+    <section class="section" style="margin-bottom: 2rem;">
+      <div class="section__head">
+        <h2 style="font-size: 1.25rem;">💊 Danh mục bào chế</h2>
+        <p class="muted">Lọc nhanh theo loại sản phẩm</p>
+      </div>
+      <div id="quickCategories" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1rem;">
+        <!-- JS Populated -->
+      </div>
+    </section>
+
     <!-- SALE -->
     <section id="saleSection" class="section">
       <div class="section__head">
@@ -112,6 +123,14 @@
           <label class="field">
             <span data-i18n="home.filter_price_max">Giá cao nhất</span>
             <input id="filterMax" type="number" min="0" step="1000" placeholder="" />
+          </label>
+
+          <label class="field">
+            <span style="font-weight:bold; color:var(--primary);">Dạng bào chế / Phân loại</span>
+            <select id="filterForm">
+              <option value="">Tất cả các loại</option>
+              <!-- Populated by JS -->
+            </select>
           </label>
 
           <label class="field">

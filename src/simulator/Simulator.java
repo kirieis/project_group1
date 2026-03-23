@@ -8,29 +8,29 @@ import java.util.Random;
 
 public class Simulator {
 
-    // Danh sách medicine IDs thực tế từ database
+    // Danh sách medicine IDs thực tế từ database (đã kiểm tra tồn tại)
     private static final String[] MEDICINE_IDS = {
-            "MED6", "MED7", "MED9", "MED11", "MED12", "MED25", "MED26", "MED27", "MED28", "MED30",
-            "MED31", "MED32", "MED34", "MED36", "MED42", "MED47", "MED49", "MED50", "MED57", "MED60",
-            "MED62", "MED75", "MED76", "MED77", "MED81", "MED88", "MED92", "MED93", "MED95", "MED97"
+            "MED4", "MED5", "MED6", "MED34", "MED36", "MED47", "MED57", "MED62", "MED75", "MED77",
+            "MED93", "MED95", "MED4608", "MED33811", "MED7798", "MED26779", "MED8105", "MED33287",
+            "MED33796", "MED24874", "MED4756", "MED17885", "MED14315", "MED27960", "MED32815",
+            "MED17164", "MED13731", "MED29664", "MED34141", "MED15190"
     };
 
     // Tên thuốc tương ứng
     private static final String[] MEDICINE_NAMES = {
-            "Telfast HD 180mg", "Esomeprazole 40mg", "Cefixime 200mg", "Acetylcysteine 200mg",
-            "Smecta", "Zinc Gluconate 20mg", "Levofloxacin 500mg", "Omeprazole 20mg",
-            "Vitamin K2", "Panadol Extra", "Cefdinir 300mg", "Enat 400", "Enterogermina",
-            "Vitamin B1 B6 B12", "Magnesium B6", "Ketoconazole 200mg", "Levothyroxine 50mcg",
-            "Calcium D3", "Levofloxacin 500mg", "Allopurinol 300mg", "Esomeprazole 40mg",
-            "Hapacol 650", "Vitamin E 400IU", "Clotrimazole 1%", "Loperamid 2mg",
-            "Eugica", "Colchicine 1mg", "Loperamid 2mg", "Enat 400", "Enat 400"
+            "Aspirin 81mg", "Salbutamol 4mg", "Efferalgan 500mg", "Ambroxol 30mg", "Vitamin B1 B6 B12",
+            "Celecoxib 200mg", "Gabapentin 300mg", "Calcium Carbonate 500mg", "Efferalgan 500mg", "Desloratadine 5mg",
+            "Allopurinol 300mg", "Tramadol 50mg", "Siro Ginkid ZinC", "Panadol Extra", "Levofloxacin 500mg",
+            "Captopril 25mg", "Vitamin K2", "Metformin 500mg", "Salbutamol 4mg", "Pantoprazole 40mg",
+            "Fluconazole 150mg", "Levothyroxine 50mcg", "Insulin Basal", "Loperamid 2mg", "Diazepam 5mg",
+            "Losartan 50mg", "Cefixime 200mg", "Eugica", "Hapacol 650", "Iron Folic"
     };
 
     // Giá bán tương ứng
     private static final int[] MEDICINE_PRICES = {
-            1450, 1000, 2000, 50000, 1500, 1000, 1500, 2500, 1400, 2500,
-            2000, 2000, 1250, 1400, 3000, 1450, 1450, 50000, 1500, 2000,
-            50000, 700, 1400, 50000, 1500, 50000, 50000, 3000, 1250, 1700
+            1000, 1000, 1500, 1250, 1400, 1200, 1700, 1600, 1500, 1450,
+            2000, 1250, 50000, 1000, 1500, 1500, 1400, 1200, 1000, 1250,
+            2500, 1250, 2500, 3000, 1700, 1200, 2000, 50000, 700, 1200
     };
 
     public static void main(String[] args) throws Exception {
