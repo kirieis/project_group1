@@ -47,7 +47,7 @@ public class NotificationSchedulerListener implements ServletContextListener {
     }
 
     private LocalDateTime calculateNextRunTime(LocalDateTime now) {
-        LocalDateTime run9AM = now.with(LocalTime.of(8, 18, 0));
+        LocalDateTime run9AM = now.with(LocalTime.of(9, 0, 0));
         LocalDateTime run9PM = now.with(LocalTime.of(21, 0, 0));
 
         if (now.isBefore(run9AM)) {
