@@ -262,10 +262,6 @@ public class InvoiceDAO {
         }
     }
 
-    /**
-     * ✅ STOCK DEDUCTION - Trừ kho khi đơn hàng được duyệt
-     * Logic: Giảm quantity trong bảng Medicine theo từng item trong Invoice_Detail
-     */
     private void deductStock(int invoiceId) {
         String sqlGetDetails = "SELECT medicine_id, quantity FROM Invoice_Detail WHERE invoice_id = ?";
         String sqlUpdateStock = "UPDATE Medicine SET quantity = CASE WHEN quantity - ? < 0 THEN 0 ELSE quantity - ? END WHERE medicine_id = ?";

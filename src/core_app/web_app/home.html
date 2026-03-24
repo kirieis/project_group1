@@ -4,9 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Github Pharmacy</title>
+  <title>Aura Pharmacy</title>
   <link rel="stylesheet" href="home.css" />
-  <script src="i18n.js"></script>
 </head>
 
 <body>
@@ -14,13 +13,11 @@
   <header class="header">
     <div class="header__inner container">
       <div class="brand">
-        <div class="brand__logo" aria-label="Github logo">
-          <span class="logo-dot"></span>
-          <span class="logo-dot"></span>
-          <span class="logo-dot"></span>
-        </div>
+        <a href="home.html" class="brand__link">
+          <img src="assets/images/logo.png" alt="Aura Pharmacy Logo" class="brand__logo-img" />
+        </a>
         <div class="brand__text">
-          <div class="brand__name">Github Pharmacy</div>
+          <div class="brand__name">Aura Pharmacy</div>
         </div>
       </div>
 
@@ -48,14 +45,33 @@
   <!-- MAIN -->
   <main class="container main">
     <!-- HERO / BANNER -->
-    <section class="hero">
-      <div class="hero__left">
-        <h1 data-i18n="home.hero_title">Mua thuốc nhanh – tìm dễ – lọc chuẩn</h1>
-        <p data-i18n="home.hero_subtitle">Cập nhật trực tiếp từ hệ thống quản lý kho.</p>
-        <div class="hero__cta">
-          <button class="btn btn--primary" id="btnGoSale" data-i18n="home.hero_btn_sale">Xem Sale 🔥</button>
-          <button class="btn btn--ghost" id="btnGoAll" data-i18n="home.hero_btn_all">Xem toàn bộ</button>
+    <section class="hero-banner">
+      <div class="hero-banner__content">
+        <div class="hero-banner__badge">
+          <span class="logo-dot"></span>
+          <span class="logo-dot" style="background:#fff"></span>
+          <span>NHÀ THUỐC HIỆN ĐẠI AURA PHARMACY</span>
         </div>
+        <div class="hero-banner__main">
+          <div class="hero-banner__discount">
+            <div class="discount-top">ƯU ĐÃI ĐẾN</div>
+            <div class="discount-val">50%</div>
+            <div class="discount-bottom">GIẢM GIÁ LỚN</div>
+          </div>
+          <div class="hero-banner__divider"></div>
+          <div class="hero-banner__text">
+            <h2>CHĂM SÓC<br>SỨC KHỎE<br><span style="color:var(--gold-light)">GIA ĐÌNH</span></h2>
+            <p>Cho Cả Nhà An Tâm</p>
+          </div>
+        </div>
+        <div class="hero-banner__desc">ĐA DẠNG SẢN PHẨM | TƯ VẤN CHUYÊN NGHIỆP</div>
+        <div class="hero-banner__cta">
+          <button class="btn btn--primary" id="btnGoSale">ĐẾN NGAY CỬA HÀNG</button>
+          <span class="hero-banner__hours">📞 Dịch vụ 24/7</span>
+        </div>
+      </div>
+      <div class="hero-banner__art">
+        <img src="assets/images/pharmacy_hero.png" alt="Aura Family Health" class="hero-banner__img" />
       </div>
     </section>
 
@@ -213,6 +229,7 @@
     </div>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="home.js"></script>
 </body>
 

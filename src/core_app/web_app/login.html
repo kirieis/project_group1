@@ -4,15 +4,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Github Pharmacy</title>
+    <title>Aura Pharmacy</title>
     <link rel="stylesheet" href="home.css" />
     <style>
-        /* Specific styles for login page to center the form */
+        /* Push footer to bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main {
+            flex: 1;
+        }
+
         .login-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 60vh;
+            min-height: calc(100vh - 200px);
             padding: 40px 0;
         }
 
@@ -64,29 +74,18 @@
     <header class="header">
         <div class="header__inner container">
             <div class="brand">
-                <!-- Link logo back to home -->
-                <a href="home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
-                    <div class="brand__logo" aria-label="Github logo">
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                    </div>
-                    <div class="brand__text">
-                        <div class="brand__name">Github Pharmacy</div>
-                    </div>
+                <a href="home.html" class="brand__link">
+                    <img src="assets/images/logo.png" alt="Aura Pharmacy Logo" class="brand__logo-img" />
                 </a>
+                <div class="brand__text">
+                    <div class="brand__name">Aura Pharmacy</div>
+                </div>
             </div>
 
-            <div class="search">
-                <input id="globalSearch" type="search" data-i18n-placeholder="common.lbl_search" />
-                <button id="btnSearch" class="btn btn--icon" title="Search" aria-label="Search">
-                    🔍
-                </button>
-            </div>
-
+            <div></div>
             <div class="header__actions">
-                <a href="#" class="btn btn--ghost" data-i18n="common.nav_help">
-                    Trợ giúp
+                <a href="register.html" class="btn btn--ghost" data-i18n="login.link_register">
+                    📝 Đăng ký
                 </a>
             </div>
         </div>
@@ -98,7 +97,7 @@
             <div class="login-card">
                 <div class="login-title">
                     <h1 data-i18n="login.title">Đăng nhập</h1>
-                    <p data-i18n="login.subtitle">Chào mừng trở lại Github Pharmacy</p>
+                    <p data-i18n="login.subtitle">Chào mừng trở lại Aura Pharmacy</p>
                 </div>
 
                 <div id="messageBox"
@@ -141,8 +140,8 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="container footer__inner" data-i18n="footer_connect">
-            Connect with us : 03xxxxxxx
+        <div class="container footer__inner">
+            <span data-i18n="common.footer_connect">Kết nối với chúng tôi : 03xxxxxxx</span>
         </div>
     </footer>
     <script>

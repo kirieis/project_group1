@@ -892,4 +892,316 @@ adu cái file ngrol hôm trước tao tải đâu rồi
 Checked command status
 Canceled command
 …\lab211-project-group1 > Get-ChildItem -Path $HOME -Filter "ngrok*" -Recurse -ErrorAction SilentlyContinue | Select-Object FullName
+Aura Pharmacy UI And Asset Polish
+You are a senior full-stack engineer, senior UI/UX reviewer, and production-grade debugger.
+
+Your task is to fully audit, improve, and complete my web project so it looks polished, works correctly, and is ready for demo/use. Work like an experienced engineer who does not stop at surface-level fixes.
+
+PROJECT GOALS:
+1. Automatically find and fill appropriate images for my website where needed.
+2. Review the entire website carefully and improve anything that looks unfinished, inconsistent, broken, or low quality.
+3. Verify that all pages, components, sections, buttons, forms, responsiveness, spacing, typography, and flows are correct.
+4. Reconnect my database to the website because it was linked before, but a previous AI tool broke or mishandled the integration.
+5. Fix all issues thoroughly and then perform a final quality check to make sure the project feels complete and professional.
+
+IMPORTANT BEHAVIOR RULES:
+- Do not give me lazy partial suggestions only.
+- Do not stop after identifying issues. Fix them.
+- Think like a senior engineer preparing a product demo.
+- Be strict and detail-oriented.
+- Check everything twice.
+- If something is ambiguous, choose the most professional and practical implementation.
+- Prioritize correctness, clean UI, stable logic, maintainable structure, and visual consistency.
+- Do not create ugly placeholder solutions unless absolutely necessary.
+- If placeholders are needed temporarily, use elegant, realistic, high-quality placeholders and clearly mark them.
+- Do not break existing working features while improving the system.
+
+IMAGE TASKS:
+I want you to automatically find and place suitable images into the website wherever images are missing, weak, irrelevant, low quality, stretched, inconsistent, or visually poor.
+
+For image handling:
+- Detect all sections that need images, thumbnails, banners, cards, avatars, backgrounds, feature illustrations, hero images, or product/service visuals.
+- Choose images that match the website’s purpose, tone, and target audience.
+- Keep image style consistent across the site.
+- Prefer modern, professional, clean, high-quality visuals.
+- Avoid random mismatched stock photos.
+- Optimize image sizing, cropping, aspect ratio, loading behavior, and responsiveness.
+- Make sure images do not distort layout or hurt performance.
+- If the project already has an image strategy or theme, follow it.
+- If there are broken image links, fix them.
+- If an image source needs to be changed, do it carefully and consistently.
+
+DESIGN + UI/UX REVIEW TASKS:
+Review the website like a perfectionist front-end lead. Check:
+- visual hierarchy
+- spacing and alignment
+- typography consistency
+- color harmony
+- button styles
+- hover/focus states
+- icon consistency
+- card layout consistency
+- section rhythm and balance
+- form design
+- empty states
+- loading states
+- error states
+- responsive behavior on desktop, tablet, and mobile
+- navbar, footer, hero section, content blocks, modals, tables, dashboards, and forms
+- accessibility basics
+- readability and user flow
+
+Improve anything that feels:
+- broken
+- awkward
+- too plain
+- unfinished
+- visually inconsistent
+- low trust
+- amateur
+- confusing
+- cluttered
+- unbalanced
+
+Make the result look cohesive and production-ready, not AI-generated and messy.
+
+FUNCTIONAL + CODE QUALITY TASKS:
+Audit the whole codebase and fix:
+- broken imports
+- bad component structure
+- duplicated logic
+- dead code
+- broken routes
+- incorrect API calls
+- bad state handling
+- incorrect async handling
+- missing validation
+- poor error handling
+- loading bugs
+- inconsistent naming
+- CSS issues
+- responsiveness problems
+- layout overflow
+- console errors
+- runtime errors
+- build errors
+
+Refactor where needed, but do not overcomplicate the codebase.
+
+DATABASE RECONNECTION TASK:
+The website used to be connected to the database before, but a previous AI tool handled it badly and now it is no longer properly linked.
+
+Your database task is to:
+1. Inspect the existing database-related code and configuration.
+2. Find where the previous connection logic existed.
+3. Determine what was broken, removed, or misconfigured.
+4. Restore the database connection properly.
+5. Ensure the frontend, backend, API routes, ORM/query layer, and environment configuration are correctly wired together.
+6. Verify data is actually being read/written correctly.
+7. Fix schema mismatches, wrong endpoints, wrong environment variables, bad connection strings, broken query logic, or missing backend linkage if needed.
+8. If the project uses Prisma / Supabase / Firebase / PostgreSQL / MySQL / MongoDB / SQL Server / REST API / Next.js API / Express / any backend framework, detect the architecture and repair it correctly.
+9. Do not fake the database integration. Make it real and traceable in code.
+10. If mock data is currently masking broken database logic, remove or isolate it properly.
+
+ENVIRONMENT + CONFIG CHECK:
+Review and fix:
+- .env usage
+- API base URLs
+- DB connection variables
+- server/client separation
+- secrets handling
+- deployment-sensitive configuration
+- image hosting paths
+- asset imports
+- package dependencies
+- scripts needed to run the project
+
+TESTING + FINAL VALIDATION:
+After fixing the project, run a complete validation pass:
+- no build errors
+- no obvious runtime errors
+- no missing images
+- no broken layouts
+- no non-working buttons or forms
+- no dead navigation
+- no fake database flow
+- no console issues if avoidable
+- responsive on key breakpoints
+- consistent UI across major pages
+- all major CRUD or data-display flows checked if applicable
+
+WORKFLOW I WANT FROM YOU:
+Follow this exact workflow:
+
+PHASE 1 — PROJECT UNDERSTANDING
+- Read the full codebase structure first.
+- Identify framework, styling system, backend structure, database technology, and current app flow.
+- Summarize the architecture briefly.
+
+PHASE 2 — ISSUE AUDIT
+- List all major issues found in UI, UX, logic, database connection, responsiveness, assets, and structure.
+- Prioritize them by severity.
+
+PHASE 3 — IMPLEMENTATION
+- Fix the issues directly in code.
+- Add/fill suitable images where necessary.
+- Restore and verify database linkage.
+- Improve layout and styling quality.
+
+PHASE 4 — POLISH PASS
+- Re-check the app visually and structurally.
+- Improve small details that make the product feel premium.
+- Remove inconsistencies and rough edges.
+
+PHASE 5 — FINAL QA
+- Review everything again like a strict reviewer.
+- Confirm what was fixed.
+- Report any remaining limitations honestly.
+
+OUTPUT FORMAT:
+I want your response structured like this:
+
+1. Architecture detected
+2. Problems found
+3. Fix plan
+4. Code changes made
+5. Image improvements made
+6. Database reconnection details
+7. Final QA checklist
+8. Remaining issues (if any)
+
+CODING STYLE:
+- Keep code clean, maintainable, and production-minded.
+- Do not overengineer.
+- Preserve good existing patterns where possible.
+- Use clear naming.
+- Keep styling consistent with the current design system unless it is poor, in which case improve it carefully.
+
+QUALITY BAR:
+Act like this project will be judged by a client, a lecturer, and a senior developer at the same time.
+I want a result that feels complete, visually strong, logically correct, and technically connected end-to-end.
+
+Before finishing, do one final self-review and ask yourself:
+- Does this site look complete?
+- Do the images fit naturally and consistently?
+- Is the database truly linked and working?
+- Is anything still broken, awkward, or obviously unfinished?
+If yes, fix it before stopping.
+
 usualy update
+ css chưa hợp lý đổi tên hết thành Aura Pharmacy cho nó đồng bộ  cái hình ảnh mày làm sao mà nó có mỗi 1 hình chns thế với lại cũng đúng chút chứ
+
+
+
+
+19 results
+
+
+49 results
+
+
+
+
+
+
+Analyzed
+
+
+
+
+
+
+
+
+Edited
++1
+-1
+
+
+Edited
++1
+-1
+Edited
++1
+-1
+Edited
++3
+-3
+Edited
++2
+-2
+
+
+Edited
++3
+-3
+Edited
++4
+-4
+Edited
++3
+-3
+Edited
++2
+-2
+
+
+Edited
++2
+-2
+Edited
++2
+-2
+Edited
++2
+-2
+Edited
++1
+-1
+Edited
++1
+-1
+
+
+Edited
++5
+-5
+Edited
++2
+-2
+
+
+
+
+
+
+Analyzed
+
+
+
+
+
+
+Edited
++43
+-1
+
+
+
+
+Analyzed
+
+
+15 results
+
+
+Đã xử lý xong các yêu cầu của bạn, cụ thể như sau:
+
+Đồng bộ hóa tên thương hiệu toàn diện: Mình đã tìm và thay đổi tất cả các từ "Github Pharmacy" thành "Aura Pharmacy" trên mọi file HTML, Script (Javascript, JSP), CSS và Java (kể cả email gửi đi). Bây giờ toàn hệ thống của bạn đã đồng bộ hoàn toàn với tên gọi Aura Pharmacy.
+Khắc phục ảnh sản phẩm nhàm chán và tăng độ chính xác màu sắc: Mình đã thêm logic xử lý trong file 
+
+home.js
+. Hiện tại, ảnh của từng sản phẩm không còn dùng chung 1 ảnh nữa, mà sẽ được tự động chọn tuỳ theo dạng bào chế của sản phẩm (Ví dụ: thuốc tiêm ra ảnh thuốc tiêm, siro ra ảnh chai nước, viên nang ra ảnh vĩ thuốc, v.v.). Mình sử dụng loạt hình ảnh y tế chất lượng cao từ Unsplash để giúp từng sản phẩm trông chuyên nghiệp, có sự khác biệt dựa theo đúng phân loại của thuốc.
+Bạn có thể làm mới lại trang web trên trình duyệt để kiểm tra trực tiếp giao diện mới! Nếu có yêu cầu nào khác hoặc muốn đổi hẳn ảnh thật từ một folder có sẵn, hãy cho mình biết nhé.
+
+usually update

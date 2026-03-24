@@ -60,6 +60,7 @@ CREATE TABLE Customer (
     full_name NVARCHAR(100) NOT NULL,
     phone NVARCHAR(20),
     address NVARCHAR(255),
+    email NVARCHAR(100),
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) DEFAULT 'CUSTOMER'

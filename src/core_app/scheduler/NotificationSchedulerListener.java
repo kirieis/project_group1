@@ -79,7 +79,7 @@ public class NotificationSchedulerListener implements ServletContextListener {
             int totalUnsellable = unsellable.size();
             int totalExpired = expired.size();
 
-            String subject = "🔔 Warning: The medicine is expired/about to expire - Github Pharmacy";
+            String subject = "🔔 Warning: The medicine is expired/about to expire - Aura Pharmacy";
             StringBuilder bodyText = new StringBuilder();
 
             bodyText.append("The system detects batches of medicine that need processing.:\n\n");
@@ -91,7 +91,7 @@ public class NotificationSchedulerListener implements ServletContextListener {
                 bodyText.append(String.format("🟠 Removed from sale (<= 15 days): %d batches.\n", totalUnsellable));
             }
             bodyText.append("\nPlease log in to the admin system to view details and handle them in time.\n\n");
-            bodyText.append("Sincerely,\nGithub Pharmacy System");
+            bodyText.append("Sincerely,\nAura Pharmacy System");
 
             // Update LatestNotification for admin_gate.html to fetch
             String uiMessage = "The system detects batches of medicine that need processing: ";

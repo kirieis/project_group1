@@ -322,6 +322,46 @@ const FORM_MAP = {
   'Powder': 'Dạng bột'
 };
 
+// -------- Image Selection (100% Strict Clinical Local Assets) --------
+// Using exclusively local generated 8K pure-medical assets and user-provided images
+const IMAGES_BY_FORM = {
+  'Tablet': [
+    "assets/images/med_tablet.png"
+  ],
+  'Capsule': [
+    "assets/images/med_capsule.png"
+  ],
+  'Powder': [
+    "assets/images/med_powder.png"
+  ],
+  'Syrup': [
+    "assets/images/med_bottle.png"
+  ],
+  'Suspension': [
+    "assets/images/med_bottle.png"
+  ],
+  'Solution': [
+    "assets/images/med_bottle.png"
+  ],
+  'Cream': [
+    "assets/images/med_kutieskin.png" // User-provided tube image
+  ],
+  'Injection': [
+    "assets/images/med_bottle.png"
+  ],
+  'Default': [
+    "assets/images/med_tablet.png",
+    "assets/images/med_capsule.png",
+    "assets/images/med_bottle.png"
+  ]
+};
+
+function getProductImage(p) {
+  const images = IMAGES_BY_FORM[p.dosageForm] || IMAGES_BY_FORM['Default'];
+  const index = Math.abs(hashString(p.name + p.id)) % images.length;
+  return images[index];
+}
+
 // -------- UI Rendering --------
 function productCard(p) {
   const saleTag = p.discount > 0
@@ -360,33 +400,33 @@ function productCard(p) {
 
   return `
     <article class="card" data-type="${productType}">
-      <div class="card__top">
-        <div>
-          <h3 class="card__name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</h3>
-          <div class="card__meta">
-            <div class="line">Mã: <b>${escapeHtml(p.id)}</b></div>
+      ${saleTag}
+      <div class="card__img-container">
+        <img src="${getProductImage(p)}" alt="${escapeHtml(p.name)}" class="card__img" loading="lazy" onerror="this.onerror=null;this.style.background='linear-gradient(135deg,#e0e7ff,#c7d2fe)';this.style.objectFit='contain';this.style.padding='30px';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>${p.isLiquid ? '🧴' : '💊'}</text></svg>'" />
+      </div>
+      
+      <div class="card__content" style="padding: 20px; display: flex; flex-direction: column; flex: 1;">
+        <h3 class="card__name" title="${escapeHtml(p.name)}" style="margin-bottom: 5px;">${escapeHtml(p.name)}</h3>
+        <p class="card__id" style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Mã: <b>${escapeHtml(p.id)}</b></p>
+
+        <div class="card__info" style="padding: 0; margin-bottom: 15px;">
+          <div class="card__info-line">
+            <span class="info-pill">📦 <b>${escapeHtml(FORM_MAP[p.dosageForm] || p.dosageForm)}</b></span>
+            <span class="info-pill info-pill--unit info-pill--unit-${productType}">${unitIcon} <b>${unitLabel}</b></span>
+          </div>
+          <div class="card__info-line" style="margin-top: 5px;">
+            <span class="${expiryClass}">📅 HSD: <b>${escapeHtml(expiryDisplay)}</b></span>
           </div>
         </div>
-        ${saleTag}
-      </div>
 
-      <div class="card__info">
-        <div class="card__info-line">
-          <span class="info-pill">📦 <b>${escapeHtml(FORM_MAP[p.dosageForm] || p.dosageForm)}</b></span>
-          <span class="info-pill info-pill--unit info-pill--unit-${productType}">${unitIcon} <b>${unitLabel}</b></span>
+        <div class="card__mid" style="padding: 15px 0; border-top: 1px solid var(--border); margin-top: auto;">
+          ${priceHtml}
         </div>
-        <div class="card__info-line">
-          <span class="${expiryClass}">📅 HSD: <b>${escapeHtml(expiryDisplay)}</b></span>
+
+        <div class="card__actions" style="padding: 0; margin-top: 10px;">
+          <button class="btn btn--buy" onclick="openModal('${p.id}', true)">MUA</button>
+          <button class="btn btn--add" onclick="openModal('${p.id}', false)">+ GIỎ</button>
         </div>
-      </div>
-
-      <div class="card__mid">
-        ${priceHtml}
-      </div>
-
-      <div class="card__actions">
-        <button class="btn btn--buy" onclick="openModal('${p.id}', true)">MUA</button>
-        <button class="btn btn--add" onclick="openModal('${p.id}', false)">+ GIỎ HÀNG</button>
       </div>
     </article>
   `;
@@ -739,7 +779,8 @@ function bindEvents() {
       };
     });
 
-    $("btnGoAll").onclick = () => scrollToAll();
+    const btnGoAll = $("btnGoAll");
+    if (btnGoAll) btnGoAll.onclick = () => scrollToAll();
 
     // Global category shortcut function
     window.selectCategory = (formName) => {
@@ -981,7 +1022,6 @@ let isEventsBound = false;
         ];
       }
       renderAllSections();
-      bindEvents();
     }
   } catch (e) {
     console.error("Init failed:", e);
@@ -995,6 +1035,10 @@ let isEventsBound = false;
 
 
 function applyLanguage(lang) {
+  if (typeof TRANSLATIONS === 'undefined') {
+    console.error("i18n.js not loaded. Skipping translations.");
+    return;
+  }
   const t = TRANSLATIONS[lang];
   if (!t) return;
 
@@ -1091,59 +1135,7 @@ function initLangSwitcher() {
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     initLangSwitcher();
-    initCarouselAutoScroll();
   });
 } else {
   initLangSwitcher();
-  initCarouselAutoScroll();
-}
-
-function initCarouselAutoScroll() {
-  const tracks = document.querySelectorAll('.carousel-track');
-
-  tracks.forEach(track => {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    // --- MOUSE DRAG LOGIC ---
-    track.addEventListener('mousedown', (e) => {
-      isDown = true;
-      track.classList.add('active'); // Optional: for styling cursor
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    });
-
-    track.addEventListener('mouseleave', () => {
-      isDown = false;
-      track.classList.remove('active');
-    });
-
-    track.addEventListener('mouseup', () => {
-      isDown = false;
-      track.classList.remove('active');
-    });
-
-    track.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 2; // Tốc độ kéo
-      track.scrollLeft = scrollLeft - walk;
-    });
-  });
-
-  // --- AUTO SCROLL TIMER ---
-  setInterval(() => {
-    tracks.forEach(track => {
-      // Chỉ chạy nếu KHÔNG bị hover VÀ KHÔNG đang bị nhấn giữ kéo
-      const isBeingDragged = track.classList.contains('active');
-      if (!track.matches(':hover')) {
-        track.scrollLeft += 1;
-        if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 1)) {
-          track.scrollLeft = 0;
-        }
-      }
-    });
-  }, 30);
 }

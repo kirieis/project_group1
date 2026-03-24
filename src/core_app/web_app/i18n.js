@@ -137,7 +137,7 @@ const i18n_pages = {
     login: {
         vi: {
             title: "Đăng nhập",
-            subtitle: "Chào mừng trở lại Github Pharmacy",
+            subtitle: "Chào mừng trở lại Aura Pharmacy",
             lbl_user: "Tên đăng nhập",
             lbl_pass: "Mật khẩu",
             btn_login: "Đăng Nhập",
@@ -149,7 +149,7 @@ const i18n_pages = {
         },
         en: {
             title: "Login",
-            subtitle: "Welcome back to Github Pharmacy",
+            subtitle: "Welcome back to Aura Pharmacy",
             lbl_user: "Username",
             lbl_pass: "Password",
             btn_login: "Sign In",
@@ -163,7 +163,7 @@ const i18n_pages = {
     register: {
         vi: {
             title: "Tạo tài khoản",
-            subtitle: "Tham gia cộng đồng Github Pharmacy ngay",
+            subtitle: "Tham gia cộng đồng Aura Pharmacy ngay",
             lbl_fullname: "Họ và tên",
             lbl_phone: "Số điện thoại",
             lbl_email: "Email (Để nhận mã OTP)",
@@ -183,7 +183,7 @@ const i18n_pages = {
         },
         en: {
             title: "Create Account",
-            subtitle: "Join the Github Pharmacy community today",
+            subtitle: "Join the Aura Pharmacy community today",
             lbl_fullname: "Full Name",
             lbl_phone: "Phone Number",
             lbl_email: "Email (For OTP codes)",

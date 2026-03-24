@@ -4,14 +4,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Đăng ký - Github Pharmacy</title>
+    <title>Đăng ký - Aura Pharmacy</title>
     <link rel="stylesheet" href="home.css" />
     <style>
+        /* Push footer to bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main {
+            flex: 1;
+        }
+
         .login-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
+            min-height: calc(100vh - 200px);
             padding: 40px 10px;
         }
 
@@ -58,16 +69,12 @@
     <header class="header">
         <div class="header__inner container">
             <div class="brand">
-                <a href="home.html" style="text-decoration: none; display: flex; gap: 14px; align-items: center;">
-                    <div class="brand__logo" aria-label="Github logo">
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                        <span class="logo-dot"></span>
-                    </div>
-                    <div class="brand__text">
-                        <div class="brand__name">Github Pharmacy</div>
-                    </div>
+                <a href="home.html" class="brand__link">
+                    <img src="assets/images/logo.png" alt="Aura Pharmacy Logo" class="brand__logo-img" />
                 </a>
+                <div class="brand__text">
+                    <div class="brand__name">Aura Pharmacy</div>
+                </div>
             </div>
             <div class="header__actions">
                 <a href="login.html" class="btn btn--ghost" data-i18n="common.nav_login">Đăng nhập</a>
@@ -81,7 +88,7 @@
             <div class="login-card">
                 <div class="login-title">
                     <h1 data-i18n="register.title">Tạo tài khoản</h1>
-                    <p data-i18n="register.subtitle">Tham gia cộng đồng Github Pharmacy ngay</p>
+                    <p data-i18n="register.subtitle">Tham gia cộng đồng Aura Pharmacy ngay</p>
                 </div>
 
                 <div id="errorBox"
@@ -150,8 +157,8 @@
     </main>
 
     <footer class="footer">
-        <div class="container footer__inner" data-i18n="footer_connect">
-            Connect with us : 03xxxxxxx
+        <div class="container footer__inner">
+            <span data-i18n="common.footer_connect">Kết nối với chúng tôi : 03xxxxxxx</span>
         </div>
     </footer>
 

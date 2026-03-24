@@ -10,7 +10,7 @@ public class EmailUtil {
 
     // THAY ĐỔI THÔNG TIN CỦA BẠN TẠI ĐÂY
     private static final String SENDER_EMAIL = "annguyenbinh325@gmail.com"; // Email của sếp
-    private static final String APP_PASSWORD = "przp dbor nerp rrkv"; // Mật khẩu ứng dụng mới của Github Pharmacy
+    private static final String APP_PASSWORD = "przp dbor nerp rrkv"; // Mật khẩu ứng dụng mới của Aura Pharmacy
 
     public static String generateOTP() {
         return String.format("%06d", new Random().nextInt(1000000));
@@ -46,9 +46,9 @@ public class EmailUtil {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(SENDER_EMAIL, "Github Pharmacy"));
+            message.setFrom(new InternetAddress(SENDER_EMAIL, "Aura Pharmacy"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject("Mã xác thực OTP - Github Pharmacy");
+            message.setSubject("Mã xác thực OTP - Aura Pharmacy");
             message.setText("Chào bạn,\n\nMã OTP để đăng ký tài khoản của bạn là: " + otp +
                     "\n\nMã này có hiệu lực trong 5 phút. Vui lòng không cung cấp mã này cho bất kỳ ai.");
 
@@ -85,7 +85,7 @@ public class EmailUtil {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(SENDER_EMAIL, "Github Pharmacy"));
+            message.setFrom(new InternetAddress(SENDER_EMAIL, "Aura Pharmacy"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject(subject);
             message.setText(body);
