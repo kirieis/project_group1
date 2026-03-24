@@ -4,24 +4,19 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Batch implements Comparable<Batch> {
-
     private String batchId;
     private String batchNumber;
     private LocalDate manufactureDate;
     private LocalDate expiryDate;
-
     private int tabletsPerBlister;
     private int blisterPerBox;
     private int bottle;
-
     private int totalTablets;
-
     private Medicine medicine;
-
     // ===== Ngưỡng quản lý (sync với BatchDAO) =====
-    private static final int DAYS_REMOVE = 15;
-    private static final int DAYS_SALE = 30;
-    private static final int DISCOUNT_PERCENT = 30;
+    private static int DAYS_REMOVE = 15;
+    private static int DAYS_SALE = 30;
+    private static int DISCOUNT_PERCENT = 30;
 
     public Batch() {
     }
@@ -43,8 +38,7 @@ public class Batch implements Comparable<Batch> {
         this.totalTablets = totalTablets;
         this.medicine = medicine;
     }
-
-    // ===== Trạng thái hạn sử dụng (3-tier) =====
+    // Trạng thái hạn sử dụng
 
     /** Đã hết hạn (≤ 0 ngày) */
     public boolean isExpired() {
@@ -56,6 +50,9 @@ public class Batch implements Comparable<Batch> {
         if (isExpired())
             return false;
         long days = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+        /**
+         * ChronoUnit.DAYS.between(...):tính số ngày còn lại từ hôm nay đến lúc hết hạn.
+         */
         return days > DAYS_REMOVE && days <= DAYS_SALE;
     }
 
