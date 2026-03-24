@@ -21,23 +21,20 @@ public class NotificationSchedulerListener implements ServletContextListener {
 
     private ScheduledExecutorService scheduler;
     private final BatchDAO batchDAO = new BatchDAO();
-    // Use the admin email configuring in your system, or a hardcoded one for now.
     private static final String ADMIN_EMAIL = "annguyenbinh325@gmail.com";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        // Run database schema updates upon application startup
         core_app.util.SchemaUpdate.updateSchema();
 
         scheduler = Executors.newSingleThreadScheduledExecutor();
 
-        // Calculate initial delay for the next 9:00 AM or 9:00 PM
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextRun = calculateNextRunTime(now);
 
         long initialDelayMinutes = Duration.between(now, nextRun).toMinutes();
         if (initialDelayMinutes < 0) {
-            initialDelayMinutes = 0; // fallback
+            initialDelayMinutes = 0;
         }
 
         System.out.println("==================================================");
@@ -46,12 +43,11 @@ public class NotificationSchedulerListener implements ServletContextListener {
         System.out.println("[NotificationScheduler] Initial delay in minutes: " + initialDelayMinutes);
         System.out.println("==================================================");
 
-        // Schedule to run every 12 hours after the initial delay
         scheduler.scheduleAtFixedRate(this::checkAndNotify, initialDelayMinutes, 12 * 60, TimeUnit.MINUTES);
     }
 
     private LocalDateTime calculateNextRunTime(LocalDateTime now) {
-        LocalDateTime run9AM = now.with(LocalTime.of(9, 49, 0));
+        LocalDateTime run9AM = now.with(LocalTime.of(9, 0, 0));
         LocalDateTime run9PM = now.with(LocalTime.of(21, 0, 0));
 
         if (now.isBefore(run9AM)) {
@@ -93,7 +89,6 @@ public class NotificationSchedulerListener implements ServletContextListener {
             bodyText.append("\nPlease log in to the admin system to view details and handle them in time.\n\n");
             bodyText.append("Sincerely,\nAura Pharmacy System");
 
-            // Update LatestNotification for admin_gate.html to fetch
             String uiMessage = "The system detects batches of medicine that need processing: ";
             if (totalExpired > 0)
                 uiMessage += totalExpired + " batches expired. ";
@@ -101,7 +96,6 @@ public class NotificationSchedulerListener implements ServletContextListener {
                 uiMessage += totalUnsellable + " batches about to expire.";
             LatestNotification.setMessage(uiMessage.trim());
 
-            // Send email
             EmailUtil.sendEmail(ADMIN_EMAIL, subject, bodyText.toString());
 
         } catch (Exception e) {
