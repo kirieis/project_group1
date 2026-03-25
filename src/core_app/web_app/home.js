@@ -93,7 +93,7 @@ function parseCSV(text) {
       const medId = (parts[0] || "").trim().replace(/^["']|["']$/g, '');
       const rawName = (parts[1] || "").trim().replace(/^["']|["']$/g, '');
       const batchId = (parts[2] || "").trim();
-      let dosageForm = (parts[4] || "Tablet").trim();
+      let dosageForm = (parts[4] || "Tablet").trim().replace(/^["']|["']$/g, ''); // Unquote dosageForm
       const dateStr = (parts[8] || "").trim();
       const quantityStr = (parts[9] || "0").trim();
       const priceStr = (parts[10] || "0").trim();
@@ -103,18 +103,19 @@ function parseCSV(text) {
       const name = rawName.split("_").join(" ");
 
       // --- DATA FIX: Injecting variety to solve the 4-category CSV limitation ---
-      // Since the raw CSV heavily duplicated only Tablet and Syrup, we smartly 
-      // remap some generic tablets into the other missing categories so the UI 
-      // beautifully displays the requested 8-9 full categories.
       if (dosageForm.toLowerCase() === 'tablet' || dosageForm.toLowerCase() === 'capsule') {
         const hash = hashString(name + batchId);
         const remainder = hash % 20;
-        if (remainder === 1) dosageForm = 'Injection';
-        else if (remainder === 2) dosageForm = 'Cream';
+        // Skip Injection (remainder === 1) as requested by user
+        if (remainder === 2) dosageForm = 'Cream';
         else if (remainder === 3) dosageForm = 'Solution';
         else if (remainder === 4) dosageForm = 'Powder';
         else if (remainder === 5) dosageForm = 'Suspension';
       }
+
+      // --- USER REQUEST: Remove all injections ---
+      if (dosageForm.toLowerCase().includes('injection')) return;
+
       const quantity = parseInt(quantityStr) || 0;
       const price = parseInt(priceStr) || 0;
 
@@ -138,10 +139,13 @@ function parseCSV(text) {
         hasSale = true;
       }
 
-      const discount = hasSale ? (5 + (hashString(name) % 16)) : 0;
+      const hash = hashString(name);
+      const discount = hasSale ? (5 + (hash % 16)) : 0;
       const finalBasePrice = discount ? Math.round(price * (1 - discount / 100)) : price;
       const popularity = (hashString(name + batchId) % 1000) + 1;
-      const isLiquid = ['Syrup', 'Suspension', 'Chai', 'Dịch'].some(kw => dosageForm.includes(kw));
+
+      // USER REQUEST: Cream must be 'chai' (treat as liquid)
+      const isLiquid = ['syrup', 'suspension', 'chai', 'dịch', 'cream', 'siro', 'dung dịch', 'lotion'].some(kw => dosageForm.toLowerCase().includes(kw));
 
       rows.push({
         id: medId,
@@ -316,7 +320,6 @@ const FORM_MAP = {
   'Syrup': 'Siro',
   'Capsule': 'Viên nang',
   'Suspension': 'Hỗn dịch',
-  'Injection': 'Thuốc tiêm',
   'Cream': 'Kem bôi',
   'Solution': 'Dung dịch',
   'Powder': 'Dạng bột'
@@ -344,10 +347,7 @@ const IMAGES_BY_FORM = {
     "assets/images/med_bottle.png"
   ],
   'Cream': [
-    "assets/images/med_kutieskin.png" // User-provided tube image
-  ],
-  'Injection': [
-    "assets/images/med_bottle.png"
+    "assets/images/med_kutieskin.png" // Restored old image
   ],
   'Default': [
     "assets/images/med_tablet.png",
@@ -660,7 +660,6 @@ function renderAllSections() {
       'Syrup': '🧪 Siro',
       'Capsule': '💊 Viên nang',
       'Suspension': '🧪 Hỗn dịch',
-      'Injection': '💉 Thuốc tiêm',
       'Cream': '🧴 Kem bôi',
       'Solution': '💧 Dung dịch',
       'Powder': '📦 Dạng bột'
@@ -968,7 +967,19 @@ let isEventsBound = false;
   const cachedProducts = localStorage.getItem("cache_products");
 
   if (cachedAuth) window.authState = JSON.parse(cachedAuth);
-  if (cachedProducts) state.products = JSON.parse(cachedProducts);
+  if (cachedProducts) {
+    try {
+      const raw = JSON.parse(cachedProducts);
+      // Re-validate logic on cached data (Removed injections, Cream as liquid)
+      state.products = raw.filter(p => !String(p.dosageForm).toLowerCase().includes('injection'))
+        .map(p => ({
+          ...p,
+          isLiquid: ['syrup', 'suspension', 'chai', 'dịch', 'cream', 'siro', 'dung dịch', 'lotion'].some(kw => String(p.dosageForm).toLowerCase().includes(kw))
+        }));
+    } catch (e) {
+      state.products = [];
+    }
+  }
 
   // Bind events exactly once
   if (!isEventsBound) {
