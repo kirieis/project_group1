@@ -20672,3 +20672,234 @@ Cập nhật mỗi giây trong khi test đang chạy
 Khi file không thay đổi khoảng 5 giây, coi là test kết thúc và ghi báo cáo cuối
 Tính các chỉ số: samples, error rate, throughput, avg/min/max response time, percentiles, v.v.
 Chi tiết đầy đủ có trong JMETER-REPORTER-README.md.
+
+25/3/2026
+
+Hãy sửa cho tôi trong folder src\simulator giúp tôi. Tôi muốn là simulator khi chạy run-simulator.bat sẽ đọc table Medicine trong database chọn random thuốc với số lượng random để mua.
+
+Đang khám phá simulator và schema bảng Medicine để tích hợp đọc DB và chọn thuốc ngẫu nhiên.
+
+Tạo lớp tải thuốc từ DB qua DBConnection, cập nhật Simulator để dùng danh sách động và giới hạn số lượng mua theo tồn kho. Thêm cấu hình simulator.order.max.quantity.per.item trong SimulatorConfig.
+
+MedicineCatalog.java
++40
+package simulator;
+import core_app.util.DBConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+SimulatorConfig.java
++2
+    private static final int DEFAULT_INITIAL_QUANTITY = 100;
+    /** Upper bound for random qty per line; actual qty is also capped by DB stock. */
+    private static final int DEFAULT_ORDER_MAX_QTY_PER_ITEM = 10;
+SimulatorConfig.java
++4
+    }
+    public static int getOrderMaxQuantityPerItem() {
+        return Math.max(1, getInt("simulator.order.max.quantity.per.item", DEFAULT_ORDER_MAX_QTY_PER_ITEM));
+    }
+Simulator.java
++28
+-25
+import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Random;
+    // Danh sách medicine IDs thực tế từ database (đã kiểm tra tồn tại)
+    private static final String[] MEDICINE_IDS = {
+Simulator.java
++6
+-5
+  for (int j = 0; j < numItems; j++) {
+      int medicineIndex = rnd.nextInt(MEDICINE_IDS.length);
+      String medId = MEDICINE_IDS[medicineIndex];
+      String medName = MEDICINE_NAMES[medicineIndex];
+      int price = MEDICINE_PRICES[medicineIndex];
+      int quantity = rnd.nextInt(10) + 1; // Số lượng 1-10
+      MedicineCatalog.Row row = catalog.get(rnd.nextInt(catalog.size()));
+simulator.properties
++3
+simulator.medicine.initial.quantity=100
+# Max random quantity per order line (also capped by Medicine.quantity in DB)
+simulator.order.max.quantity.per.item=10
+Đã chỉnh xong: simulator nạp thuốc từ bảng Medicine (SQL Server PharmacyDB) thay cho mảng cứng, và mỗi dòng đơn chọn thuốc ngẫu nhiên + số lượng ngẫu nhiên trong phạm vi hợp lệ.
+
+Thay đổi chính
+MedicineCatalog.java (mới)
+
+SELECT medicine_id, name, price, quantity FROM Medicine WHERE quantity > 0
+Chỉ lấy dòng còn tồn để số lượng mua luôn ≤ quantity.
+Simulator.java
+
+Khởi động: gọi MedicineCatalog.loadInStock() qua DBConnection (cùng cấu hình localhost:1433, sa / 123456 như app).
+Lỗi kết nối / query → in hướng dẫn và System.exit(1).
+Mỗi item: rnd.nextInt(catalog.size()), số lượng 1 … min(simulator.order.max.quantity.per.item, tồn kho).
+Tên thuốc escape ký tự JSON (", \).
+Endpoint lấy từ SimulatorConfig.getEndpoint() (trùng simulator.properties).
+SimulatorConfig.java
+
+getOrderMaxQuantityPerItem() — mặc định tối thiểu 1.
+simulator.properties
+
+simulator.order.max.quantity.per.item=10 (có thể chỉnh).
+Cách chạy
+Giữ run-simulator.bat như cũ: cần SQL Server bật, database PharmacyDB và bảng Medicine có dữ liệu với quantity > 0. User/password sửa trong src/core_app/util/DBConnection.java nếu máy bạn khác.
+
+mvn compile đã chạy thành công trên workspace.
+
+simulator.properties (32-33)
+ lệnh ở đây có cần thiết ko vì đã có phần random quantity từ 50-100 ở trên rồi mà
+
+Hai phần trong simulator.properties không thay thế nhau — chúng phục vụ mục đích khác, và phần 50–100 hiện không điều khiển số lượng mua trong Simulator.java.
+
+simulator.inventory.min/max.quantity (50–100)
+Trong comment file ghi là “when updating inventory” — tức là ý tưởng cho cập nhật tồn kho, không phải cho từng dòng đơn hàng giả lập.
+
+Trong code, getMinQuantity() / getMaxQuantity() chỉ được dùng khi in cấu hình trong SimulatorConfig.printConfig(); Simulator.java không gọi hai getter này. Nên dù bạn đặt 50–100, luồng gửi 50 đơn hiện tại cũng không đọc các key đó.
+
+simulator.order.max.quantity.per.item (dòng 32)
+Đây mới là giá trị Simulator.java thực sự dùng: trần số lượng ngẫu nhiên mỗi dòng đơn (còn bị cắt thêm bởi quantity trong DB). Nó map tới SimulatorConfig.getOrderMaxQuantityPerItem().
+
+Có bắt buộc phải có dòng 32 không? Không — nếu xóa dòng đó, trong SimulatorConfig vẫn có mặc định 10 (DEFAULT_ORDER_MAX_QTY_PER_ITEM), hành vi giống như đang để =10.
+Có “trùng” với 50–100 không? Không — 50–100 không được nối vào logic đặt hàng; muốn dùng một khoảng random cho đơn hàng thì cần code đọc đúng key (hoặc đổi tên/ràng buộc rõ ràng trong properties).
+Tóm lại: Dòng 32 cần về mặt ý nghĩa nếu bạn muốn chỉnh trần số lượng mỗi line đơn mà không sửa code; nó không dư vì 50–100 ở trên không đang điều khiển random quantity của simulator đơn hàng.
+
+nếu vậy hãy loại bỏ những chức năng dư thừa đi vì tôi chỉ muốn giả lập đặt đơn hàng thôi.
+
+Đang rà soát simulator để chỉ giữ phần giả lập đặt đơn hàng.
+
+Đang thu gọn SimulatorConfig và simulator.properties, chỉ giữ cấu hình cần cho gửi đơn hàng.
+
+SimulatorConfig.java
++10
+-93
+/**
+ * Manages configuration for Simulator
+ * Reads from simulator.properties or uses default values
+ * Cấu hình giả lập đặt đơn — đọc simulator.properties (nếu có).
+ */
+public class SimulatorConfig {
+public final class SimulatorConfig {
+simulator.properties
++3
+-28
+# SIMULATOR CONFIGURATION
+# You can adjust the values below without recompiling code
+# Frequency of performing actions (milliseconds)
+# Default: 10000ms (10 seconds)
+simulator.interval.ms=1000
+# Target endpoint to send orders
+Đã dọn xong: simulator chỉ còn cấu hình phục vụ gửi đơn.
+
+SimulatorConfig.java
+Xóa toàn bộ phần không dùng: interval, cờ enable (order/inventory/medicine/log), min/max inventory, initial medicine quantity, printConfig, getLong, getBoolean.
+Giữ: nạp simulator.properties, getEndpoint(), getOrderMaxQuantityPerItem().
+simulator.properties
+Chỉ còn 2 mục: simulator.endpoint và simulator.order.max.quantity.per.item.
+Simulator.java, MedicineCatalog.java và run-simulator.bat không đổi logic. mvn compile chạy OK.
+
+Lưu ý: SIMULATOR_README.md (nếu có) vẫn có thể nhắc tới key cũ — khi rảnh bạn có thể chỉnh cho khớp file properties mới.
+
+xóa hơi nhiều rồi chỉ loại phần restock thôi
+
+Khôi phục cấu hình chung (interval, logging, enable order), chỉ giữ phần đã loại liên quan restock/tồn kho/thêm thuốc.
+
+Khôi phục interval, enable.log, enable.order và printConfig; gắn chúng vào Simulator. Không thêm lại các mục restock (inventory min/max, medicine initial, enable inventory/medicine).
+
+SimulatorConfig.java
++48
+-6
+/**
+ * Cấu hình giả lập đặt đơn — đọc simulator.properties (nếu có).
+ * Cấu hình simulator đặt đơn. Phần restock/tồn kho/thêm thuốc đã bỏ khỏi cấu hình.
+ */
+public final class SimulatorConfig {
+public class SimulatorConfig {
+    private static final Properties properties = new Properties();
+simulator.properties
++12
+-3
+# Giả lập đặt đơn hàng (POST JSON tới API)
+# SIMULATOR — giả lập đặt đơn hàng (không gồm cấu hình restock/tự thêm thuốc)
+# Khoảng cách giữa mỗi lần POST đơn (milliseconds)
+simulator.interval.ms=1000
+# URL nhận đơn
+# URL API nhận đơn
+simulator.endpoint=https://unplanked-inculpably-malorie.ngrok-free.dev/api/orders
+Simulator.java
++10
+    public static void main(String[] args) throws Exception {
+        if (SimulatorConfig.isEnableLog()) {
+            SimulatorConfig.printConfig();
+        }
+        if (!SimulatorConfig.isEnableOrderSimulation()) {
+            System.out.println("simulator.enable.order=false — thoát, không gửi đơn.");
+Simulator.java
++3
+-1
+      Thread.sleep(50); // 50ms delay - siêu nhanh
+      if (intervalMs > 0) {
+          Thread.sleep(intervalMs);
+      }
+  }
+Đã chỉnh lại đúng hướng chỉ bỏ phần restock, còn lại giữ như simulator đặt đơn ban đầu.
+
+Đã khôi phục
+simulator.interval.ms — dùng cho Thread.sleep giữa mỗi lần POST (thay cho 50ms cứng).
+simulator.enable.log — bật thì in printConfig() lúc khởi động.
+simulator.enable.order — tắt thì in thông báo và thoát, không gửi đơn.
+printConfig() — in interval, endpoint, enable order, max qty/line.
+Vẫn không có (coi là restock / không dùng cho đơn)
+simulator.enable.inventory, simulator.enable.medicine
+simulator.inventory.min/max.quantity
+simulator.medicine.initial.quantity
+mvn compile OK. Nếu muốn chạy nhanh như trước, giảm simulator.interval.ms (ví dụ 50) trong simulator.properties.
+
+hãy giải thích cho tôi quá trình diễn ra từng bước sau khi tôi chạy run-simulator.bat
+
+Dưới đây là chuỗi việc xảy ra khi bạn chạy run-simulator.bat, theo đúng code hiện tại.
+
+1. Batch file (run-simulator.bat)
+In vài dòng banner.
+cd /d "%~dp0": chuyển thư mục làm việc về thư mục chứa file .bat (thường là root project), để Maven và file simulator.properties được tìm đúng chỗ.
+Chạy: mvn exec:java -Dexec.mainClass="simulator.Simulator"
+→ Maven khởi động JVM, nạp classpath (project đã compile + dependency như JDBC), gọi simulator.Simulator.main.
+Khi chương trình Java kết thúc, pause giữ cửa sổ CMD mở để bạn đọc log.
+Nếu chưa mvn compile (hoặc code lỗi), bước Maven có thể báo lỗi trước khi vào main.
+
+2. Nạp cấu hình — SimulatorConfig (trước / khi vào main)
+Lần đầu code chạm vào SimulatorConfig (dòng đầu trong main là SimulatorConfig.isEnableLog()), khối static của lớp chạy:
+
+Cố đọc file simulator.properties trong thư mục hiện tại (vì batch đã cd về project root).
+Nếu đọc được: in [INFO] Loaded simulator.properties successfully.
+Nếu không có file: in là dùng default và các getter dùng giá trị mặc định trong code.
+3. Simulator.main — phần khởi đầu
+Theo 20:33:e:\Project-LAB-github\lab211-project-group1 - Copy\src\simulator\Simulator.java:
+
+Nếu simulator.enable.log=true: gọi printConfig() (in interval, endpoint, bật đơn, max qty/dòng).
+Nếu simulator.enable.order=false: in thông báo và thoát, không làm gì thêm.
+Đọc endpoint, intervalMs, maxQtyCap từ config; tạo Random.
+4. Đọc database — MedicineCatalog.loadInStock()
+Mở kết nối qua DBConnection.getConnection() tới SQL Server (URL/user/pass trong core_app.util.DBConnection).
+Chạy SQL: lấy medicine_id, name, price, quantity từ bảng Medicine, chỉ các dòng quantity > 0.
+Trả về List<Row> trong RAM — một bản chụp tại thời điểm chạy; simulator không tự refresh lại DB giữa các đơn.
+Nếu lỗi SQL: in lỗi và System.exit(1). Nếu list rỗng: báo không có thuốc tồn & thoát.
+
+5. Vòng lặp 50 đơn hàng
+Mỗi đơn (i = 1 … 50):
+
+Số dòng hàng: ngẫu nhiên 1–5 (numItems).
+Với mỗi dòng:
+Chọn ngẫu nhiên một Row trong catalog.
+quantity ngẫu nhiên từ 1 tới min(simulator.order.max.quantity.per.item, tồn kho trong Row).
+Cộng totalAmount += price * quantity, ghép chuỗi JSON cho items.
+Tạo body JSON: status: "PAID", totalAmount, items (tên thuốc đã qua jsonEscape cho an toàn JSON).
+HTTP POST tới endpoint: Content-Type: application/json, thêm header ngrok-skip-browser-warning (phục vụ tunnel ngrok).
+Đọc mã HTTP; 200 → đếm success, không thì fail; in một dòng log cho đơn đó.
+Nếu intervalMs > 0: Thread.sleep(intervalMs) trước đơn tiếp theo.
+6. Kết thúc
+In tổng thành công / thất bại.
+main return → JVM thoát → batch chạy pause.
+Tóm tắt một dòng: batch → Maven chạy Simulator → đọc simulator.properties → (tuỳ chọn) in config → đọc Medicine từ SQL Server → lặp 50 lần: dựng JSON đơn ngẫu nhiên → POST tới API → chờ interval → báo cáo. Phía server/API (và việc trừ kho thật) xảy ra trên ứng dụng web nhận request, không nằm trong file .bat hay class simulator.
