@@ -2,7 +2,6 @@ package core_app.scheduler;
 
 import core_app.dao.BatchDAO;
 import core_app.dao.BatchDAO.BatchInfo;
-import core_app.util.EmailUtil;
 import core_app.util.LatestNotification;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -21,7 +20,6 @@ public class NotificationSchedulerListener implements ServletContextListener {
 
     private ScheduledExecutorService scheduler;
     private final BatchDAO batchDAO = new BatchDAO();
-    private static final String ADMIN_EMAIL = "annguyenbinh325@gmail.com";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -47,7 +45,7 @@ public class NotificationSchedulerListener implements ServletContextListener {
     }
 
     private LocalDateTime calculateNextRunTime(LocalDateTime now) {
-        LocalDateTime run9AM = now.with(LocalTime.of(9, 0, 0));
+        LocalDateTime run9AM = now.with(LocalTime.of(10, 53, 0));
         LocalDateTime run9PM = now.with(LocalTime.of(21, 0, 0));
 
         if (now.isBefore(run9AM)) {
@@ -75,28 +73,12 @@ public class NotificationSchedulerListener implements ServletContextListener {
             int totalUnsellable = unsellable.size();
             int totalExpired = expired.size();
 
-            String subject = "🔔 Warning: The medicine is expired/about to expire - Aura Pharmacy";
-            StringBuilder bodyText = new StringBuilder();
-
-            bodyText.append("The system detects batches of medicine that need processing.:\n\n");
-
-            if (totalExpired > 0) {
-                bodyText.append(String.format("🔴 Expired: %d batches.\n", totalExpired));
-            }
-            if (totalUnsellable > 0) {
-                bodyText.append(String.format("🟠 Removed from sale (<= 15 days): %d batches.\n", totalUnsellable));
-            }
-            bodyText.append("\nPlease log in to the admin system to view details and handle them in time.\n\n");
-            bodyText.append("Sincerely,\nAura Pharmacy System");
-
             String uiMessage = "The system detects batches of medicine that need processing: ";
             if (totalExpired > 0)
                 uiMessage += totalExpired + " batches expired. ";
             if (totalUnsellable > 0)
                 uiMessage += totalUnsellable + " batches about to expire.";
             LatestNotification.setMessage(uiMessage.trim());
-
-            EmailUtil.sendEmail(ADMIN_EMAIL, subject, bodyText.toString());
 
         } catch (Exception e) {
             System.err.println("[NotificationScheduler] Error during execution:");
