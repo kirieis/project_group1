@@ -63,8 +63,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-badge fail">
-                ❌ Critical
+            <div class="header-badge pass">
+                ✅ Healthy
             </div>
             <h1>🔥 Stress Test Report</h1>
             <p>PharmaCare Medicine Management System — Load Testing Results</p>
@@ -74,22 +74,22 @@
         <div class="stats-grid">
             <div class="stat-card green">
                 <div class="stat-label">Total Requests</div>
-                <div class="stat-value">4</div>
+                <div class="stat-value">1000</div>
                 <div class="stat-sub">Samples recorded</div>
             </div>
             <div class="stat-card blue">
                 <div class="stat-label">Success Rate</div>
-                <div class="stat-value">75.0%</div>
-                <div class="stat-sub">1 errors / 3 success</div>
+                <div class="stat-value">100.0%</div>
+                <div class="stat-sub">0 errors / 1000 success</div>
             </div>
             <div class="stat-card orange">
                 <div class="stat-label">Duration</div>
-                <div class="stat-value">~0s</div>
+                <div class="stat-value">10.93s</div>
                 <div class="stat-sub">Total test execution time</div>
             </div>
             <div class="stat-card purple">
                 <div class="stat-label">Throughput</div>
-                <div class="stat-value">~13.3</div>
+                <div class="stat-value">91.5</div>
                 <div class="stat-sub">Requests per second</div>
             </div>
         </div>
@@ -100,19 +100,19 @@
                 <div class="bar-row">
                     <span class="bar-label">&lt; 200ms</span>
                     <div class="bar-track">
-                        <div class="bar-fill fast" style="width:100.0%">2 req</div>
+                        <div class="bar-fill fast" style="width:0.0%">0 req</div>
                     </div>
                 </div>
                 <div class="bar-row">
                     <span class="bar-label">200-500ms</span>
                     <div class="bar-track">
-                        <div class="bar-fill medium" style="width:100.0%">2 req</div>
+                        <div class="bar-fill medium" style="width:41.5%">415 req</div>
                     </div>
                 </div>
                 <div class="bar-row">
                     <span class="bar-label">500ms-1s</span>
                     <div class="bar-track">
-                        <div class="bar-fill slow" style="width:0.0%">0 req</div>
+                        <div class="bar-fill slow" style="width:58.5%">585 req</div>
                     </div>
                 </div>
                 <div class="bar-row">
@@ -131,25 +131,25 @@
         <div class="chart-card">
             <h3>📋 Chi Tiết Kết Quả</h3>
             <div class="details-grid">
-                <div class="detail-item"><div class="label">Min Response Time</div><div class="value" style="color:var(--accent-green)">150ms</div></div>
-                <div class="detail-item"><div class="label">Avg Response Time</div><div class="value" style="color:var(--accent-blue)">208ms</div></div>
-                <div class="detail-item"><div class="label">Max Response Time</div><div class="value" style="color:var(--accent-orange)">300ms</div></div>
+                <div class="detail-item"><div class="label">Min Response Time</div><div class="value" style="color:var(--accent-green)">267ms</div></div>
+                <div class="detail-item"><div class="label">Avg Response Time</div><div class="value" style="color:var(--accent-blue)">682ms</div></div>
+                <div class="detail-item"><div class="label">Max Response Time</div><div class="value" style="color:var(--accent-orange)">782ms</div></div>
                 <div class="detail-item"><div class="label">90th Percentile</div><div class="value" style="color:var(--accent-blue)">270ms</div></div>
                 <div class="detail-item"><div class="label">95th Percentile</div><div class="value" style="color:var(--accent-orange)">285ms</div></div>
-                <div class="detail-item"><div class="label">99th Percentile</div><div class="value" style="color:var(--accent-red)">297ms</div></div>
-                <div class="detail-item"><div class="label">Error Rate</div><div class="value" style="color:var(--accent-red)">25.00%</div></div>
+                <div class="detail-item"><div class="label">99th Percentile</div><div class="value" style="color:var(--accent-red)">928ms</div></div>
+                <div class="detail-item"><div class="label">Error Rate</div><div class="value" style="color:var(--accent-red)">0.00%</div></div>
                 <div class="detail-item"><div class="label">Data Transferred</div><div class="value">~0.00 MB</div></div>
-                <div class="detail-item"><div class="label">Overall Score</div><div class="value" style="color:var(--accent-purple)">57/100</div></div>
+                <div class="detail-item"><div class="label">Overall Score</div><div class="value" style="color:var(--accent-purple)">90/100</div></div>
             </div>
         </div>
 
         <div class="verdict-card">
-            <div class="verdict-emoji">❌</div>
-            <div class="verdict-title">STRESS TEST: FAILED</div>
+            <div class="verdict-emoji">✅</div>
+            <div class="verdict-title">STRESS TEST: SUCCESS</div>
             <div class="verdict-text">
-                4 requests đã được thực hiện. 3 thành công, 1 lỗi. 
-                Error rate: 25.00%. Throughput: 13.3 req/s. 
-                Avg response time: 208ms.
+                1000 requests đã thực hiện. 1000 thành công, 0 lỗi.
+                Error rate: 0.00%. Throughput: 91.5 req/s.
+                Avg response time: 539ms.
             </div>
         </div>
 
@@ -157,19 +157,19 @@
             <h3>⚙️ Cấu Hình Test</h3>
             <div class="details-grid">
                 <div class="detail-item"><div class="label">Tool</div><div class="value" style="font-size:16px">Apache JMeter 5.6.3</div></div>
-                <div class="detail-item"><div class="label">Test Date</div><div class="value" style="font-size:16px">2026-03-23</div></div>
-                <div class="detail-item"><div class="label">Report Generated</div><div class="value" style="font-size:14px">2026-03-23 08:58:28</div></div>
+                <div class="detail-item"><div class="label">Test Date</div><div class="value" style="font-size:16px">2026-03-25</div></div>
+                <div class="detail-item"><div class="label">Report Generated</div><div class="value" style="font-size:14px">2026-03-25 11:24:36</div></div>
             </div>
         </div>
 
         <div class="footer">
-            <p>Generated by JMeter Reporter • 2026-03-23</p>
+            <p>Generated by Java StressTest • 2026-03-25</p>
             <p>LAB211 - Group 1 Project</p>
         </div>
     </div>
 
     <script>
-        const chartData = [150, 200, 180, 300];
+        const chartData = [267,304,334,339,346,360,370,381,392,409,417,421,425,429,432,435,437,441,445,450,451,454,457,458,462,463,465,467,470,472,473,476,477,480,482,486,487,489,491,492,495,498,501,505,508,510,511,514,517,520,522,523,527,529,532,534,536,539,542,546,549,554,557,561,565,566,570,571,576,579,585,589,591,594,597,599,603,607,610,614,619,625,629,633,639,643,648,655,663,670,682,705,711,731,761,782,819,865,901,928];
         const canvas = document.getElementById('responseTimeChart');
         if (canvas && chartData.length > 0) {
             const ctx = canvas.getContext('2d');
