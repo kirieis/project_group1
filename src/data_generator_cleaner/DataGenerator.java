@@ -50,7 +50,7 @@ public class DataGenerator {
             }
         }
 
-        System.out.println("✅ HOÀN THÀNH! Đã sinh 1000 loại thuốc SẠCH vào file medicines_raw.csv");
+        System.out.println("✅ HOÀN THÀNH! Đã sinh 1000 loại thuốc SẠCH vào file medicines_clean.csv");
         System.out.println("👉 Tổng tồn kho đang là: 10.000.000 hộp.");
     }
 }
