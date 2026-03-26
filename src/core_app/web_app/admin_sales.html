@@ -404,9 +404,11 @@
                 `;
             }).join('');
 
-            document.getElementById('statOrders').textContent = filteredOrders.length;
+            const paidOrders = filteredOrders.filter(o => o.status === 'PAID');
+            document.getElementById('statOrders').textContent = paidOrders.length;
             document.getElementById('statRevenue').textContent = formatVND(totalRev);
             document.getElementById('statProfit').textContent = formatVND(totalProfit);
+            console.log(`DEBUG: Table rendered with ${filteredOrders.length} total, ${paidOrders.length} paid.`);
         }
 
         window.toggleDetails = (id) => {

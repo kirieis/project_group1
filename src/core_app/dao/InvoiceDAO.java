@@ -143,54 +143,58 @@ public class InvoiceDAO {
 
     public List<Invoice> getAllInvoices() {
         List<Invoice> list = new ArrayList<>();
-        // Query joining with Customer to get customer names for sales history
-        String sql = "SELECT i.*, c.full_name as customer_name FROM Invoice i " +
+        // Optimized: Single query using LEFT JOIN to fetch invoices and their details
+        // together
+        // This avoids the N+1 problem (70,000+ queries) which would crash the dashboard
+        String sql = "SELECT i.*, c.full_name as customer_name, id.medicine_id, id.medicine_name, id.quantity, id.unit_price, id.import_price "
+                +
+                "FROM Invoice i " +
                 "LEFT JOIN Customer c ON i.customer_id = c.customer_id " +
+                "LEFT JOIN Invoice_Detail id ON i.invoice_id = id.invoice_id " +
                 "ORDER BY i.invoice_id DESC";
-        String sqlDetail = "SELECT * FROM Invoice_Detail WHERE invoice_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
+
+            Invoice currentInvoice = null;
             while (rs.next()) {
-                Invoice inv = new Invoice();
-                inv.setInvoiceId(rs.getInt("invoice_id"));
-                inv.setTotalAmount(rs.getDouble("total_amount"));
-                inv.setPaymentMethod(rs.getString("payment_method"));
-                inv.setStatus(rs.getString("status"));
-                inv.setPaymentProof(rs.getString("payment_proof"));
-                inv.setCustomerId(rs.getInt("customer_id"));
-                inv.setCustomerName(rs.getString("customer_name"));
-                // We'll use a temporary hack or extend Invoice model to store customer name if
-                // needed,
-                // but let's just stick to the model for now.
+                int invId = rs.getInt("invoice_id");
 
-                Timestamp ts = rs.getTimestamp("invoice_date");
-                if (ts != null)
-                    inv.setInvoiceDate(ts.toLocalDateTime());
+                // If we hit a new invoice ID, add the previous one and create a new one
+                if (currentInvoice == null || currentInvoice.getInvoiceId() != invId) {
+                    currentInvoice = new Invoice();
+                    currentInvoice.setInvoiceId(invId);
+                    currentInvoice.setTotalAmount(rs.getDouble("total_amount"));
+                    currentInvoice.setPaymentMethod(rs.getString("payment_method"));
+                    currentInvoice.setStatus(rs.getString("status"));
+                    currentInvoice.setPaymentProof(rs.getString("payment_proof"));
+                    currentInvoice.setCustomerId(rs.getInt("customer_id"));
+                    currentInvoice.setCustomerName(rs.getString("customer_name"));
 
-                try (PreparedStatement psD = conn.prepareStatement(sqlDetail)) {
-                    psD.setInt(1, inv.getInvoiceId());
-                    ResultSet rsD = psD.executeQuery();
-                    List<InvoiceDetail> details = new ArrayList<>();
-                    while (rsD.next()) {
-                        InvoiceDetail det = new InvoiceDetail(
-                                rsD.getString("medicine_id"),
-                                rsD.getString("medicine_name"),
-                                rsD.getInt("quantity"),
-                                rsD.getDouble("unit_price"));
-                        try {
-                            det.setImportPrice(rsD.getDouble("import_price"));
-                        } catch (SQLException e) {
-                        }
-                        details.add(det);
-                    }
-                    inv.setInvoiceDetails(details);
+                    Timestamp ts = rs.getTimestamp("invoice_date");
+                    if (ts != null)
+                        currentInvoice.setInvoiceDate(ts.toLocalDateTime());
+
+                    currentInvoice.setInvoiceDetails(new ArrayList<>());
+                    list.add(currentInvoice);
                 }
-                list.add(inv);
+
+                // Add the detail (if any) to the current invoice
+                String medId = rs.getString("medicine_id");
+                if (medId != null) {
+                    InvoiceDetail det = new InvoiceDetail(
+                            medId,
+                            rs.getString("medicine_name"),
+                            rs.getInt("quantity"),
+                            rs.getDouble("unit_price"));
+                    det.setImportPrice(rs.getDouble("import_price"));
+                    currentInvoice.getInvoiceDetails().add(det);
+                }
             }
         } catch (SQLException e) {
             System.err.println("❌ GET ALL ERROR: " + e.getMessage());
+            e.printStackTrace();
         }
         return list;
     }
